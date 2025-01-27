@@ -8,9 +8,12 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MINISHELL = 
+MINISHELL_F =	
 
-MINI_SRC = $(addprefix srcs/, $(MINISHELL))
+MINISHELL_B =	
+
+MINI_SRC =	$(addprefix srcs/backend, $(MINISHELL_B))\
+			$(addprefix srcs/frontend, $(MINISHELL_F))
 
 OBJ = $(MINI_SRC:.c=.o)
 
