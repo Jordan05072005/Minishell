@@ -1,0 +1,27 @@
+Hugo :
+-execution
+	-"<", ">", ">>", "<<", "|", 
+	-./fdf
+	-pipe
+	-$?
+-exit
+-export
+-cd 
+
+
+
+
+
+-CTRL + ...
+
+
+Jordan :
+-parsing
+- "", '' ->$arg
+
+-prompte
+-pwd 
+-unset
+-echo
+-env
+-history
