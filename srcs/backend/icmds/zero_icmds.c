@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_fd.c                                           :+:      :+:    :+:   */
+/*   zero_icmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 16:39:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/27 18:07:12 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/28 10:57:07 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/28 11:11:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../backend.h"
 
-int	set_in(int child, int nb_cmds, t_icmd cmd, t_icmd prev)
+void	zero_out(t_icmd *cmds)
 {
-	if (child == 0)
-		if (dup2(cmd.fd_in, 0) == -1)
-			exit(1) //should clean things I think ?
-	else if (fd_in != 0)
-		if (dup2(cmd.fd_in, 0) == -1)
-			exit(1) //should clean things I think ?
-	else
-		if (dup2(prev.pipe[0], 0) == -1)
-			exit(1) //should clean things I think ?
-	if (child ==)
+	int	i;
+
+	i = -1;
+	while (cmds[++i])
+	{
+		cmds[i].fd_in = 0;
+		cmds[i].fd_out = 1;
+		cmds[i].here_doc = NULL;
+		cmds[i].path = NULL;
+		cmds[i].args = NULL;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pid = 0;
+	}
 }

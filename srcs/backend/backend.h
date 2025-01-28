@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/27 17:55:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:11:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 
 # include "../../libft.h"
 
-typdef struct s_cmd
+typedef struct s_cmd
 {
 	char	*in;
 	char	*out;
 	char	**args;
-	int		here_doc;
+	char	*here_doc;
 	int		append;
 }	t_cmd;
 
-typdef	struct	s_info_cmd
+typedef	struct	s_info_cmd
 {
 	int		fd_in;
 	int		fd_out;
-	int		here_doc;
-	int		append_out;
-	char	*cmd_path;
-	char	**cmd_arg;
-	int		pipe_fd[2];
+	char	*here_doc;
+	char	*path;
+	char	**args;
+	int		pipe[2];
+	int		pid;
 }	t_icmd;
 
 #endif

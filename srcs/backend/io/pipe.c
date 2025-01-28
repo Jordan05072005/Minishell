@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_child.c                                       :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/28 11:00:33 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/28 10:38:21 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/28 10:49:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../backend.h"
 
-void	exec_child(t_icmd *cmds, int nb_cmds, int child, char **env)
+void	set_pipes(t_icmd *cmds, int nb_cmds)
 {
-	set_io_cp(child, nb_cmds, cmds);
-	close_fd(data);
-	if (!cmds[child].cmd_path)
-		exit(127); //Should clean I think
-	if (execve(cmds[child].path, cmds[child].args, env) == -1)
-		ft_perror(127, 0/* clean_data(data) */, "An error occured during the execution of \
-the command.");
+	int	i;
+
+	i = -1;
+	while (cmds[++i])
+		if (pipe(cmds[i].pipe) == -1)
+			return (ft_perror(1, 0/* clean_data(data) */,
+					"A pipe failed to open."));
 }
