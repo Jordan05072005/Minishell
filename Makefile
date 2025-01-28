@@ -8,12 +8,12 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MINISHELL_F =	
+MINISHELL_F =	path.c main.c parseur.c utils.c
 
 MINISHELL_B =	
 
-MINI_SRC =	$(addprefix srcs/backend, $(MINISHELL_B))\
-			$(addprefix srcs/frontend, $(MINISHELL_F))
+MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))
+#$(addprefix srcs/backend, $(MINISHELL_B))\
 
 OBJ = $(MINI_SRC:.c=.o)
 
@@ -28,7 +28,7 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(OBJ) $(FRAMEWORK) -o $(NAME) -L $(LIBFT_DIR) -lft
+	@$(CC) $(OBJ) $(FRAMEWORK) -o $(NAME) -L $(LIBFT_DIR) -lft -lreadline
 	@echo "$(NAME) compiled successfully!"
 
 clean:
