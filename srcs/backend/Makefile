@@ -36,6 +36,9 @@ OBJ = $(MINI_SRC:.c=.o)
 
 all: $(NAME)
 
+run: re all
+	@./minishell
+
 bonus: $(NAME)
 
 $(LIBFT):

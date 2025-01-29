@@ -1,3 +1,54 @@
+.:$
+.$
+..$
+backend.c$
+backend.h$
+backend.o$
+exec$
+icmds$
+io$
+Makefile$
+minishell$
+path$
+test$
+$
+./exec:$
+.$
+..$
+exec_child.c$
+exec_child.o$
+exec_parent.c$
+exec_parent.o$
+exec_proc.c$
+exec_proc.o$
+$
+./icmds:$
+.$
+..$
+init_icmd.c$
+init_icmd.o$
+init_icmds.c$
+init_icmds.o$
+zero_icmds.c$
+zero_icmds.o$
+$
+./io:$
+.$
+..$
+close_fd.c$
+close_fd.o$
+here_doc.c$
+here_doc.o$
+pipe.c$
+pipe.o$
+set_io.c$
+set_io.o$
+$
+./path:$
+.$
+..$
+get_path.c$
+get_path.o$
 #this is a temp Makefile$
 $
 MAKEFLAGS += --no-print-directory$
@@ -36,6 +87,9 @@ $
 $
 all: $(NAME)$
 $
+run: re all$
+	@./minishell$
+$
 bonus: $(NAME)$
 $
 $(LIBFT):$
@@ -61,4 +115,9 @@ norminette:$
 	@make -C $(LIBFT_DIR) norminette$
 	@-norminette srcs | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"$
 $
-.PHONY: all clean fclean re bonus norminette
+.PHONY: all clean fclean re bonus norminetteblablabla$
+blabakjlds$
+EOF$
+blablablabla$
+iseugkhjlkjSDBV$
+LKSJDDbfh;kDDBS$
