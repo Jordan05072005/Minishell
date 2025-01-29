@@ -10,131 +10,109 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-void new_prompt(int signum)
-{
-	if (signum == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
-int	in_str(char c, char *sep, int y)
+int	nbr_sep(char **str)
 {
 	int	i;
+	int	compt;
 
-	i = -1;
-	if (y != -1)
+	i = 0;
+	compt = 0;
+	while (str[i])
 	{
-		if (sep[y] == c)
-			return (1);
-		return (0);
+		if (strncmp(str[i], "|", 1) == 0)
+			compt++;
+		i++;
 	}
-	while (sep[++i])
-	{
-		if (sep[i] == c)
-			return (1);
-	}
-	return (0);
+	return (compt + 1);
 }
 
-
-int	fill_struct(t_cmd **cmd, char **arg, int *n_arg, int max)
+int	fill_struct(t_cmd *cmd, char **arg, int *n_arg, int max)
 {
 	int	i;
+	int	fd;
 
 	i = 0;
 	while (*n_arg < max && !(ft_strlen(arg[*n_arg]) == 1 && in_str(arg[*n_arg][0], "|", -1)))
 	{
-		printf("i : %d ; %d %d %d %d\n", i, i > 1 , (*n_arg) + 1 < max , ft_strlen(arg[*n_arg]) == 2 ,ft_strncmp(arg[*n_arg], ">>", 2) == 0);
-		if (i == 0)
+		if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
 		{
-			if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 1) == 0 && max > 2)
-			{
-				(*cmd)->in = arg[++(*n_arg)];
-				i++;
-			}
-			else
-				(*cmd)->cmd = arg[*n_arg];
+			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
+			cmd->append = arg[(*n_arg)];
+			(cmd)->out = arg[++(*n_arg)];
+			close(fd);
+			i++;
 		}
-		else if ((*cmd)->cmd != NULL && in_str('-', arg[*n_arg], 0))
-			(*cmd)->cmd = ft_strjoin((*cmd)->cmd, arg[*n_arg]);
-		else if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2 && ft_strncmp(arg[*n_arg], ">>", 2) == 0)
-			(*cmd)->out = arg[(*n_arg) + 1];
+		else if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 1) == 0 && max > *n_arg + 1)
+		{
+			cmd->append = arg[(*n_arg)];
+			(cmd)->in = arg[++(*n_arg)];
+			i++;
+		}
 		else if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2 && ft_strncmp(arg[(*n_arg)], "<<", 2) == 0)
-			(*cmd)->limiter = arg[(*n_arg) + 1];
+		{
+			(cmd)->limiter = arg[++(*n_arg)];
+			i++;
+		}
 		else
-			return (-1);
+		{
+			(cmd)->cmd = ft_strjoin2((cmd)->cmd, arg[*n_arg]);
+			(cmd)->cmd = ft_strjoin2((cmd)->cmd, " ");
+		}
 		i++;
 		(*n_arg)++;
 		}
 		if (*n_arg == max)
 			return (0);
+		cmd->sep = arg[*n_arg][0];
+		(*n_arg)++;
 		return (1);
 }
 
 
-t_cmd *init_struct(char **split)
+void	reader(t_cmd *cmd, int i)
 {
-	t_cmd	*cmd;
+	int	j=0;
 
-	cmd = malloc(sizeof(t_cmd));
-
-	cmd->split = split;
-	cmd->in = NULL;
-	cmd->out = NULL;
-	cmd->cmd = NULL;
-	cmd->here_doc = 0;
-	cmd->limiter = NULL;
-	cmd->append = 0;
-	cmd->sep = 0;
-	cmd->next= NULL;
-	return (cmd);
+	while (j < i)
+	{
+		printf("%d :\n", j);
+		if (cmd[j].cmd)
+			printf(" cmd : %s\n",cmd[j].cmd);
+		if (cmd[j].in)
+			printf(" in : %s\n",cmd[j].in);
+		if (cmd[j].out)
+			printf(" out : %s \n",cmd[j].out);
+		if (cmd[j].limiter)
+			printf(" limiter : %s\n",cmd[j].limiter);
+		if (cmd[j].sep != 0)
+			printf(" sep : %c\n",cmd[j].sep);
+		if (cmd[j].append)
+			printf(" append : %s\n",cmd[j].append);
+		j++;
+	}
 }
 
-void	reader(t_cmd *cmd)
-{
-	//printfcmd->split = split;
-	if (cmd->cmd)
-		printf("cmd : %s\n",cmd->cmd);
-	if (cmd->in)
-		printf("in : %s\n",cmd->in);
-	if (cmd->out)
-		printf("out :%s \n",cmd->out);
-	if (cmd->limiter)
-		printf("limiter : %s\n",cmd->limiter);
-	if (cmd->sep != 0)
-		printf("sep :%c\n",cmd->sep);
-	if (cmd->next)
-		reader(cmd->next);
-}
-
-int	parseur(char *line)
+t_cmd	*parseur(char *line)
 {
 	char	**arg;
 	t_cmd *cmd;
-	t_cmd	*temp;
 	int		n_arg;
 	int	err;
+	int	i;
 
 	err = 1;
 	arg = ft_split(line, ' ');
-	cmd = init_struct(arg);
+	cmd = init_struct(arg, nbr_sep(arg));
 	n_arg = 0;
-	temp = cmd;
+	i = 0;
 	while (err == 1)
 	{
-		err = fill_struct(&temp, arg, &n_arg, ft_strstrlen(arg));
+		err = fill_struct(&(cmd[i]), arg, &n_arg, ft_strstrlen(arg));
 		if (err == 1)
-		{
-			temp = temp->next;
-			temp = init_struct(arg);
-		}
+			i++;
 	}
-	reader(cmd);
-	return (0);
+	reader(cmd, nbr_sep(arg));
+	return (cmd);
 }

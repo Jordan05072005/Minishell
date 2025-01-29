@@ -17,6 +17,7 @@
 #	include <unistd.h>
 # include <stdio.h>
 #	include <signal.h>
+#include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -28,15 +29,23 @@ typedef struct s_cmd
 	char	*cmd;
 	int		here_doc;
 	char	*limiter;
-	int		append;
+	char	*append;
 	char	sep;
 	char	**split;
-	struct s_cmd	*next;
 }		t_cmd;
 
-int	parseur(char *line);
+//parseur.c
+t_cmd	*parseur(char *line);
+
+//prompt.c
 void new_prompt(int signum);
 char	*get_prompt();
+
+//utils.c
+int	in_str(char c, char *sep, int y);
 int	ft_strstrlen(char **str);
+
+//utils_lst.c
+t_cmd *init_struct(char **split, int nbr);
 
 #endif

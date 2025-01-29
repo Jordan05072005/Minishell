@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 02:50:33 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/01/28 02:50:33 by jguaglio         ###   ########.fr       */
+/*   Created: 2025/01/28 17:59:50 by jguaglio          #+#    #+#             */
+/*   Updated: 2025/01/28 17:59:50 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strstrlen(char **str)
+t_cmd *init_struct(char **split, int nbr)
 {
+	t_cmd	*cmd;
 	int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	in_str(char c, char *sep, int y)
-{
-	int	i;
-
+	cmd = malloc(sizeof(t_cmd) * (nbr));
 	i = -1;
-	if (y != -1)
+	while (++i < nbr)
 	{
-		if (sep[y] == c)
-			return (1);
-		return (0);
+		cmd[i].split = split;
+		cmd[i].in = NULL;
+		cmd[i].out = NULL;
+		cmd[i].cmd = ft_strdup("");
+		cmd[i].limiter = NULL;
+		cmd[i].append = NULL;
+		cmd[i].sep = 0;
 	}
-	while (sep[++i])
-	{
-		if (sep[i] == c)
-			return (1);
-	}
-	return (0);
+	return (cmd);
 }

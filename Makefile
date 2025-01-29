@@ -2,13 +2,13 @@ MAKEFLAGS += --no-print-directory
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g #Has -g flag, watch out !
+FLAGS = -Wall -Wextra -Werror -g -I./includes#Has -g flag, watch out !
 RM = rm -f
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MINISHELL_F =	path.c main.c parseur.c utils.c
+MINISHELL_F =	prompt.c main.c parseur.c utils.c utils_lst.c
 
 MINISHELL_B =	
 
