@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 //penser a clear l'history
 int	main()
@@ -18,6 +18,7 @@ int	main()
 	char	*line;
 	char	*before;
 	char	*prompt;
+	t_cmd	*cmd;
 
 	before = NULL;
 	signal(SIGINT, new_prompt);
@@ -30,25 +31,11 @@ int	main()
 		if (before)
 			free(before);
 		before = line;
-		if (parseur(line) == 0)
-			return 1;
+		cmd = parseur(line);
+		(void)cmd;
+		//envoyer au back (cmd)
 		line = readline(prompt);
 	}
 	free(prompt);
 	return (1);
-}
-
-
-int main2() {
-    printf("Texte à effacer...");
-    fflush(stdout); // Assurez-vous que le texte est bien affiché avant de manipuler le curseur
-
-    // Séquence d'échappement pour effacer la ligne actuelle
-    printf("\033[K");
-		printf("\033[G"); // replacer le curseur au debut de la ligne;
-
-    // Reste du texte ou nouvelle entrée
-    printf("Nouvelle ligne après effacement\n");
-
-    return 0;
 }
