@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   close_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:20:58 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/28 10:10:31 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:26:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../exec.h"
 
-void	ft_free_tab(void **tab, size_t size)
+void	close_fd(t_icmd *cmds, int nb_cmds)
 {
-	void	**temp;
-	size_t	i;
+	int	i;
 
 	i = -1;
-	temp = tab;
-	while (++i < size)
-		ft_del(*tab++);
-	ft_del(temp);
+	while (++i < nb_cmds)
+	{
+		close(cmds[i].pipe[0]);
+		close(cmds[i].pipe[1]);
+		if (cmds[i].fd_in > 0)
+			close(cmds[i].fd_in);
+		if (cmds[i].fd_out > 1)
+			close(cmds[i].fd_out);
+	}
 }

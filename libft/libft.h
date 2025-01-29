@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/28 03:15:17 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:08:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	*ft_realloc(void *ptr, size_t size);
 
 /*			print&co			*/
 /********************************/
+void	ft_perror(int error_code, int clean, char *custom_mess);
 int		ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *str, int fd);
 int		ft_putstr_fd(char *str, int fd);
@@ -103,8 +104,7 @@ char	**ft_split(const char *str, char c);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *str, void (*f)(unsigned int, char *));
-char	*ft_strjoin(char *s1, const char *s2);
-char	*ft_strjoin2(char *s1, const char *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
 size_t	ft_strlen(const char *str);

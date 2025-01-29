@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:20:58 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:26:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../exec.h"
 
-void	ft_free_tab(void **tab, size_t size)
+int	is_builtin(const char *str)
 {
-	void	**temp;
-	size_t	i;
-
-	i = -1;
-	temp = tab;
-	while (++i < size)
-		ft_del(*tab++);
-	ft_del(temp);
+	if (ft_strncmp("cd", str, 3) == 0)
+		return (1);
+	return (0);
 }

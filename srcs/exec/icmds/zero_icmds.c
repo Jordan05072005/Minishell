@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   zero_icmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:56:44 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/22 11:20:58 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/28 10:57:07 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../exec.h"
 
-void	ft_free_tab(void **tab, size_t size)
+void	zero_out(t_icmd *cmds, int nb_cmds)
 {
-	void	**temp;
-	size_t	i;
+	int	i;
 
 	i = -1;
-	temp = tab;
-	while (++i < size)
-		ft_del(*tab++);
-	ft_del(temp);
+	while (++i < nb_cmds)
+	{
+		cmds[i].fd_in = 0;
+		cmds[i].fd_out = 1;
+		cmds[i].here_doc = NULL;
+		cmds[i].path = NULL;
+		cmds[i].args = NULL;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pid = 0;
+		cmds[i].exit = -1;
+	}
 }

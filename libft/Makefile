@@ -21,8 +21,8 @@ MEM =		ft_bzero.c			ft_calloc.c			ft_del.c			\
 
 GNL =		get_next_line.c
 
-PRINT = 	ft_putchar_fd.c		ft_putendl_fd.c		ft_putnbr_fd.c		\
-			ft_putstr_fd.c
+PRINT = 	ft_perror.c			ft_putchar_fd.c		ft_putendl_fd.c		\
+			ft_putnbr_fd.c		ft_putstr_fd.c
 
 PRINTF =	digits.c			ft_printf.c			handle_args.c		\
 			str.c

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_fd.c                                           :+:      :+:    :+:   */
+/*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 16:39:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/27 18:07:12 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
-int	set_in(int child, int nb_cmds, t_icmd cmd, t_icmd prev)
+void	exec_child(t_icmd *cmds, int nb_cmds, int child, char **env)
 {
-	if (child == 0)
-		if (dup2(cmd.fd_in, 0) == -1)
-			exit(1) //should clean things I think ?
-	else if (fd_in != 0)
-		if (dup2(cmd.fd_in, 0) == -1)
-			exit(1) //should clean things I think ?
-	else
-		if (dup2(prev.pipe[0], 0) == -1)
-			exit(1) //should clean things I think ?
-	if (child ==)
+	set_io_cp(child, nb_cmds, cmds);
+	close_fd(cmds, nb_cmds);
+	if (!cmds[child].path)
+		ft_perror(127, clean_icmds(cmds, nb_cmds), "Command not found.");
+	if (execve(cmds[child].path, cmds[child].args, env) == -1)
+		ft_perror(127, clean_icmds(cmds, nb_cmds), "An error occured during \
+the execution of the command.");
 }
