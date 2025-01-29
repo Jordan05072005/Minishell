@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_icmds.c                                      :+:      :+:    :+:   */
+/*   zero_icmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 11:11:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 12:50:08 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/28 10:57:07 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
-int	clean_icmds(t_icmd *cmds, int nb_cmds)
+void	zero_out(t_icmd *cmds, int nb_cmds)
 {
-	int	child;
+	int	i;
 
-	child = -1;
-	while (++child < nb_cmds)
-		ft_del(cmds[child].path);
-	ft_del(cmds);
-	return (0);
+	i = -1;
+	while (++i < nb_cmds)
+	{
+		cmds[i].fd_in = 0;
+		cmds[i].fd_out = 1;
+		cmds[i].here_doc = NULL;
+		cmds[i].path = NULL;
+		cmds[i].args = NULL;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pipe[0] = 0;
+		cmds[i].pid = 0;
+		cmds[i].exit = -1;
+	}
 }

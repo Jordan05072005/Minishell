@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:01:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 12:49:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:27:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
 void	init_icmd(t_icmd *cmd, t_cmd input, int nb_cmds)
 {

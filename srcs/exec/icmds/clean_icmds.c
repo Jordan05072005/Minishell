@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   clean_icmds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 13:22:01 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 11:11:38 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
-int	is_builtin(const char *str)
+int	clean_icmds(t_icmd *cmds, int nb_cmds)
 {
-	if (ft_strncmp("cd", str, 3) == 0)
-		return (1);
+	int	child;
+
+	child = -1;
+	while (++child < nb_cmds)
+		ft_del(cmds[child].path);
+	ft_del(cmds);
 	return (0);
 }

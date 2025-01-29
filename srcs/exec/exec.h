@@ -6,12 +6,12 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:18:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:25:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BACKEND_H
-# define BACKEND_H
+#ifndef EXEC_H
+# define EXEC_H
 
 # include "../../libft/libft.h"
 # include <wait.h>
@@ -39,6 +39,7 @@ typedef struct s_info_cmd
 	int		exit;
 }	t_icmd;
 
+int		exec(int nb_cmds, t_cmd *input, char **env);
 t_icmd	*init_icmds(t_cmd *input, int nb_cmds);
 void	zero_out(t_icmd *cmds, int nb_cmds);
 void	init_icmd(t_icmd *cmd, t_cmd input, int nb_cmds);

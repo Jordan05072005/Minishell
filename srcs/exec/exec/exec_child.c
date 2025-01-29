@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   exec_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:07:08 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
-void	exec_builtin(t_icmd *cmds, int nb_cmds, int child, char **env)
+void	exec_child(t_icmd *cmds, int nb_cmds, int child, char **env)
 {
-	(void) env;
 	set_io_cp(child, nb_cmds, cmds);
-	ft_del(cmds[child].path);
-	if (ft_strncmp(cmds[child].args[0], "cd", 3))
-		cmds[child].exit = 0;// ft_cd()
-	else
-		cmds[child].exit = 1;
+	close_fd(cmds, nb_cmds);
+	if (!cmds[child].path)
+		ft_perror(127, clean_icmds(cmds, nb_cmds), "Command not found.");
+	if (execve(cmds[child].path, cmds[child].args, env) == -1)
+		ft_perror(127, clean_icmds(cmds, nb_cmds), "An error occured during \
+the execution of the command.");
 }

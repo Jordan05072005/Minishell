@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zero_icmds.c                                       :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 10:57:07 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:05:36 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:27:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../backend.h"
+#include "../exec.h"
 
-void	zero_out(t_icmd *cmds, int nb_cmds)
+void	exec_builtin(t_icmd *cmds, int nb_cmds, int child, char **env)
 {
-	int	i;
-
-	i = -1;
-	while (++i < nb_cmds)
-	{
-		cmds[i].fd_in = 0;
-		cmds[i].fd_out = 1;
-		cmds[i].here_doc = NULL;
-		cmds[i].path = NULL;
-		cmds[i].args = NULL;
-		cmds[i].pipe[0] = 0;
-		cmds[i].pipe[0] = 0;
-		cmds[i].pid = 0;
-		cmds[i].exit = -1;
-	}
+	(void) env;
+	set_io_cp(child, nb_cmds, cmds);
+	ft_del(cmds[child].path);
+	if (ft_strncmp(cmds[child].args[0], "cd", 3))
+		cmds[child].exit = 0;// ft_cd()
+	else
+		cmds[child].exit = 1;
 }

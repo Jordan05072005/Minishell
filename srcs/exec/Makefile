@@ -10,7 +10,8 @@ RM = rm -f
 LIBFT_DIR = ../../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-EXEC =	exec_child.c	exec_parent.c	exec_builtin.c
+EXEC =	exec_child.c	exec_parent.c	exec_builtin.c	\
+		exec.c
 
 ICMDS =	init_icmd.c		init_icmds.c	zero_icmds.c	\
 		clean_icmds.c
