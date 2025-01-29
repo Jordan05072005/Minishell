@@ -6,23 +6,24 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/28 18:31:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:50:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../backend.h"
 
-void	here_doc(t_icmd cmd)
+void	here_doc(t_icmd cmd, t_icmd *cmds, int nb_cmds)
 {
 	int		p_fd[2];
 	pid_t	f_id;
 	char	*temp;
 
 	if (pipe(p_fd) == -1)
-		ft_perror(1, 0/* clean_data(data) */, "The pipe didn't open.");
+		ft_perror(1, clean_icmds(cmds, nb_cmds), "A pipe didn't open.");
 	f_id = fork();
 	if (f_id == -1)
-		ft_perror(1, 0/* clean_data(data) */, "A subprocess was not started.");
+		ft_perror(1, clean_icmds(cmds, nb_cmds), "A subprocess was not \
+started.");
 	if (f_id == 0)
 	{
 		close(p_fd[0]);

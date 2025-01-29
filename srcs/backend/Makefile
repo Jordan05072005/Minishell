@@ -10,14 +10,14 @@ RM = rm -f
 LIBFT_DIR = ../../libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-EXEC =	exec_child.c	exec_parent.c	exec_proc.c
+EXEC =	exec_child.c	exec_parent.c	exec_builtin.c
 
-ICMDS =	init_icmd.c		init_icmds.c	zero_icmds.c
+ICMDS =	init_icmd.c		init_icmds.c	zero_icmds.c	\
+		clean_icmds.c
 
-IO =	close_fd.c		here_doc.c		pipe.c			\
-		set_io.c
+IO =	close_fd.c		here_doc.c		set_io.c
 
-PTH =	get_path.c
+PTH =	get_path.c		is_builtin.c
 
 MINI_SRC =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix icmds/, $(ICMDS))	\
@@ -37,7 +37,10 @@ OBJ = $(MINI_SRC:.c=.o)
 all: $(NAME)
 
 run: re all
-	@./minishell
+	@./$(NAME)
+
+valgrind: re all
+	@valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 bonus: $(NAME)
 

@@ -6,13 +6,17 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/28 18:58:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:08:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../backend.h"
 
-char	*get_path(t_cmd cmd)
+	// if (!cmd.args)
+	// 	return (exit(clean_icmds(cmds, nb_cmds)), NULL);
+	// if (!cmd.args[0])
+	// 	return (NULL);
+char	*get_path(t_cmd cmd, t_icmd *cmds, int nb_cmds)
 {
 	char	**tries;
 	char	*paths;
@@ -20,13 +24,12 @@ char	*get_path(t_cmd cmd)
 	char	*temp;
 	int		i;
 
-	// if (!cmd.args)
-	// 	return (ft_perror(1, 0/* clean_data(data) */, "Error happened during split."),
-	// 		NULL);
-	// if (!data->cmd_arg[0])
-	// 	return (ft_perror(-1, 0, "Empty argument as function."), NULL);
+	(void) cmds;
+	(void) nb_cmds;
+	if (ft_strncmp(cmd.args[0], "./", 2) == 0)
+		return (ft_strdup(cmd.args[0]));
 	i = -1;
-	paths = getenv("PATH");
+	paths = getenv("PATH"); //should not be using this env
 	tries = ft_split(paths, ':');
 	while (tries && tries[++i])
 	{

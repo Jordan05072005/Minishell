@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_proc.c                                        :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 10:37:50 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/28 18:55:58 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 14:07:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../backend.h"
 
-void	exec_proc(char **env, t_cmd *input, int nb_cmds)
+void	exec_builtin(t_icmd *cmds, int nb_cmds, int child, char **env)
 {
-	t_icmd	*cmds;
-	int		child;
-
-	cmds = init_icmds(input, nb_cmds);
-	child = -1;
-	while (++child < nb_cmds)
-	{
-		cmds[child].pid = fork();
-		if (cmds[child].pid == -1)
-			ft_perror(1, 0, "A subprocess was not started.");
-		if (cmds[child].pid == 0)
-			exec_child(cmds, nb_cmds, child, env);
-		// clean_func(&data);
-	}
-	exit(exec_parent(cmds, nb_cmds));
+	(void) env;
+	set_io_cp(child, nb_cmds, cmds);
+	ft_del(cmds[child].path);
+	if (ft_strncmp(cmds[child].args[0], "cd", 3))
+		cmds[child].exit = 0;// ft_cd()
+	else
+		cmds[child].exit = 1;
 }
