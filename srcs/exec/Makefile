@@ -4,7 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g#Has -g flag, watch out !
+FLAGS = -Wall -Wextra -Werror -I./../../includes -g#Has -g flag, watch out !
 RM = rm -f
 
 LIBFT_DIR = ../../libft

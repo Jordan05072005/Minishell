@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:24:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:53:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../exec.h"
+#include "exec.h"
 
 int	exec(int nb_cmds, t_cmd *input, char **env)
 {

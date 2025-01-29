@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:21:07 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:27:16 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:53:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../exec.h"
+#include "exec.h"
 
 int	exec_parent(t_icmd *cmds, int nb_cmds)
 {

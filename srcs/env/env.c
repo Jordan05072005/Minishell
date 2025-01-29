@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:54:40 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 16:56:52 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 16:57:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#inlcude "env.h"
 
-int	is_builtin(const char *str)
+char **env(void)
 {
-	if (ft_strncmp("cd", str, 3) == 0)
-		return (1);
-	return (0);
+	static char	**env = NULL;
+
+	return (env);
 }

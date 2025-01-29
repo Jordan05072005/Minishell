@@ -6,9 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:20:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:42:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../builtin.h"
 
 int	ft_cd(char **av, char **env)
 {

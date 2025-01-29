@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:54:40 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/01/29 15:56:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-int	is_builtin(const char *str)
-{
-	if (ft_strncmp("cd", str, 3) == 0)
-		return (1);
-	return (0);
-}
+# include "../libft/libft.h"
+
+#endif
