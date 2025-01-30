@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/17 12:08:58 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:08:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *str, void (*f)(unsigned int, char *));
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strjoin_free(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
 size_t	ft_strlen(const char *str);

@@ -10,10 +10,23 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MINISHELL_F =	prompt.c main.c parseur.c utils.c utils_lst.c
 
-MINISHELL_B =	
+EXEC =	exec_child.c	exec_parent.c	exec_builtin.c	\
+		exec.c
 
-MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))
-#$(addprefix srcs/backend, $(MINISHELL_B))\
+ICMDS =	init_icmd.c		init_icmds.c	zero_icmds.c	\
+		clean_icmds.c
+
+IO =	close_fd.c		here_doc.c		set_io.c
+
+PTH =	get_path.c		is_builtin.c
+
+MINI_B =	$(addprefix exec/, $(EXEC))		\
+			$(addprefix icmds/, $(ICMDS))	\
+			$(addprefix io/, $(IO))			\
+			$(addprefix path/, $(PTH))
+
+MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
+$(addprefix srcs/exec/, $(MINI_B))
 
 OBJ = $(MINI_SRC:.c=.o)
 
@@ -21,6 +34,12 @@ OBJ = $(MINI_SRC:.c=.o)
 	@$(CC) $(FLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 all: $(NAME)
+
+run: re all
+	@./$(NAME)
+
+valgrind: re all
+	@valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 bonus: $(NAME)
 

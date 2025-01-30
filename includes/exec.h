@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 16:19:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:05:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_cmd
 	char	**args;
 	char	*here_doc;
 	int		append;
+	char	**split;
 }	t_cmd;
 
 typedef struct s_info_cmd

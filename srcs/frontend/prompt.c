@@ -30,16 +30,16 @@ char	*get_prompt()
 
 	prompt = ft_strdup("");
 	str = getenv("LOGNAME");
-	prompt = ft_strjoin2(prompt, str);
-	prompt = ft_strjoin2(prompt, "@");
-	str = getenv("NAME");
-	prompt = ft_strjoin2(prompt, str);
-	prompt = ft_strjoin2(prompt, ":");
+	prompt = ft_strjoin_free(prompt, str);
+	prompt = ft_strjoin_free(prompt, "@");
+	str = getenv("USER");
+	prompt = ft_strjoin_free(prompt, str);
+	prompt = ft_strjoin_free(prompt, ":");
 	str = getenv("PWD");
-	prompt = ft_strjoin2(prompt, str);
-	if (strncmp(getenv("NAME"), "root", 4) == 0)
-		prompt = ft_strjoin2(prompt, "# ");
+	prompt = ft_strjoin_free(prompt, str);
+	if (strncmp(getenv("USER"), "root", 4) == 0)
+		prompt = ft_strjoin_free(prompt, "# ");
 	else
-		prompt = ft_strjoin2(prompt, "$ ");
+		prompt = ft_strjoin_free(prompt, "$ ");
 	return (prompt);
 }

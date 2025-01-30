@@ -21,15 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_cmd
-{
-	char	*in;
-	char	*out;
-	char	**args;
-	char	*here_doc;
-	int		append;
-	char	**split;
-}	t_cmd;
+#include "exec.h"
 
 typedef struct s_pars
 {

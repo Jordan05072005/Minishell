@@ -56,8 +56,8 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg, int max)
 		}
 		else
 		{
-			(cmd)->cmd = ft_strjoin2((cmd)->cmd, arg[*n_arg]);
-			(cmd)->cmd = ft_strjoin2((cmd)->cmd, " ");
+			(cmd)->cmd = ft_strjoin_free((cmd)->cmd, arg[*n_arg]);
+			(cmd)->cmd = ft_strjoin_free((cmd)->cmd, " ");
 		}
 		i++;
 		(*n_arg)++;
@@ -150,6 +150,6 @@ t_pars	*parseur(char *line)
 	{
 		pars_line(exe[i], &cmd[i]);
 	}
-	reader(cmd, ft_strstrlen(exe));
+	// reader(cmd, ft_strstrlen(exe));
 	return (cmd);
 }
