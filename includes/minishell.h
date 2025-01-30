@@ -43,6 +43,7 @@ t_pars	*parseur(char *line);
 //prompt.c
 void new_prompt(int signum);
 char	*get_prompt();
+void	ft_exit();
 
 //utils.c
 int	in_str(char c, char *sep, int y);

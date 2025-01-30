@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, new_prompt);
 	prompt = get_prompt();
 	line = readline(prompt);
+	free(prompt);
 	while (line)
 	{
 		if (!before || ft_strncmp(before, line, ft_strlen(line)) != 0 || ft_strncmp(before, line, ft_strlen(before)) != 0)
@@ -37,9 +38,10 @@ int	main(int ac, char **av, char **env)
 		cmd = parseur(line);
 		//while pr && 
 		exec(cmd->pipe, cmd->exe, env);
+		prompt = get_prompt();
 		line = readline(prompt);
+		free(prompt);
 	}
-	free(prompt);
-	// ft_exit();
+	ft_exit();
 	return (1);
 }

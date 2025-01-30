@@ -17,6 +17,8 @@ t_pars *init_struct_pars(char **split, int sep)
 	t_pars	*cmd;
 	int	i;
 
+	if (sep <= 0)
+		return (NULL);
 	cmd = malloc(sizeof(t_pars) * (sep));
 	i = -1;
 	while (++i < sep)

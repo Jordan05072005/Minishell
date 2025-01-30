@@ -23,6 +23,10 @@ void new_prompt(int signum)
 	}
 }
 
+void	ft_exit()
+{
+	ft_printf("exit\n");
+}
 char	*get_prompt()
 {
 	char	*str;
@@ -34,12 +38,12 @@ char	*get_prompt()
 	prompt = ft_strjoin_free(prompt, "@");
 	str = getenv("USER");
 	prompt = ft_strjoin_free(prompt, str);
-	prompt = ft_strjoin_free(prompt, "\033[0;37m:\033[0;34m");
+	prompt = ft_strjoin_free(prompt, "\033[0;0m:\033[0;34m");
 	str = getenv("PWD");
 	prompt = ft_strjoin_free(prompt, str);
 	if (strncmp(getenv("USER"), "root", 4) == 0)
-		prompt = ft_strjoin_free(prompt, "\033[0;37m# ");
+		prompt = ft_strjoin_free(prompt, "\033[0;0m# ");
 	else
-		prompt = ft_strjoin_free(prompt, "\033[0;37m$ ");
+		prompt = ft_strjoin_free(prompt, "\033[0;0m$ ");
 	return (prompt);
 }
