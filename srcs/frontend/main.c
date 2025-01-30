@@ -39,8 +39,12 @@ int	main(int ac, char **av, char **env)
 		{
 			exec(cmd->pipe, cmd->exe, env);
 			while (--cmd->pipe >= 0)
+			{
 				ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
+				free(cmd->exe);
+			}
 			ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
+			free(cmd);
 			free(line);
 		}
 		prompt = get_prompt();
