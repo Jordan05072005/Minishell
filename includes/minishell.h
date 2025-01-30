@@ -23,20 +23,6 @@
 
 #include "exec.h"
 
-typedef struct s_pars
-{
-	int		n_sep;
-	int		pipe;
-	char	*in;
-	char	*out;
-	char	*cmd;
-	char	*limiter;
-	char	*append;
-	char	sep;
-	char	**split;
-	t_cmd *exe;
-}		t_pars;
-
 //parseur.c
 t_pars	*parseur(char *line);
 

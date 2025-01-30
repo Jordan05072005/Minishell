@@ -150,6 +150,7 @@ t_pars	*parseur(char *line)
 	cmd = init_struct_pars(exe, ft_strstrlen(exe));
 	if (!cmd)
 		return (NULL);
+	cmd->line = line;
 	while (++i < ft_strstrlen(exe))
 	{
 		pars_line(exe[i], &cmd[i]);
