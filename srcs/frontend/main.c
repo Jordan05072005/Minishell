@@ -34,14 +34,21 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		if (before)
 			free(before);
-		before = line;
+		before = strdup(line);
 		cmd = parseur(line);
-		//while pr && 
-		exec(cmd->pipe, cmd->exe, env);
+		if (cmd)
+		{
+			exec(cmd->pipe, cmd->exe, env);
+			while (--cmd->pipe >= 0)
+				ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
+			ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
+			free(line);
+		}
 		prompt = get_prompt();
 		line = readline(prompt);
 		free(prompt);
 	}
+	free(before);
 	ft_exit();
 	return (1);
 }
