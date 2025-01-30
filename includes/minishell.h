@@ -21,21 +21,32 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-
 typedef struct s_cmd
 {
 	char	*in;
 	char	*out;
+	char	**args;
+	char	*here_doc;
+	int		append;
+	char	**split;
+}	t_cmd;
+
+typedef struct s_pars
+{
+	int		n_sep;
+	int		pipe;
+	char	*in;
+	char	*out;
 	char	*cmd;
-	int		here_doc;
 	char	*limiter;
 	char	*append;
 	char	sep;
 	char	**split;
-}		t_cmd;
+	t_cmd *exe;
+}		t_pars;
 
 //parseur.c
-t_cmd	*parseur(char *line);
+t_pars	*parseur(char *line);
 
 //prompt.c
 void new_prompt(int signum);
@@ -46,6 +57,8 @@ int	in_str(char c, char *sep, int y);
 int	ft_strstrlen(char **str);
 
 //utils_lst.c
-t_cmd *init_struct(char **split, int nbr);
+t_pars *init_struct_pars(char **split, int nbr);
+void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
+
 
 #endif

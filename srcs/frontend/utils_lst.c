@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-t_cmd *init_struct(char **split, int nbr)
+t_pars *init_struct_pars(char **split, int sep)
 {
-	t_cmd	*cmd;
+	t_pars	*cmd;
 	int	i;
 
-	cmd = malloc(sizeof(t_cmd) * (nbr));
+	cmd = malloc(sizeof(t_pars) * (sep));
 	i = -1;
-	while (++i < nbr)
+	while (++i < sep)
 	{
 		cmd[i].split = split;
 		cmd[i].in = NULL;
@@ -30,4 +30,22 @@ t_cmd *init_struct(char **split, int nbr)
 		cmd[i].sep = 0;
 	}
 	return (cmd);
+}
+
+void	init_struct_cmd(t_pars **pars, int nbr, char **arg)
+{
+	int	i;
+
+	(*pars)->exe = malloc(sizeof(t_cmd) * nbr);
+	i = -1;
+	(*pars)->pipe = nbr;
+	while (++i < nbr)
+	{
+		(*pars)->exe[i].in = NULL;
+		(*pars)->exe[i].out = NULL;
+		(*pars)->exe[i].args = NULL;
+		(*pars)->exe[i].here_doc = NULL;
+		(*pars)->exe[i].append = 0;
+		(*pars)->exe[i].split = arg;
+	}
 }
