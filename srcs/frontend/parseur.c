@@ -144,7 +144,7 @@ t_pars	*parseur(char *line)
 	int	i;
 
 	i = -1;
-	if (!line || line[0] =='\n')
+	if (!line || line[0] =='\0')
 		return (NULL);
 	exe = ft_split(line, '&'); //-> coder un split;
 	cmd = init_struct_pars(exe, ft_strstrlen(exe));

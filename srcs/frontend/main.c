@@ -18,7 +18,6 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	char	*before;
 	char	*prompt;
-	// char	*temp;
 	t_pars	*cmd;	
 
 	before = NULL;
@@ -36,7 +35,7 @@ int	main(int ac, char **av, char **env)
 			free(before);
 		before = strdup(line);
 		cmd = parseur(line);
-		if (cmd)
+		if (cmd != NULL)
 		{
 			exec(cmd->pipe, cmd->exe, env);
 			while (--cmd->pipe >= 0)
