@@ -36,7 +36,15 @@ int	main(int ac, char **av, char **env)
 		if (cmd != NULL)
 		{
 			exec(cmd->pipe, cmd->exe, env, cmd);
-			clean_temp(cmd);
+			while (--cmd->pipe >= 0)
+			{
+				ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
+				ft_free_tab((void **)cmd->exe[cmd->pipe].args, ft_strstrlen(cmd->exe[cmd->pipe].args));
+				ft_del(cmd->exe);
+			}
+			ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
+			ft_del(cmd->cmd);
+			ft_del(cmd);
 		}
 		prompt = get_prompt();
 		line = readline(prompt);

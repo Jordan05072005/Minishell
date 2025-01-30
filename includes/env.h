@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/30 17:02:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:05:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data
 	t_pars	cmd;
 	char	**env;
 	char	**temp;
-}
+}	t_data;
 
 int	ft_strstrlen(char **str);
 int	clean_temp(t_pars *pars);
