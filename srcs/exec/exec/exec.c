@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:53:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:16:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	exec(int nb_cmds, t_cmd *input, char **env)
 	t_icmd	*cmds;
 	int		child;
 
+	if (!input || !input->args)
+		return (0);
 	cmds = init_icmds(input, nb_cmds);
 	child = -1;
 	while (++child < nb_cmds)
