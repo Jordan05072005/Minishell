@@ -18,14 +18,15 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	char	*before;
 	char	*prompt;
-	t_pars	*cmd;
+	t_pars	*cmd;	
 
 	before = NULL;
 	(void)av;
 	(void)ac;
 	signal(SIGINT, new_prompt);
 	prompt = get_prompt();
-	line = readline(prompt);
+	ft_printf("%s", prompt);
+	line = get_next_line(0);
 	while (line)
 	{
 		if (!before || ft_strncmp(before, line, ft_strlen(line)) != 0 || ft_strncmp(before, line, ft_strlen(before)) != 0)
@@ -34,11 +35,10 @@ int	main(int ac, char **av, char **env)
 			free(before);
 		before = line;
 		cmd = parseur(line);
-		//envoyer au back (cmd)(size, struct *, env) exec
 		//while pr && 
 		exec(cmd->pipe, cmd->exe, env);
-
-		line = readline(prompt);
+		ft_printf("%s", prompt);
+		line = get_next_line(0);
 	}
 	free(prompt);
 	return (1);

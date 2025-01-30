@@ -28,18 +28,18 @@ char	*get_prompt()
 	char	*str;
 	char	*prompt;
 
-	prompt = ft_strdup("");
+	prompt = ft_strdup("\033[0;32m");
 	str = getenv("LOGNAME");
 	prompt = ft_strjoin_free(prompt, str);
 	prompt = ft_strjoin_free(prompt, "@");
 	str = getenv("USER");
 	prompt = ft_strjoin_free(prompt, str);
-	prompt = ft_strjoin_free(prompt, ":");
+	prompt = ft_strjoin_free(prompt, "\033[0;37m:\033[0;34m");
 	str = getenv("PWD");
 	prompt = ft_strjoin_free(prompt, str);
 	if (strncmp(getenv("USER"), "root", 4) == 0)
-		prompt = ft_strjoin_free(prompt, "# ");
+		prompt = ft_strjoin_free(prompt, "\033[0;37m# ");
 	else
-		prompt = ft_strjoin_free(prompt, "$ ");
+		prompt = ft_strjoin_free(prompt, "\033[0;37m$ ");
 	return (prompt);
 }
