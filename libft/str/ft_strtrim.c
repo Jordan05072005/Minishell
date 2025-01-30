@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:35:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/18 18:06:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:51:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strtrim(const char *s1, const char *set)
 	int		start;
 	int		len;
 
+	if (!s1 || !set)
+		return (NULL);
 	len = ft_strlen(s1) - 1;
 	start = 0;
 	while (start <= len && ft_strchr(set, s1[start]))
