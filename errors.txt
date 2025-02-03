@@ -1,0 +1,2 @@
+main line 43 : invalid free for "ls | clear"
+idk where : da fuck is going on for "CTRL + \"

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 16:24:01 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:07:45 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,22 @@ int	clean_temp(t_pars *cmd)
 	return (0);
 }
 
-// void	ft_lstclear(t_var **lst)
+// int	clean_data(void)
 // {
-// 	t_var	*temp;
+// 	t_data	*data;
+// 	t_pars	cmd;
 
-// 	while (*lst)
+// 	data = data();
+// 	cmd = &data->cmd;
+// 	while (--cmd->pipe >= 0)
 // 	{
-// 		temp = (*lst)->next;
-// 		if (del)
-// 			ft_free_tab((*lst)->split, ft_strstrlen((*lst)->split));
-// 		free(*lst);
-// 		*lst = temp;
+// 		ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
+// 		ft_free_tab((void **)cmd->exe[cmd->pipe].args, ft_strstrlen(cmd->exe[cmd->pipe].args));
+// 		ft_del(cmd->exe);
 // 	}
-// 	*lst = 0;
-// }
-
-// int	clean_temp(t_data *d)
-// {
-// 	while (--d->cmd->pipe >= 0)
-// 	{
-// 		ft_free_tab((void *)(d->cmd->exe[d->cmd->pipe].split), ft_strstrlen(d->cmd->exe[d->cmd->pipe].split));
-// 		ft_free_tab((void **)d->cmd->exe[d->cmd->pipe].args, ft_strstrlen(d->cmd->exe[d->cmd->pipe].args));
-// 		ft_del(d->cmd->exe);
-// 	}
-// 	ft_free_tab((void *)d->cmd->split, ft_strstrlen(d->cmd->split));
-// 	ft_del(d->cmd->line);
-// 	ft_del(d->cmd->cmd);
-// 	ft_del(d->cmd);
-// 	ft_lstclear(d->var);
+// 	ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
+// 	ft_del(cmd->line);
+// 	ft_del(cmd->cmd);
+// 	ft_del(cmd);
 // 	return (0);
 // }

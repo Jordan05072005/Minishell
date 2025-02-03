@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_getenv_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 14:42:47 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/02/03 10:49:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../builtin.h"
+#include "env.h"
 
-int	ft_cd(char **av, char **env)
+t_list	*ft_getenv_struct(const char *str)
 {
-	
+	int		i;
+	int		size;
+	char	*line;
+	t_list	env;
+
+	i = 0;
+	size = ft_strlen(str);
+	env = data()->env;
+	line = ft_strnstr(env.content, str, size);
+	while (!line && env->next)
+	{
+		env = env->next;
+		line = ft_strnstr(env.content, str, size);
+	}
+	if (!line)
+		return (NULL);
+	return (&env);
 }
