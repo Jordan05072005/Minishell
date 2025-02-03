@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 15:07:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:37:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ char	*get_curpath(char *arg)
 	return (create_path(ft_getenv("PWD="), arg));
 }
 
-char	**get_stack(char *curpath)
+char	**get_stack(char *curpath, int *depth)
 {
 	char	**stack;
 	char	**path;
-	int		depth;
 	int		i;
 
 	path = ft_split(curpath, '/');
@@ -65,17 +64,20 @@ char	**get_stack(char *curpath)
 	if (!path || !stack)
 		return (ft_free_tab(path, ft_strslen(path)), ft_del(stack),
 			ft_perror(1, 0, "Malloc error."));
-	depth = 0;
+	*depth = 0;
 	i = -1;
 	while (path[++i])
 	{
-		if (!ft_strncmp(path[i], "..", 3) && depth > 0)
-			depth--;
+		if (!ft_strncmp(path[i], "..", 3) && *depth > 0)
+			*depth--;
 		else if (ft_strncmp(path[i], "..", 3) != 0)
-			stack[depth++] = ft_strdup(path[i]);
+		{
+			if (stack[*depth])
+				ft_del(stack[*depth])
+			stack[*depth++] = ft_strdup(path[i]);
+		}
 	}
-	stack[depth] = NULL;
-	ft_del(path);
+	ft_free_tab(path, ft_strslen(path))
 	return (stack);
 }
 
@@ -83,19 +85,21 @@ char	*clean_curpath(char *curpath)
 {
 	char	*clean;
 	char	**stack;
+	int		depth;
 	int		len;
 	int		i;
 
 	if (!curpath)
 		return (curpath);
-	stack = get_stack(curpath);
+	stack = get_stack(curpath, &depth);
 	len = 1;
 	i = -1;
 	while (stack[++i])
 		len += ft_strlen(stack[i]) + 1;
 	clean = ft_calloc(len, sizeof(char));
 	if (!clean)
-		return (ft_del(stack), ft_perror(1, 0, "Malloc error."));
+		return (ft_free_tab(stack, ft_strslen(stack)),
+			ft_perror(1, 0, "Malloc error."));
 	i = -1;
 	clean[0] = '/';
 	len = 1;
@@ -106,7 +110,7 @@ char	*clean_curpath(char *curpath)
 		if (stack[i + 1])
 			clean[len++] = '/';
 	}
-	return (ft_del(stack), clean);
+	return (ft_free_tab(stack, ft_strslen(stack)), clean);
 }
 
 char	*clean_curpath(char *curpath)
