@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/30 17:05:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:16:48 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,19 @@ typedef struct s_pars
 	t_cmd *exe;
 }		t_pars;
 
+typedef struct s_var
+{
+	char	*name;
+	char	*data;
+	char	**split;
+	struct s_var *next;
+}	t_var;
+
 typedef struct s_data
 {
-	t_pars	cmd;
+	t_pars	*cmd;
 	char	**env;
-	char	**temp;
+	t_var	*var;
 }	t_data;
 
 int	ft_strstrlen(char **str);

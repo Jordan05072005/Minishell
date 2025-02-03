@@ -24,7 +24,7 @@
 #include "exec.h"
 
 //parseur.c
-t_pars	*parseur(char *line);
+int	parseur(char *line, t_data **d);
 
 //prompt.c
 void new_prompt(int signum);
@@ -38,6 +38,8 @@ int	ft_strstrlen(char **str);
 //utils_lst.c
 t_pars *init_struct_pars(char **split, int nbr);
 void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
+void	push_back_var(t_var **v, char *name, char *data, char **split);
+char	**ft_split2(char *s, char *c);
 
 
 #endif

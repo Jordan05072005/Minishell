@@ -18,9 +18,10 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	char	*before;
 	char	*prompt;
-	t_pars	*cmd;	
+	t_data	*d;
 
 	before = NULL;
+	d = malloc(sizeof(t_data));
 	(void)av;
 	(void)ac;
 	signal(SIGINT, new_prompt);
@@ -32,19 +33,10 @@ int	main(int ac, char **av, char **env)
 		if (!before || ft_strncmp(before, line, ft_strlen(line)) != 0 || ft_strncmp(before, line, ft_strlen(before)) != 0)
 			add_history(line);
 		before = line;
-		cmd = parseur(line);
-		if (cmd != NULL)
+		if (!parseur(line, &d))
 		{
-			exec(cmd->pipe, cmd->exe, env, cmd);
-			while (--cmd->pipe >= 0)
-			{
-				ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
-				ft_free_tab((void **)cmd->exe[cmd->pipe].args, ft_strstrlen(cmd->exe[cmd->pipe].args));
-				ft_del(cmd->exe);
-			}
-			ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
-			ft_del(cmd->cmd);
-			ft_del(cmd);
+			exec(d->cmd->pipe, d->cmd->exe, env, d->cmd);
+			clean_temp(d->cmd);
 		}
 		prompt = get_prompt();
 		line = readline(prompt);

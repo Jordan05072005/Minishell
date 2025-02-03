@@ -28,15 +28,37 @@ int	nbr_sep(char **str, char *sep)
 	return (compt + 1);
 }
 
-int	fill_struct(t_pars *cmd, char **arg, int *n_arg, int max)
+int	is_var(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (i != 0 && i != (ft_strlen(str) - 1) && str[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	fill_struct(t_pars *cmd, t_data **d, char **arg, int *n_arg)
 {
 	int	i;
 	int	fd;
+	int	max;
+	char	**split;
 
+	max = ft_strstrlen(arg);
 	i = 0;
 	while (*n_arg < max && !(ft_strlen(arg[*n_arg]) == 1 && in_str(arg[*n_arg][0], "|", -1)))
 	{
-		if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
+		if (is_var(arg[*n_arg]) && ((*n_arg) + 1 >= max || in_str(arg[*n_arg][0], "|",(*n_arg) + 1 )))
+		{
+			split = ft_split(arg[*n_arg], '=');
+			push_back_var(&(*d)->var, split[0], split[1], split);
+		}
+		else if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
 		{
 			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			cmd->append = arg[(*n_arg)];
@@ -70,7 +92,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg, int max)
 }
 
 
-void	reader(t_pars *cmd, int i)
+void	reader(t_pars *cmd, int i, t_var *temp)
 {
 	int	j=0;
 	int	y=0;
@@ -80,21 +102,27 @@ void	reader(t_pars *cmd, int i)
 		printf("exe : %d :\n", j);
 		while (y < cmd[j].pipe)
 		{ 
-			printf("  pipe %d :\n   ", y);
+			printf("  pipe %d :\n", y);
 			if (cmd[j].exe[y].args)
-				printf(" cmd : %s\n",cmd[j].exe[y].args[0]);
+				printf("    cmd : %s\n",cmd[j].exe[y].args[0]);
 			if (cmd[j].exe[y].in)
-				printf(" in : %s\n",cmd[j].exe[y].in);
+				printf("    in : %s\n",cmd[j].exe[y].in);
 			if (cmd[j].exe[y].out)
-				printf(" out : %s \n",cmd[j].exe[y].out);
+				printf("    out : %s \n",cmd[j].exe[y].out);
 			if (cmd[j].exe[y].here_doc)
-				printf(" limiter : %s\n",cmd[j].exe[y].here_doc);
+				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
 			if (cmd[j].exe[y].append)
-				printf(" append : %d\n",cmd[j].exe[y].append);
+				printf("    append : %d\n",cmd[j].exe[y].append);
 			y++;
 		}
 		y = 0;
 		j++;
+	}
+	printf("data : \n");
+	while (temp != NULL)
+	{
+		printf("  key : %s, value : %s\n", temp->name, temp->data);
+		temp = temp->next;
 	}
 }
 
@@ -118,17 +146,17 @@ void	free_tpars(t_pars **pars)  //vide ->free
 	(*pars)->sep = 0;
 }
 
-void	pars_line(char *line, t_pars *exe)
+void	pars_line(char *line, t_pars *exe, t_data **d)
 {
 	char	**arg;
 	int	n_arg;
 	int	i;
 
-	arg = ft_split(line, ' '); // split custom
+	arg = ft_split2(line, " ");
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	n_arg = 0;
 	i = 0;
-	while (fill_struct(exe, arg, &n_arg, ft_strstrlen(arg)))
+	while (fill_struct(exe, d,  arg, &n_arg))
 	{
 		fill_exe(&exe, i);
 		free_tpars(&exe);
@@ -137,24 +165,23 @@ void	pars_line(char *line, t_pars *exe)
 	fill_exe(&exe, i);
 }
 
-t_pars	*parseur(char *line)
+int	parseur(char *line, t_data **d)
 {
 	char	**exe;
-	t_pars *cmd;
 	int	i;
 
 	i = -1;
 	if (!line || line[0] =='\0')
-		return (NULL);
-	exe = ft_split(line, '&'); //-> coder un split;
-	cmd = init_struct_pars(exe, ft_strstrlen(exe));
-	if (!cmd)
-		return (NULL);
-	cmd->line = line;
+		return (1);
+	exe = ft_split2(line, "&"); //-> coder un split;
+	(*d)->cmd = init_struct_pars(exe, ft_strstrlen(exe));
+	if (!(*d)->cmd)
+		return (1);
+	(*d)->cmd->line = line;
 	while (++i < ft_strstrlen(exe))
 	{
-		pars_line(exe[i], &cmd[i]);
+		pars_line(exe[i], &(*d)->cmd[i], d);
 	}
-	// reader(cmd, ft_strstrlen(exe));
-	return (cmd);
+	reader((*d)->cmd, ft_strstrlen(exe), (*d)->var);
+	return (0);
 }
