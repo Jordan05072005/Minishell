@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 static int	in_cote(char *str, int j)
 {
 	int	i;
@@ -69,8 +68,8 @@ static int	ft_nbr_word(char *str, char *charset)
 	counter = 0;
 	while (str[i])
 	{
-		if (!in_cote(str, i) && ((!is_charset(charset, str[i])) 
-			&& (is_charset(charset, str[i + 1]) || str[i + 1] == '\0')))
+		if (!in_cote(str, i) && (!is_charset(charset, str[i])) 
+			&& (is_charset(charset, str[i + 1]) || str[i + 1] == '\0'))
 			counter++;
 		i++;
 	}
@@ -90,7 +89,7 @@ char	**ft_split2(char *s, char *c)
 		return (NULL);
 	while (s[i])
 	{
-		if (in_cote(s, i) || !is_charset(c,s[i]))
+		if (in_cote(s, i) || !is_charset(c, s[i]))
 		{
 			str_final[i_m] = malloc((strlen_char(c, s, i) + 1) * sizeof(char));
 			if (str_final[i_m] == NULL)
@@ -101,6 +100,6 @@ char	**ft_split2(char *s, char *c)
 		else
 			i++;
 	}
-	str_final[i_m] = 0;
+	str_final[i_m] = 0;	
 	return (str_final);
 }

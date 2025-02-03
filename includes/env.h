@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 17:04:11 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:09:04 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ typedef struct s_var
 
 typedef struct s_data
 {
-	t_pars	cmd;
+	t_pars	*cmd;
 	char	**env;
-	char	**temp;
+	t_var	*var;
 }	t_data;
 
 int	ft_strstrlen(char **str);

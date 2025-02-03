@@ -130,7 +130,7 @@ void	fill_exe(t_pars **pars, int i)
 {
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
-	(*pars)->exe[i].args = ft_split((*pars)->cmd, ' ');
+	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
 	(*pars)->exe[i].append = 0; // add append
 }
@@ -173,7 +173,7 @@ int	parseur(char *line, t_data **d)
 	i = -1;
 	if (!line || line[0] =='\0')
 		return (1);
-	exe = ft_split2(line, "&"); //-> coder un split;
+	exe = ft_split2(line, "&");
 	(*d)->cmd = init_struct_pars(exe, ft_strstrlen(exe));
 	if (!(*d)->cmd)
 		return (1);
