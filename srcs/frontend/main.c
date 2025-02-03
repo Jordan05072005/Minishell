@@ -31,27 +31,25 @@ int	main(int ac, char **av, char **env)
 	{
 		if (!before || ft_strncmp(before, line, ft_strlen(line)) != 0 || ft_strncmp(before, line, ft_strlen(before)) != 0)
 			add_history(line);
-		if (before)
-			free(before);
-		before = strdup(line);
+		before = line;
 		cmd = parseur(line);
 		if (cmd != NULL)
 		{
-			exec(cmd->pipe, cmd->exe, env);
+			exec(cmd->pipe, cmd->exe, env, cmd);
 			while (--cmd->pipe >= 0)
 			{
 				ft_free_tab((void *)(cmd->exe[cmd->pipe].split), ft_strstrlen(cmd->exe[cmd->pipe].split));
-				free(cmd->exe);
+				ft_free_tab((void **)cmd->exe[cmd->pipe].args, ft_strstrlen(cmd->exe[cmd->pipe].args));
+				ft_del(cmd->exe);
 			}
 			ft_free_tab((void *)cmd->split, ft_strstrlen(cmd->split));
-			free(cmd);
-			free(line);
+			ft_del(cmd->cmd);
+			ft_del(cmd);
 		}
 		prompt = get_prompt();
 		line = readline(prompt);
 		free(prompt);
 	}
-	free(before);
 	ft_exit();
 	return (1);
 }

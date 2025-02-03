@@ -26,7 +26,7 @@ MINI_B =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix path/, $(PTH))
 
 MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
-$(addprefix srcs/exec/, $(MINI_B))
+$(addprefix srcs/exec/, $(MINI_B)) srcs/env/clean.c
 
 OBJ = $(MINI_SRC:.c=.o)
 
