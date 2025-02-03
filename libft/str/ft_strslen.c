@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strslen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 16:56:52 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 17:16:33 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/02/03 10:21:27 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/02/03 10:23:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#inlcude "env.h"
+#include "../libft.h"
 
-char **env(void)
+size_t	ft_strslen(const char **str)
 {
-	static char	**env = NULL;
+	size_t	i;
 
-	return (env);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
