@@ -10,15 +10,19 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MINISHELL_F =	prompt.c main.c parseur.c utils.c utils_lst.c split2.c
 
-EXEC =	exec_child.c	exec_parent.c	exec_builtin.c	\
+EXEC =	exec_child.c		exec_parent.c	exec_builtin.c		\
 		exec.c
 
-ICMDS =	init_icmd.c		init_icmds.c	zero_icmds.c	\
+ICMDS =	init_icmd.c			init_icmds.c	zero_icmds.c		\
 		clean_icmds.c
 
-IO =	close_fd.c		here_doc.c		set_io.c
+IO =	close_fd.c			here_doc.c		set_io.c
 
-PTH =	get_path.c		is_builtin.c
+PTH =	get_path.c			is_builtin.c
+
+DATA =	clean_data.c		data.c			env2env.c			\
+		ft_getenv_struct.c	ft_getenv.c		ft_getloc_struct.c	\
+		ft_getloc.c
 
 MINI_B =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix icmds/, $(ICMDS))	\
@@ -26,7 +30,7 @@ MINI_B =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix path/, $(PTH))
 
 MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
-$(addprefix srcs/exec/, $(MINI_B)) srcs/data/clean_data.c
+$(addprefix srcs/exec/, $(MINI_B)) $(addprefix srcs/data/, $(DATA))
 
 OBJ = $(MINI_SRC:.c=.o)
 

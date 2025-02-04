@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   env2env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:38:03 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/02/04 13:56:02 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/02/04 14:02:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "env.h"
 
-void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
+char	**env2env(t_list *env)
 {
-	set_io_cp(child, nb_cmds, cmds);
-	ft_del(cmds[child].path);
-	if (ft_strncmp(cmds[child].args[0], "cd", 3))
-		cmds[child].exit = 0;// ft_cd(cmds[child].args, env)
-	else if (ft_strncmp(cmds[child].args[0], "pwd", 4))
-		cmds[child].exit = 0;//ft_pwd(cmds[child].args);
-	else
-		cmds[child].exit = 1;
+	char	**new_env;
+	t_list	*temp;
+	size_t	len;
+	size_t	i;
+
+	temp = env;
+	len = ft_lstsize(env);
+	new_env = ft_calloc(len + 1, sizeof(char *));//not protected
+	i = -1;
+	while (++i < len)
+	{
+		new_env[i] = env->content;
+		temp = temp->next;
+	}
+	return (new_env);
 }

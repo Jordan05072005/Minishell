@@ -21,7 +21,12 @@ int	main(int ac, char **av, char **env)
 	t_data	*d;
 
 	before = NULL;
-	d = malloc(sizeof(t_data));
+	d = data();
+	while (*env)
+	{
+		ft_lstadd_back(&d->env, ft_lstnew(ft_strdup(*env)));
+		env++;
+	}
 	(void)av;
 	(void)ac;
 	signal(SIGINT, new_prompt);
@@ -36,7 +41,7 @@ int	main(int ac, char **av, char **env)
 		before = line;
 		if (!parseur(line, &d))
 		{
-			exec(d->cmd->pipe, d->cmd->exe, env, d->cmd);
+			exec(d->cmd->pipe, d->cmd->exe);
 			clean_temp(d->cmd);
 		}
 		prompt = get_prompt();
