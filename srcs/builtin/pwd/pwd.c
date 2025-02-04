@@ -12,11 +12,13 @@
 
 #include "minishell.c"
 
-void	ft_pwd(char **arg)
+int	ft_pwd(char **arg)
 {
 	char	buf[4096];
 
-
+	if (ft_strstrlen(arg) > 1)
+		return (1);
 	ft_getcwd(buf, 4096);
 	ft_printf("%s", buf);
+	return (0)
 }
