@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:56:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:02:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:58:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**env2env(t_list *env)
 	i = -1;
 	while (++i < len)
 	{
-		new_env[i] = env->content;
+		new_env[i] = temp->content;
 		temp = temp->next;
 	}
 	return (new_env);
