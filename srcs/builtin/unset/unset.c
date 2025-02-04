@@ -44,4 +44,5 @@ int	ft_unset(char **arg)
 		if (lst)
 			ft_lstdel_link(&lst, ft_lstdelone, arg[i]);
 	}
+	return (0);
 }	
