@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 08:51:51 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:33:05 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:41:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	*ft_getloc(const char *str)
 	}
 	if (!line)
 		return (NULL);
-	return (line + size);
+	return (line + size + 1);
 }

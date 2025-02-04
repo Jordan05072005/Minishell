@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:32:46 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:41:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char	*ft_getenv(const char *str)
 	}
 	if (!line)
 		return (NULL);
-	return (line + size);
+	return (line + size + 1);
 }

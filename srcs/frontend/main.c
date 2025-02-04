@@ -49,5 +49,5 @@ int	main(int ac, char **av, char **env)
 		free(prompt);
 	}
 	ft_exit();
-	return (1);
+	return (0);
 }

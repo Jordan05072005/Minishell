@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:16:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:46:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	ft_cd(char **av)
 {
 	struct stat	path_stat;
 	char		*curpath;
-	t_list		*oldpwd;
+	// t_list		*oldpwd;
 	t_list		*pwd;
 
 	if (!av[1])
@@ -135,11 +135,11 @@ int	ft_cd(char **av)
 		return (ft_perror(-1, 0, "Directory does not exist."), 3);
 	if (!S_ISDIR(path_stat.st_mode))
 		return (ft_perror(-1, 0, "Path is not a directory."), 3);
-	oldpwd = ft_getenv_struct("OLDPWD=");
+	// oldpwd = ft_getenv_struct("OLDPWD=");
 	pwd = ft_getenv_struct("PWD=");
-	ft_del(oldpwd->content);
-	oldpwd->content = pwd->content;
-	pwd->content = curpath;
+	// ft_del(oldpwd->content);
+	// oldpwd->content = pwd->content;
+	pwd->content = ft_strjoin("PWD=", curpath);
 	chdir(curpath);
 	return (0);
 }
