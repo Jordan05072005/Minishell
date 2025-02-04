@@ -42,23 +42,16 @@ int	is_var(char *str)
 	return (0);
 }
 
-int	fill_struct(t_pars *cmd, t_data **d, char **arg, int *n_arg)
+int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 {
 	int	i;
 	int	fd;
 	int	max;
-	char	**split;
-
 	max = ft_strstrlen(arg);
 	i = 0;
 	while (*n_arg < max && !(ft_strlen(arg[*n_arg]) == 1 && in_str(arg[*n_arg][0], "|", -1)))
 	{
-		if (is_var(arg[*n_arg]) && ((*n_arg) + 1 >= max || in_str(arg[*n_arg][0], "|",(*n_arg) + 1 )))
-		{
-			split = ft_split(arg[*n_arg], '=');
-			push_back_var(&(*d)->var, split[0], split[1], split);
-		}
-		else if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
+		if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
 		{
 			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			cmd->append = arg[(*n_arg)];
@@ -92,7 +85,7 @@ int	fill_struct(t_pars *cmd, t_data **d, char **arg, int *n_arg)
 }
 
 
-void	reader(t_pars *cmd, int i, t_var *temp)
+void	reader(t_pars *cmd, int i)
 {
 	int	j=0;
 	int	y=0;
@@ -118,12 +111,6 @@ void	reader(t_pars *cmd, int i, t_var *temp)
 		y = 0;
 		j++;
 	}
-	printf("data : \n");
-	while (temp != NULL)
-	{
-		printf("  key : %s, value : %s\n", temp->name, temp->data);
-		temp = temp->next;
-	}
 }
 
 void	fill_exe(t_pars **pars, int i)
@@ -146,7 +133,7 @@ void	free_tpars(t_pars **pars)  //vide ->free
 	(*pars)->sep = 0;
 }
 
-void	pars_line(char *line, t_pars *exe, t_data **d)
+void	pars_line(char *line, t_pars *exe)
 {
 	char	**arg;
 	int	n_arg;
@@ -156,7 +143,7 @@ void	pars_line(char *line, t_pars *exe, t_data **d)
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	n_arg = 0;
 	i = 0;
-	while (fill_struct(exe, d,  arg, &n_arg))
+	while (fill_struct(exe, arg, &n_arg))
 	{
 		fill_exe(&exe, i);
 		free_tpars(&exe);
@@ -180,8 +167,8 @@ int	parseur(char *line, t_data **d)
 	(*d)->cmd->line = line;
 	while (++i < ft_strstrlen(exe))
 	{
-		pars_line(exe[i], &(*d)->cmd[i], d);
+		pars_line(exe[i], &(*d)->cmd[i]);
 	}
-	reader((*d)->cmd, ft_strstrlen(exe), (*d)->var);
+	reader((*d)->cmd, ft_strstrlen(exe));
 	return (0);
 }
