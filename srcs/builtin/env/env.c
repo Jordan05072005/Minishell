@@ -16,10 +16,13 @@ int	ft_env(char **arg)
 {
 	t_list	*env;
 
+	if (ft_strstrlen(arg) > 1)
+		return (1);
 	env = data()->env;
 	while (env)
 	{
-		ft_printf("%s", env->content);
+		ft_printf("%s\n", env->content);
 		env = env->next;
 	}
+	return (0);
 }

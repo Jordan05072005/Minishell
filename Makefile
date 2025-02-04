@@ -33,7 +33,7 @@ MINI_B =	$(addprefix exec/, $(EXEC))		\
 
 MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
 $(addprefix srcs/exec/, $(MINI_B)) $(addprefix srcs/data/, $(DATA)) \
-$(addprefix srcs/builtin/cd/, $(CD)) srcs/builtin/pwd/pwd.c
+$(addprefix srcs/builtin/cd/, $(CD)) srcs/builtin/pwd/pwd.c srcs/builtin/unset/unset.c srcs/builtin/env/env.c
 
 OBJ = $(MINI_SRC:.c=.o)
 

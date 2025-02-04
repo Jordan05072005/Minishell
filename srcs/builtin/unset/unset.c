@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void ft_lstdel_link(t_list **l, void (*del)(void *), void *content)
+void ft_lstdel_link(t_list **l, void *content)
 {
 	t_list	*cpy;
 	t_list	*temp;
@@ -26,7 +26,7 @@ void ft_lstdel_link(t_list **l, void (*del)(void *), void *content)
 		return;
 	temp = cpy->next;
 	cpy->next = cpy->next->next;
-	del(temp);
+	ft_lstdelone(temp, free);
 }
 
 int	ft_unset(char **arg)
@@ -39,10 +39,10 @@ int	ft_unset(char **arg)
 	{
 		lst = ft_getloc_struct(arg[i]);
 		if (lst)
-			ft_lstdel_link(&lst, ft_lstdelone, arg[i]);
+			ft_lstdel_link(&lst, arg[i]);
 		lst = ft_getenv_struct(arg[i]);
 		if (lst)
-			ft_lstdel_link(&lst, ft_lstdelone, arg[i]);
+			ft_lstdel_link(&lst, arg[i]);
 	}
 	return (0);
 }	
