@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 08:51:51 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:51:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:33:05 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 char	*ft_getloc(const char *str)
 {
-	int		i;
 	int		size;
 	char	*line;
 	t_list	*loc;
 
-	i = 0;
 	size = ft_strlen(str);
 	loc = data()->loc;
 	if (!loc)

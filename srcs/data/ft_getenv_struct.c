@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:02:34 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:32:27 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 t_list	*ft_getenv_struct(const char *str)
 {
-	int		i;
 	int		size;
 	char	*line;
 	t_list	*env;
 
-	i = 0;
 	size = ft_strlen(str);
 	env = data()->env;
 	if (!env)

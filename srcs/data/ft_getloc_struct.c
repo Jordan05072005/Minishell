@@ -14,12 +14,10 @@
 
 t_list	*ft_getloc_struct(const char *str)
 {
-	int		i;
 	int		size;
 	char	*line;
 	t_list	*loc;
 
-	i = 0;
 	size = ft_strlen(str);
 	loc = data()->loc;
 	if (!loc)

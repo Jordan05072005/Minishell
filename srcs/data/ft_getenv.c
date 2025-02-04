@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:50:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:32:46 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 char	*ft_getenv(const char *str)
 {
-	int		i;
 	int		size;
 	char	*line;
 	t_list	*env;
 
-	i = 0;
 	size = ft_strlen(str);
 	env = data()->env;
 	if (!env)
