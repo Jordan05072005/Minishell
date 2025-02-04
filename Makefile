@@ -8,7 +8,7 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MINISHELL_F =	prompt.c main.c parseur.c utils.c utils_lst.c split2.c
+MINISHELL_F =	prompt.c main.c parseur/parseur.c parseur/utils.c parseur/utils_lst.c parseur/split2.c
 
 EXEC =	exec_child.c		exec_parent.c	exec_builtin.c		\
 		exec.c
