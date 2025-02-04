@@ -32,5 +32,5 @@ t_list	*ft_getloc_struct(const char *str)
 	}
 	if (!line)
 		return (NULL);
-	return (&loc);
+	return (loc);
 }

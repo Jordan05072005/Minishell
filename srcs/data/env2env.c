@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv_struct.c                                 :+:      :+:    :+:   */
+/*   env2env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:02:34 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/02/04 13:56:02 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/02/04 14:02:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-t_list	*ft_getenv_struct(const char *str)
+char	**env2env(t_list *env)
 {
-	int		i;
-	int		size;
-	char	*line;
-	t_list	*env;
+	char	**new_env;
+	t_list	*temp;
+	size_t	len;
+	size_t	i;
 
-	i = 0;
-	size = ft_strlen(str);
-	env = data()->env;
-	if (!env)
-		return (NULL);
-	line = ft_strnstr(env->content, str, size);
-	while (!line && env->next)
+	temp = env;
+	len = ft_lstsize(env);
+	new_env = ft_calloc(len + 1, sizeof(char *));//not protected
+	i = -1;
+	while (++i < len)
 	{
-		env = env->next;
-		line = ft_strnstr(env->content, str, size);
+		new_env[i] = env->content;
+		temp = temp->next;
 	}
-	if (!line)
-		return (NULL);
-	return (env);
+	return (new_env);
 }

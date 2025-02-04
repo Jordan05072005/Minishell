@@ -25,7 +25,7 @@ int	main(int ac, char **av, char **env)
 	while (*env)
 	{
 		ft_lstadd_back(&d->env, ft_lstnew(ft_strdup(*env)));
-		*env++;
+		env++;
 	}
 	(void)av;
 	(void)ac;
