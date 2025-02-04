@@ -39,8 +39,9 @@ int	ft_unset(char **arg)
 	{
 		lst = ft_getloc_struct(arg[i]);
 		if (lst)
-			ft_lstdel_link(&lst)
+			ft_lstdel_link(&lst, ft_lstdelone, arg[i]);
+		lst = ft_getenv_struct(arg[i]);
+		if (lst)
+			ft_lstdel_link(&lst, ft_lstdelone, arg[i]);
 	}
-	ft_getloc_struct();
-	ft_getenv_struct();
 }	
