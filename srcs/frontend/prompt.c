@@ -27,10 +27,14 @@ void	ft_exit()
 {
 	ft_printf("exit\n");
 }
+
+//29 is the number of char for color
 char	*get_prompt()
 {
 	char	*str;
 	char	*prompt;
+	char	*curseur;
+	char	*len;
 
 	prompt = ft_strdup("\033[0;32m");
 	str = ft_getenv("LOGNAME");
@@ -42,8 +46,12 @@ char	*get_prompt()
 	str = ft_getenv("PWD");
 	prompt = ft_strjoin_free(prompt, str);
 	if (strncmp(ft_getenv("USER"), "root", 4) == 0)
-		prompt = ft_strjoin_free(prompt, "\033[0;0m# ");
+		prompt = ft_strjoin_free(prompt, "\033[0;0m# \033[G");
 	else
-		prompt = ft_strjoin_free(prompt, "\033[0;0m$ ");
-	return (prompt);
+		prompt = ft_strjoin_free(prompt, "\033[0;0m$ \033[G");
+	len = ft_itoa(ft_strlen(prompt) - 29);
+	curseur = ft_strjoin("\033[", len);
+	curseur = ft_strjoin(curseur, "C");
+	prompt = ft_strjoin_free(prompt, curseur);
+	return (free(len), free(curseur), prompt);
 }
