@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 09:08:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:17:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "exec.h"
 
 char	*create_path(char *first_component, char *second_component)
 {
@@ -21,7 +21,7 @@ char	*create_path(char *first_component, char *second_component)
 		path = ft_strjoin(first_component, "/");
 	else
 		path = ft_strdup(first_component);
-	dir_path = ft_strjoin(path, second_component)
+	dir_path = ft_strjoin(path, second_component);
 	ft_del(path);
-	return (dir_path)
+	return (dir_path);
 }
