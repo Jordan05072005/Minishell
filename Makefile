@@ -24,13 +24,16 @@ DATA =	clean_data.c		data.c			env2env.c			\
 		ft_getenv_struct.c	ft_getenv.c		ft_getloc_struct.c	\
 		ft_getloc.c
 
+CD =	cd.c				utils.c
+
 MINI_B =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix icmds/, $(ICMDS))	\
 			$(addprefix io/, $(IO))			\
 			$(addprefix path/, $(PTH))
 
 MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
-$(addprefix srcs/exec/, $(MINI_B)) $(addprefix srcs/data/, $(DATA))
+$(addprefix srcs/exec/, $(MINI_B)) $(addprefix srcs/data/, $(DATA)) \
+$(addprefix srcs/builtin/cd/, $(CD)) srcs/builtin/pwd/pwd.c
 
 OBJ = $(MINI_SRC:.c=.o)
 

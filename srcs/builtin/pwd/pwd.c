@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "exec.h"
 
 int	ft_pwd(char **arg)
 {
@@ -18,7 +18,7 @@ int	ft_pwd(char **arg)
 
 	if (ft_strstrlen(arg) > 1)
 		return (1);
-	ft_getcwd(buf, 4096);
+	getcwd(buf, 4096);
 	ft_printf("%s", buf);
-	return (0)
+	return (0);
 }
