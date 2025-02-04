@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/30 16:37:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:30:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	exec(int nb_cmds, t_cmd *input, char **env, t_pars *pars)
+int	exec(int nb_cmds, t_cmd *input)
 {
 	//Is using the wrong env
 	t_icmd	*cmds;

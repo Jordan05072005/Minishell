@@ -17,16 +17,18 @@ t_list	*ft_getloc_struct(const char *str)
 	int		i;
 	int		size;
 	char	*line;
-	t_list	loc;
+	t_list	*loc;
 
 	i = 0;
 	size = ft_strlen(str);
 	loc = data()->loc;
-	line = ft_strnstr(loc.content, str, size);
+	if (!loc)
+		return (NULL);
+	line = ft_strnstr(loc->content, str, size);
 	while (!line && loc->next)
 	{
 		loc = loc->next;
-		line = ft_strnstr(loc.content, str, size);
+		line = ft_strnstr(loc->content, str, size);
 	}
 	if (!line)
 		return (NULL);
