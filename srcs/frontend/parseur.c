@@ -53,12 +53,7 @@ int	fill_struct(t_pars *cmd, t_data **d, char **arg, int *n_arg)
 	i = 0;
 	while (*n_arg < max && !(ft_strlen(arg[*n_arg]) == 1 && in_str(arg[*n_arg][0], "|", -1)))
 	{
-		if (is_var(arg[*n_arg]) && ((*n_arg) + 1 >= max || in_str(arg[*n_arg][0], "|",(*n_arg) + 1 )))
-		{
-			split = ft_split(arg[*n_arg], '=');
-			push_back_var(&(*d)->var, split[0], split[1], split);
-		}
-		else if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
+		if ((*n_arg) + 1 < max && (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg])) || !ft_strncmp(arg[*n_arg], ">", ft_strlen(arg[*n_arg]))))	
 		{
 			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			cmd->append = arg[(*n_arg)];
@@ -117,12 +112,6 @@ void	reader(t_pars *cmd, int i, t_var *temp)
 		}
 		y = 0;
 		j++;
-	}
-	printf("data : \n");
-	while (temp != NULL)
-	{
-		printf("  key : %s, value : %s\n", temp->name, temp->data);
-		temp = temp->next;
 	}
 }
 
