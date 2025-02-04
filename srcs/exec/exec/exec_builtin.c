@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 17:19:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:22:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 {
-	int	saved_i;
-	int	saved_o;
+	int	saved[2];
 
-	saved_i = dup(0);
-	saved_o = dup(1);
+	saved[0] = dup(0);
+	saved[1] = dup(1);
 	set_io_cp(child, nb_cmds, cmds);
 	// ft_del(cmds[child].path);
 	if (!ft_strncmp(cmds[child].args[0], "cd", 3))
@@ -31,6 +30,6 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 		cmds[child].exit = ft_env(cmds[child].args);
 	else
 		cmds[child].exit = 1;
-	dup2(saved_i, 0);
-	dup2(saved_o, 1);
+	dup2(saved[0], 0);
+	dup2(saved[1], 1);
 }
