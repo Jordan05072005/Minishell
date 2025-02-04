@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, new_prompt);
 	prompt = get_prompt();
 	line = readline(prompt);
 	free(prompt);
