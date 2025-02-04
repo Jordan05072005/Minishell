@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 08:51:51 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 08:54:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:24:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "emv.h"
+#include "env.h"
 
 char	*ft_getloc(const char *str)
 {
@@ -23,9 +23,9 @@ char	*ft_getloc(const char *str)
 	size = ft_strlen(str);
 	loc = data()->loc;
 	line = ft_strnstr(loc.content, str, size);
-	while (!line && loc->next)
+	while (!line && loc.next)
 	{
-		loc = loc->next;
+		loc = *loc.next;
 		line = ft_strnstr(loc.content, str, size);
 	}
 	if (!line)

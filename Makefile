@@ -39,7 +39,8 @@ run: re all
 	@./$(NAME)
 
 valgrind: re all
-	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+# --suppressions=supp.supp
 
 bonus: $(NAME)
 
