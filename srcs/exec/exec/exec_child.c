@@ -6,14 +6,21 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:55:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:53:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+void print_list(void *arg)
+{
+	ft_printf("%s\n", arg);
+}
+
+
 void	exec_child(t_icmd *cmds, int nb_cmds, int child)
 {
+	// ft_lstiter(data()->env, &print_list);
 	set_io_cp(child, nb_cmds, cmds);
 	close_fd(cmds, nb_cmds);
 	if (!cmds[child].path)

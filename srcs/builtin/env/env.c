@@ -19,10 +19,11 @@ int	ft_env(char **arg)
 	if (ft_strstrlen(arg) > 1)
 		return (1);
 	env = data()->env;
-	while (env)
+	ft_printf("%s\n", env->content);
+	while (env->next)
 	{
-		ft_printf("%s\n", env->content);
 		env = env->next;
+		ft_printf("%s\n", env->content);
 	}
 	return (0);
 }
