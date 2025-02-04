@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:58:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,94 +59,59 @@ char	**get_stack(char *curpath, int *depth)
 	int		i;
 
 	path = ft_split(curpath, '/');
-	stack = ft_calloc(ft_strslen(path) + 1, sizeof(char *));
+	stack = ft_calloc(ft_strslen((const char **)path) + 1, sizeof(char *));
 	ft_del(curpath);
 	if (!path || !stack)
-		return (ft_free_tab(path, ft_strslen(path)), ft_del(stack),
-			ft_perror(1, 0, "Malloc error."));
+		return (ft_free_tab((void **)path, ft_strslen((const char **)path)),
+			ft_del(stack), ft_perror(1, 0, "Malloc error."), NULL);
 	*depth = 0;
 	i = -1;
 	while (path[++i])
 	{
 		if (!ft_strncmp(path[i], "..", 3) && *depth > 0)
-			*depth--;
-		else if (ft_strncmp(path[i], "..", 3) != 0)
+			(*depth)--;
+		else if (ft_strncmp(path[i], ".", 2) != 0)
 		{
 			if (stack[*depth])
-				ft_del(stack[*depth])
-			stack[*depth++] = ft_strdup(path[i]);
+				ft_del(stack[*depth]);
+			stack[(*depth)++] = ft_strdup(path[i]);
 		}
 	}
-	ft_free_tab(path, ft_strslen(path))
+	ft_free_tab((void **)path, ft_strslen((const char **)path));
 	return (stack);
 }
 
+// i3[0] = depth;
+// i3[1] = len / j;
+// i3[2] = i;
 char	*clean_curpath(char *curpath)
 {
 	char	*clean;
-	char	**stack;
-	int		depth;
-	int		len;
-	int		i;
+	char	**path;
+	int		i3[3];
 
 	if (!curpath)
 		return (curpath);
-	stack = get_stack(curpath, &depth);
-	len = 1;
-	i = -1;
-	while (stack[++i])
-		len += ft_strlen(stack[i]) + 1;
-	clean = ft_calloc(len, sizeof(char));
+	path = get_stack(curpath, &i3[0]);
+	i3[1] = ft_tern_int(i3[0] == 0, 2, 1);
+	i3[2] = -1;
+	while (++i3[2] < i3[0])
+		i3[1] += ft_strlen(path[i3[2]]) + 1;
+	clean = ft_calloc(i3[1], sizeof(char));
 	if (!clean)
-		return (ft_free_tab(stack, ft_strslen(stack)),
-			ft_perror(1, 0, "Malloc error."));
-	i = -1;
+		return (ft_free_tab((void **)path, ft_strslen((const char **)path)),
+			ft_perror(1, 0, "Malloc error."), NULL);
+	i3[2] = -1;
+	i3[1] = 0;
 	clean[0] = '/';
-	len = 1;
-	while (stack[++i])
+	while (++i3[2] < i3[0])
 	{
-		ft_strlcpy(clean + len, stack[i], ft_strlen(stack[i]) + 1);
-		len += ft_strlen(stack[i]);
-		if (stack[i + 1])
-			clean[len++] = '/';
+		clean[i3[1]++] = '/';
+		ft_strlcpy(clean + i3[1], path[i3[2]], ft_strlen(path[i3[2]]) + 1);
+		i3[1] += ft_strlen(path[i3[2]]);
 	}
-	return (ft_free_tab(stack, ft_strslen(stack)), clean);
+	return (ft_free_tab((void **)path, ft_strslen((const char **)path)), clean);
 }
-
-char	*clean_curpath(char *curpath)
-{
-	char	*clean;
-	char	**stack;
-	int		len;
-	int		i;
-
-	if (!curpath)
-		return (curpath);
-	stack = get_stack(curpath);
-	len = 1;
-	i = -1;
-	while (stack[++i])
-		len += ft_strlen(stack[i]) + 1;
-	clean = ft_calloc(len, sizeof(char));
-	if (!clean)
-	{
-		ft_del(stack);
-		return (ft_perror(1, 0, "Malloc error."));
-	}
-	i = -1;
-	clean[0] = '/';
-	len = 1;
-	while (stack[++i])
-	{
-		ft_strlcpy(clean + len, stack[i], ft_strlen(stack[i]) + 1);
-		len += ft_strlen(stack[i]);
-		if (stack[i + 1])
-			clean[len++] = '/';
-	}
-	ft_del(stack);
-	return (clean);
-}
-
 
 int	ft_cd(char **av)
 {
