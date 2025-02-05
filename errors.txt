@@ -1,3 +1,17 @@
 main line 43 : invalid free for "ls | clear"
 idk where : prompt doesnt reset properly with "CTRL + \"
 getprompt : invalid read of size 1 when PWD is unset.
+
+Invalid read of size 1
+==2493414==    at 0x404F43: ft_strncmp (in /home/hle-hena/Documents/42_projects/Minishell/minishell)
+==2493414==    by 0x4015AD: main (main.c:39)
+==2493414==  Address 0x4b63580 is 0 bytes inside a block of size 3 free'd
+==2493414==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2493414==    by 0x403970: clean_pars (clean_data.c:46)
+==2493414==    by 0x40162E: main (main.c:45)
+==2493414==  Block was alloc'd at
+==2493414==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2493414==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==2493414==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==2493414==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==2493414==    by 0x401561: main (main.c:35)
