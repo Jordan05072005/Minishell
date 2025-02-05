@@ -37,15 +37,15 @@ char	*get_prompt()
 	char	*len;
 
 	prompt = ft_strdup("\033[0;32m");
-	str = ft_getenv("LOGNAME");
+	str = ft_getenv("LOGNAME=");
 	prompt = ft_strjoin_free(prompt, str);
 	prompt = ft_strjoin_free(prompt, "@");
-	str = ft_getenv("USER");
+	str = ft_getenv("USER=");
 	prompt = ft_strjoin_free(prompt, str);
 	prompt = ft_strjoin_free(prompt, "\033[0;0m:\033[0;34m");
-	str = ft_getenv("PWD");
+	str = ft_getenv("PWD=");
 	prompt = ft_strjoin_free(prompt, str);
-	if (strncmp(ft_getenv("USER"), "root", 4) == 0)
+	if (strncmp(ft_getenv("USER="), "root", 4) == 0)
 		prompt = ft_strjoin_free(prompt, "\033[0;0m# \033[G");
 	else
 		prompt = ft_strjoin_free(prompt, "\033[0;0m$ \033[G");

@@ -6,14 +6,14 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:59:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:04:52 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 
 typedef struct s_cmd
 {

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 15:13:51 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:04:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <sys/stat.h>
 
 int		ft_pwd(char **arg);

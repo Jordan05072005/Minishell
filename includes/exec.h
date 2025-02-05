@@ -6,14 +6,14 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:05:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:04:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <wait.h>
 # include <fcntl.h>
 # include "env.h"
