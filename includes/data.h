@@ -6,14 +6,12 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 13:07:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:12:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
-
-# include "struct.h"
 
 int		clean_data(void);
 int		clean_pars(void);

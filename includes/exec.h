@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 13:07:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:14:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXEC_H
 
 # include <wait.h>
-# include "struct.h"
 
 int		exec(int nb_cmds, t_cmd *input);
 t_icmd	*init_icmds(t_cmd *input, int nb_cmds);
