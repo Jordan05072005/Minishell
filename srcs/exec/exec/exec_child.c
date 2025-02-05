@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 11:11:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 void print_list(void *arg)
 {

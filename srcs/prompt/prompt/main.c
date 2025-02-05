@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "mini.h"
 
 //penser a clear l'history
 int	main(int ac, char **av, char **env)

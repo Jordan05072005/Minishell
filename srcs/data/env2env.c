@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:56:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 16:58:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "mini.h"
 
 char	**env2env(t_list *env)
 {

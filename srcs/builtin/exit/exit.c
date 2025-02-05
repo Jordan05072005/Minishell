@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:14:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 11:30:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:56:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 int	ft_exit(void)
 {

@@ -59,6 +59,7 @@
 "C_Cpp.errorSquiggles": "disabled",
 "files.associations": {
 	"env.h": "c",
-	"libft.h": "c"
+	"libft.h": "c",
+	"exec.h": "c"
 }
 }

@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 08:51:51 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 10:24:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:34 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "mini.h"
 
 char	*ft_getloc(const char *str)
 {

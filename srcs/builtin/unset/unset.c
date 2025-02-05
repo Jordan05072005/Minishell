@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "mini.h"
 
 void ft_lstdel_link(t_list **l, void *content)
 {
@@ -35,7 +35,7 @@ int	ft_unset(char **arg)
 	size_t	i;
 
 	i = 0;
-	while (++i < ft_strslen(arg))
+	while (arg[++i])
 	{
 		lst = ft_getloc_struct(arg[i]);
 		if (lst)

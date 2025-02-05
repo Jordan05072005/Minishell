@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:56:52 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 13:24:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "mini.h"
 
 t_data	*data(void)
 {

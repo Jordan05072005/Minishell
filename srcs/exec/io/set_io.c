@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:39:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:54:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:17 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 void	set_io_cp(int child, int nb_cmds, t_icmd *cmds)
 {

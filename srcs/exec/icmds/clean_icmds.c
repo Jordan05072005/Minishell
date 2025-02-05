@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:11:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:53:29 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:57 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 int	clean_icmds(t_icmd *cmds, int nb_cmds)
 {

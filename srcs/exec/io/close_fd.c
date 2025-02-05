@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:10:31 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:54:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 void	close_fd(t_icmd *cmds, int nb_cmds)
 {

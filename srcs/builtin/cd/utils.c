@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:17:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:55:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 char	*create_path(char *first_component, char *second_component)
 {

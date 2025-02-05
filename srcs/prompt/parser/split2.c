@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "mini.h"
 
 static int	in_cote(char *str, int j)
 {

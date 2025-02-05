@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "mini.h"
 
 t_pars *init_struct_pars(char **split, int sep)
 {

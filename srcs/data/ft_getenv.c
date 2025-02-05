@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 10:24:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "mini.h"
 
 char	*ft_getenv(const char *str)
 {

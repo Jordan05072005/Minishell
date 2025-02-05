@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 11:30:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 int	is_builtin(const char *str)
 {

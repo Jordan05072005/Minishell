@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/30 14:44:14 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 	// if (!cmd.args)
 	// 	return (exit(clean_icmds(cmds, nb_cmds)), NULL);

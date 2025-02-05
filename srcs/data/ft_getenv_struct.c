@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv_struct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/04 14:32:27 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "mini.h"
 
 t_list	*ft_getenv_struct(const char *str)
 {

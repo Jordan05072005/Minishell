@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/29 15:54:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 t_icmd	*init_icmds(t_cmd *input, int nb_cmds)
 {

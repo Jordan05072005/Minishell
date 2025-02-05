@@ -6,11 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 11:28:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:57:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#include "mini.h"
 
 void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 {

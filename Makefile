@@ -52,7 +52,7 @@ OBJ = $(MINI_SRC:.c=.o)
 
 all: $(NAME)
 
-run: re all
+run: re
 	@./$(NAME)
 
 valgrind: re all
