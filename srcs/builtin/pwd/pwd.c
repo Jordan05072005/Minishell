@@ -19,6 +19,6 @@ int	ft_pwd(char **arg)
 	if (ft_strslen(arg) > 1)
 		return (1);
 	getcwd(buf, 4096);
-	ft_printf("%s", buf);
+	ft_printf("%s\n", buf);
 	return (0);
 }

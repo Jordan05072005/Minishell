@@ -60,6 +60,7 @@
 "files.associations": {
 	"env.h": "c",
 	"libft.h": "c",
-	"exec.h": "c"
+	"exec.h": "c",
+	"mini.h": "c"
 }
 }

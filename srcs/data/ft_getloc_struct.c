@@ -12,7 +12,7 @@
 
 #include "mini.h"
 
-t_list	*ft_getloc_struct(const char *str)
+t_list	*ft_getloc_struct(const char *str, t_list **placeholder)
 {
 	int		size;
 	char	*line;
@@ -20,15 +20,14 @@ t_list	*ft_getloc_struct(const char *str)
 
 	size = ft_strlen(str);
 	loc = data()->loc;
-	if (!loc)
-		return (NULL);
-	line = ft_strnstr(loc->content, str, size);
-	while (!line && loc->next)
+	*placeholder = loc;
+	while (loc)
 	{
-		loc = loc->next;
 		line = ft_strnstr(loc->content, str, size);
+		if (line && line[size] == '=')
+			return (loc);
+		*placeholder = loc;
+		loc = loc->next;
 	}
-	if (!line)
-		return (NULL);
-	return (loc);
+	return (NULL);
 }

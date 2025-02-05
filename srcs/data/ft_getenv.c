@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:37:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ char	*ft_getenv(const char *str)
 
 	size = ft_strlen(str);
 	env = data()->env;
-	if (!env)
-		return (NULL);
-	line = ft_strnstr(env->content, str, size);
-	while (!line && env->next)
+	while (env)
 	{
-		env = env->next;
 		line = ft_strnstr(env->content, str, size);
+		if (line && line[size] == '=')
+			return (line + size + 1);
+		env = env->next;
 	}
-	if (!line)
-		return (NULL);
-	return (line + size);
+	return (NULL);
 }

@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:47:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:24 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:11:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_list	*ft_getenv_struct(const char *str)
+t_list	*ft_getenv_struct(const char *str, t_list **placeholder)
 {
 	int		size;
 	char	*line;
@@ -20,15 +20,14 @@ t_list	*ft_getenv_struct(const char *str)
 
 	size = ft_strlen(str);
 	env = data()->env;
-	if (!env)
-		return (NULL);
-	line = ft_strnstr(env->content, str, size);
-	while (!line && env->next)
+	*placeholder = env;
+	while (env)
 	{
-		env = env->next;
 		line = ft_strnstr(env->content, str, size);
+		if (line && line[size] == '=')
+			return (env);
+		*placeholder = env;
+		env = env->next;
 	}
-	if (!line)
-		return (NULL);
-	return (env);
+	return (NULL);
 }

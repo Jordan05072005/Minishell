@@ -1,2 +1,3 @@
 main line 43 : invalid free for "ls | clear"
-idk where : da fuck is going on for "CTRL + \"
+idk where : prompt doesnt reset properly with "CTRL + \"
+getprompt : invalid read of size 1 when PWD is unset.

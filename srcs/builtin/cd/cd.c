@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:55:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:12:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ char	*get_curpath(char *arg)
 	char	**cdpath;
 
 	if (!arg)
-		return (ft_strdup(ft_getenv("HOME=")));
+		return (ft_strdup(ft_getenv("HOME")));
 	if (arg[0] == '/')
 		return (ft_strdup(arg));
 	if (arg[0] == '~')
-		return (create_path(ft_getenv("HOME="), arg + 1));//this aint how this one works bruh, if no HOME, still go HOME I guess ? Do better bro
+		return (create_path(ft_getenv("HOME"), arg + 1));//this aint how this one works bruh, if no HOME, still go HOME I guess ? Do better bro
 	if (arg[0] == '.')
-		return (create_path(ft_getenv("PWD="), arg));
+		return (create_path(ft_getenv("PWD"), arg));
 	cdpath = NULL;
-	if (ft_getenv("CDPATH="))
-		cdpath = ft_split(ft_getenv("CDPATH="), ':');
-	else if (ft_getloc("CDPATH="))
-		cdpath = ft_split(ft_getloc("CDPATH="), ':');
+	if (ft_getenv("CDPATH"))
+		cdpath = ft_split(ft_getenv("CDPATH"), ':');
+	else if (ft_getloc("CDPATH"))
+		cdpath = ft_split(ft_getloc("CDPATH"), ':');
 	curpath = test_cdpath(cdpath, arg);
 	ft_free_tab((void **)cdpath, ft_strslen(cdpath));
 	if (curpath)
 		return (curpath);
-	return (create_path(ft_getenv("PWD="), arg));
+	return (create_path(ft_getenv("PWD"), arg));
 }
 
 char	**get_stack(char *curpath, int *depth)
@@ -121,6 +121,7 @@ int	ft_cd(char **av)
 {
 	struct stat	path_stat;
 	char		*curpath;
+	t_list		*temp;
 	// t_list		*oldpwd;
 	t_list		*pwd;
 
@@ -135,8 +136,8 @@ int	ft_cd(char **av)
 		return (ft_perror(-1, 0, "Directory does not exist."), 3);
 	if (!S_ISDIR(path_stat.st_mode))
 		return (ft_perror(-1, 0, "Path is not a directory."), 3);
-	// oldpwd = ft_getenv_struct("OLDPWD=");
-	pwd = ft_getenv_struct("PWD=");
+	// oldpwd = ft_getenv_struct("OLDPWD", temp);
+	pwd = ft_getenv_struct("PWD", &temp);
 	// ft_del(oldpwd->content);
 	// oldpwd->content = pwd->content;
 	pwd->content = ft_strjoin("PWD=", curpath);

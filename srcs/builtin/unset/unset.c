@@ -29,20 +29,33 @@ void ft_lstdel_link(t_list **l, void *content)
 	ft_lstdelone(temp, free);
 }
 
+void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void *))
+{
+	if (!*link)
+		return ;
+	ft_printf("Trying %s\n", (*link)->content);
+	if (*prev == *link)
+		*prev = (*prev)->next;
+	else
+		(*prev)->next = (*link)->next;
+	ft_lstdelone(*link, del);
+}
+
 int	ft_unset(char **arg)
 {
 	t_list	*lst;
+	t_list	*prev;
 	size_t	i;
 
 	i = 0;
 	while (arg[++i])
 	{
-		lst = ft_getloc_struct(arg[i]);
+		lst = ft_getloc_struct(arg[i], &prev);
 		if (lst)
-			ft_lstdel_link(&lst, arg[i]);
-		lst = ft_getenv_struct(arg[i]);
+			return (ft_lstdelink(&prev, &lst, ft_del), 0);
+		lst = ft_getenv_struct(arg[i], &prev);
 		if (lst)
-			ft_lstdel_link(&lst, arg[i]);
+			ft_lstdelink(&prev, &lst, ft_del);
 	}
 	return (0);
 }	
