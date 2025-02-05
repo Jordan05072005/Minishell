@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:21:27 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/03 10:23:10 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:42:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-size_t	ft_strslen(const char **str)
+size_t	ft_strslen(char **str)
 {
 	size_t	i;
 

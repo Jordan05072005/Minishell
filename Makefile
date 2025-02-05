@@ -8,32 +8,42 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MINISHELL_F =	prompt.c main.c parseur/parseur.c parseur/utils.c parseur/utils_lst.c parseur/split2.c
+PROMPT =	prompt.c			main.c
+PARS =		parseur.c			utils.c			utils_lst.c			\
+			split2.c
+MINI_P =	$(addprefix prompt/, $(PROMPT))		\
+			$(addprefix parser/, $(PARS))
 
-EXEC =	exec_child.c		exec_parent.c	exec_builtin.c		\
-		exec.c
-
-ICMDS =	init_icmd.c			init_icmds.c	zero_icmds.c		\
-		clean_icmds.c
-
-IO =	close_fd.c			here_doc.c		set_io.c
-
-PTH =	get_path.c			is_builtin.c
-
-DATA =	clean_data.c		data.c			env2env.c			\
-		ft_getenv_struct.c	ft_getenv.c		ft_getloc_struct.c	\
-		ft_getloc.c
-
-CD =	cd.c				utils.c
-
-MINI_B =	$(addprefix exec/, $(EXEC))		\
+EXEC =		exec_child.c		exec_parent.c	exec_builtin.c		\
+			exec.c
+ICMDS =		init_icmd.c			init_icmds.c	zero_icmds.c		\
+			clean_icmds.c
+IO =		close_fd.c			here_doc.c		set_io.c
+PTH =		get_path.c			is_builtin.c
+MINI_E =	$(addprefix exec/, $(EXEC))		\
 			$(addprefix icmds/, $(ICMDS))	\
 			$(addprefix io/, $(IO))			\
 			$(addprefix path/, $(PTH))
 
-MINI_SRC =	$(addprefix srcs/frontend/, $(MINISHELL_F))	\
-$(addprefix srcs/exec/, $(MINI_B)) $(addprefix srcs/data/, $(DATA)) \
-$(addprefix srcs/builtin/cd/, $(CD)) srcs/builtin/pwd/pwd.c srcs/builtin/unset/unset.c srcs/builtin/env/env.c
+MINI_D =	clean_data.c		data.c			env2env.c			\
+			ft_getenv_struct.c	ft_getenv.c		ft_getloc_struct.c	\
+			ft_getloc.c
+
+CD =		cd.c				utils.c
+PWD =		pwd.c
+ENV =		env.c
+EXIT =		exit.c
+UN =		unset.c
+MINI_B =	$(addprefix cd/, $(CD))		\
+			$(addprefix pwd/, $(PWD))	\
+			$(addprefix env/, $(ENV))	\
+			$(addprefix unset/, $(UN))	\
+			$(addprefix exit/, $(EXIT))
+
+MINI_SRC =	$(addprefix srcs/prompt/, $(MINI_P))	\
+			$(addprefix srcs/exec/, $(MINI_E))		\
+			$(addprefix srcs/data/, $(MINI_D))		\
+			$(addprefix srcs/builtin/, $(MINI_B))
 
 OBJ = $(MINI_SRC:.c=.o)
 
@@ -46,7 +56,10 @@ run: re all
 	@./$(NAME)
 
 valgrind: re all
-	@valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+
+no-child: re all
+	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 # --suppressions=supp.supp
 
 bonus: $(NAME)

@@ -16,7 +16,7 @@ int	ft_pwd(char **arg)
 {
 	char	buf[4096];
 
-	if (ft_strstrlen(arg) > 1)
+	if (ft_strslen(arg) > 1)
 		return (1);
 	getcwd(buf, 4096);
 	ft_printf("%s", buf);

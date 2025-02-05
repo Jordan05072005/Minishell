@@ -93,7 +93,7 @@ char	**ft_split2(char *s, char *c)
 		{
 			str_final[i_m] = malloc((strlen_char(c, s, i) + 1) * sizeof(char));
 			if (str_final[i_m] == NULL)
-				return (ft_free_tab((void *)str_final, ft_strstrlen(str_final)), NULL);
+				return (ft_free_tab((void *)str_final, ft_strslen(str_final)), NULL);
 			ft_strlcpy(str_final[i_m++], &s[i], strlen_char(c, s, i) + 1);
 			i += strlen_char(c, s, i);
 		}

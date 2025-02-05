@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 10:27:29 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:56:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_curpath(char *arg)
 	else if (ft_getloc("CDPATH="))
 		cdpath = ft_split(ft_getloc("CDPATH="), ':');
 	curpath = test_cdpath(cdpath, arg);
-	ft_free_tab((void **)cdpath, ft_strslen((const char **)cdpath));
+	ft_free_tab((void **)cdpath, ft_strslen(cdpath));
 	if (curpath)
 		return (curpath);
 	return (create_path(ft_getenv("PWD="), arg));
@@ -63,10 +63,10 @@ char	**get_stack(char *curpath, int *depth)
 	int		i;
 
 	path = ft_split(curpath, '/');
-	stack = ft_calloc(ft_strslen((const char **)path) + 1, sizeof(char *));
+	stack = ft_calloc(ft_strslen(path) + 1, sizeof(char *));
 	ft_del(curpath);
 	if (!path || !stack)
-		return (ft_free_tab((void **)path, ft_strslen((const char **)path)),
+		return (ft_free_tab((void **)path, ft_strslen(path)),
 			ft_del(stack), ft_perror(1, 0, "Malloc error."), NULL);
 	*depth = 0;
 	i = -1;
@@ -81,7 +81,7 @@ char	**get_stack(char *curpath, int *depth)
 			stack[(*depth)++] = ft_strdup(path[i]);
 		}
 	}
-	ft_free_tab((void **)path, ft_strslen((const char **)path));
+	ft_free_tab((void **)path, ft_strslen(path));
 	return (stack);
 }
 
@@ -103,7 +103,7 @@ char	*clean_curpath(char *curpath)
 		i3[1] += ft_strlen(path[i3[2]]) + 1;
 	clean = ft_calloc(i3[1], sizeof(char));
 	if (!clean)
-		return (ft_free_tab((void **)path, ft_strslen((const char **)path)),
+		return (ft_free_tab((void **)path, ft_strslen(path)),
 			ft_perror(1, 0, "Malloc error."), NULL);
 	i3[2] = -1;
 	i3[1] = 0;
@@ -114,7 +114,7 @@ char	*clean_curpath(char *curpath)
 		ft_strlcpy(clean + i3[1], path[i3[2]], ft_strlen(path[i3[2]]) + 1);
 		i3[1] += ft_strlen(path[i3[2]]);
 	}
-	return (ft_free_tab((void **)path, ft_strslen((const char **)path)), clean);
+	return (ft_free_tab((void **)path, ft_strslen(path)), clean);
 }
 
 int	ft_cd(char **av)

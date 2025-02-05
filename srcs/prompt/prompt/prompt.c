@@ -23,11 +23,6 @@ void new_prompt(int signum)
 	}
 }
 
-void	ft_exit()
-{
-	ft_printf("exit\n");
-}
-
 //29 is the number of char for color
 char	*get_prompt()
 {

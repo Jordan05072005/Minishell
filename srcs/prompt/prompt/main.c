@@ -42,7 +42,7 @@ int	main(int ac, char **av, char **env)
 		if (!parseur(line, &d))
 		{
 			exec(d->cmd->pipe, d->cmd->exe);
-			clean_temp(d->cmd);
+			clean_pars();
 		}
 		prompt = get_prompt();
 		line = readline(prompt);

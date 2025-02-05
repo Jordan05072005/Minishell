@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-int	ft_strstrlen(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 int	in_str(char c, char *sep, int y)
 {
 	int	i;

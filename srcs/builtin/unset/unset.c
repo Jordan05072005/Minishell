@@ -32,10 +32,10 @@ void ft_lstdel_link(t_list **l, void *content)
 int	ft_unset(char **arg)
 {
 	t_list	*lst;
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (++i < ft_strstrlen(arg))
+	while (++i < ft_strslen(arg))
 	{
 		lst = ft_getloc_struct(arg[i]);
 		if (lst)

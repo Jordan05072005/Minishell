@@ -47,7 +47,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 	int	i;
 	int	fd;
 	int	max;
-	max = ft_strstrlen(arg);
+	max = ft_strslen(arg);
 	i = 0;
 	while (*n_arg < max && !(ft_strlen(arg[*n_arg]) == 1 && in_str(arg[*n_arg][0], "|", -1)))
 	{
@@ -155,20 +155,20 @@ void	pars_line(char *line, t_pars *exe)
 int	parseur(char *line, t_data **d)
 {
 	char	**exe;
-	int	i;
+	size_t	i;
 
 	i = -1;
 	if (!line || line[0] =='\0')
 		return (1);
 	exe = ft_split2(line, "&");
-	(*d)->cmd = init_struct_pars(exe, ft_strstrlen(exe));
+	(*d)->cmd = init_struct_pars(exe, ft_strslen(exe));
 	if (!(*d)->cmd)
 		return (1);
 	(*d)->cmd->line = line;
-	while (++i < ft_strstrlen(exe))
+	while (++i < ft_strslen(exe))
 	{
 		pars_line(exe[i], &(*d)->cmd[i]);
 	}
-	reader((*d)->cmd, ft_strstrlen(exe));
+	reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }

@@ -29,11 +29,9 @@ int	parseur(char *line, t_data **d);
 //prompt.c
 void new_prompt(int signum);
 char	*get_prompt();
-void	ft_exit();
 
 //utils.c
 int	in_str(char c, char *sep, int y);
-int	ft_strstrlen(char **str);
 
 //utils_lst.c
 t_pars *init_struct_pars(char **split, int nbr);

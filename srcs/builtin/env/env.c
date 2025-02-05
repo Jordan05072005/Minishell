@@ -16,7 +16,7 @@ int	ft_env(char **arg)
 {
 	t_list	*env;
 
-	if (ft_strstrlen(arg) > 1)
+	if (ft_strslen(arg) > 1)
 		return (1);
 	env = data()->env;
 	ft_printf("%s\n", env->content);

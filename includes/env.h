@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 10:04:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:54:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ typedef struct s_data
 	t_list	*loc;
 }	t_data;
 
-int		ft_strstrlen(char **str);
-int		clean_temp(t_pars *pars);
+int		clean_data(void);
+int		clean_pars(void);
+int		clean_env(void);
+int		clean_temp(t_pars *data);
 t_data	*data(void);
 t_list	*ft_getenv_struct(const char *str);
 char	*ft_getenv(const char *str);
