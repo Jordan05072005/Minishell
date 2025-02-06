@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:44:08 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 		cmds[child].exit = ft_env(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "exit", 5))
 		cmds[child].exit = ft_exit();
+	else if (!ft_strncmp(cmds[child].args[0], "echo", 5))
+		cmds[child].exit = ft_echo(&cmds[child]);
 	else
 		cmds[child].exit = 1;
 	dup2(saved[0], 0);

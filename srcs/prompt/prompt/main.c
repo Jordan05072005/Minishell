@@ -36,9 +36,10 @@ int	main(int ac, char **av, char **env)
 	free(prompt);
 	while (line)
 	{
-		if (!before || ft_strncmp(before, line, ft_strlen(line)) != 0 || ft_strncmp(before, line, ft_strlen(before)) != 0)
+		if (!before || ft_strncmp(before, line, ft_strlen(before) + 1) != 0)
 			add_history(line);
-		before = line;
+		free(before);
+		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
 			exec(d->cmd->pipe, d->cmd->exe);

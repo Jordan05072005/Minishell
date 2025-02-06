@@ -26,7 +26,7 @@ t_pars *init_struct_pars(char **split, int sep)
 		cmd[i].split = split;
 		cmd[i].in = NULL;
 		cmd[i].out = NULL;
-		cmd[i].cmd = ft_strdup("");
+		cmd[i].cmd = NULL;
 		cmd[i].limiter = NULL;
 		cmd[i].append = NULL;
 		cmd[i].sep = 0;

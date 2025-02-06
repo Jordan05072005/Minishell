@@ -46,7 +46,7 @@ char	*get_prompt()
 		prompt = ft_strjoin_free(prompt, "\033[0;0m$ \033[G");
 	len = ft_itoa(ft_strlen(prompt) - 29);
 	curseur = ft_strjoin("\033[", len);
-	curseur = ft_strjoin(curseur, "C");
+	curseur = ft_strjoin_free(curseur, "C");
 	prompt = ft_strjoin_free(prompt, curseur);
 	return (free(len), free(curseur), prompt);
 }

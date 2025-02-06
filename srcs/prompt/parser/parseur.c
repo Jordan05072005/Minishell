@@ -71,8 +71,13 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 		}
 		else
 		{
-			(cmd)->cmd = ft_strjoin_free((cmd)->cmd, arg[*n_arg]);
-			(cmd)->cmd = ft_strjoin_free((cmd)->cmd, " ");
+			if (!cmd->cmd)
+				(cmd)->cmd = ft_strjoin(arg[*n_arg], " ");
+			else
+			{
+				(cmd)->cmd = ft_strjoin_free((cmd)->cmd, arg[*n_arg]);
+				(cmd)->cmd = ft_strjoin_free((cmd)->cmd, " ");
+			}
 		}
 		i++;
 		(*n_arg)++;
@@ -119,7 +124,10 @@ void	fill_exe(t_pars **pars, int i)
 	(*pars)->exe[i].out = (*pars)->out;
 	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
-	(*pars)->exe[i].append = 0; // add append
+		if (((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3))
+			(*pars)->exe[i].append = 1;
+		else
+		(*pars)->exe[i].append = 0;
 }
 
 void	free_tpars(t_pars **pars)  //vide ->free
@@ -127,7 +135,7 @@ void	free_tpars(t_pars **pars)  //vide ->free
 	(*pars)->in = NULL;
 	(*pars)->out = NULL;
 	ft_del((*pars)->cmd);
-	(*pars)->cmd = ft_strdup("");
+	(*pars)->cmd = NULL;
 	(*pars)->limiter = NULL;
 	(*pars)->append = NULL;
 	(*pars)->sep = 0;
@@ -169,6 +177,6 @@ int	parseur(char *line, t_data **d)
 	{
 		pars_line(exe[i], &(*d)->cmd[i]);
 	}
-	reader((*d)->cmd, ft_strslen(exe));
+	//reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }

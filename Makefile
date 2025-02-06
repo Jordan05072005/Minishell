@@ -34,11 +34,14 @@ PWD =		pwd.c
 ENV =		env.c
 EXIT =		exit.c
 UN =		unset.c
+ECHO = echo.c
+
 MINI_B =	$(addprefix cd/, $(CD))		\
 			$(addprefix pwd/, $(PWD))	\
 			$(addprefix env/, $(ENV))	\
 			$(addprefix unset/, $(UN))	\
-			$(addprefix exit/, $(EXIT))
+			$(addprefix exit/, $(EXIT)) \
+			$(addprefix echo/, $(ECHO))
 
 MINI_SRC =	$(addprefix srcs/prompt/, $(MINI_P))	\
 			$(addprefix srcs/exec/, $(MINI_E))		\
