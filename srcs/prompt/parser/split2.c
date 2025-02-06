@@ -32,6 +32,7 @@ static int	in_cote(char *str, int j)
 		return (0);
 	return (1);
 }
+
 static int	is_charset(char *charset, char ch)
 {
 	int	i;
@@ -68,7 +69,7 @@ static int	ft_nbr_word(char *str, char *charset)
 	counter = 0;
 	while (str[i])
 	{
-		if (!in_cote(str, i) && (!is_charset(charset, str[i])) 
+		if (!in_cote(str, i) && (!is_charset(charset, str[i]))
 			&& (is_charset(charset, str[i + 1]) || str[i + 1] == '\0'))
 			counter++;
 		i++;
@@ -93,13 +94,14 @@ char	**ft_split2(char *s, char *c)
 		{
 			str_final[i_m] = malloc((strlen_char(c, s, i) + 1) * sizeof(char));
 			if (str_final[i_m] == NULL)
-				return (ft_free_tab((void *)str_final, ft_strslen(str_final)), NULL);
+				return (ft_free_tab((void *)str_final, ft_strslen(str_final)),
+					NULL);
 			ft_strlcpy(str_final[i_m++], &s[i], strlen_char(c, s, i) + 1);
 			i += strlen_char(c, s, i);
 		}
 		else
 			i++;
 	}
-	str_final[i_m] = 0;	
+	str_final[i_m] = 0;
 	return (str_final);
 }

@@ -12,10 +12,10 @@
 
 #include "mini.h"
 
-t_pars *init_struct_pars(char **split, int sep)
+t_pars	*init_struct_pars(char **split, int sep)
 {
 	t_pars	*cmd;
-	int	i;
+	int		i;
 
 	if (sep <= 0)
 		return (NULL);

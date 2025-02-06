@@ -33,6 +33,9 @@ void	any(int signum);
 /*                  utils.c                                                   */
 /* -------------------------------------------------------------------------- */
 int	in_str(char c, char *sep, int y);
+int	nbr_sep(char **str, char *sep);
+int	is_var(char *str);
+void	free_tpars(t_pars **pars);
 
 /* -------------------------------------------------------------------------- */
 /*                  utils_lst.c                                               */

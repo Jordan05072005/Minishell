@@ -17,7 +17,8 @@ void	any(int signum)
 	(void)signum;
 	return ;
 }
-void new_prompt(int signum)
+
+void	new_prompt(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -29,7 +30,7 @@ void new_prompt(int signum)
 }
 
 //29 is the number of char for color
-char	*get_prompt()
+char	*get_prompt(void)
 {
 	char	*str;
 	char	*prompt;
