@@ -33,6 +33,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, new_prompt);
 	prompt = get_prompt();
 	line = readline(prompt);
+	signal(SIGINT, any);
 	free(prompt);
 	while (line)
 	{
@@ -42,11 +43,14 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
+			
 			exec(d->cmd->pipe, d->cmd->exe);
 			clean_pars();
 		}
+		signal(SIGINT, new_prompt);
 		prompt = get_prompt();
 		line = readline(prompt);
+		signal(SIGINT, any);
 		free(prompt);
 	}
 	ft_exit();

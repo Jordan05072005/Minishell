@@ -12,6 +12,11 @@
 
 #include "mini.h"
 
+void	any(int signum)
+{
+	(void)signum;
+	return ;
+}
 void new_prompt(int signum)
 {
 	if (signum == SIGINT)
