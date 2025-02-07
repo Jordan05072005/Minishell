@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 22:02:22 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:06:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ int	clean_env(void)
 {
 	t_list	*env;
 	t_list	*loc;
+	t_list	*imp;
 	
 	env = data()->env;
 	loc = data()->loc;
+	imp = data()->imp;
 	ft_lstclear(&env, ft_del);
 	ft_lstclear(&loc, ft_del);
+	ft_lstclear(&imp, ft_del);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 09:32:38 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:18:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*create_path(char *first_component, char *second_component)
 	char	*path;
 	char	*dir_path;
 
+	if (!first_component)
+		return (NULL);
 	if (first_component[ft_strlen(first_component) - 1] != '/')
 		path = ft_strjoin(first_component, "/");
 	else

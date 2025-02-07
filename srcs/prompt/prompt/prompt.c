@@ -36,20 +36,14 @@ char	*get_prompt(void)
 	char	*user;
 	char	*path;
 
-	user = ft_getenv("USER");
-	if (!user)
-		user = "unknown";
-	path = getcwd(NULL, 0);
-	if (!path)
-		path = "unknown";
+	user = ft_getimp("USER");
+	path = ft_getimp("PWD");
 	temp = ft_strjoin("\001\033[38;2;0;161;201m\002", user);
 	prompt = ft_strjoin(temp, "\001\033[0;33m\002@\001\033[38;2;0;255;161m\002");
 	ft_del(temp);
 	temp = ft_strjoin(prompt, path);
 	ft_del(prompt);
-	if (ft_strncmp("unknown", path, 8))
-		ft_del(path);
-	prompt = ft_strjoin(temp, "\001\033[0;33m\002$\001\033[0;0m\002");
+	prompt = ft_strjoin(temp, "\001\033[0;33m\002$\001\033[0;0m\002 ");
 	return (prompt);
 }
 

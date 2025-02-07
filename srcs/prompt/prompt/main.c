@@ -32,11 +32,13 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 {
 	(void)av;
 	(void)ac;
+	
 	while (*env)
 	{
 		ft_lstadd_back(&(*d)->env, ft_lstnew(ft_strdup(*env)));
 		env++;
 	}
+	init_imp(&((*d)->imp));
 }
 
 int	main(int ac, char **av, char **env)
