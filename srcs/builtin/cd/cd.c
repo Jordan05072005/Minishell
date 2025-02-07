@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/06 13:54:35 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:32:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-char	*test_cdpath(char **cdpath, char *arg)
-{
-	int			i;
-	char		*dir_path;
-	struct stat	path_stat;
-
-	i = -1;
-	if (!cdpath)
-		return (NULL);
-	while (cdpath[++i])
-	{
-		dir_path = create_path(cdpath[i], arg);
-		if (stat(dir_path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
-			return (dir_path);
-		ft_del(dir_path);
-	}
-	return (NULL);
-}
 
 char	*get_curpath(char *arg)
 {
@@ -37,13 +18,13 @@ char	*get_curpath(char *arg)
 	char	**cdpath;
 
 	if (!arg)
-		return (ft_strdup(ft_getenv("HOME")));
+		return (ft_strdup(ft_getimp("HOME")));
 	if (arg[0] == '/')
 		return (ft_strdup(arg));
 	if (arg[0] == '~')
-		return (create_path(ft_getenv("HOME"), arg + 1));//this aint how this one works bruh, if no HOME, still go HOME I guess ? Do better bro
+		return (create_path(ft_getimp("HOME"), arg + 1));//this aint how this one works bruh, if no HOME, still go HOME I guess ? Do better bro
 	if (arg[0] == '.')
-		return (create_path(ft_getenv("PWD"), arg));
+		return (create_path(ft_getimp("PWD"), arg));
 	cdpath = NULL;
 	if (ft_getenv("CDPATH"))
 		cdpath = ft_split(ft_getenv("CDPATH"), ':');
@@ -53,7 +34,7 @@ char	*get_curpath(char *arg)
 	ft_free_tab((void **)cdpath, ft_strslen(cdpath));
 	if (curpath)
 		return (curpath);
-	return (create_path(ft_getenv("PWD"), arg));
+	return (create_path(ft_getimp("PWD"), arg));
 }
 
 char	**get_stack(char *curpath, int *depth)
@@ -117,13 +98,37 @@ char	*clean_curpath(char *curpath)
 	return (ft_free_tab((void **)path, ft_strslen(path)), clean);
 }
 
+void	update_env(char *curpath, int mode)
+{
+	t_list		*temp;
+	t_list		*oldpwd;
+	t_list		*pwd;
+
+	pwd = ft_getimp_struct("PWD", &temp);
+	ft_del(pwd->content);
+	pwd->content = ft_strjoin("PWD=", curpath);
+	if (mode == 0)
+		return ;
+	pwd = ft_getenv_struct("PWD", &temp);
+	oldpwd = ft_getenv_struct("OLDPWD", &temp);
+	if (oldpwd && pwd)
+	{
+		ft_del(oldpwd->content);
+		oldpwd->content = ft_strjoin("OLDPWD=", pwd->content + 4);
+	}
+	if (oldpwd && !pwd)
+		ft_lstdelink(&temp, &oldpwd, ft_del);
+	if (pwd)
+	{
+		ft_del(pwd->content);
+		pwd->content = ft_strjoin("PWD=", curpath);
+	}
+}
+
 int	ft_cd(char **av)
 {
 	struct stat	path_stat;
 	char		*curpath;
-	t_list		*temp;
-	// t_list		*oldpwd;
-	t_list		*pwd;
 
 	if (!av[1])
 		curpath = get_curpath(NULL);
@@ -131,16 +136,14 @@ int	ft_cd(char **av)
 		return (ft_perror(-1, 0, "Too many arguments."), 1);
 	else
 		curpath = get_curpath(av[1]);
+	if (curpath)
+		update_env(curpath, 0);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
 		return (ft_perror(-1, 0, "Directory does not exist."), 3);
 	if (!S_ISDIR(path_stat.st_mode))
 		return (ft_perror(-1, 0, "Path is not a directory."), 3);
-	// oldpwd = ft_getenv_struct("OLDPWD", temp);
-	pwd = ft_getenv_struct("PWD", &temp);
-	// ft_del(oldpwd->content);
-	// oldpwd->content = pwd->content;
-	pwd->content = ft_strjoin("PWD=", curpath);
+	update_env(curpath, 1);
 	chdir(curpath);
 	return (0);
 }

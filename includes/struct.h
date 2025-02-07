@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 20:03:01 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:54:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_pars
 typedef struct s_data
 {
 	t_pars	*cmd;
+	t_list	*imp;
 	t_list	*env;
 	t_list	*loc;
 }	t_data;

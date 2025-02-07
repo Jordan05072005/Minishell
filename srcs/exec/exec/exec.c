@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:52 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:54:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	exec(int nb_cmds, t_cmd *input)
 {
-	//Is using the wrong env
 	t_icmd	*cmds;
 	int		child;
 

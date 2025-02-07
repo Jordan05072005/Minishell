@@ -133,6 +133,6 @@ int	parseur(char *line, t_data **d)
 	(*d)->cmd->line = line;
 	while (++i < ft_strslen(exe))
 		pars_line(exe[i], &(*d)->cmd[i]);
-	reader((*d)->cmd, ft_strslen(exe));
+	// reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }

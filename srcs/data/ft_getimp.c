@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   ft_getimp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 11:53:45 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/02/07 13:06:13 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/02/07 13:06:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "mini.h"
 
-# include <sys/stat.h>
+char	*ft_getimp(const char *str)
+{
+	int		size;
+	char	*line;
+	t_list	*imp;
 
-int		ft_exit(void);
-
-int		ft_pwd(char **arg);
-
-int		ft_unset(char **arg);
-
-int		ft_env(char **arg);
-
-int		ft_echo(t_icmd *cmd);
-
-int		ft_cd(char **av);
-char	*create_path(char *first_component, char *second_component);
-char	*cwd_path(char *arg);
-char	*test_cdpath(char **cdpath, char *arg);
-
-#endif
+	size = ft_strlen(str);
+	imp = data()->imp;
+	while (imp)
+	{
+		line = ft_strnstr(imp->content, str, size);
+		if (line && line[size] == '=')
+			return (line + size + 1);
+		imp = imp->next;
+	}
+	return (NULL);
+}

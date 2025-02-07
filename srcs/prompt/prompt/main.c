@@ -20,6 +20,7 @@ char	*ft_readline(void)
 	char	*line;
 
 	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
 	prompt = get_prompt();
 	line = readline(prompt);
 	signal(SIGINT, any);
@@ -31,11 +32,13 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 {
 	(void)av;
 	(void)ac;
+	
 	while (*env)
 	{
 		ft_lstadd_back(&(*d)->env, ft_lstnew(ft_strdup(*env)));
 		env++;
 	}
+	init_imp(&((*d)->imp));
 }
 
 int	main(int ac, char **av, char **env)
@@ -47,7 +50,6 @@ int	main(int ac, char **av, char **env)
 	before = NULL;
 	d = data();
 	create_env(&d, env, av, ac);
-	signal(SIGQUIT, new_prompt);
 	line = ft_readline();
 	while (line)
 	{
@@ -57,7 +59,7 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
-			//exec(d->cmd->pipe, d->cmd->exe);
+			exec(d->cmd->pipe, d->cmd->exe);
 			clean_pars();
 		}
 		line = ft_readline();
