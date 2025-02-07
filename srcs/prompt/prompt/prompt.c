@@ -43,7 +43,10 @@ char	*get_prompt(void)
 	ft_del(temp);
 	temp = ft_strjoin(prompt, path);
 	ft_del(prompt);
-	prompt = ft_strjoin(temp, "\001\033[0;33m\002$\001\033[0;0m\002 ");
+	if (strncmp(ft_getimp("USER"), "root", 4) == 0)
+		prompt = ft_strjoin_free(temp, "\001\033[0;33m\002#\001\033[0;0m\002 ");
+	else
+		prompt = ft_strjoin(temp, "\001\033[0;33m\002$\001\033[0;0m\002 ");
 	return (ft_del(temp), prompt);
 }
 

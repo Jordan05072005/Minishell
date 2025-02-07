@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 21:44:08 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:51:29 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 		cmds[child].exit = ft_cd(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "pwd", 4))
 		cmds[child].exit = ft_pwd(cmds[child].args);
+	else if (!ft_strncmp(cmds[child].args[0], "export", 7))
+		cmds[child].exit = ft_export(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "unset", 6))
 		cmds[child].exit = ft_unset(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "env", 4))

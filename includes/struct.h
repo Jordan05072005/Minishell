@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 12:54:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:28:09 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_pars
 	char	sep;
 	char	**split;
 	char	*line;
+	char	*before;
 	t_cmd *exe;
 }		t_pars;
 

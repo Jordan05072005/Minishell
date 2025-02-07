@@ -57,6 +57,7 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
+		//d->cmd->before = before; //Hugo free;
 		if (!parseur(line, &d))
 		{
 			exec(d->cmd->pipe, d->cmd->exe);
