@@ -1,8 +1,4 @@
-main line 43 : invalid free for "ls | clear"
-idk where : prompt doesnt reset properly with "CTRL + \"
-getprompt : segfault if we unset anything which it needs.
 Update SHLVL
-
 
 Invalid read of size 1
 ==2493414==    at 0x404F43: ft_strncmp (in /home/hle-hena/Documents/42_projects/Minishell/minishell)

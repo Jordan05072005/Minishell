@@ -84,8 +84,8 @@ int	ft_echo(t_icmd *cmd)
 	int		i;
 	char	*str;
 
-	if (cmd->fd_in) // ?
-		return (0);
+	// if (cmd->fd_in) // ?
+	// 	return (0);
 	i = cmd->args[1] && !ft_strncmp(cmd->args[1], "-n", 3);
 	while (cmd->args[1] && cmd->args[++i])
 	{

@@ -50,7 +50,6 @@ int	main(int ac, char **av, char **env)
 	before = NULL;
 	d = data();
 	create_env(&d, env, av, ac);
-	signal(SIGQUIT, new_prompt);
 	line = ft_readline();
 	while (line)
 	{
