@@ -29,18 +29,6 @@ void ft_lstdel_link(t_list **l, void *content)
 	ft_lstdelone(temp, free);
 }
 
-void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void *))
-{
-	if (!*link)
-		return ;
-	ft_printf("Trying %s\n", (*link)->content);
-	if (*prev == *link)
-		*prev = (*prev)->next;
-	else
-		(*prev)->next = (*link)->next;
-	ft_lstdelone(*link, del);
-}
-
 int	ft_unset(char **arg)
 {
 	t_list	*lst;

@@ -20,6 +20,7 @@ char	*ft_readline(void)
 	char	*line;
 
 	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
 	prompt = get_prompt();
 	line = readline(prompt);
 	signal(SIGINT, any);
@@ -57,7 +58,7 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
-			//exec(d->cmd->pipe, d->cmd->exe);
+			exec(d->cmd->pipe, d->cmd->exe);
 			clean_pars();
 		}
 		line = ft_readline();
