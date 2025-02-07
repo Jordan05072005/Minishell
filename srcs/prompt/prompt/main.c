@@ -57,7 +57,7 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
-			exec(d->cmd->pipe, d->cmd->exe);
+			//exec(d->cmd->pipe, d->cmd->exe);
 			clean_pars();
 		}
 		line = ft_readline();

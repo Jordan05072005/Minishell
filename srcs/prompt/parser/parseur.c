@@ -12,33 +12,33 @@
 
 #include "mini.h"
 
-// void	reader(t_pars *cmd, int i)
-// {
-// 	int	j=0;
-// 	int	y=0;
+void	reader(t_pars *cmd, int i)
+{
+	int	j=0;
+	int	y=0;
 
-// 	while (j < i)
-// 	{
-// 		printf("exe : %d :\n", j);
-// 		while (y < cmd[j].pipe)
-// 		{ 
-// 			printf("  pipe %d :\n", y);
-// 			if (cmd[j].exe[y].args)
-// 				printf("    cmd : %s\n",cmd[j].exe[y].args[0]);
-// 			if (cmd[j].exe[y].in)
-// 				printf("    in : %s\n",cmd[j].exe[y].in);
-// 			if (cmd[j].exe[y].out)
-// 				printf("    out : %s \n",cmd[j].exe[y].out);
-// 			if (cmd[j].exe[y].here_doc)
-// 				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
-// 			if (cmd[j].exe[y].append)
-// 				printf("    append : %d\n",cmd[j].exe[y].append);
-// 			y++;
-// 		}
-// 		y = 0;
-// 		j++;
-// 	}
-// }
+	while (j < i)
+	{
+		printf("exe : %d :\n", j);
+		while (y < cmd[j].pipe)
+		{ 
+			printf("  pipe %d :\n", y);
+			if (cmd[j].exe[y].args)
+				printf("    cmd : %s\n",cmd[j].exe[y].args[0]);
+			if (cmd[j].exe[y].in)
+				printf("    in : %s\n",cmd[j].exe[y].in);
+			if (cmd[j].exe[y].out)
+				printf("    out : %s \n",cmd[j].exe[y].out);
+			if (cmd[j].exe[y].here_doc)
+				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
+			if (cmd[j].exe[y].append)
+				printf("    append : %d\n",cmd[j].exe[y].append);
+			y++;
+		}
+		y = 0;
+		j++;
+	}
+}
 
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
@@ -83,7 +83,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 	}
 	if (*n_arg == max)
 		return (0);
-	cmd->sep = arg[(*n_arg)++][0];
+	cmd->sep = arg[(*n_arg)][0];
 	return (1);
 }
 
@@ -91,6 +91,7 @@ void	fill_exe(t_pars **pars, int i)
 {
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
+	//printf("%s\n", (*pars)->cmd);
 	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
 	if (((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3))
@@ -133,6 +134,6 @@ int	parseur(char *line, t_data **d)
 	(*d)->cmd->line = line;
 	while (++i < ft_strslen(exe))
 		pars_line(exe[i], &(*d)->cmd[i]);
-	//reader((*d)->cmd, ft_strslen(exe));
+	reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }
