@@ -44,7 +44,7 @@ char	*get_prompt(void)
 	temp = ft_strjoin(prompt, path);
 	ft_del(prompt);
 	prompt = ft_strjoin(temp, "\001\033[0;33m\002$\001\033[0;0m\002 ");
-	return (prompt);
+	return (ft_del(temp), prompt);
 }
 
 //29 is the number of char for color

@@ -87,16 +87,31 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 	return (1);
 }
 
-void	fill_exe(t_pars **pars, int i)
+void	fill_exe(t_pars **pars, int i, int j)
 {
+	//char	*pt;
+
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
 	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
+	while ((*pars)->exe[i].args[++j])
+	{
+		if ((*pars)->exe[i].args[j][0] == '$')
+		{
+			//pt = (*pars)->exe[i].args[j];
+			if (ft_getloc(&(*pars)->exe[i].args[j][1]))
+				(*pars)->exe[i].args[j] = ft_strdup(ft_getloc(&(*pars)->exe[i].args[j][1]));
+			else if (ft_getenv(&(*pars)->exe[i].args[j][1]))
+				(*pars)->exe[i].args[j] = ft_strdup(ft_getenv(&(*pars)->exe[i].args[j][1]));
+			else
+				shift_left((*pars)->exe[i].args, j);
+			//ft_del(pt);
+		}
+	}
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
+	(*pars)->exe[i].append = 0;
 	if (((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3))
 		(*pars)->exe[i].append = 1;
-	else
-		(*pars)->exe[i].append = 0;
 }
 
 void	pars_line(char *line, t_pars *exe)
@@ -111,11 +126,11 @@ void	pars_line(char *line, t_pars *exe)
 	i = 0;
 	while (fill_struct(exe, arg, &n_arg))
 	{
-		fill_exe(&exe, i);
+		fill_exe(&exe, i, -1);
 		free_tpars(&exe);
 		i++;
 	}
-	fill_exe(&exe, i);
+	fill_exe(&exe, i, -1);
 }
 
 int	parseur(char *line, t_data **d)

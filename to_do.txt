@@ -1,0 +1,6 @@
+-export
+-remplacer var par valeur 
+-exe var local 
+-&& , || -> split_loc
+-*, …
+-

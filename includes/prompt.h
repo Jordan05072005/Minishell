@@ -36,6 +36,7 @@ int	in_str(char c, char *sep, int y);
 int	nbr_sep(char **str, char *sep);
 int	is_var(char *str);
 void	free_tpars(t_pars **pars);
+void	shift_left(char **str, size_t i);
 
 /* -------------------------------------------------------------------------- */
 /*                  utils_lst.c                                               */

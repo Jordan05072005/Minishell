@@ -71,3 +71,11 @@ void	free_tpars(t_pars **pars)
 	(*pars)->append = NULL;
 	(*pars)->sep = 0;
 }
+
+void	shift_left(char **str, size_t i)
+{
+	if (i > ft_strslen(str) || !str)
+		return ;
+	while (str[++i])
+		str[i - 1] = str[i];
+}	
