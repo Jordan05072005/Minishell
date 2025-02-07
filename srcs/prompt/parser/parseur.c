@@ -91,7 +91,6 @@ void	fill_exe(t_pars **pars, int i)
 {
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
-	//printf("%s\n", (*pars)->cmd);
 	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
 	if (((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3))
