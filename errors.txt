@@ -1,4 +1,5 @@
 Update SHLVL
+cd nothing works with HOME unset.
 
 Invalid read of size 1
 ==2493414==    at 0x404F43: ft_strncmp (in /home/hle-hena/Documents/42_projects/Minishell/minishell)

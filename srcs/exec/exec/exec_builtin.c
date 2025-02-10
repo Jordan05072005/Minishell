@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 15:51:29 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:31:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 		cmds[child].exit = ft_exit();
 	else if (!ft_strncmp(cmds[child].args[0], "echo", 5))
 		cmds[child].exit = ft_echo(&cmds[child]);
+	else if (!ft_strncmp(cmds[child].args[0], "color", 6))
+		cmds[child].exit = ft_color(cmds[child].args);
 	else
 		cmds[child].exit = 1;
 	dup2(saved[0], 0);

@@ -8,7 +8,7 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PROMPT =	prompt.c			main.c
+PROMPT =	color.c				prompt.c			main.c
 PARS =		parseur.c			utils.c				utils_lst.c			\
 			split2.c
 MINI_P =	$(addprefix prompt/, $(PROMPT))								\
@@ -37,6 +37,7 @@ EXIT =		exit.c
 UN =		unset.c
 ECHO =		echo.c
 EXPORT =	export.c
+COLOR =		color.c
 
 MINI_B =	$(addprefix cd/, $(CD))										\
 			$(addprefix pwd/, $(PWD))									\
@@ -44,7 +45,8 @@ MINI_B =	$(addprefix cd/, $(CD))										\
 			$(addprefix unset/, $(UN))									\
 			$(addprefix exit/, $(EXIT)) 								\
 			$(addprefix echo/, $(ECHO)) 								\
-			$(addprefix export/, $(EXPORT))
+			$(addprefix export/, $(EXPORT))								\
+			$(addprefix color/, $(COLOR))
 
 MINI_SRC =	$(addprefix srcs/prompt/, $(MINI_P))						\
 			$(addprefix srcs/exec/, $(MINI_E))							\

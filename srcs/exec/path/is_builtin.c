@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 15:51:55 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:29:18 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	is_builtin(const char *str)
 	if (ft_strncmp("unset", str, 6) == 0)
 		return (1);
 	if (ft_strncmp("echo", str, 5) == 0)
+		return (1);
+	if (ft_strncmp("color", str, 6) == 0)
 		return (1);
 	return (0);
 }

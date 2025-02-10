@@ -6,41 +6,41 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 08:40:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/07 12:03:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:13:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int	find_index(char c, const char *base)
-{
-	static int	lookup[256] = {0};
-	static int	initialized = 0;
-	int			i;
-
-	if (!initialized)
-	{
-		i = -1;
-		while (++i < 256)
-			lookup[i] = -1;
-		i = -1;
-		while (base[++i])
-			lookup[(unsigned char)base[i]] = i;
-		initialized = 1;
-	}
-	return (lookup[(unsigned char)c]);
-}
-
 // static int	find_index(char c, const char *base)
 // {
-// 	int	i;
+// 	static int	lookup[256] = {0};
+// 	static int	initialized = 0;
+// 	int			i;
 
-// 	i = -1;
-// 	while (base[++i])
-// 		if (c == base[i])
-// 			return (i);
-// 	return (-1);
+// 	if (!initialized)
+// 	{
+// 		i = -1;
+// 		while (++i < 256)
+// 			lookup[i] = -1;
+// 		i = -1;
+// 		while (base[++i])
+// 			lookup[(unsigned char)base[i]] = i;
+// 		initialized = 1;
+// 	}
+// 	return (lookup[(unsigned char)c]);
 // }
+
+static int	find_index(char c, const char *base)
+{
+	int	i;
+
+	i = -1;
+	while (base[++i])
+		if (c == base[i])
+			return (i);
+	return (-1);
+}
 
 int	ft_atoi_base(const char *str, const char *base, int len)
 {
@@ -52,11 +52,11 @@ int	ft_atoi_base(const char *str, const char *base, int len)
 		return (nb);
 	while (ft_isspace(*str))
 		str++;
-	while (1)
+	while (*str)
 	{
 		ind = find_index(*str, base);
 		if (ind == -1)
-			break ;
+			return (-1);
 		nb = nb * len + ind;
 		str++;
 	}
