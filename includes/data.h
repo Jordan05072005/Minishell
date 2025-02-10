@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:27:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:21:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DATA_H
 
 int		clean_data(void);
-int		clean_pars(void);
+int		clean_pars(int full);
 int		clean_env(void);
 t_data	*data(void);
 void	init_imp(t_list **imp);

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:32:20 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:01:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,14 +136,15 @@ int	ft_cd(char **av)
 		return (ft_perror(-1, 0, "Too many arguments."), 1);
 	else
 		curpath = get_curpath(av[1]);
-	if (curpath)
+	if (is_dot(av[1]))
 		update_env(curpath, 0);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
-		return (ft_perror(-1, 0, "Directory does not exist."), 3);
+		return (ft_del(curpath), ft_perror(-1, 0, "Directory does not exist."), 3);
 	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_perror(-1, 0, "Path is not a directory."), 3);
+		return (ft_del(curpath), ft_perror(-1, 0, "Path is not a directory."), 3);
 	update_env(curpath, 1);
 	chdir(curpath);
+	ft_del(curpath);
 	return (0);
 }

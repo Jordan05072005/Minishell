@@ -6,11 +6,39 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:18:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:56:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+int	is_dot(char *path)
+{
+	int	i;
+
+	i = -1;
+	if (!path)
+		return (0);
+	if (path[0] == '/')
+		return (0);
+	while (path[++i])
+	{
+		if (path[i] == '/')
+			continue ;
+		if (path[i] == '.')
+		{
+			i++;
+			if (!path[i])
+				return (1);
+			if ((path[i] == '/') || (path[i] == '.' && path[i + 1] != '.'))
+				continue ;
+			else
+				return (0);
+		}
+		return (0);
+	}
+	return (1);
+}
 
 char	*create_path(char *first_component, char *second_component)
 {

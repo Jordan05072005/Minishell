@@ -64,10 +64,10 @@ run: re
 	@./$(NAME)
 
 valgrind: re all
-	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 no-child: re all
-	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
+	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 # --suppressions=supp.supp
 
 bonus: $(NAME)

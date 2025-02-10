@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/10 12:30:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:38:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	ft_export(char **arg);
 
 int		ft_cd(char **av);
 char	*create_path(char *first_component, char *second_component);
-char	*cwd_path(char *arg);
 char	*test_cdpath(char **cdpath, char *arg);
+int		is_dot(char *path);
 
 int		ft_color(char **av);
 

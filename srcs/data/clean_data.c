@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:06:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:20:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,21 @@
 
 int	clean_env(void)
 {
-	t_list	*env;
-	t_list	*loc;
-	t_list	*imp;
-	
-	env = data()->env;
-	loc = data()->loc;
-	imp = data()->imp;
-	ft_lstclear(&env, ft_del);
-	ft_lstclear(&loc, ft_del);
-	ft_lstclear(&imp, ft_del);
+	ft_lstclear(&(data()->env), ft_del);
+	ft_lstclear(&(data()->loc), ft_del);
+	ft_lstclear(&(data()->imp), ft_del);
 	return (0);
 }
 
-int	clean_pars(void)
+int	clean_pars(int full)
 {
 	t_pars	*cmd;
 	
 	cmd = data()->cmd;
 	if (cmd == NULL)
 		return (0);
+	if (full)
+		ft_del(cmd->before);
 	if (cmd->exe)
 	{
 		while (--cmd->pipe >= 0)
@@ -56,6 +51,6 @@ int	clean_pars(void)
 int	clean_data(void)
 {
 	clean_env();
-	clean_pars();
+	clean_pars(1);
 	return (0);
 }

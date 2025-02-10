@@ -57,13 +57,14 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
-		//d->cmd->before = before; //Hugo free;
 		if (!parseur(line, &d))
 		{
+			d->cmd->before = before; //Hugo free;
 			exec(d->cmd->pipe, d->cmd->exe);
-			clean_pars();
+			clean_pars(0);
 		}
 		line = ft_readline();
 	}
+	ft_del(before);
 	return (ft_exit(), 0);
 }
