@@ -6,14 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 09:22:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:01:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
 //Create a new func for all the special cases.
-//probably use a goto
 char	*get_curpath(char *arg)
 {
 	char	*curpath;
@@ -49,8 +48,8 @@ char	**get_stack(char *curpath, int *depth)
 	stack = ft_calloc(ft_strslen(path) + 1, sizeof(char *));
 	ft_del(curpath);
 	if (!path || !stack)
-		return (ft_free_tab((void **)path, ft_strslen(path)),
-			ft_del(stack), ft_perror(1, 0, "Malloc error."), NULL);
+		return (ft_free_tab((void **)path, ft_strslen(path)), ft_del(stack),
+			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);//Does not free like it should
 	*depth = 0;
 	i = -1;
 	while (path[++i])
@@ -87,7 +86,7 @@ char	*clean_curpath(char *curpath)
 	clean = ft_calloc(i3[1], sizeof(char));
 	if (!clean)
 		return (ft_free_tab((void **)path, ft_strslen(path)),
-			ft_perror(1, 0, "Malloc error."), NULL);
+			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);//Does not free correctly ?????
 	i3[2] = -1;
 	i3[1] = 0;
 	clean[0] = '/';
@@ -135,16 +134,17 @@ int	ft_cd(char **av)
 	if (!av[1])
 		curpath = get_curpath(NULL);
 	else if (av[2])
-		return (ft_perror(-1, 0, "Too many arguments."), 1);
+		return (ft_perror(-1, ft_strdup("cd: Too many arguments."), 0), 1);
 	else
 		curpath = get_curpath(av[1]);
 	if (is_dot(av[1]))
 		update_env(curpath, 0);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
-		return (ft_del(curpath), ft_perror(-1, 0, "Directory does not exist."), 3);
+		return (ft_del(curpath),
+			ft_perror(-1, ft_strdup("cd: No such file or directory."), 0), 3);
 	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_del(curpath), ft_perror(-1, 0, "Path is not a directory."), 3);
+		return (ft_del(curpath), ft_perror(-1, ft_strdup("cd: Not a directory."), 0), 3);
 	update_env(curpath, 1);
 	chdir(curpath);
 	ft_del(curpath);

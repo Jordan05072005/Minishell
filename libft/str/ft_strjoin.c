@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:04:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/30 16:02:49 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:23:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,30 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		return (NULL);
 	ft_strlcpy(dest, s1, s1_len + 1);
 	ft_strlcat(dest, s2, s1_len + s2_len + 1);
+	return (dest);
+}
+
+char	*ft_strsjoin(const char **strs)
+{
+	char	*dest;
+	int		i;
+	size_t	len;
+
+	i = 0;
+	len = 0;
+	while (strs[i])
+		len += ft_strlen(strs[i++]);
+	dest = ft_calloc((len + 1), sizeof(char));
+	if (!dest)
+		return (NULL);
+	i = 0;
+	len = 0;
+	while (strs[i])
+	{
+		ft_strlcpy(dest + len, strs[i], ft_strlen(strs[i]) + 1);
+		len += ft_strlen(strs[i]);
+		i++;
+	}
 	return (dest);
 }
 

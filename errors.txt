@@ -2,14 +2,19 @@ Update SHLVL
 cd nothing works with HOME unset.
 cd /.. goes through
 
+Still didnt fix the fork issue with builtin and pipes.
 
 Should look at which characters are accepted for the variable, like for exemple, the ',', the '/' are not allowed
 Cannot contain only numbers.
-Assignment can contain =
+MUST start with an alpha or an _, and can only conatin alpha, _ or digits after.
 [, . / ? \ | - :]
 
 echo : if ~ followed by a / or by nothing, print $HOME instead of ~
 actually not in echo but in the parsing xDDDD
+
+parsing interprets '\' while it shouldn't
+
+> test
 
 Doing :
 mkdir a

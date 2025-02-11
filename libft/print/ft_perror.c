@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:07:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/01/21 13:30:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:21:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,13 @@ void	put_error_code(int code)
 		ft_putstr_fd("Something went wrong during the parsing of the args.", 2);
 }
 
-void	ft_perror(int error_code, int clean, char *custom_mess)
+void	ft_perror(int error_code, char *custom_mess, int clean)
 {
 	if (clean)
 		ft_putendl_fd("What even happened there ???", 2);
 	else
-	{
-		ft_putstr_fd("\033[0;31m", 2);
-		ft_putstr_fd(custom_mess, 2);
-		ft_putendl_fd("\033[0;0m", 2);
-	}
+		ft_putendl_fd(custom_mess, 2);
+	ft_del(custom_mess);
 	if (error_code >= 0)
 		exit(error_code);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:21:07 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:33:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exec_parent(t_icmd *cmds, int nb_cmds)
 	exit_code = 1;
 	while (--child >= 0)
 	{
-		if (cmds[child].exit != -1)
+		if (cmds[child].exit != -1 && nb_cmds == 1)
 		{
 			if (child == nb_cmds - 1)
 				exit_code = cmds[child].exit;

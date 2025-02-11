@@ -63,10 +63,13 @@ all: $(NAME)
 run: re
 	@./$(NAME)
 
-valgrind: re all
+strace: $(LIBFT) all
+	@strace -f ./$(NAME)
+
+valgrind: $(LIBFT) all
 	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
-no-child: re all
+no-child: $(LIBFT) all
 	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 # --suppressions=supp.supp
 

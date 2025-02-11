@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/07 09:46:07 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:58:52 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	*ft_realloc(void *ptr, size_t size);
 
 /*			print&co			*/
 /********************************/
-void	ft_perror(int error_code, int clean, char *custom_mess);
+void	ft_perror(int error_code, char *custom_mess, int clean);
 int		ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *str, int fd);
 int		ft_putstr_fd(char *str, int fd);
@@ -106,6 +106,7 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *str, void (*f)(unsigned int, char *));
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strsjoin(const char **strs);
 char	*ft_strjoin_free(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);
