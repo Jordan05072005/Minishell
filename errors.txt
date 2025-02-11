@@ -2,6 +2,15 @@ Update SHLVL
 cd nothing works with HOME unset.
 cd /.. goes through
 
+
+Should look at which characters are accepted for the variable, like for exemple, the ',', the '/' are not allowed
+Cannot contain only numbers.
+Assignment can contain =
+[, . / ? \ | - :]
+
+echo : if ~ followed by a / or by nothing, print $HOME instead of ~
+actually not in echo but in the parsing xDDDD
+
 Doing :
 mkdir a
 mkdir a/a
@@ -9,16 +18,10 @@ mkdir a/a/a
 cd a/a/a
 rm -rf ../../../a
 
-Invalid read of size 1
-==2493414==    at 0x404F43: ft_strncmp (in /home/hle-hena/Documents/42_projects/Minishell/minishell)
-==2493414==    by 0x4015AD: main (main.c:39)
-==2493414==  Address 0x4b63580 is 0 bytes inside a block of size 3 free'd
-==2493414==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2493414==    by 0x403970: clean_pars (clean_data.c:46)
-==2493414==    by 0x40162E: main (main.c:45)
-==2493414==  Block was alloc'd at
-==2493414==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2493414==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
-==2493414==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
-==2493414==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
-==2493414==    by 0x401561: main (main.c:35)
+==5207== 6 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==5207==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5207==    by 0x10B256: ft_split2 (split2.c:95)
+==5207==    by 0x10A4DB: fill_exe (parseur.c:96)
+==5207==    by 0x10A8BF: pars_line (parseur.c:133)
+==5207==    by 0x10A9C0: parseur (parseur.c:150)
+==5207==    by 0x109B84: main (main.c:60)

@@ -6,23 +6,25 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/10 17:01:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:22:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+//Create a new func for all the special cases.
+//probably use a goto
 char	*get_curpath(char *arg)
 {
 	char	*curpath;
 	char	**cdpath;
 
 	if (!arg)
-		return (ft_strdup(ft_getimp("HOME")));
+		return (ft_strdup(ft_getenv("HOME")));
 	if (arg[0] == '/')
 		return (ft_strdup(arg));
 	if (arg[0] == '~')
-		return (create_path(ft_getimp("HOME"), arg + 1));//this aint how this one works bruh, if no HOME, still go HOME I guess ? Do better bro
+		return (create_path(ft_getimp("HOME"), arg + 1));
 	if (arg[0] == '.')
 		return (create_path(ft_getimp("PWD"), arg));
 	cdpath = NULL;
@@ -55,15 +57,15 @@ char	**get_stack(char *curpath, int *depth)
 	{
 		if (!ft_strncmp(path[i], "..", 3) && *depth > 0)
 			(*depth)--;
+		else if (!ft_strncmp(path[i], "..", 3) && *depth == 0)
+			continue ;
 		else if (ft_strncmp(path[i], ".", 2) != 0)
 		{
-			if (stack[*depth])
-				ft_del(stack[*depth]);
+			ft_del(stack[*depth]);
 			stack[(*depth)++] = ft_strdup(path[i]);
 		}
 	}
-	ft_free_tab((void **)path, ft_strslen(path));
-	return (stack);
+	return (ft_free_tab((void **)path, ft_strslen(path)), stack);
 }
 
 // i3[0] = depth;
