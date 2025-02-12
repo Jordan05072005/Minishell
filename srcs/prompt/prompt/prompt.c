@@ -36,18 +36,11 @@ char	*get_prompt(void)
 	char	*path;
 
 	user = ft_getimp("USER");
-	//look into how it handles it when you are in a NULL dir
-	// path = getcwd(NULL, 0);
-	// if (path)
-	// {
-	// 	ft_del(path)
-	// 	path = ft_getloc("PWD");
-	// 	if (!path)
-	// 		path = ft_getenv("PWD");
-	// 	if (!path)
-	// 		path = ft_getimp("PWD");
-	// }
-	path = ft_getimp("PWD");
+	path = ft_getloc("PWD");
+	if (!path)
+		path = ft_getenv("PWD");
+	if (!path)
+		path = ft_getimp("PWD");
 	if (strncmp(user, "root", 4) == 0)
 		prompt = ft_strsjoin((const char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
 	else

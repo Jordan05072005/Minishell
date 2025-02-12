@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 18:28:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:40:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	*clean_curpath(char *curpath)
 	->	If OLDPWD is set
 	->	->	NULL OLDPWD
 */
-void	update_env(char *curpath, int mode)
+void	update_env(char *curpath)
 {
 	static int	present = 0;
 	t_list		*temp;
@@ -123,8 +123,6 @@ void	update_env(char *curpath, int mode)
 	pwd = ft_getimp_struct("PWD", &temp);
 	ft_del(pwd->content);
 	pwd->content = ft_strjoin("PWD=", curpath);
-	if (!mode)
-		return ;
 	pwd = ft_getenv_struct("PWD", &temp);
 	if (!pwd)
 		pwd = ft_getloc_struct("PWD", &temp);
@@ -151,14 +149,14 @@ int	ft_cd(char **av)
 	else
 		curpath = get_curpath(av[1]);
 	if (is_dot(av[1]))
-		update_env(curpath, 0);
+		update_env(curpath);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
 		return (ft_del(curpath),
 			ft_perror(-1, ft_strdup("cd: No such file or directory."), 0), 3);
 	if (!S_ISDIR(path_stat.st_mode))
 		return (ft_del(curpath), ft_perror(-1, ft_strdup("cd: Not a directory."), 0), 3);
-	update_env(curpath, 1);
+	update_env(curpath);
 	chdir(curpath);
 	ft_del(curpath);
 	return (0);
