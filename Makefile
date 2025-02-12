@@ -28,7 +28,7 @@ MINI_E =	$(addprefix exec/, $(EXEC))									\
 MINI_D =	clean_data.c		data.c				env2env.c			\
 			ft_getenv_struct.c	ft_getenv.c			ft_getimp_struct.c	\
 			ft_getimp.c			ft_getloc_struct.c	ft_getloc.c			\
-			init_imp.c
+			init_imp.c			is_env.c
 
 CD =		cd.c				utils.c
 PWD =		pwd.c

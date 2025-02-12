@@ -31,29 +31,29 @@ void ft_lstdel_link(t_list **l, void *content)
 
 int	ft_unset(char **arg)
 {
-	t_list	*lst;
-	t_list	*prev;
+	// t_list	*lst;
+	// t_list	*prev;
 	size_t	i;
 
 	i = 0;
 	while (arg[++i])
 	{
-		lst = ft_getloc_struct(arg[i], &prev);
-		if (lst)
-		{
-			if (!prev)
-				ft_lstdelink(&(data()->loc), &lst, ft_del);
-			else
-				ft_lstdelink(&prev, &lst, ft_del);
-		}
-		lst = ft_getenv_struct(arg[i], &prev);
-		if (lst)
-		{
-			if (!prev)
-				ft_lstdelink(&(data()->env), &lst, ft_del);
-			else
-				ft_lstdelink(&prev, &lst, ft_del);
-		}
+		ft_lstremove_if(&(data()->loc), is_env, ft_del, arg[i]);
+		ft_lstremove_if(&(data()->env), is_env, ft_del, arg[i]);
+		// lst = ft_getloc_struct(arg[i], &prev);
+		// if (lst)
+		// {
+		// 		ft_lstdelink(&(data()->loc), &lst, ft_del);
+		// 		ft_lstdelink(&prev, &lst, ft_del);
+		// }
+		// lst = ft_getenv_struct(arg[i], &prev);
+		// if (lst)
+		// {
+		// 	if (!prev)
+		// 		ft_lstdelink(&(data()->env), &lst, ft_del);
+		// 	else
+		// 		ft_lstdelink(&prev, &lst, ft_del);
+		// }
 	}
 	return (0);
 }

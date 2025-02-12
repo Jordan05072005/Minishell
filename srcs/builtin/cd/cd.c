@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 17:36:19 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:28:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,11 @@ void	update_env(char *curpath, int mode)
 	if (!oldpwd && !present)
 		oldpwd = ft_getloc_struct("OLDPWD", &temp);
 	update_pwd(pwd, oldpwd, &present, curpath);
-	if (present && temp)
-		ft_lstdelink(&temp, &oldpwd, ft_del);
-	if (present && !temp && ft_getenv("OLDPWD"))
-		ft_lstdelink(&(data()->env), &oldpwd, ft_del);
-	else if (present)
-		ft_lstdelink(&(data()->loc), &oldpwd, ft_del);
+	if (present)
+	{
+		ft_lstremove_if(&(data()->loc), is_env, ft_del, "OLDPWD");
+		ft_lstremove_if(&(data()->env), is_env, ft_del, "OLDPWD");
+	}
 }
 
 int	ft_cd(char **av)
