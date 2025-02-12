@@ -40,10 +40,20 @@ int	ft_unset(char **arg)
 	{
 		lst = ft_getloc_struct(arg[i], &prev);
 		if (lst)
-			return (ft_lstdelink(&prev, &lst, ft_del), 0);
+		{
+			if (!prev)
+				ft_lstdelink(&(data()->loc), &lst, ft_del);
+			else
+				ft_lstdelink(&prev, &lst, ft_del);
+		}
 		lst = ft_getenv_struct(arg[i], &prev);
 		if (lst)
-			ft_lstdelink(&prev, &lst, ft_del);
+		{
+			if (!prev)
+				ft_lstdelink(&(data()->env), &lst, ft_del);
+			else
+				ft_lstdelink(&prev, &lst, ft_del);
+		}
 	}
 	return (0);
-}	
+}

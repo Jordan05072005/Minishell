@@ -20,13 +20,18 @@ t_list	*ft_getloc_struct(const char *str, t_list **placeholder)
 
 	size = ft_strlen(str);
 	loc = data()->loc;
-	*placeholder = loc;
+	*placeholder = NULL;
 	while (loc)
 	{
 		line = ft_strnstr(loc->content, str, size);
 		if (line && line[size] == '=')
+		{
+			if (loc == data()->loc)
+				*placeholder = NULL;
+			else
+				*placeholder = loc;
 			return (loc);
-		*placeholder = loc;
+		}
 		loc = loc->next;
 	}
 	return (NULL);

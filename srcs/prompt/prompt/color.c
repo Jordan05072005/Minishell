@@ -6,60 +6,22 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 10:40:22 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/10 15:44:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:13:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+//Plan to mess with the piscine, see with NIDRUON
 char	*get_color(int option)
 {
-	static char	col[3][22] = {"\001\033[38;2;000;161;201m\002",
+	static char	col[4][22] = {"\001\033[38;2;000;161;201m\002",
 		"\001\033[38;2;000;255;161m\002",
-		"\001\033[38;2;000;208;181m\002"};
+		"\001\033[38;2;000;208;181m\002",
+		"\001\033[38;2;255;255;255m\002"};
 
 	return (col[option]);
 }
-
-// void	set_bit(char *col, char *bit, int offset)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	len;
-
-// 	len = ft_strlen(bit);
-// 	i = -1;
-// 	while (++i < len - 3)
-// 		col[i + offset] = '0';
-// 	j = -1;
-// 	while (bit[++j])
-// 	{
-// 		col[i + offset] = bit[j];
-// 		i++;
-// 	}
-// }
-
-// int	set_color(char *col, int color)
-// {
-// 	char	*bit;
-
-// 	bit = ft_itoa((color >> 16) & 0xFF);
-// 	if (!bit)
-// 		return (1);
-// 	set_bit(col, bit, 8);
-// 	ft_del(bit);
-// 	bit = ft_itoa((color >> 8) & 0xFF);
-// 	if (!bit)
-// 		return (1);
-// 	set_bit(col, bit, 12);
-// 	ft_del(bit);
-// 	bit = ft_itoabit;
-// 	if (!bit)
-// 		return (1);
-// 	set_bit(col, bit, 16);
-// 	ft_del(bit);
-// 	return (0);
-// }
 
 void	set_color(char *col, int color)
 {
@@ -79,7 +41,7 @@ void	set_color(char *col, int color)
 	col[18] = '0' + bit % 10;
 }
 
-int	set_colors(char	*col1, char *col2, char *col3)
+int	set_colors(char	*col1, char *col2, char *col3, char *col4)
 {
 	int		color;
 
@@ -95,5 +57,9 @@ int	set_colors(char	*col1, char *col2, char *col3)
 	if (color == -1)
 		return (3);
 	set_color(get_color(2), color);
+	color = ft_atoi_base(col4 + 2, "0123456789abcdef", 16);
+	if (color == -1)
+		return (3);
+	set_color(get_color(3), color);
 	return (0);
 }

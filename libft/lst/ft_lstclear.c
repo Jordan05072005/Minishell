@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@students.42perpignan    +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:03:30 by hle-hena          #+#    #+#             */
-/*   Updated: 2024/11/21 14:36:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:38:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		temp = (*lst)->next;
 		if (del)
 			del((*lst)->content);
-		free(*lst);
+		del(*lst);
 		*lst = temp;
 	}
 	*lst = 0;

@@ -15,7 +15,7 @@ MINI_P =	$(addprefix prompt/, $(PROMPT))								\
 			$(addprefix parser/, $(PARS))
 
 EXEC =		exec_child.c		exec_parent.c		exec_builtin.c		\
-			exec.c
+			exec.c				exec_define.c
 ICMDS =		init_icmd.c			init_icmds.c		zero_icmds.c		\
 			clean_icmds.c
 IO =		close_fd.c			here_doc.c			set_io.c

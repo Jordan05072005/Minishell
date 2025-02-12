@@ -32,27 +32,25 @@ void	new_prompt(int signum)
 char	*get_prompt(void)
 {
 	char	*prompt;
-	char	*temp1;
-	char	*temp2;
 	char	*user;
 	char	*path;
 
 	user = ft_getimp("USER");
+	//look into how it handles it when you are in a NULL dir
+	// path = getcwd(NULL, 0);
+	// if (path)
+	// {
+	// 	ft_del(path)
+	// 	path = ft_getloc("PWD");
+	// 	if (!path)
+	// 		path = ft_getenv("PWD");
+	// 	if (!path)
+	// 		path = ft_getimp("PWD");
+	// }
 	path = ft_getimp("PWD");
-	temp1 = ft_strjoin(get_color(0), user);
-	temp2 = ft_strjoin(get_color(2), "@");
-	prompt = ft_strjoin(temp1, temp2);
-	ft_del(temp1);
-	ft_del(temp2);
-	temp2 = ft_strjoin(get_color(1), path);
-	temp1 = ft_strjoin(temp2, get_color(2));
-	ft_del(temp2);
 	if (strncmp(user, "root", 4) == 0)
-		temp2 = ft_strjoin(temp1, "#\001\033[0;0m\002 ");
+		prompt = ft_strsjoin((const char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
 	else
-		temp2 = ft_strjoin(temp1, "$\001\033[0;0m\002 ");
-	ft_del(temp1);
-	temp1 = prompt;
-	prompt = ft_strjoin(temp1, temp2);
-	return (ft_del(temp1), ft_del(temp2), prompt);
+		prompt = ft_strsjoin((const char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
+	return (prompt);
 }

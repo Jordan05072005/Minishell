@@ -46,7 +46,7 @@ SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(PRINT
 OBJ = ${SRC:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3 -g
 
 NAME = libft.a
 
@@ -54,7 +54,7 @@ all: ${NAME}
 
 ${NAME}: ${OBJ}
 	@ar rcs ${NAME} ${OBJ}
-	@echo "Library ready to be used"
+	@echo "Library ready to be used with gdb"
 
 %.o: %.c
 	@${CC} ${CFLAGS} -c -o $@ $<

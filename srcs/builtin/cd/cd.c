@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 16:01:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:36:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,23 @@ char	*clean_curpath(char *curpath)
 	return (ft_free_tab((void **)path, ft_strslen(path)), clean);
 }
 
+/*
+	If PWD is set in loc or env
+	->	update PWD
+	->	If OLDPWD is UNSET
+	->	->	add OLDPWD to loc
+	->	If OLDPWD has been NULLED
+	->	->	update OLDPWD in env
+	->	If OLDPWD is set in loc or env
+	->	->	update OLDPWD
+	If PWD is UNSET
+	->	add PWD to loc
+	->	If OLDPWD is set
+	->	->	NULL OLDPWD
+*/
 void	update_env(char *curpath, int mode)
 {
+	static int	present = 0;
 	t_list		*temp;
 	t_list		*oldpwd;
 	t_list		*pwd;
@@ -108,22 +123,21 @@ void	update_env(char *curpath, int mode)
 	pwd = ft_getimp_struct("PWD", &temp);
 	ft_del(pwd->content);
 	pwd->content = ft_strjoin("PWD=", curpath);
-	if (mode == 0)
+	if (!mode)
 		return ;
 	pwd = ft_getenv_struct("PWD", &temp);
+	if (!pwd)
+		pwd = ft_getloc_struct("PWD", &temp);
 	oldpwd = ft_getenv_struct("OLDPWD", &temp);
-	if (oldpwd && pwd)
-	{
-		ft_del(oldpwd->content);
-		oldpwd->content = ft_strjoin("OLDPWD=", pwd->content + 4);
-	}
-	if (oldpwd && !pwd)
+	if (!oldpwd && !present)
+		oldpwd = ft_getloc_struct("OLDPWD", &temp);
+	update_pwd(pwd, oldpwd, &present, curpath);
+	if (present && temp)
 		ft_lstdelink(&temp, &oldpwd, ft_del);
-	if (pwd)
-	{
-		ft_del(pwd->content);
-		pwd->content = ft_strjoin("PWD=", curpath);
-	}
+	if (present && !temp && ft_getenv("OLDPWD"))
+		ft_lstdelink(&(data()->env), &oldpwd, ft_del);
+	else if (present)
+		ft_lstdelink(&(data()->loc), &oldpwd, ft_del);
 }
 
 int	ft_cd(char **av)

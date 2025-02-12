@@ -18,7 +18,7 @@
 # include <readline/history.h>
 
 char	*get_color(int option);
-int		set_colors(char	*col1, char *col2, char *col3);
+int		set_colors(char	*col1, char *col2, char *col3, char *col4);
 
 /* -------------------------------------------------------------------------- */
 /*                  parser.c                                                  */

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 14:29:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:16:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 	dup2(saved[0], 0);
 	dup2(saved[1], 1);
 	if (nb_cmds > 1)
-		return (clean_data(), clean_icmds(cmds, nb_cmds), exit(cmds[child].exit));
+		return (clean_data(), clean_icmds(cmds, nb_cmds), exit(cmds[child].exit));//This is stupid, access a var after freeing it .............
 }
