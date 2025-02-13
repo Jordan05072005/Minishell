@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 20:08:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:39:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ char	*clean_curpath(char *curpath)
 	return (ft_free_tab((void **)path, ft_strslen(path)), clean);
 }
 
+char *regen_curpath(char *curpath)
+{
+	char	*dest;
+
+	dest = create_path(ft_getimp("PWD"), curpath);
+	ft_del(curpath);
+	return (dest);
+}
+
 char	*check_curpath(char *curpath, char *arg)
 {
 	struct stat	path_stat;
@@ -81,6 +90,8 @@ char	*check_curpath(char *curpath, char *arg)
 	if (!curpath)
 		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg,
 			": No such file or directory.", NULL}), 0), NULL);
+	if (curpath[0] != '/')
+		curpath = regen_curpath(curpath);
 	if (stat(ft_getimp("PWD"), &path_stat) != 0)
 	{
 		if (is_dot(arg))//I dont like this, there is probably a better idea.
@@ -100,7 +111,7 @@ ni: cd: ", arg, ": Not a directory.", NULL}), 0), NULL);
 	return (curpath);
 }
 
-char	*get_curpath(char *arg)
+char	*get_curpath(char *arg, int *print)
 {
 	char	*curpath;
 	char	*cdpath;
@@ -114,9 +125,9 @@ char	*get_curpath(char *arg)
 		cdpaths = ft_split(cdpath, ':');
 	curpath = test_cdpath(cdpaths, arg);
 	ft_free_tab((void **)cdpaths, ft_strslen(cdpaths));
-	if (curpath)
-		ft_putendl_fd(curpath, 1);
-	else
+	if (!curpath)
 		curpath = create_path(ft_getimp("PWD"), arg);
+	else
+		*print = 1;
 	return (curpath);
 }

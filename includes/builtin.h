@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 20:04:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:40:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_cd(char **av);
 //curpath.c
 char	*check_curpath(char *curpath, char *arg);
 char	*clean_curpath(char *curpath);
-char	*get_curpath(char *arg);
+char	*get_curpath(char *arg, int *print);
 //cd_env.c
 void	update_env(char *curpath);
 //utils.c
