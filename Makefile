@@ -67,7 +67,7 @@ strace: $(LIBFT) all
 	@strace -f ./$(NAME)
 
 valgrind: $(LIBFT) all
-	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+	@valgrind --suppressions=./supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 no-child: $(LIBFT) all
 	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)

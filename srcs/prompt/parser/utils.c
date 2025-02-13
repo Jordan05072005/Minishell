@@ -74,8 +74,12 @@ void	free_tpars(t_pars **pars)
 
 void	shift_left(char **str, size_t i)
 {
+	write(1, "here", 4);
 	if (i > ft_strslen(str) || !str)
 		return ;
-	while (str[++i])
-		str[i - 1] = str[i];
+	while (str[i])
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
 }	

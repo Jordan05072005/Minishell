@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:18:25 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/10 12:29:18 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 08:18:49 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(const char *str)
 {
+	if (!str)
+		return (0);
 	if (ft_strncmp("cd", str, 3) == 0)
 		return (1);
 	if (ft_strncmp("pwd", str, 4) == 0)
