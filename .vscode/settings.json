@@ -66,6 +66,7 @@
     "builtin.h": "c",
     "struct.h": "c",
     "data.h": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "fcntl.h": "c"
   }
 }

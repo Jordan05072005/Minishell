@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 16:43:53 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:11:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,6 @@ int	is_dot(char *path)
 		return (0);
 	}
 	return (1);
-}
-
-void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
-{
-	if (pwd)
-	{
-		if (oldpwd)
-		{
-			ft_del(oldpwd->content);
-			oldpwd->content = ft_strjoin("OLDPWD=", pwd->content + 4);
-		}
-		else if (!oldpwd && *present)
-		{
-			ft_lstadd_back(&data()->env,
-				ft_lstnew(ft_strjoin("OLDPWD=", pwd->content + 4)));
-			*present = 0;
-		}
-		else
-			ft_lstadd_back(&data()->loc,
-				ft_lstnew(ft_strjoin("OLDPWD=", pwd->content + 4)));
-		ft_del(pwd->content);
-		pwd->content = ft_strjoin("PWD=", curpath);
-	}
-	else
-	{
-		ft_lstadd_back(&data()->loc, ft_lstnew(ft_strjoin("PWD=", curpath)));
-		if (oldpwd)
-			*present = 1;
-	}
 }
 
 char	*create_path(char *first_component, char *second_component)

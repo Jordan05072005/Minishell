@@ -1,5 +1,34 @@
 Update SHLVL
 
+/* ---------------------------------- */
+          This is for cd
+
+[cd ~] if HOME has been re set.
+[cd] if HOME is unset.
+[cd 'srcs'] because I get the ', same goes for "srcs".
+[cd //] I dont even know if we are supposed to do that
+[cd -] Should look into it.
+[cd --]
+[cd ---]
+/*
+	hle-hena@pop-os:~/Documents/42_projects/Minishell$ echo $OLDPWD
+
+	hle-hena@pop-os:~/Documents/42_projects/Minishell$ cd -
+	bash: cd: OLDPWD not set
+*/
+/*
+	hle-hena@pop-os:~/Documents/42_projects/Minishell/a/a$ cd ..
+	cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+/*
+/*
+	hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ cd $CDPATH
+	herehle-hena@/home/hle-hena$ 
+/* Where is this here coming from lmao
+[CDPATH=./] I can't move afterward ??
+[cd fdf] Using CDPATH, doesnt write the CDPATH.
+/* ---------------------------------- */
+
+
 /./../../../../..
 /////////////////////////////
 
