@@ -1,6 +1,12 @@
 Update SHLVL
-cd nothing works with HOME unset.
-cd /.. goes through
+
+/./../../../../..
+/////////////////////////////
+
+| hola
+|||||
+
+exit(127)
 
 echo : if ~ followed by a / or by nothing, print $HOME instead of ~
 actually not in echo but in the parsing xDDDD
@@ -10,6 +16,10 @@ echo ''
 
 parsing interprets '\' while it shouldn't
 env|grep PWD
+parsing : "                             "
+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+> or < or >> or << with nothing after, should probably write smth
 
 $?
 
@@ -22,43 +32,3 @@ $?
 ==5207==    by 0x10A8BF: pars_line (parseur.c:133)
 ==5207==    by 0x10A9C0: parseur (parseur.c:150)
 ==5207==    by 0x109B84: main (main.c:60)
-
-
-hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ unset PWD
-hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ cd srcs/
-hle-hena@/home/hle-hena/Documents/42_projects/Minishell/srcs$ env | grep PWD
-==306508== Invalid read of size 4
-==306508==    at 0x403388: exec_builtin (exec_builtin.c:41)
-==306508==    by 0x403523: exec_cmd (exec.c:28)
-==306508==    by 0x4035EC: exec (exec.c:46)
-==306508==    by 0x401921: main (main.c:63)
-==306508==  Address 0x4b6ee80 is 48 bytes inside a block of size 168 free'd
-==306508==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==306508==    by 0x403D7D: clean_icmds (clean_icmds.c:22)
-==306508==    by 0x403378: exec_builtin (exec_builtin.c:41)
-==306508==    by 0x403523: exec_cmd (exec.c:28)
-==306508==    by 0x4035EC: exec (exec.c:46)
-==306508==    by 0x401921: main (main.c:63)
-==306508==  Block was alloc'd at
-==306508==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==306508==    by 0x4072AF: ft_calloc (in /home/hle-hena/Documents/42_projects/Minishell/minishell)
-==306508==    by 0x403B71: init_icmds (init_icmds.c:20)
-==306508==    by 0x4035C0: exec (exec.c:43)
-==306508==    by 0x401921: main (main.c:63)
-==306508== 
-==306508== 
-==306508== HEAP SUMMARY:
-==306508==     in use at exit: 208,651 bytes in 231 blocks
-==306508==   total heap usage: 685 allocs, 454 frees, 270,269 bytes allocated
-==306508== 
-==306508== LEAK SUMMARY:
-==306508==    definitely lost: 0 bytes in 0 blocks
-==306508==    indirectly lost: 0 bytes in 0 blocks
-==306508==      possibly lost: 0 bytes in 0 blocks
-==306508==    still reachable: 208,651 bytes in 231 blocks
-==306508==         suppressed: 0 bytes in 0 blocks
-==306508== Rerun with --leak-check=full to see details of leaked memory
-==306508== 
-==306508== For lists of detected and suppressed errors, rerun with: -s
-==306508== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-hle-hena@/home/hle-hena/Documents/42_projects/Minishell/srcs$ 
