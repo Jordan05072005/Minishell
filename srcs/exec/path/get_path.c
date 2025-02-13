@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 10:36:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 11:24:10 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmds, int nb_cmds)
 char	*get_path(t_cmd input, t_icmd *cmd, t_icmd *cmds, int nb_cmds)
 {
 	if (is_builtin(input.args[0]) || (access(input.args[0], F_OK) == 0
-			&& ft_strnstr(input.args[0], "./", ft_strlen(input.args[0]))))
+			&& ft_strnstr(input.args[0], "/", ft_strlen(input.args[0]))))
 		return (ft_strdup(input.args[0]));
 	if (ft_strchr(input.args[0], '='))
 	{
