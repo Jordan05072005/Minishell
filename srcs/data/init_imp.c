@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:30:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:24:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_imp(t_list **imp)
 	home = getenv("HOME");
 	if (!home && !ft_strncmp(user, "unknown", 8))
 		home = ft_strjoin("/home/", user);
-	else if (!home && ft_strncmp(user, "unknown", 8))
+	else if (!home)
 		home = ft_strdup("/");
 	pwd = getenv("PWD");
 	if (!pwd)

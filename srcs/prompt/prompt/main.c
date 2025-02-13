@@ -33,6 +33,9 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 	(void)av;
 	(void)ac;
 	
+	(*d)->loc = NULL;
+	(*d)->env = NULL;
+	(*d)->imp = NULL;
 	while (*env)
 	{
 		ft_lstadd_back(&(*d)->env, ft_lstnew(ft_strdup(*env)));
