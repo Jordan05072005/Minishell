@@ -81,10 +81,10 @@ BIG BOSS A TESTER :
 exit(127)
 
 echo : if ~ followed by a / or by nothing, print $HOME instead of ~
-actually not in echo but in the parsing xDDDD
-echo hello'world'
-echo "$"
-echo ''
+actually not in echo but in the parsing xDDDD -> good !
+echo hello'world' -> good 
+echo "$" -> good 
+echo '' -> good 
 
 parsing interprets '\' while it shouldn't
 env|grep PWD

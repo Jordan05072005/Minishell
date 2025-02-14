@@ -9,7 +9,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 PROMPT =	color.c				prompt.c			main.c
-PARS =		parseur.c			utils.c				utils_lst.c			\
+PARS =		parseur.c			utils.c				utils_lst.c				fill.c		\
 			split2.c
 MINI_P =	$(addprefix prompt/, $(PROMPT))								\
 			$(addprefix parser/, $(PARS))

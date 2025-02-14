@@ -79,7 +79,7 @@ void	write_str(char *str, t_icmd *cmd, int i)
 	oct = 0;
 	while (j < ft_strlen(str))
 	{
-		if (str[j] == '$')
+		if (str[j] == '$' && str[j + 1])
 		{
 			sub_str = ft_substr(str, j + 1, ft_strchr_index(&str[j], ' ') - 1);
 			if (ft_getloc(sub_str))
@@ -103,6 +103,7 @@ int	ft_echo(t_icmd *cmd)
 
 	// if (cmd->fd_in) // ?
 	// 	return (0);
+	
 	i = cmd->args[1] && !ft_strncmp(cmd->args[1], "-n", 3);
 	while (cmd->args[1] && cmd->args[++i])
 	{
