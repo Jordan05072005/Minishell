@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 09:08:21 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/05 13:14:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:06:08 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "data.h"
 # include "builtin.h"
 # include <fcntl.h>
+
 
 #endif

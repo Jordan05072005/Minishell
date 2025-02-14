@@ -96,6 +96,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 	(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	while ((*pars)->exe[i].args[++j])
 	{
+		(*pars)->exe[i].args[j] = ft_delcot((*pars)->exe[i].args[j], 1);
 		if ((*pars)->exe[i].args[j][0] == '$')
 		{
 			pt = (*pars)->exe[i].args[j];

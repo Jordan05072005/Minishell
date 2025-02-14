@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 21:40:55 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:02:13 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	update_env(char *curpath);
 char	*create_path(char *first_component, char *second_component);
 char	*test_cdpath(char **cdpath, char *arg);
 int		is_dot(char *path);
+char	*ft_delcot(char *str, int i);
 
 int		ft_color(char **av);
 

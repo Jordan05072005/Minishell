@@ -39,6 +39,19 @@ char	*ft_strdelchar(const char *str, char del)
 	return (str_f);
 }
 
+char	*ft_delcot(char *str, int i)
+{
+	char	*str2;
+
+	if (ft_strchr(str, '"') < ft_strchr(str, '\'') || !ft_strchr(str, '\''))
+		str2 = ft_strdelchar(str, '"');
+	else if (ft_strchr(str, '"') > ft_strchr(str, '\'') || !ft_strchr(str, '"'))
+		str2 = ft_strdelchar(str, '\'');
+	if (i)
+		ft_del(str);
+	return (str2);
+}
+
 char	ft_strchr_index(char *str, char c)
 {
 	int	i;
@@ -89,10 +102,7 @@ int	ft_echo(t_icmd *cmd)
 	i = cmd->args[1] && !ft_strncmp(cmd->args[1], "-n", 3);
 	while (cmd->args[1] && cmd->args[++i])
 	{
-		if (ft_strchr(cmd->args[i], '"') < ft_strchr(cmd->args[i], '\'') || !ft_strchr(cmd->args[i], '\''))
-			str = ft_strdelchar(cmd->args[i], '"');
-		else if (ft_strchr(cmd->args[i], '"') > ft_strchr(cmd->args[i], '\'') || !ft_strchr(cmd->args[i], '"'))
-			str = ft_strdelchar(cmd->args[i], '\'');
+		str = ft_delcot(cmd->args[i], 0);
 		write_str(str, cmd, i);
 		ft_del(str);
 	}
