@@ -30,7 +30,8 @@ MINI_D =	clean_data.c		data.c				env2env.c			\
 			ft_getimp.c			ft_getloc_struct.c	ft_getloc.c			\
 			init_imp.c			is_env.c
 
-CD =		cd.c				utils.c
+CD =		cd_env.c			cd.c				utils.c				\
+			curpath.c
 PWD =		pwd.c
 ENV =		env.c
 EXIT =		exit.c

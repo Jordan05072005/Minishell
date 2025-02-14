@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:06:13 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/07 13:06:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:59:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ char	*ft_getimp(const char *str)
 	{
 		line = ft_strnstr(imp->content, str, size);
 		if (line && line[size] == '=')
-			return (line + size + 1);
+		{
+			if (line[size + 1])
+				return (line + size + 1);
+			return ("");
+		}
 		imp = imp->next;
 	}
 	return (NULL);

@@ -65,6 +65,8 @@
     "prompt.h": "c",
     "builtin.h": "c",
     "struct.h": "c",
-    "data.h": "c"
+    "data.h": "c",
+    "cstdlib": "c",
+    "fcntl.h": "c"
   }
 }
