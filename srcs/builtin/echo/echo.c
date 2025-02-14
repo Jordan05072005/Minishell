@@ -43,9 +43,13 @@ char	*ft_delcot(char *str, int i)
 {
 	char	*str2;
 
-	if (ft_strchr(str, '"') < ft_strchr(str, '\'') || !ft_strchr(str, '\''))
+	if (!ft_strchr(str, '\'') && ft_strchr(str, '"'))
 		str2 = ft_strdelchar(str, '"');
-	else if (ft_strchr(str, '"') > ft_strchr(str, '\'') || !ft_strchr(str, '"'))
+	else if (ft_strchr(str, '\'') && !ft_strchr(str, '"'))
+		str2 = ft_strdelchar(str, '\'');
+	else if (ft_strchr(str, '"') < ft_strchr(str, '\'') || !ft_strchr(str, '\''))
+		str2 = ft_strdelchar(str, '"');
+	else
 		str2 = ft_strdelchar(str, '\'');
 	if (i)
 		ft_del(str);
