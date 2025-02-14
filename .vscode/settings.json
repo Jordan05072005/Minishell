@@ -58,13 +58,13 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "C_Cpp.errorSquiggles": "disabled",
   "files.associations": {
-	"env.h": "c",
-	"libft.h": "c",
-	"exec.h": "c",
-	"mini.h": "c",
-	"prompt.h": "c",
-	"builtin.h": "c",
-	"struct.h": "c",
-	"data.h": "c"
-}
+    "env.h": "c",
+    "libft.h": "c",
+    "exec.h": "c",
+    "mini.h": "c",
+    "prompt.h": "c",
+    "builtin.h": "c",
+    "struct.h": "c",
+    "data.h": "c"
+  }
 }
