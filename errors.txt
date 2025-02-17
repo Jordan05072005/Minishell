@@ -3,20 +3,74 @@ Update SHLVL
 /* ---------------------------------- */
           This is for cd
 
-[cd 'srcs'] because I get the ', same goes for "srcs".
 [cd //] I dont even know if we are supposed to do that
-[cd -] Should look into it.
-[cd --]
-[cd ---]
-/*
-	hle-hena@pop-os:~/Documents/42_projects/Minishell$ echo $OLDPWD
+/* ---------------------------------- */
 
-	hle-hena@pop-os:~/Documents/42_projects/Minishell$ cd -
-	bash: cd: OLDPWD not set
+/* ---------------------------------- */
+          This is for echo
+
+[echo -n -n] Should skip all of the -n I think
+[echo -n -n Hola] Should skip all of the -n I think
+[echo -nnnnnnnnnnnnnnnnnnnnnnnnnnnnn] Should act as if -n
+[echo -n -nnn -nnnn] combination of both above
+[echo -n -nnn hola -nnnn] still the same.
+[echo -nnnnnnnn ----------------n] still.
+
+	Special case, need to talk this one.
+[echo $?]
+/* ---------------------------------- */
+
+/* ---------------------------------- */
+			This is for the parser
+
+[echo $:$= | cat -e] Doesnt stop the str for the search of env.
+[echo my shit terminal is [$TERM]] Doesnt stop the str for the search of env.
+[echo my shit terminal is [$TERM4]] Same as before.
+[echo $9HOME] Still the same thing.
+[echo $HOME%] Same as before.
+[echo $UID] I think this is a special case.
+[echo > <] Should put an error of parsing.
+/*
+	$> echo > <				OK	OK	bash: syntax error near unexpected token `<'
+	$>	2	
+	132
+		$> echo | |				OK	OK	bash: syntax error near unexpected token `|'
+	$>	2	
+	133
+		$> EechoE				OK	OK	bash: EechoE: command not found
+	$>	127	
+	134
+		$> .echo.				OK	OK	bash: .echo.: command not found
+	$>	127	
+	135
+		$> >echo>				OK	OK	bash: syntax error near unexpected token `newline'
+	$>	2	
+	136
+		$> <echo<				OK	OK	bash: syntax error near unexpected token `newline'
+	$>	2	
+	137
+		$> >>echo>>				OK	OK	bash: syntax error near unexpected token `newline'
+	$>	2	
+	138
+		$> |echo|				OK	OK	bash: syntax error near unexpected token `|'
+	$>	2	
+	139
+		$> |echo -n hola				OK	OK	bash: syntax error near unexpected token `|'
+	$>
 */
+
+
 /* ---------------------------------- */
 
 your_command > stdout.txt 2> stderr.txt ??
+
+What does the subject mean by 'Not interpret' ?
+-> echo \n hola ?
+-> echo \$HOME
+
+
+BIG BOSS A TESTER :
+""''echo hola""'''' que""'' tal""''
 
 /./../../../../..
 /////////////////////////////
