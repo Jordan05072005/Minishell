@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:43:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 17:29:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:54:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	exec_define(t_icmd *cmds, int nb_cmds, int child)
 		i++;
 	if (cmds[child].args[i])
 	{
-		//should probably fork i think xDD	
+		//should probably fork i think xDD	 
 		exec_child(cmds, nb_cmds, child);//Should move arg and recalculate path.
 	}
 	define_vars(cmds, child);
