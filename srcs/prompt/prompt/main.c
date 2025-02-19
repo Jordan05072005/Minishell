@@ -14,6 +14,29 @@
 
 //penser a clear l'history
 
+void remove_escape_sequences(char *str)
+{
+    char *read_ptr = str;
+    char *write_ptr = str;
+
+    while (*read_ptr) {
+        // Check for escape sequences
+        if (*read_ptr == '\033') {
+            // Skip the escape sequence
+            while (*read_ptr && *read_ptr != 'm') {
+                read_ptr++;
+            }
+            if (*read_ptr) {
+                read_ptr++;  // Skip the 'm' at the end of the sequence
+            }
+        } else {
+            // Copy character if not part of an escape sequence
+            *write_ptr++ = *read_ptr++;
+        }
+    }
+    *write_ptr = '\0';  // Null-terminate the modified string
+}
+
 char	*ft_readline(void)
 {
 	char	*prompt;
@@ -21,10 +44,15 @@ char	*ft_readline(void)
 
 	signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
-	prompt = get_prompt();
+	if (!isatty(0))
+		prompt = NULL;
+	else
+		prompt = get_prompt();
 	line = readline(prompt);
+	// if (!prompt)
+	// 	printf("\n\nPrompt : %s\nWhat readline is reading : %s\n\n", prompt, line);
+	ft_del(prompt);
 	signal(SIGINT, any);
-	free(prompt);
 	return (line);
 }
 
@@ -44,15 +72,43 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 	init_imp(&((*d)->imp));
 }
 
+void	init_mini(t_data *d, int ac, char **av, char **env)
+{
+	t_list	*shlvl;
+	t_list	*bin;
+	char	*temp;
+	int		value;
+
+	// print_welcome();
+	create_env(&d, env, av, ac);
+	init_io(d);
+	printf("\e[?2004l");
+	shlvl = ft_getenv_struct("SHLVL", &bin);
+	if (!shlvl)
+		return (ft_lstadd_back(&(data()->env), ft_lstnew(ft_strdup("SHLVL=0"))));
+	value = ft_atoi(shlvl->content + 6);
+	ft_del(shlvl->content);
+	if (value > 999 || value < 0)
+	{
+		// if (value > 999)
+		// put error mess.
+		shlvl->content = ft_strdup("SHLVL=0");
+		return ;
+	}
+	temp = ft_itoa(value + 1);
+	shlvl->content = ft_strsjoin((const char *[]){"SHLVL=", temp, NULL});
+	ft_del(temp);
+}
+
 int	main(int ac, char **av, char **env)
 {
-	char	*before;
 	t_data	*d;
 	char	*line;
+	char	*before;
 
 	before = NULL;
 	d = data();
-	create_env(&d, env, av, ac);
+	init_mini(d, ac, av, env);
 	line = ft_readline();
 	while (line)
 	{

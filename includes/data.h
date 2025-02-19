@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 18:20:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:31:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		clean_pars(int full);
 int		clean_env(void);
 t_data	*data(void);
 void	init_imp(t_list **imp);
+void	init_io(t_data *d);
 t_list	*ft_getimp_struct(const char *str, t_list **placeholder);
 char	*ft_getimp(const char *str);
 t_list	*ft_getenv_struct(const char *str, t_list **placeholder);

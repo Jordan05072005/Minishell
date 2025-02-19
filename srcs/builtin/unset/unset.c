@@ -29,6 +29,7 @@ void ft_lstdel_link(t_list **l, void *content)
 	ft_lstdelone(temp, free);
 }
 
+//Should not be able to del SHLVL apparently ...
 int	ft_unset(char **arg)
 {
 	// t_list	*lst;
@@ -40,20 +41,8 @@ int	ft_unset(char **arg)
 	{
 		ft_lstremove_if(&(data()->loc), is_env, ft_del, arg[i]);
 		ft_lstremove_if(&(data()->env), is_env, ft_del, arg[i]);
-		// lst = ft_getloc_struct(arg[i], &prev);
-		// if (lst)
-		// {
-		// 		ft_lstdelink(&(data()->loc), &lst, ft_del);
-		// 		ft_lstdelink(&prev, &lst, ft_del);
-		// }
-		// lst = ft_getenv_struct(arg[i], &prev);
-		// if (lst)
-		// {
-		// 	if (!prev)
-		// 		ft_lstdelink(&(data()->env), &lst, ft_del);
-		// 	else
-		// 		ft_lstdelink(&prev, &lst, ft_del);
-		// }
+		if (!ft_strncmp(arg[i], "SHLVL", 6))
+			ft_lstadd_back(&data()->env, ft_lstnew(ft_strdup("SHLVL=0")));
 	}
 	return (0);
 }

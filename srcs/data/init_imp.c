@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 10:24:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:48:20 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,27 @@ void	init_imp(t_list **imp)
 	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("USER=", user)));
 	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("HOME=", home)));
 	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("PWD=", pwd)));
+}
+
+void	init_io(t_data *d)
+{
+	int	tty;
+
+	d->saved_out = -1;
+	d->saved_tty = -1;
+	if (!isatty(1))
+	{
+		d->saved_out = dup(1);
+		tty = open("/dev/tty", O_WRONLY);
+		if (tty == -1)
+			ft_perror(1, ft_strdup("mini: error opening a terminal.\n"),
+					clean_data());
+		d->saved_tty = dup(tty);
+		if (d->saved_tty == -1)
+			ft_perror(1, ft_strdup("mini: error redirecting stdout to a termina\
+l.\n"), clean_data());
+		if (dup2(tty, 1) == -1)
+			ft_perror(1, ft_strdup("mini: error redirecting stdout to a termina\
+l.\n"), clean_data());
+	}
 }
