@@ -39,7 +39,7 @@ void	reader(t_pars *cmd, int i)
 		j++;
 	}
 }
-
+	
 void	pars_line(char *line, t_pars *exe)
 {
 	char	**arg;
