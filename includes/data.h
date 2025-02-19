@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/18 16:31:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:05:22 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ t_list	*ft_getloc_struct(const char *str, t_list **placeholder);
 char	*ft_getloc(const char *str);
 char	**env2env(t_list *env);
 int		is_env(void *str, void *to_find);
+void	update_shlvl(void);
 
 #endif

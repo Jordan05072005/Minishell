@@ -74,30 +74,11 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 
 void	init_mini(t_data *d, int ac, char **av, char **env)
 {
-	t_list	*shlvl;
-	t_list	*bin;
-	char	*temp;
-	int		value;
-
 	// print_welcome();
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");
-	shlvl = ft_getenv_struct("SHLVL", &bin);
-	if (!shlvl)
-		return (ft_lstadd_back(&(data()->env), ft_lstnew(ft_strdup("SHLVL=0"))));
-	value = ft_atoi(shlvl->content + 6);
-	ft_del(shlvl->content);
-	if (value > 999 || value < 0)
-	{
-		// if (value > 999)
-		// put error mess.
-		shlvl->content = ft_strdup("SHLVL=0");
-		return ;
-	}
-	temp = ft_itoa(value + 1);
-	shlvl->content = ft_strsjoin((const char *[]){"SHLVL=", temp, NULL});
-	ft_del(temp);
+	update_shlvl();
 }
 
 int	main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 16:06:12 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/19 09:17:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmds, int nb_cmds)
 	paths = ft_getenv("PATH");
 	if (!paths)
 		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: \
-", input.args[0], " No such file or directory."}), 0), NULL);
+", input.args[0], " No such file or directory.", NULL}), 0), NULL);
 	tries = ft_split(paths, ':');
 	if (!tries)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/18 17:03:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:58:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 {
-	if (nb_cmds > 1 || (!is_builtin(cmds[child].args[0]) && !cmds[child].define))
+	if (nb_cmds > 1 || (!is_builtin(cmds[child].args[0])
+		&& !cmds[child].define))
 	{
 		cmds[child].pid = fork();
 		if (cmds[child].pid == -1)

@@ -17,8 +17,8 @@ MINI_P =	$(addprefix prompt/, $(PROMPT))								\
 
 EXEC =		exec_child.c		exec_parent.c		exec_builtin.c		\
 			exec.c				exec_define.c
-ICMDS =		init_icmd.c			init_icmds.c		zero_icmds.c		\
-			clean_icmds.c
+ICMDS =		clean_icmds.c		define2child.c		init_icmd.c			\
+			init_icmds.c		zero_icmds.c
 IO =		close_fd.c			here_doc.c			set_io.c
 PTH =		get_path.c			is_builtin.c
 MINI_E =	$(addprefix exec/, $(EXEC))									\
@@ -29,7 +29,7 @@ MINI_E =	$(addprefix exec/, $(EXEC))									\
 MINI_D =	clean_data.c		data.c				env2env.c			\
 			ft_getenv_struct.c	ft_getenv.c			ft_getimp_struct.c	\
 			ft_getimp.c			ft_getloc_struct.c	ft_getloc.c			\
-			init_imp.c			is_env.c
+			init_imp.c			is_env.c			update_shlvl.c
 
 CD =		cd_env.c			cd.c				utils.c				\
 			curpath.c

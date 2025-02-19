@@ -96,11 +96,3 @@ parsing : "                             "
 $?
 
 > test
-
-==5207== 6 bytes in 1 blocks are definitely lost in loss record 1 of 67
-==5207==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==5207==    by 0x10B256: ft_split2 (split2.c:95)
-==5207==    by 0x10A4DB: fill_exe (parseur.c:96)
-==5207==    by 0x10A8BF: pars_line (parseur.c:133)
-==5207==    by 0x10A9C0: parseur (parseur.c:150)
-==5207==    by 0x109B84: main (main.c:60)
