@@ -69,49 +69,43 @@ char	ft_strchr_index(char *str, char c)
 	return (i);
 }
 
-void	write_str(char *str, t_icmd *cmd, int i)
+void	write_str(char *str, t_icmd *cmd, int etat, int i)
 {
 	size_t	j;
-	char	*sub_str;
 	int		oct;
 
-	j = 0;
+	j = -1;
 	oct = 0;
-	while (j < ft_strlen(str))
-	{
-		if (str[j] == '$' && str[j + 1])
-		{
-			sub_str = ft_substr(str, j + 1, ft_strchr_index(&str[j], ' ') - 1);
-			if (ft_getloc(sub_str))
-				oct += ft_putstr_fd(ft_getloc(sub_str), cmd->fd_out);
-			else if (ft_getenv(sub_str))
-				oct += ft_putstr_fd(ft_getenv(sub_str), cmd->fd_out);
-			j += (ft_strlen(sub_str) + 1);
-			ft_del(sub_str);
-		}
-		else
-			oct += ft_putchar_fd(str[j++], cmd->fd_out);
-	}
+	if (!etat)
+		return ;
+	while (++j < ft_strlen(str))
+			oct += ft_putchar_fd(str[j], cmd->fd_out);
 	if (cmd->args[i + 1] && oct != 0)
-		write(1, " ", 1);
+				write(1, " ", 1);
 }
 
 int	ft_echo(t_icmd *cmd)
 {
 	int		i;
 	char	*str;
+	int		etat;
+	char	*trunc;
 
-	// if (cmd->fd_in) // ?
-	// 	return (0);
-	
-	i = cmd->args[1] && !ft_strncmp(cmd->args[1], "-n", 3);
+	etat = 0;
+	i = 0;
+	//printf("%s", cmd->args[1]);
 	while (cmd->args[1] && cmd->args[++i])
 	{
 		str = ft_delcot(cmd->args[i], 0);
-		write_str(str, cmd, i);
+		trunc = ft_strtrim(str, "n");
+		if (!etat && !(!ft_strncmp(str, "-n", 2) && !ft_strncmp(trunc, "-", 2)))
+			etat = 1;
+		write_str(str, cmd, etat, i);
 		ft_del(str);
+		ft_del(trunc);
 	}
-	if (!cmd->args[1] || ft_strncmp(cmd->args[1], "-n", 3) != 0)
+	trunc = ft_strtrim(cmd->args[1], "n");
+	if (!cmd->args[1] || !(!ft_strncmp(cmd->args[1], "-n", 2) && !ft_strncmp(trunc, "-", 2)))
 		write(cmd->fd_out, "\n", 1);
-	return (1);
+	return (ft_del(trunc), 1);
 }

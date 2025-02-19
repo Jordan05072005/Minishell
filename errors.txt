@@ -9,13 +9,6 @@ Update SHLVL
 /* ---------------------------------- */
           This is for echo
 
-[echo -n -n] Should skip all of the -n I think
-[echo -n -n Hola] Should skip all of the -n I think
-[echo -nnnnnnnnnnnnnnnnnnnnnnnnnnnnn] Should act as if -n
-[echo -n -nnn -nnnn] combination of both above
-[echo -n -nnn hola -nnnn] still the same.
-[echo -nnnnnnnn ----------------n] still.
-
 	Special case, need to talk this one.
 [echo $?]
 /* ---------------------------------- */
