@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:43:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/18 15:54:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:01:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,9 @@ int	is_define(char *str)
 			return (0);
 		str++;
 	}
+	if (!*str)
+		return (2);
 	return (1);
-}
-
-char	*get_var_name(char *str)
-{
-	int		i;
-	char	*dest;
-
-	i = 0;
-	while (str[i] != '=')
-		i++;
-	dest = ft_calloc(i + 1, sizeof(char));
-	ft_strlcpy(dest, str, i + 1);
-	return (dest);
 }
 
 void	define_imp(t_icmd *cmds, int child, int i, char *var_name)
@@ -58,27 +47,29 @@ void	define_imp(t_icmd *cmds, int child, int i, char *var_name)
 void	define_vars(t_icmd *cmds, int child)
 {
 	int		i;
-	t_list	*temp;
 	t_list	*var;
 	char	*var_name;
-	
+
 	i = -1;
 	while (cmds[child].args[++i])
 	{
 		var_name = get_var_name(cmds[child].args[i]);
-		ft_printf("[%s]\n", var_name);
-		var = ft_getenv_struct(var_name, &temp);
+		var = ft_getenv_struct(var_name, &(t_list *){0});
 		if (!var)
-			var = ft_getloc_struct(var_name, &temp);
+			var = ft_getloc_struct(var_name, &(t_list *){0});
 		if (var)
 		{
 			ft_del(var->content);
-			var->content = ft_strdup(cmds[child].args[i]);
+			var->content = create_var(cmds[child].args[i]);
 			continue ;
 		}
-		ft_lstadd_back(&data()->loc, ft_lstnew(ft_strdup(cmds[child].args[i])));
-		// define_imp(cmds, child, i, var_name);//Should not touch this and just use the imp if we can find in env.
 		ft_del(var_name);
+		var_name = create_var(cmds[child].args[i]);
+		var = ft_lstnew(var_name);
+		if (!var)
+			return (ft_del(var_name), ft_perror(1, ft_strdup("mini: Internal er\
+ror: malloc."), clean_data() + clean_icmds()));
+		ft_lstadd_back(&data()->loc, var);
 	}
 }
 
@@ -87,15 +78,13 @@ void	define_vars(t_icmd *cmds, int child)
 //like it is one.
 void	exec_define(t_icmd *cmds, int nb_cmds, int child)
 {
+	//Current version doesnt strip the char.
 	int	i;
 
 	i = 0;
-	while (is_define(cmds[child].args[i]))
+	while (is_define(cmds[child].args[i]) == 1)
 		i++;
 	if (cmds[child].args[i])
-	{
-		//should probably fork i think xDD	 
-		exec_child(cmds, nb_cmds, child);//Should move arg and recalculate path.
-	}
+		return (define2child(cmds, nb_cmds, child, i));
 	define_vars(cmds, child);
 }
