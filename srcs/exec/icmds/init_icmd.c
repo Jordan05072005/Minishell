@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:01:55 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 10:50:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:28:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_icmd(t_icmd *cmd, t_cmd input, int nb_cmds, t_icmd *clean)
 		cmd->fd_out = open(input.out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (input.out && input.append)
 		cmd->fd_out = open(input.out, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	cmd->define = 0;
 	cmd->here_doc = input.here_doc;
 	cmd->args = input.args;
 	cmd->path = get_path(input, cmd, clean, nb_cmds);

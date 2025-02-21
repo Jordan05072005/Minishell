@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:01:32 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/19 17:24:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:29:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,11 @@ void	define2child(t_icmd *cmds, int nb_cmds, int child, int start)
 	int		i;
 
 	i = -1;
-	temp = copy_args(&(cmds[child].args[start - 1]));
+	temp = copy_args(&(cmds[child].args[start]));
 	if (!temp)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 				clean_data() + clean_icmds(cmds, nb_cmds));
-	while (cmds[child].args[++i] != temp[0])
-		ft_del(cmds[child].args[i]);
-	ft_del(cmds[child].args);
+	cmds[child].define = 2;
 	cmds[child].args = temp;
 	cmds[child].path = re_get_path(cmds[child], cmds, nb_cmds);
 	if (!is_builtin(cmds[child].args[0]) && nb_cmds == 1)
