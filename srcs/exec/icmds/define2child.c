@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define2child.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:01:32 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:14:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:30:37 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ char	*re_get_path(t_icmd cmd)
 void	define2child(t_icmd *cmds, int nb_cmds, int child, int start)
 {
 	char	**temp;
-	int		i;
 
-	i = -1;
 	temp = copy_args(&(cmds[child].args[start]));
 	if (!temp)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),

@@ -14,11 +14,11 @@
 /* ---------------------------------- */
 			This is for the parser
 
-[echo $:$= | cat -e] Doesnt stop the str for the search of env.
-[echo my shit terminal is [$TERM]] Doesnt stop the str for the search of env.
-[echo my shit terminal is [$TERM4]] Same as before.
-[echo $9HOME] Still the same thing.
-[echo $HOME%] Same as before.
+[echo $:$= | cat -e] Doesnt stop the str for the search of env. -> good
+[echo my shit terminal is [$TERM]] Doesnt stop the str for the search of env. -> good
+[echo my shit terminal is [$TERM4]] Same as before. -> good
+[echo $9HOME] Still the same thing. -> good
+[echo $HOME%] Same as before.	-> good
 [echo $UID] I think this is a special case.
 [echo > <] Should put an error of parsing.
 /*
