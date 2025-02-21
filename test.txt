@@ -1,13 +1,1 @@
-double.txt
-errors.txt
-includes
-libft
-Makefile
-minishell
-minishell.txt
-README.md
-srcs
-supp.supp
-test.txt
-to_do.txt
-[H[2J[3J
+Hello

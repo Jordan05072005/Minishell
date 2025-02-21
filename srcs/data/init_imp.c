@@ -6,11 +6,26 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/19 09:22:59 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:23:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+void	add_imp(t_list **imp, char *content)
+{
+	t_list	*link;
+
+	if (!content)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
+	link = ft_lstnew(content);
+	if (!link)
+	{
+		ft_del(content);
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
+	}
+	ft_lstadd_back(imp, link);
+}
 
 void	init_imp(t_list **imp)
 {
@@ -25,13 +40,14 @@ void	init_imp(t_list **imp)
 	if (!home && ft_strncmp(user, "unknown", 8))
 		home = ft_strjoin("/home/", user);
 	else if (!home)
-		home = ft_strdup("/");
+		home = ft_strdup("/"); //need to check this, I think it doesnt work.
 	pwd = getenv("PWD");
 	if (!pwd)
 		pwd = getcwd(NULL, 0);
-	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("USER=", user)));
-	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("HOME=", home)));
-	ft_lstadd_back(imp, ft_lstnew(ft_strjoin("PWD=", pwd)));
+	add_imp(imp, ft_strjoin("USER=", user));
+	add_imp(imp, ft_strjoin("HOME=", home));
+	add_imp(imp, ft_strjoin("PWD=", pwd));
+	add_imp(imp, ft_strdup("?=0"));
 }
 
 void	init_io(t_data *d)
