@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:09:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:26:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ int	exec(int nb_cmds, t_cmd *input)
 	int		child;
 	int		ret_value;
 
-	if (!input || !input->args)
-		return (0);
+	if (!input)
+		return (set_exit_val(0), 0);
+	else if (!input->args)
+		return (set_exit_val(0), 0);
+	else if (!input->args[0])
+		return (set_exit_val(0), 0);
 	if (data()->saved_tty != -1)
 		dup2(data()->saved_out, 1);
 	cmds = init_icmds(input, nb_cmds);

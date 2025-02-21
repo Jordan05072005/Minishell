@@ -83,7 +83,3 @@ parsing : "                             "
 ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 > or < or >> or << with nothing after, should probably write smth
-
-$?
-
-> test
