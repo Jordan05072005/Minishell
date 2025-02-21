@@ -26,10 +26,11 @@ MINI_E =	$(addprefix exec/, $(EXEC))									\
 			$(addprefix io/, $(IO))										\
 			$(addprefix path/, $(PTH))
 
-MINI_D =	clean_data.c		data.c				env2env.c			\
-			ft_getenv_struct.c	ft_getenv.c			ft_getimp_struct.c	\
-			ft_getimp.c			ft_getloc_struct.c	ft_getloc.c			\
-			init_imp.c			is_env.c			update_shlvl.c
+MINI_D =	clean_data.c		create_var.c		data.c				\
+			env2env.c			ft_getenv_struct.c	ft_getenv.c			\
+			ft_getimp_struct.c	ft_getimp.c			ft_getloc_struct.c	\
+			ft_getloc.c			init_imp.c			is_env.c			\
+			update_shlvl.c
 
 CD =		cd_env.c			cd.c				utils.c				\
 			curpath.c
@@ -38,7 +39,7 @@ ENV =		env.c
 EXIT =		exit.c
 UN =		unset.c
 ECHO =		echo.c
-EXPORT =	export.c
+EXPORT =	export.c			export_var.c
 COLOR =		color.c
 
 MINI_B =	$(addprefix cd/, $(CD))										\

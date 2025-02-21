@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/19 09:17:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:13:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*get_cmd_path(t_cmd input, t_icmd *cmds, int nb_cmds)
+char	*get_cmd_path(t_cmd input)
 {
 	char	**tries;
 	char	*paths;
@@ -27,7 +27,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmds, int nb_cmds)
 	tries = ft_split(paths, ':');
 	if (!tries)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
-			clean_data() + clean_icmds(cmds, nb_cmds)), NULL);
+			clean_data() + clean_icmds()), NULL);
 	while (tries[++i])
 	{
 		path = create_path(tries[i], input.args[0]);
@@ -38,7 +38,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmds, int nb_cmds)
 	return (ft_free_tab((void **)tries, count_words(paths, ':')), NULL);
 }
 
-char	*get_path(t_cmd input, t_icmd *cmd, t_icmd *cmds, int nb_cmds)
+char	*get_path(t_cmd input, t_icmd *cmd)
 {
 	if (!input.args)
 		return (NULL);
@@ -52,5 +52,5 @@ char	*get_path(t_cmd input, t_icmd *cmd, t_icmd *cmds, int nb_cmds)
 		cmd->define = 1;
 		return (NULL);
 	}
-	return (get_cmd_path(input, cmds, nb_cmds));
+	return (get_cmd_path(input));
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:21:07 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 17:31:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:24:32 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	exec_parent(t_icmd *cmds, int nb_cmds)
 			if ((child == (nb_cmds - 1)) && WIFEXITED(status))
 				exit_code = WEXITSTATUS(status);
 	}
-	clean_icmds(cmds, nb_cmds);
+	clean_icmds();
 	return (exit_code);
 }

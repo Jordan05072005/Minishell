@@ -70,29 +70,14 @@ void	putexport(t_list *cpy, int size)
 int	ft_export(char **arg)
 {
 	t_data	*d;
-	t_list	*temp;
 	int			i;
-	char		*var;
 
 	i = 0;
 	d = data();
 	if (ft_strslen(arg) > 1)
 	{
 		while (arg[++i])
-		{
-			var = ft_substr(arg[i], 0, find_chr(arg[i], '='));
-			printf("ici :%s", arg[i]);
-			if (ft_getenv_struct(var, &temp) != NULL)
-			{
-				ft_del(temp->content);
-				temp->content = ft_strdup(arg[i]);
-			}
-			else if (ft_strchr(arg[i], '=') || !ft_getloc(var)) // gèrer t=t===t=t -> t="t===t=t"
-				ft_lstadd_back(&(d->env), ft_lstnew(ft_strdup(arg[i])));
-			else
-				ft_lstadd_back(&d->env, ft_lstnew(ft_strdup(ft_getloc(arg[i]))));
-			ft_del(var);
-		}
+			export_var(arg[i]);
 	}
 	else
 		putexport(ft_lstcpy(d->env), ft_lstsize(d->env));

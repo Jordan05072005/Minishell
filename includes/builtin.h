@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:32:57 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/14 12:02:13 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:01:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		ft_env(char **arg);
 
 int		ft_echo(t_icmd *cmd);
 
-int	ft_export(char **arg);
+int		ft_export(char **arg);
+int		export_var(char *str);
 
 int		ft_cd(char **av);
 //curpath.c

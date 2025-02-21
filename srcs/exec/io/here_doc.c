@@ -6,23 +6,23 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 16:06:27 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:12:48 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	here_doc(t_icmd cmd, t_icmd *cmds, int nb_cmds)
+void	here_doc(t_icmd cmd)
 {
 	int		p_fd[2];
 	pid_t	f_id;
 	char	*temp;
 
 	if (pipe(p_fd) == -1)
-		ft_perror(1, ft_strdup("mini: Internal error: pipe."), clean_icmds(cmds, nb_cmds) + clean_data());
+		ft_perror(1, ft_strdup("mini: Internal error: pipe."), clean_icmds() + clean_data());
 	f_id = fork();
 	if (f_id == -1)
-		ft_perror(1, ft_strdup("mini: Internal error: process."), clean_icmds(cmds, nb_cmds) + clean_data());
+		ft_perror(1, ft_strdup("mini: Internal error: process."), clean_icmds() + clean_data());
 	if (f_id == 0)
 	{
 		close(p_fd[0]);
