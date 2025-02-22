@@ -74,7 +74,8 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 
 void	init_mini(t_data *d, int ac, char **av, char **env)
 {
-	// print_welcome();
+	if (isatty(1))
+		print_welcome();
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");
