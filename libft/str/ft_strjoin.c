@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:04:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 16:23:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/22 23:15:15 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*ft_strjoin_free(const char *s1, const char *s2)
 	size_t	s2_len;
 	char	*dest;
 
+	if (!s2)
+		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	dest = ft_calloc(s1_len + s2_len + 1, sizeof(char));

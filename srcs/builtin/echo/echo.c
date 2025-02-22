@@ -12,50 +12,6 @@
 
 #include "mini.h"
 
-char	*ft_strdelchar(const char *str, char del)
-{
-	int	i;
-	int	len;
-	char	*str_f;
-
-	i = -1;
-	len = 0;
-	while (str[++i])
-	{
-		if (str[i] != del)
-			len++;
-	}
-	str_f = malloc(sizeof(char) * (len + 1));
-	if (!str_f)
-		return (NULL);
-	i = -1;
-	len = 0;
-	while (str[++i])
-	{
-		if (str[i] != del)
-			str_f[len++] = str[i];
-	}
-	str_f[len] = 0;
-	return (str_f);
-}
-
-char	*ft_delcot(char *str, int i)
-{
-	char	*str2;
-
-	if (!ft_strchr(str, '\'') && ft_strchr(str, '"'))
-		str2 = ft_strdelchar(str, '"');
-	else if (ft_strchr(str, '\'') && !ft_strchr(str, '"'))
-		str2 = ft_strdelchar(str, '\'');
-	else if (ft_strchr(str, '"') < ft_strchr(str, '\'') || !ft_strchr(str, '\''))
-		str2 = ft_strdelchar(str, '"');
-	else
-		str2 = ft_strdelchar(str, '\'');
-	if (i)
-		ft_del(str);
-	return (str2);
-}
-
 char	ft_strchr_index(char *str, char c)
 {
 	int	i;
@@ -87,7 +43,6 @@ void	write_str(char *str, t_icmd *cmd, int etat, int i)
 int	ft_echo(t_icmd *cmd)
 {
 	int		i;
-	char	*str;
 	int		etat;
 	char	*trunc;
 
@@ -96,12 +51,10 @@ int	ft_echo(t_icmd *cmd)
 	//printf("%s", cmd->args[1]);
 	while (cmd->args[1] && cmd->args[++i])
 	{
-		str = ft_delcot(cmd->args[i], 0);
-		trunc = ft_strtrim(str, "n");
-		if (!etat && !(!ft_strncmp(str, "-n", 2) && !ft_strncmp(trunc, "-", 2)))
+		trunc = ft_strtrim(cmd->args[i], "n");
+		if (!etat && !(!ft_strncmp(cmd->args[i], "-n", 2) && !ft_strncmp(trunc, "-", 2)))
 			etat = 1;
-		write_str(str, cmd, etat, i);
-		ft_del(str);
+		write_str(cmd->args[i], cmd, etat, i);
 		ft_del(trunc);
 	}
 	trunc = ft_strtrim(cmd->args[1], "n");

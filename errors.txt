@@ -61,13 +61,13 @@ What does the subject mean by 'Not interpret' ?
 
 
 BIG BOSS A TESTER :
-""''echo hola""'''' que""'' tal""''
+""''echo hola""'''' que""'' tal""'' -> GOOOOOD
 
 /./../../../../..
 /////////////////////////////
 
-| hola
-|||||
+| hola -> GOOD 
+||||| -> GOOD 
 
 exit(127)
 
@@ -79,7 +79,7 @@ echo '' -> good
 
 parsing interprets '\' while it shouldn't
 env|grep PWD
-parsing : "                             "
+parsing : "                             " ->> GOOD
 ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 > or < or >> or << with nothing after, should probably write smth
