@@ -55,10 +55,12 @@ all: ${NAME}
 
 ${NAME}: ${OBJ}
 	@ar rcs ${NAME} ${OBJ}
-	@echo "Library ready to be used with gdb"
+	@echo "\033[94mLibrary ready to be used with gdb 🗹\033[0m"
 
-%.o: %.c
-	@${CC} ${CFLAGS} -c -o $@ $<
+.c.o:
+	@printf "\r\033[K\033[34mCompiling: $<\033[0m"
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@printf "\r\033[K"
 
 norminette:
 	@-norminette | grep -E --color=always "Error" || echo "Norminette in libft: Everything is fine!"

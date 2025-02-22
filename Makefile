@@ -2,103 +2,80 @@ MAKEFLAGS += --no-print-directory
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g -I./includes#Has -g flag, watch out !
+FLAGS = -Wall -Wextra -Werror -g -I./includes
 RM = rm -f
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PROMPT =	color.c				prompt.c			main.c				\
-			welcome.c
-PARS =		parseur.c			utils.c				utils_lst.c			\
-			fill.c				split2.c
-MINI_P =	$(addprefix prompt/, $(PROMPT))								\
-			$(addprefix parser/, $(PARS))
+BUILTIN_SRC = \
+    $(addprefix cd/, cd_env.c cd.c utils.c curpath.c) \
+    $(addprefix pwd/, pwd.c) \
+    $(addprefix env/, env.c) \
+    $(addprefix unset/, unset.c) \
+    $(addprefix exit/, exit.c) \
+    $(addprefix echo/, echo.c) \
+    $(addprefix export/, export.c export_var.c) \
+    $(addprefix color/, color.c)
 
-EXEC =		exec_child.c		exec_parent.c		exec_builtin.c		\
-			exec.c				exec_define.c
-ICMDS =		clean_icmds.c		define2child.c		init_icmd.c			\
-			init_icmds.c		zero_icmds.c
-IO =		close_fd.c			here_doc.c			set_io.c
-PTH =		get_path.c			is_builtin.c
-MINI_E =	$(addprefix exec/, $(EXEC))									\
-			$(addprefix icmds/, $(ICMDS))								\
-			$(addprefix io/, $(IO))										\
-			$(addprefix path/, $(PTH))
+DATA_SRC = \
+    clean_data.c create_var.c data.c env2env.c \
+    ft_getenv_struct.c ft_getenv.c ft_getimp_struct.c ft_getimp.c \
+    ft_getloc_struct.c ft_getloc.c init_imp.c is_env.c update_shlvl.c
 
-MINI_D =	clean_data.c		create_var.c		data.c				\
-			env2env.c			ft_getenv_struct.c	ft_getenv.c			\
-			ft_getimp_struct.c	ft_getimp.c			ft_getloc_struct.c	\
-			ft_getloc.c			init_imp.c			is_env.c			\
-			update_shlvl.c
+EXEC_SRC = \
+    $(addprefix exec/, exec_child.c exec_parent.c exec_builtin.c exec.c exec_define.c) \
+    $(addprefix icmds/, clean_icmds.c define2child.c init_icmd.c init_icmds.c zero_icmds.c) \
+    $(addprefix io/, close_fd.c here_doc.c set_io.c) \
+    $(addprefix path/, get_path.c is_builtin.c)
 
-CD =		cd_env.c			cd.c				utils.c				\
-			curpath.c
-PWD =		pwd.c
-ENV =		env.c
-EXIT =		exit.c
-UN =		unset.c
-ECHO =		echo.c
-EXPORT =	export.c			export_var.c
-COLOR =		color.c
+PROMPT_SRC = \
+    $(addprefix prompt/, color.c prompt.c main.c welcome.c) \
+    $(addprefix parser/, parseur.c utils.c utils_lst.c fill.c split2.c)
 
-MINI_B =	$(addprefix cd/, $(CD))										\
-			$(addprefix pwd/, $(PWD))									\
-			$(addprefix env/, $(ENV))									\
-			$(addprefix unset/, $(UN))									\
-			$(addprefix exit/, $(EXIT)) 								\
-			$(addprefix echo/, $(ECHO)) 								\
-			$(addprefix export/, $(EXPORT))								\
-			$(addprefix color/, $(COLOR))
-
-MINI_SRC =	$(addprefix srcs/prompt/, $(MINI_P))						\
-			$(addprefix srcs/exec/, $(MINI_E))							\
-			$(addprefix srcs/data/, $(MINI_D))							\
-			$(addprefix srcs/builtin/, $(MINI_B))
+MINI_SRC = \
+    $(addprefix srcs/builtin/, $(BUILTIN_SRC)) \
+    $(addprefix srcs/data/, $(DATA_SRC)) \
+    $(addprefix srcs/exec/, $(EXEC_SRC)) \
+    $(addprefix srcs/prompt/, $(PROMPT_SRC))
 
 OBJ = $(MINI_SRC:.c=.o)
 
-.c.o: 
-	@$(CC) $(FLAGS) -Imlx -c $< -o $(<:.c=.o)
+.c.o:
+	@printf "\r\033[K\033[34mCompiling: $<\033[0m"
+	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@printf "\r\033[K"
 
 all: $(NAME)
 
 run: re
 	@./$(NAME)
 
-strace: $(LIBFT) all
-	@strace -f ./$(NAME)
-
-valgrind: $(LIBFT) all
-	@valgrind --suppressions=./supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
-
-no-child: $(LIBFT) all
-	@valgrind --suppressions=/home/hle-hena/Documents/42_projects/Minishell/supp.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
-# --suppressions=supp.supp
-
-bonus: $(NAME)
-
 $(LIBFT):
+	@echo
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(OBJ) $(FRAMEWORK) -o $(NAME) -L $(LIBFT_DIR) -lft -lreadline
-	@echo "$(NAME) compiled successfully!"
+	@echo "\n\033[2K\r\033[94mLinking $(NAME) 🗹\033[0m\n"
+	@$(CC) $(OBJ) -o $(NAME) -L $(LIBFT_DIR) -lft -lreadline
+	@len=$$(echo -n "$(NAME)" | wc -c); \
+	border=$$(printf '=%.0s' $$(seq 1 $$((len + 36)))); \
+	echo "\n\033[94m|$$border|\033[0m"; \
+	echo "\033[94m|    🎉 $(NAME) Compilation Complete! 🎉    |\033[0m"; \
+	echo "\033[94m|$$border|\033[0m\n"
 
 clean:
+	@echo -n "\033[34m"
 	@make -C $(LIBFT_DIR) clean
-	@$(RM) $(OBJ) $(BONUS_OBJ)
-	@echo "Object files removed"
+	@$(RM) $(OBJ)
+	@echo "Object files removed\033[0m"
 
 fclean: clean
+	@echo -n "\033[34m"
 	@make -C $(LIBFT_DIR) fclean > /dev/null
-	@$(RM) $(NAME) checker
-	@echo "Binary files and Libft removed"
+	@$(RM) $(NAME)
+	@echo "Binary files and Libft removed\033[0m"
 
 re: fclean all
 
-norminette:
-	@make -C $(LIBFT_DIR) norminette
-	@-norminette srcs | grep -E --color=always "Error" || echo "Norminette: Everything is fine!"
-
-.PHONY: all clean fclean re bonus norminette
+.PHONY: all clean fclean re
