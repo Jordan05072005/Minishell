@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 16:26:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:58:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	exec(int nb_cmds, t_cmd *input)
 	int		child;
 	int		ret_value;
 
+	write(1, "\033[0m", 5);
 	if (!input)
 		return (set_exit_val(0), 0);
 	else if (!input->args)

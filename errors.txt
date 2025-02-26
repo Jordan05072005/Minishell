@@ -83,3 +83,10 @@ parsing : "                             " ->> GOOD
 ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 > or < or >> or << with nothing after, should probably write smth
+
+
+[ls > | test] -> creer un fichier et ne dit pas qu'il y a un soucis
+[echo '|' ls] -> n'as pas d'output
+[<<<<<] -> mauvais message
+[>] et tous les trucs a erreur de syntaxe -> pas la bonne valeur de retour, il faut update $?, a voir ensemble
+["] -> devrait check si la deuxieme quote existe sinon mettre un message d'erreur

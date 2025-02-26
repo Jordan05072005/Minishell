@@ -60,5 +60,5 @@ int	ft_echo(t_icmd *cmd)
 	trunc = ft_strtrim(cmd->args[1], "n");
 	if (!cmd->args[1] || !(!ft_strncmp(cmd->args[1], "-n", 2) && !ft_strncmp(trunc, "-", 2)))
 		write(cmd->fd_out, "\n", 1);
-	return (ft_del(trunc), 1);
+	return (ft_del(trunc), 0);
 }
