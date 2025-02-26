@@ -14,29 +14,6 @@
 
 //penser a clear l'history
 
-void remove_escape_sequences(char *str)
-{
-    char *read_ptr = str;
-    char *write_ptr = str;
-
-    while (*read_ptr) {
-        // Check for escape sequences
-        if (*read_ptr == '\033') {
-            // Skip the escape sequence
-            while (*read_ptr && *read_ptr != 'm') {
-                read_ptr++;
-            }
-            if (*read_ptr) {
-                read_ptr++;  // Skip the 'm' at the end of the sequence
-            }
-        } else {
-            // Copy character if not part of an escape sequence
-            *write_ptr++ = *read_ptr++;
-        }
-    }
-    *write_ptr = '\0';  // Null-terminate the modified string
-}
-
 char	*ft_readline(void)
 {
 	char	*prompt;
@@ -60,7 +37,7 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 {
 	(void)av;
 	(void)ac;
-	
+
 	(*d)->loc = NULL;
 	(*d)->env = NULL;
 	(*d)->imp = NULL;
@@ -74,6 +51,8 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 
 void	init_mini(t_data *d, int ac, char **av, char **env)
 {
+	if (av[1])
+		ft_color(av);
 	if (isatty(1))
 		print_welcome();
 	create_env(&d, env, av, ac);
