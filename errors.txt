@@ -25,7 +25,7 @@
 	$> echo > <				OK	OK	bash: syntax error near unexpected token `<'
 	$>	2	
 	132
-		$> echo | |				OK	OK	bash: syntax error near unexpected token `|'
+		$> echo | |				OK	OK	bash: syntax error near unexpected token `|' -> GOOD 
 	$>	2	
 	133
 		$> EechoE				OK	OK	bash: EechoE: command not found

@@ -17,6 +17,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+#define S_ERR "mini: syntax error near unexpected token `"
+
 char	*get_color(int option);
 int		set_colors(char	*col1, char *col2, char *col3, char *col4);
 void	print_welcome(void);
@@ -50,7 +52,7 @@ void	any(int signum);
 /* -------------------------------------------------------------------------- */
 int	in_str(char c, char *sep, int y);
 int	nbr_sep(char **str, char *sep);
-int	is_var(char *str);
+char	*ft_strdelchar(char *str, char del);
 void	free_tpars(t_pars **pars);
 void	shift_left(char **str, size_t i);
 

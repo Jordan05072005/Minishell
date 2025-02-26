@@ -47,18 +47,32 @@ int	nbr_sep(char **str, char *sep)
 	return (compt + 1);
 }
 
-int	is_var(char *str)
-{
-	size_t	i;
 
-	i = 0;
-	while (str[i])
+char	*ft_strdelchar(char *str, char del)
+{
+	int	i;
+	int	len;
+	char	*str_f;
+
+	i = -1;
+	len = 0;
+	while (str[++i])
 	{
-		if (i != 0 && i != (ft_strlen(str) - 1) && str[i] == '=')
-			return (1);
-		i++;
+		if (str[i] != del)
+			len++;
 	}
-	return (0);
+	str_f = malloc(sizeof(char) * (len + 1));
+	if (!str_f)
+		return (NULL);
+	i = -1;
+	len = 0;
+	while (str[++i])
+	{
+		if (str[i] != del)
+			str_f[len++] = str[i];
+	}
+	str_f[len] = 0;
+	return (ft_del(str), str_f);
 }
 
 void	free_tpars(t_pars **pars)
