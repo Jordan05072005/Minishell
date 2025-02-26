@@ -52,7 +52,7 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 void	init_mini(t_data *d, int ac, char **av, char **env)
 {
 	if (av[1])
-		ft_ color(av);
+		ft_color(av);
 	if (isatty(1))
 		print_welcome();
 	create_env(&d, env, av, ac);
