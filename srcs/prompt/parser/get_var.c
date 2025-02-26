@@ -50,7 +50,7 @@ char	*get_var(char *str)
 
 	i = -1;
 	var = ft_strdup("");
-	if (str[0] == '~' && !str[1])
+	if (str[0] == '~' && (!str[1] || str[1] == '/'))
 	{
 		i++;
 		var = ft_strjoin_free(var, find_var("HOME"));
@@ -63,9 +63,14 @@ char	*get_var(char *str)
 		ft_del(temp);
 		if (str[i] == '$' && str[i + 1] && ft_isdigit(str[i + 1]))
 			i++;
+		else if (str[i] == '$' && str[i + 1] == '?')
+		{
+			i++;
+			var = ft_strdup(ft_getimp("?"));
+		}
 		else if (str[i] == '$' && str[i + 1] && ft_isalnum(str[i + 1]))
 		{
-			temp = ft_substr(str, i, ft_strchri(&str[i], "[]%"));
+			temp = ft_substr(str, i, ft_strchri(&str[i], "[]%/"));
 			i += (ft_strlen(temp) - 1);
 			var = ft_strjoin_free(var, find_var(&temp[1]));
 			ft_del(temp);
