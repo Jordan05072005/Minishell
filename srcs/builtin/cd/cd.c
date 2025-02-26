@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/19 12:56:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:12:04 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ char	*cd_previous(char *arg, char *unused, int *print, int option)
 {
 	char	*path;
 
+	if (!arg)
+		return (unused);
+	if (arg[0] != '-')
+		return (unused);
+	if (arg[1] && option)
+		return (unused);
 	ft_del(unused);
 	if (!arg[1])
 	{
@@ -28,12 +34,9 @@ char	*cd_previous(char *arg, char *unused, int *print, int option)
 		*print = 1;
 		return (ft_strdup(path));
 	}
-	else if (!option)
-		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg, "\
-: Invalid option.", NULL}), 0), NULL);
 	else
 		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg, "\
-: No such file or directory.", NULL}), 0), NULL);
+: Invalid option.", NULL}), 0), NULL);
 }
 
 char	*find_path(char *arg, int *print)
@@ -74,7 +77,7 @@ int	ft_cd(char **av)
 
 	print = 0;
 	option = 0;
-	if (av[1])
+	if (av[1]) 
 		option = (ft_strncmp(av[1], "--", 3) == 0);
 	if (ft_strslen(av) > 2 + option)
 		return (ft_perror(-1, ft_strdup("mini: cd: Too many arguments."), 0),
@@ -82,8 +85,7 @@ int	ft_cd(char **av)
 	curpath = find_path(av[1 + option], &print);
 	if (!curpath)
 		return (1);
-	if (access(curpath, F_OK) != 0 && av[1 + option][0] == '-')
-		curpath = cd_previous(av[1 + option], curpath, &print, option);
+	curpath = cd_previous(av[1 + option], curpath, &print, option);
 	if (!curpath)
 		return (1);
 	curpath = check_curpath(curpath, av[1 + option]);

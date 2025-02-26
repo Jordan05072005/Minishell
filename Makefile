@@ -54,7 +54,7 @@ valgrind: $(LIBFT) all
 run: all
 	@make clean
 	@clear
-	@./$(NAME)
+	@./$(NAME) 4
 
 $(LIBFT):
 	@echo
