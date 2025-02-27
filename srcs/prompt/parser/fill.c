@@ -39,7 +39,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 
 	max = ft_strslen(arg);
 	while (++(*n_arg) < max && !(ft_strlen(arg[*n_arg]) == 1
-			&& in_str(arg[*n_arg][0], "|", -1)))
+			&& ft_strchri(arg[*n_arg], "|") != (int)ft_strlen(arg[*n_arg])))
 	{
 		if ((*n_arg) + 1 < max
 			&& (!ft_strncmp(arg[*n_arg], ">>", ft_strlen(arg[*n_arg]))
@@ -72,6 +72,8 @@ void	fill_exe(t_pars **pars, int i, int j)
 		(*pars)->exe[i].args = NULL;
 	while ((*pars)->exe[i].args && (*pars)->exe[i].args[++j])
 	{
+		if (ft_strchr((*pars)->exe[i].args[j], '*'))
+			wildcard((*pars)->exe[i].args, j);
 		if (ft_strchr((*pars)->exe[i].args[j], '$') || ft_strchr((*pars)->exe[i].args[j], '~'))
 			var = get_var((*pars)->exe[i].args[j]);
 		if (var && var[0]) // is vcvar$
@@ -81,9 +83,8 @@ void	fill_exe(t_pars **pars, int i, int j)
 		}
 		else if (var)
 			shift_left((*pars)->exe[i].args, j);
+		var = NULL;
 	}
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
-	(*pars)->exe[i].append = 0;
-	if (((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3))
-		(*pars)->exe[i].append = 1;
+	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3);
 }

@@ -13,24 +13,6 @@
 #include "mini.h"
 
 
-char	ft_strchri(char *str, char *c)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (str[++i])
-	{
-		j = -1;
-		while (c[++j])
-		{
-			if (str[i] == c[j])
-				return (i);
-		}
-	}
-	return (i);
-}
-
 char	*find_var(char *name)
 {
 	if (ft_getenv(name))

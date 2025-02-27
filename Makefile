@@ -31,7 +31,7 @@ EXEC_SRC = \
 
 PROMPT_SRC = \
     $(addprefix prompt/, color.c prompt.c main.c welcome.c) \
-    $(addprefix parser/, parseur.c utils.c utils_lst.c fill.c split2.c get_var.c)
+    $(addprefix parser/, parseur.c utils.c utils_lst.c fill.c split2.c get_var.c wildcard.c)
 
 MINI_SRC = \
     $(addprefix srcs/builtin/, $(BUILTIN_SRC)) \

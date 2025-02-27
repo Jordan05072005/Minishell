@@ -14,6 +14,7 @@
 # define PROMPT_H
 
 # include <signal.h>
+#include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -24,9 +25,13 @@ int		set_colors(char	*col1, char *col2, char *col3, char *col4);
 void	print_welcome(void);
 
 /* -------------------------------------------------------------------------- */
+/*                  wildcard.c                                                  */
+/* -------------------------------------------------------------------------- */
+void	wildcard();
+
+/* -------------------------------------------------------------------------- */
 /*                  get_var.c                                                  */
 /* -------------------------------------------------------------------------- */
-
 char	*get_var(char *str);
 
 /* -------------------------------------------------------------------------- */
@@ -50,7 +55,7 @@ void	any(int signum);
 /* -------------------------------------------------------------------------- */
 /*                  utils.c                                                   */
 /* -------------------------------------------------------------------------- */
-int	in_str(char c, char *sep, int y);
+int	ft_strchri(char *str, char *c);
 int	nbr_sep(char **str, char *sep);
 char	*ft_strdelchar(char *str, char del);
 void	free_tpars(t_pars **pars);

@@ -12,23 +12,22 @@
 
 #include "mini.h"
 
-int	in_str(char c, char *sep, int y)
+int	ft_strchri(char *str, char *c)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	if (y != -1)
+	while (str[++i])
 	{
-		if (sep[y] == c)
-			return (1);
-		return (0);
+		j = -1;
+		while (c[++j])
+		{
+			if (str[i] == c[j])
+				return (i);
+		}
 	}
-	while (sep[++i])
-	{
-		if (sep[i] == c)
-			return (1);
-	}
-	return (0);
+	return (i);
 }
 
 int	nbr_sep(char **str, char *sep)
