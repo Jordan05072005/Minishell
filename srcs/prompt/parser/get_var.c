@@ -24,6 +24,19 @@ char	*find_var(char *name)
 	return (NULL);
 }
 
+char	end_var(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[++i])
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (i);
+	}
+	return (i);
+}
+
 char	*get_var(char *str)
 {
 	int		i;
@@ -52,7 +65,7 @@ char	*get_var(char *str)
 		}
 		else if (str[i] == '$' && str[i + 1] && ft_isalnum(str[i + 1]))
 		{
-			temp = ft_substr(str, i, ft_strchri(&str[i], "[]%/"));
+			temp = ft_substr(str, i, end_var(&str[i]));
 			i += (ft_strlen(temp) - 1);
 			var = ft_strjoin_free(var, find_var(&temp[1]));
 			ft_del(temp);

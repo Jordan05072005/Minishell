@@ -35,8 +35,41 @@
 // 	return (str_f);
 // }
 
-// char	**get_file()
+// int	name_correct(char *name, char *before, char *after, int len)
+// {
+// 	int	s;
+// 	int	end;
 
+// 	end = strlen(name);
+// 	while (s < ft_strlen(before) && end < ft_strlen(after))
+// 	{
+// 		if (name[s] != before[s] || name[len - s] != after[ft_strlen(after) - end - 1])
+// 			return (1);
+// 		if (s < ft_strlen(before))
+// 		s++;
+// 		if (end < ft_strlen(after))
+// 		end++;
+// 	}
+// 	return (0);
+// 	)
+// }
+
+// char	**get_file(DIR *dir, char *before, char *after)
+// {
+// 	struct dirent *entry;
+// 	int	start;
+// 	int	end;
+
+// 	entry = readdir(dir);
+// 	while (entry != NULL) // Lire chaque fichier ou répertoire
+// 	{
+// 		if (name_correct(dir->dd_name, before, after, ft_strlen(dir->dd_name)));
+
+
+// 		entry = readdir(dir);
+// 	}
+// 	printf("Nom du fichier : %s\n", entry->d_name);
+// }
 
 // si avant y'a / -> prend se chemin
 // sinon reduire la recherche a avant apres 
@@ -51,8 +84,6 @@ void	wildcard(char **str, int j)
 	dir = opendir(ft_getimp("PWD"));
 	if (!dir)
 		return ;
-	while ((entry = readdir(dir)) != NULL) // Lire chaque fichier ou répertoire
-		printf("Nom du fichier : %s\n", entry->d_name);
 	(void)entry;
 	(void)str;
 	(void)j;

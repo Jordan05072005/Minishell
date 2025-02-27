@@ -63,7 +63,6 @@ void	fill_exe(t_pars **pars, int i, int j)
 {
 	char	*var;
 
-	var = NULL;
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
 	if ((*pars)->cmd)
@@ -72,6 +71,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 		(*pars)->exe[i].args = NULL;
 	while ((*pars)->exe[i].args && (*pars)->exe[i].args[++j])
 	{
+		var = NULL;
 		if (ft_strchr((*pars)->exe[i].args[j], '*'))
 			wildcard((*pars)->exe[i].args, j);
 		if (ft_strchr((*pars)->exe[i].args[j], '$') || ft_strchr((*pars)->exe[i].args[j], '~'))
@@ -83,7 +83,6 @@ void	fill_exe(t_pars **pars, int i, int j)
 		}
 		else if (var)
 			shift_left((*pars)->exe[i].args, j);
-		var = NULL;
 	}
 	(*pars)->exe[i].here_doc = (*pars)->limiter;
 	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3);
