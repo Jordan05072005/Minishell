@@ -49,7 +49,7 @@ OBJ = $(MINI_SRC:.c=.o)
 all: $(NAME)
 
 valgrind: $(LIBFT) all
-	@valgrind --suppressions=$(shell realpath $(dir $(lastword $(MAKEFILE_LIST))))/supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
+	@valgrind --suppressions=supp.supp --leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 run: all
 	@make clean
