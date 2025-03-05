@@ -59,33 +59,40 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 	return (1);
 }
 
-void	fill_exe(t_pars **pars, int i, int j)
+char	**fill_args(char **str, int j)
 {
 	char	*var;
 
-	(*pars)->exe[i].in = (*pars)->in;
-	(*pars)->exe[i].out = (*pars)->out;
+	while (str && str[++j])
+	{
+		var = NULL;
+		str[j] = ft_strdelchar(str[j], '"');
+		if (ft_strchr(str[j], '*'))
+			str = wildcard(str, &j);
+		if (!str || !str[1])
+			printf("hello");
+		if (ft_strchr(str[j], '$') || ft_strchr(str[j], '~'))
+			var = get_var(str[j]);
+		if (var && var[0]) // is vcvar$
+		{
+			ft_del(str[j]);
+			str[j] = var;
+		}
+		else if (var)
+			shift_left(str, j);
+	}
+	return (str);
+}
+
+void	fill_exe(t_pars **pars, int i, int j)
+{
+	(*pars)->exe[i].in = ft_strdelchar((*pars)->in, '"');
+	(*pars)->exe[i].out = ft_strdelchar((*pars)->out, '"');
 	if ((*pars)->cmd)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	else
 		(*pars)->exe[i].args = NULL;
-	while ((*pars)->exe[i].args && (*pars)->exe[i].args[++j])
-	{
-		var = NULL;
-		if (ft_strchr((*pars)->exe[i].args[j], '*'))
-			(*pars)->exe[i].args = wildcard((*pars)->exe[i].args, &j);
-		if (!(*pars)->exe[i].args || !(*pars)->exe[i].args[1])
-			printf("hello");
-		if (ft_strchr((*pars)->exe[i].args[j], '$') || ft_strchr((*pars)->exe[i].args[j], '~'))
-			var = get_var((*pars)->exe[i].args[j]);
-		if (var && var[0]) // is vcvar$
-		{
-			ft_del((*pars)->exe[i].args[j]);
-			(*pars)->exe[i].args[j] = var;
-		}
-		else if (var)
-			shift_left((*pars)->exe[i].args, j);
-	}
-	(*pars)->exe[i].here_doc = (*pars)->limiter;
-	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3);
+	(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);
+	(*pars)->exe[i].here_doc = ft_strdelchar((*pars)->limiter, '"');
+	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3); // a modif
 }

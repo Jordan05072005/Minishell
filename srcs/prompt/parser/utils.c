@@ -53,6 +53,8 @@ char	*ft_strdelchar(char *str, char del)
 	int	len;
 	char	*str_f;
 
+	if (!str)
+		return (str);
 	i = -1;
 	len = 0;
 	while (str[++i])

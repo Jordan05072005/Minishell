@@ -107,11 +107,6 @@ void	pars_line(char *line, t_pars *exe)
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	n_arg = -1;
 	i = -1;
-	while (arg[++i])
-	{
-		arg[i] = ft_strdelchar(arg[i], '"');
-		arg[i] = ft_strdelchar(arg[i], '\'');
-	}
 	i = 0;
 	while (fill_struct(exe, arg, &n_arg))
 	{
