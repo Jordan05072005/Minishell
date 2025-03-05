@@ -66,7 +66,7 @@ char	**fill_args(char **str, int j)
 	while (str && str[++j])
 	{
 		var = NULL;
-		str[j] = ft_strdelchar(str[j], '"');
+		str[j] = ft_strdelquotes(str[j]);
 		if (ft_strchr(str[j], '*'))
 			str = wildcard(str, &j);
 		if (!str || !str[1])
@@ -86,13 +86,13 @@ char	**fill_args(char **str, int j)
 
 void	fill_exe(t_pars **pars, int i, int j)
 {
-	(*pars)->exe[i].in = ft_strdelchar((*pars)->in, '"');
-	(*pars)->exe[i].out = ft_strdelchar((*pars)->out, '"');
+	(*pars)->exe[i].in = ft_strdelquotes((*pars)->in);
+	(*pars)->exe[i].out = ft_strdelquotes((*pars)->out);
 	if ((*pars)->cmd)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	else
 		(*pars)->exe[i].args = NULL;
 	(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);
-	(*pars)->exe[i].here_doc = ft_strdelchar((*pars)->limiter, '"');
+	(*pars)->exe[i].here_doc = ft_strdelquotes((*pars)->limiter);
 	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3); // a modif
 }

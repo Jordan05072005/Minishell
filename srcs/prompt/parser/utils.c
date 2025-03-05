@@ -39,57 +39,57 @@ int	nbr_sep(char **str, char *sep)
 	compt = 0;
 	while (str[i])
 	{
-		if (strncmp(str[i], sep, ft_strlen(sep)) == 0)
+		if (ft_strncmp(str[i], sep, ft_strlen(sep)) == 0)
 			compt++;
 		i++;
 	}
 	return (compt + 1);
 }
 
-
-char	*ft_strdelchar(char *str, char del)
+int	strlenchar(char *str, char c)
 {
 	int	i;
 	int	len;
-	char	*str_f;
 
-	if (!str)
-		return (str);
 	i = -1;
 	len = 0;
 	while (str[++i])
 	{
-		if (str[i] != del)
+		if (str[i] == c)
 			len++;
 	}
+	return (len);
+}
+
+char	*ft_strdelquotes(char *str)
+{
+	int	i;
+	int	len;
+	char	*str_f;
+	int		verr;
+
+	if (!str)
+		return (str);
+	len = ft_strlen(str) - (strlenchar(str, '"') + strlenchar(str, '\'')) + 1;
 	str_f = malloc(sizeof(char) * (len + 1));
 	if (!str_f)
 		return (NULL);
 	i = -1;
 	len = 0;
+	verr = 0;
 	while (str[++i])
 	{
-		if (str[i] != del)
+		if (!(str[i] == '"' || (str[i] == '\'' && verr % 2 == 0)))
 			str_f[len++] = str[i];
+		if (str[i] == '"')
+			verr++;
 	}
 	str_f[len] = 0;
 	return (ft_del(str), str_f);
 }
 
-void	free_tpars(t_pars **pars)
-{
-	(*pars)->in = NULL;
-	(*pars)->out = NULL;
-	ft_del((*pars)->cmd);
-	(*pars)->cmd = NULL;
-	(*pars)->limiter = NULL;
-	(*pars)->append = NULL;
-	(*pars)->sep = 0;
-}
-
 void	shift_left(char **str, size_t i)
 {
-	// write(1, "here", 4);
 	if (i > ft_strslen(str) || !str)
 		return ;
 	while (str[i])

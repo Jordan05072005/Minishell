@@ -73,7 +73,7 @@ void	any(int signum);
 /* -------------------------------------------------------------------------- */
 int	ft_strchri(char *str, char *c);
 int	nbr_sep(char **str, char *sep);
-char	*ft_strdelchar(char *str, char del);
+char	*ft_strdelquotes(char *str);
 void	free_tpars(t_pars **pars);
 void	shift_left(char **str, size_t i);
 

@@ -40,6 +40,17 @@ void	reader(t_pars *cmd, int i)
 	}
 }
 
+void	free_tpars(t_pars **pars)
+{
+	(*pars)->in = NULL;
+	(*pars)->out = NULL;
+	ft_del((*pars)->cmd);
+	(*pars)->cmd = NULL;
+	(*pars)->limiter = NULL;
+	(*pars)->append = NULL;
+	(*pars)->sep = 0;
+}
+
 char	*syntax_error2(char **arg, char *mess, int is_str)
 {
 	char	*temp;
