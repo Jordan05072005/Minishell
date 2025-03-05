@@ -73,7 +73,9 @@ void	fill_exe(t_pars **pars, int i, int j)
 	{
 		var = NULL;
 		if (ft_strchr((*pars)->exe[i].args[j], '*'))
-			(*pars)->exe[i].args = wildcard((*pars)->exe[i].args, j);
+			(*pars)->exe[i].args = wildcard((*pars)->exe[i].args, &j);
+		if (!(*pars)->exe[i].args || !(*pars)->exe[i].args[1])
+			printf("hello");
 		if (ft_strchr((*pars)->exe[i].args[j], '$') || ft_strchr((*pars)->exe[i].args[j], '~'))
 			var = get_var((*pars)->exe[i].args[j]);
 		if (var && var[0]) // is vcvar$

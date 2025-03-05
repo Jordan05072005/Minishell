@@ -25,9 +25,25 @@ int		set_colors(char	*col1, char *col2, char *col3, char *col4);
 void	print_welcome(void);
 
 /* -------------------------------------------------------------------------- */
-/*                  wildcard.c                                                  */
+/*                  wildcard.c                                                */
 /* -------------------------------------------------------------------------- */
-char **wildcard(char **str, int j);
+char **wildcard(char **str, int *j);
+char	**insert_strs(char **str1, char *str2, int j, int overwrite);
+
+/* -------------------------------------------------------------------------- */
+/*                  get_wildcard.c                                            */
+/* -------------------------------------------------------------------------- */
+char	**get_file(DIR *dir, char *after, char *path);
+char	*get_end(char *after);
+char	*get_before(char *str);
+char	*get_after(char *str);
+char	*get_start(char *str);
+
+/* -------------------------------------------------------------------------- */
+/*                  utils_wildcard.c                                          */
+/* -------------------------------------------------------------------------- */
+
+int	accessv(char *start, char *file, char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                  get_var.c                                                  */

@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:04:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/22 23:15:15 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:57:44 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ char	*ft_strsjoin(const char **strs)
 	len = 0;
 	while (strs[i])
 	{
-		ft_strlcpy(dest + len, strs[i], ft_strlen(strs[i]) + 1);
-		len += ft_strlen(strs[i]);
+		if (strs[i][0])
+		{
+			ft_strlcpy(dest + len, strs[i], ft_strlen(strs[i]) + 1);
+			len += ft_strlen(strs[i]);
+		}
 		i++;
 	}
 	return (dest);

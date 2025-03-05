@@ -12,6 +12,35 @@
 
 #include "mini.h"
 
+
+char **del_strs(char **str, int j, char *s)
+{
+	int	i;
+	int	len;
+	int	it;
+	char	**str2;
+
+	i = j - 1;
+	len = 0;
+	while (str[++i])
+	{
+		if (ft_strncmp(str[i], s, ft_strlen(s)) != 0)
+			len++;
+	}
+	str2 = malloc(sizeof(char *) * (len + 1 + j));
+	i = -1;
+	it = -1;
+	while (str[++i])
+	{
+		if (i < j || ft_strncmp(str[i], s, ft_strlen(s)) != 0)
+			str2[++it] = str[i];
+		else
+			ft_del(str[i]);
+	}
+	str2[++it] = NULL;
+	return (ft_del(str), str2);
+}
+
 char	**insert_strs(char **str1, char *str2, int j, int overwrite)
 {
 	int		i;
@@ -33,7 +62,7 @@ char	**insert_strs(char **str1, char *str2, int j, int overwrite)
 			++i1;
 	}
 	str_f[i] = NULL;
-	return (ft_free_tab((void *)str1, ft_strslen(str1)), str_f);
+	return (ft_free_tab((void *)str1, ft_strslen(str1)), ft_del(str2), str_f);
 }
 
 int	name_correct(char *name, char *before, char *after, int len)
@@ -50,7 +79,7 @@ int	name_correct(char *name, char *before, char *after, int len)
 	{
 		if (before[0] && name[s] != before[s])
 			return (1);
-		if (after[0] && name[len - s] != after[ft_strlen(after) - end - 1])
+		if (after[0] && name[len - s] != after[ft_strlen(after) - end - 1]) // a modif
 			return (1);
 		if (s < ft_strlen(before))
 			s++;
@@ -60,62 +89,78 @@ int	name_correct(char *name, char *before, char *after, int len)
 	return (0);
 }
 
-char	**insert_file(char **str, int j, int i, char **file)
+char	**insert_file(char **str, int j, char **file, int *change)
 {
 	int		f;
-	int		w;
 	char	*before;
 	char	*after;
+	char *end;
+	char	*start;
 
-	before = ft_substr(str[j], 0, i);
-	after = ft_substr(str[j], i + 1, ft_strlen(str[j]));
-	w = 0;
+	before = get_before(str[j]);
+	after = get_after(str[j]);
+	end = get_end(str[j]);
+	start = get_start(str[j]);
 	f = -1;
 	while (file[++f])
 	{
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
-		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1))
-			str = insert_strs(str, file[f], j++, 0 == w++);
+		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1) && !accessv(start, file[f], end))
+			str = insert_strs(str, ft_strsjoin((const char *[]){start, file[f], end, NULL}), j++, (0 == (*change)++ && 0));
 	}
 	return (ft_del(before), ft_del(after),
-		ft_free_tab((void *)file, ft_strslen(file)), str);
+		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);
 }
 
-char	**get_file(DIR *dir)
-{
-	struct dirent	*entry;
-	char			**file;
-	int				i;
+// int	existing(char *str)
+// {
+// 	char	*path;
+// 	char	*temp;
+// 	DIR		*dir;
 
-	file = malloc(sizeof(char *));
-	file[0] = NULL;
-	entry = readdir(dir);
-	while (entry)
-	{
-		i = 0;
-		while (file[i]
-			&& ft_strncmp(entry->d_name, file[i], ft_strlen(file[i])) > 0)
-			i++;
-		file = insert_strs(file, entry->d_name, i, 0);
-		entry = readdir(dir);
-	}
-	return (file);
-}
+
+// 	path = get_start(str[*j]);
+// 	temp = ft_strdup(str[*j]);
+// 	if (!path[0])
+// 	{
+// 		ft_del(path);
+// 		path = ft_strdup("./");
+// 	}
+// 	dir = opendir(path);
+// 	if (!dir)
+// 		return (1);
+// }
 
 // si avant y'a / -> prend se chemin
 // sinon reduire la recherche a avant apres 
 // juste * == all
 // riens on ecrit jsute *dededde = *dededde
-char	**wildcard(char **str, int j)
+// echo /*
+// echo /includes/*
+// echo */
+char	**wildcard(char **str, int *j)
 {
 	DIR		*dir;
 	char	**file;
+	char	*path;
+	int		change;
+	char	*temp;
 
-	dir = opendir(ft_getimp("PWD"));
+	// if (!existig)
+	// 	return ;
+	change = 0;
+	path = get_start(str[*j]);
+	temp = ft_strdup(str[*j]);
+	if (!path[0])
+	{
+		ft_del(path);
+		path = ft_strdup("./");
+	}
+	dir = opendir(path);
 	if (!dir)
-		return (NULL);
-	file = get_file(dir);
-	str = insert_file(str, j, ft_strchri(str[j], "*"), file);
-	return (free(dir), str);
+		return (del_strs(str, (*j)--, temp));
+	file = get_file(dir	,ft_substr(str[*j], ft_strchri(str[*j], "*") + ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"), ft_strlen(str[*j])), path);
+	str = insert_file(str, *j, file, &change);
+	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));	
 }

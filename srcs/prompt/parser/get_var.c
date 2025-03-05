@@ -13,13 +13,13 @@
 #include "mini.h"
 
 
-char	*find_var(char *name)
+char	*find_var(char *name, int lock)
 {
 	if (ft_getenv(name))
 		return (ft_getenv(name));
 	else if (ft_getloc(name))
 		return (ft_getloc(name));
-	else if (ft_getimp(name))
+	else if (ft_getimp(name) && lock)
 		return(ft_getimp(name));
 	return (NULL);
 }
@@ -48,7 +48,7 @@ char	*get_var(char *str)
 	if (str[0] == '~' && (!str[1] || str[1] == '/'))
 	{
 		i++;
-		var = ft_strjoin_free(var, find_var("HOME"));
+		var = ft_strjoin_free(var, find_var("HOME", 1));
 	}
 	while (++i < (int)ft_strlen(str))
 	{
@@ -67,7 +67,7 @@ char	*get_var(char *str)
 		{
 			temp = ft_substr(str, i, end_var(&str[i]));
 			i += (ft_strlen(temp) - 1);
-			var = ft_strjoin_free(var, find_var(&temp[1]));
+			var = ft_strjoin_free(var, find_var(&temp[1], 0));
 			ft_del(temp);
 		}
 		else if (str[i] == '$')

@@ -22,6 +22,7 @@ void	new_prompt(int signum)
 {
 	if (signum == SIGINT)
 	{
+		// ft_getimp("&?")
 		ft_printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

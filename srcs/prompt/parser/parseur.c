@@ -121,6 +121,8 @@ void	pars_line(char *line, t_pars *exe)
 	fill_exe(&exe, i, -1);
 }
 
+
+
 int	parseur(char *line, t_data **d)
 {
 	char	**exe;
@@ -132,7 +134,7 @@ int	parseur(char *line, t_data **d)
 		return (1);
 	mess = syntax_error(line, -1, -1);
 	if (mess)
-		return (ft_perror(-1, mess, 0), 1);
+		return (set_exit_val(1), ft_perror(-1, mess, 0), 1);
 	exe = ft_split2(line, "&");
 	if (!exe)
 		return (ft_perror(1, NULL, 1), 1);
@@ -142,6 +144,6 @@ int	parseur(char *line, t_data **d)
 	(*d)->cmd->line = line;
 	while (++i < ft_strslen(exe))
 		pars_line(exe[i], &(*d)->cmd[i]);
-	reader((*d)->cmd, ft_strslen(exe));
+	//reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }
