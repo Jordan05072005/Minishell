@@ -51,6 +51,8 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 
 void	init_mini(t_data *d, int ac, char **av, char **env)
 {
+	char	*temp;
+
 	if (av[1])
 		ft_color(av);
 	if (isatty(1))
@@ -59,6 +61,12 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 	init_io(d);
 	printf("\e[?2004l");
 	update_shlvl();
+	temp = ft_getenv("PWD");
+	if (!temp)
+		add_link(&(data()->env), ft_strdup(ft_getimp("PWD")));
+	temp = ft_getenv("_");
+	if (!temp)
+		add_link(&(data()->env), ft_strdup("_=/usr/bin/env"));
 }
 
 int	main(int ac, char **av, char **env)
@@ -86,5 +94,5 @@ int	main(int ac, char **av, char **env)
 		line = ft_readline();
 	}
 	ft_del(before);
-	return (ft_exit(), 0);
+	return (ft_putendl_fd("exit\n", 1), clean_data(), 0);
 }

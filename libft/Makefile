@@ -47,7 +47,7 @@ SRC = $(LST_SRC) $(IS_SRC) $(STR_SRC) $(MEM_SRC) $(GNL_SRC) $(PRINT_SRC) $(PRINT
 OBJ = ${SRC:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME = libft.a
 
@@ -59,7 +59,7 @@ ${NAME}: ${OBJ}
 
 .c.o:
 	@printf "\r\033[K\033[34mCompiling: $<\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 	@printf "\r\033[K"
 
 norminette:

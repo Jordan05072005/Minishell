@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:04:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:18:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	switch_cmd(t_icmd *cmds, int child)
 	else if (!ft_strncmp(cmds[child].args[0], "env", 4))
 		cmds[child].exit = ft_env(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "exit", 5))
-		cmds[child].exit = ft_exit();
+		cmds[child].exit = ft_exit(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "echo", 5))
 		cmds[child].exit = ft_echo(&cmds[child]);
 	else

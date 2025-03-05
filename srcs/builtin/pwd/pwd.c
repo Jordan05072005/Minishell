@@ -16,8 +16,7 @@ int	ft_pwd(char **arg)
 {
 	char	*cwd;
 
-	if (ft_strslen(arg) != 1)
-		return (1);
+	(void) arg;
 	cwd = ft_getimp("PWD");
 	ft_printf("%s\n", cwd);
 	return (0);

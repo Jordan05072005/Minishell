@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 21:39:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:36:05 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,22 @@ char *regen_curpath(char *curpath)
 	return (dest);
 }
 
+char	*cd_nopwd(char *curpath, char *arg)
+{
+	struct stat	path_stat;
+	char		*temp;
+
+	temp = ft_strdup(curpath);
+	curpath = clean_curpath(curpath);
+	if (stat(curpath, &path_stat) == 0)
+		return (ft_del(temp), curpath);
+	if (is_dot(arg))//I dont like this, there is probably a better idea.
+		update_env(temp);
+	return (ft_del(curpath), ft_del(temp), ft_perror(-1, ft_strdup("cd: error retrieving \
+current directory: getcwd: cannot access parent directories: No such file or di\
+rectory"), 0), NULL);
+}
+
 char	*check_curpath(char *curpath, char *arg)
 {
 	struct stat	path_stat;
@@ -93,13 +109,9 @@ char	*check_curpath(char *curpath, char *arg)
 	if (curpath[0] != '/')
 		curpath = regen_curpath(curpath);
 	if (stat(ft_getimp("PWD"), &path_stat) != 0)
-	{
-		if (is_dot(arg))//I dont like this, there is probably a better idea.
-			update_env(curpath);
-		return (ft_del(curpath), ft_perror(-1, ft_strdup("cd: error retrieving \
-current directory: getcwd: cannot access parent directories: No such file or di\
-rectory"), 0), NULL);
-	}
+		curpath = cd_nopwd(curpath, arg);
+	if (!curpath)
+		return (NULL);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
 		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
