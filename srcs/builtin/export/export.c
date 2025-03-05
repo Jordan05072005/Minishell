@@ -71,15 +71,20 @@ int	ft_export(char **arg)
 {
 	t_data	*d;
 	int			i;
+	int			rv;
 
 	i = 0;
 	d = data();
+	rv = 0;
 	if (ft_strslen(arg) > 1)
 	{
 		while (arg[++i])
-			export_var(arg[i]);
+		{
+			if (!rv && export_var(arg[i]))
+				rv = 1;
+		}
 	}
 	else
 		putexport(ft_lstcpy(d->env), ft_lstsize(d->env));
-	return (0);
+	return (rv);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 15:50:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:39:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ mand not found.", NULL}), 127); //Might need this for . or .. also, so everyhtin
 				": Is a directory.", NULL}), 126);
 	if (access(cmds[child].path, F_OK | X_OK) != 0)
 		exit_exec(ft_strsjoin((const char *[]){"mini: ", cmds[child].path, ": \
-Permission denied.", NULL}), 127);
+Permission denied.", NULL}), 126);
 	if (execve(cmds[child].path, cmds[child].args, env2env(data()->env)) == -1)
 		ft_perror(127, ft_strdup("mini: An error occured during the execution o\
 f the command."), clean_icmds() + clean_data());

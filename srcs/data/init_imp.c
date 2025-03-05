@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 11:23:21 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:52:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	add_imp(t_list **imp, char *content)
+void	add_link(t_list **imp, char *content)
 {
 	t_list	*link;
 
@@ -44,10 +44,10 @@ void	init_imp(t_list **imp)
 	pwd = getenv("PWD");
 	if (!pwd)
 		pwd = getcwd(NULL, 0);
-	add_imp(imp, ft_strjoin("USER=", user));
-	add_imp(imp, ft_strjoin("HOME=", home));
-	add_imp(imp, ft_strjoin("PWD=", pwd));
-	add_imp(imp, ft_strdup("?=0"));
+	add_link(imp, ft_strjoin("USER=", user));
+	add_link(imp, ft_strjoin("HOME=", home));
+	add_link(imp, ft_strjoin("PWD=", pwd));
+	add_link(imp, ft_strdup("?=0"));
 }
 
 void	init_io(t_data *d)

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/10 16:20:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:13:30 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	clean_pars(int full)
 		{
 			ft_free_tab((void **)cmd->exe[cmd->pipe].args,
 				ft_strslen(cmd->exe[cmd->pipe].args));
+				
 		}
 		ft_free_tab((void *)(cmd->exe[0].split),
 			ft_strslen(cmd->exe[0].split));
