@@ -75,11 +75,12 @@ int	name_correct(char *name, char *before, char *after, int len)
 		return (0);
 	end = 0;
 	s = 0;
+	printf("after : %s", after);
 	while (s < ft_strlen(before) || end < (ft_strlen(after)))
 	{
 		if (before[0] && name[s] != before[s])
 			return (1);
-		if (after[0] && name[len - s] != after[ft_strlen(after) - end - 1]) // a modif
+		if (after[0] && name[len - end] != after[ft_strlen(after) - end - 1]) // a modif
 			return (1);
 		if (s < ft_strlen(before))
 			s++;
@@ -162,5 +163,7 @@ char	**wildcard(char **str, int *j)
 		return (del_strs(str, (*j)--, temp));
 	file = get_file(dir	,ft_substr(str[*j], ft_strchri(str[*j], "*") + ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"), ft_strlen(str[*j])), path);
 	str = insert_file(str, *j, file, &change);
+	if ((*j) == 0)
+		(*j)++;
 	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));	
 }

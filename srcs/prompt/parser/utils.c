@@ -85,7 +85,7 @@ char	*ft_strdelquotes(char *str)
 			verr++;
 	}
 	str_f[len] = 0;
-	return (ft_del(str), str_f);
+	return (str_f);
 }
 
 void	shift_left(char **str, size_t i)

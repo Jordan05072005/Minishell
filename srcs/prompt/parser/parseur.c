@@ -51,18 +51,20 @@ void	free_tpars(t_pars **pars)
 	(*pars)->sep = 0;
 }
 
-char	*syntax_error2(char **arg, char *mess, int is_str)
+char	*syntax_error2(char **arg, char *mess)
 {
 	char	*temp;
 	char	**err;
 	int		i;
 
+	if (!arg || !arg[0])
+		return (NULL);
 	temp = ft_strsjoin((const char *[]){">>.", ">.", "<<.", "<", NULL});
 	err = ft_split(temp, '.');
 	ft_del(temp);
 	temp = NULL;
 	i = -1;
-	while (is_str % 2 == 0 && !mess && ++i < 4)
+	while (!mess && ++i < 4)
 	{
 		if (ft_strslen(arg) > 1)
 			temp = ft_substr(arg[1], 0, 1 + (arg[1][0] == 62 || arg[1][0] == 60 || arg[1][0] == arg[1][1] || arg[1][1] == 62 || arg[1][1] == 60));
@@ -74,82 +76,87 @@ char	*syntax_error2(char **arg, char *mess, int is_str)
 				mess = ft_strsjoin((const char *[]){S_ERR, temp, "'.", NULL});
 		}
 	}
-	return (ft_del(temp), ft_free_tab((void *)err, ft_strslen(err)),
-		ft_free_tab((void *)arg, ft_strslen(arg)), mess);
+	return (ft_del(temp), ft_free_tab((void *)err, ft_strslen(err)), mess);
 }
 
-char	*syntax_error(char *line, int i, int j)
+char	*syntax_error(char **arg, int i, int j)
 {
 	char	*temp;
 	char	**err;
-	int		is_str;
 
 	temp = ft_strsjoin((const char *[]){"||.", "|.", "&&.", "&.", NULL});
 	err = ft_split(temp, '.');
 	ft_del(temp);
 	temp = NULL;
-	is_str = 0;
-	while (err[++i])
+	while (!temp && arg[++j])
 	{
-		j = -1;
-		while (!temp && line[++j])
+		i = -1;
+		while (!temp && err[++i] && arg[j])
 		{
-			if (line[j] == '"')
-				is_str++;
-			else if (is_str % 2 == 0 && ft_strlen(&line[j]) == ft_strlen(err[i])
-				&& !ft_strncmp(err[i], &line[j], ft_strlen(err[i])))
+			if (ft_strlen(arg[j]) >= ft_strlen(err[i])
+				&& !ft_strncmp(err[i], arg[j], ft_strlen(err[i])) && j < 2)
 				temp = ft_strsjoin((const char *[]){S_ERR, err[i], "'.", NULL});
-			else if (i == 0)
-				temp = syntax_error2(ft_split(line, 32), NULL, is_str);
+			else if (ft_strlen(arg[j]) >= ft_strlen(err[i]) && ft_strlen(arg[j]) > 2
+			&& !ft_strncmp(err[i], &arg[j][2], ft_strlen(err[i])) && j > 0)
+				temp = ft_strsjoin((const char *[]){S_ERR, err[i], "'.", NULL});
+			else if (j == 0)
+				temp = syntax_error2(arg, NULL);
 		}
 	}
-	return (ft_free_tab((void *)err, i), temp);
+	return (ft_free_tab((void *)err, ft_strslen(err)), temp);
 }
 
-void	pars_line(char *line, t_pars *exe)
+int	pars_line(char *line, t_pars *exe)
 {
 	char	**arg;
 	int		n_arg;
 	int		i;
+	char	*mess;
 
-	arg = ft_split2(line, " ");
-	if (!arg)
-		return (ft_perror(1, NULL, 1));
-	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	n_arg = -1;
 	i = -1;
 	i = 0;
+	arg = cut_line(line);
+	// int	j = -1;
+	// while (arg && arg[++j])
+	// 	printf("zrg : %s\n", arg[j]);
+	if (!arg)
+		return (1);
+	mess = syntax_error(arg, -1, -1);
+	if (mess)
+		return (set_exit_val(2), ft_perror(-1, mess, 0), 1);
+	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	while (fill_struct(exe, arg, &n_arg))
 	{
 		fill_exe(&exe, i++, -1);
 		free_tpars(&exe);
 	}
 	fill_exe(&exe, i, -1);
+	return (0);
 }
-
-
 
 int	parseur(char *line, t_data **d)
 {
 	char	**exe;
 	size_t	i;
-	char	*mess;
+	int	err;
 
 	i = -1;
-	if (!line || line[0] == '\0')
+	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
+		&& (line[0] == '!' || line[0] == ':')))
 		return (1);
-	mess = syntax_error(line, -1, -1);
-	if (mess)
-		return (set_exit_val(1), ft_perror(-1, mess, 0), 1);
 	exe = ft_split2(line, "&");
-	if (!exe)
+	if (!exe)	
 		return (ft_perror(1, NULL, 1), 1);
 	(*d)->cmd = init_struct_pars(exe, ft_strslen(exe));
 	if (!(*d)->cmd)
 		return (1);
 	(*d)->cmd->line = line;
+	// pars_line(line, &(*d)->cmd[i]);
 	while (++i < ft_strslen(exe))
-		pars_line(exe[i], &(*d)->cmd[i]);
+		err = pars_line(exe[i], &(*d)->cmd[i]);
+	if (err)
+		return (1);
 	//reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }
