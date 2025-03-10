@@ -62,12 +62,15 @@ char	**fill_args(char **str, int j)
 {
 	char	*var;
 
-	while (str && str[++j])
+	j = -1;
+	while (str && ++j < (int)ft_strslen(str))
 	{
 		var = NULL;
-		str[j] = ft_strdelquotes(str[j]);
 		if (ft_strchr(str[j], '*'))
+		{
 			str = wildcard(str, &j);
+			continue;
+		}
 		// if (!str || !str[1])
 		// 	printf("hello");
 		if (ft_strchr(str[j], '$') || ft_strchr(str[j], '~'))
@@ -79,22 +82,20 @@ char	**fill_args(char **str, int j)
 		}
 		else if (var)
 			shift_left(str, j);
+		str[j] = ft_strdelquotes(str[j]);
 	}
 	return (str);
 }
 
 void	fill_exe(t_pars **pars, int i, int j)
 {
-	char	**temp;
-
 	(*pars)->exe[i].in = ft_strdelquotes((*pars)->in);
 	(*pars)->exe[i].out = ft_strdelquotes((*pars)->out);
 	if ((*pars)->cmd)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
 	else
 		(*pars)->exe[i].args = NULL;
-	temp = fill_args((*pars)->exe[i].args, j++);
-	(*pars)->exe[i].args = temp;
+	(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
 	(*pars)->exe[i].here_doc = ft_strdelquotes((*pars)->limiter);
 	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3); // a modif
 }

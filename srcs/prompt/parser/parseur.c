@@ -40,15 +40,17 @@ void	reader(t_pars *cmd, int i)
 	}
 }
 
-void	free_tpars(t_pars **pars)
+char	*nextc(char **str)
 {
-	(*pars)->in = NULL;
-	(*pars)->out = NULL;
-	ft_del((*pars)->cmd);
-	(*pars)->cmd = NULL;
-	(*pars)->limiter = NULL;
-	(*pars)->append = NULL;
-	(*pars)->sep = 0;
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i][0] != ' ' && str[i][0] != '\t')
+			return (str[i]);
+	}
+	return (NULL);
 }
 
 char	*syntax_error2(char **arg, char *mess)
@@ -93,16 +95,16 @@ char	*syntax_error(char **arg, int i, int j)
 		i = -1;
 		while (!temp && err[++i] && arg[j])
 		{
-			if (ft_strlen(arg[j]) >= ft_strlen(err[i])
-				&& !ft_strncmp(err[i], arg[j], ft_strlen(err[i])) && j < 2)
-				temp = ft_strsjoin((const char *[]){S_ERR, err[i], "'.", NULL});
-			else if (ft_strlen(arg[j]) >= ft_strlen(err[i]) && ft_strlen(arg[j]) > 2
-			&& !ft_strncmp(err[i], &arg[j][2], ft_strlen(err[i])) && j > 0)
+			if (((ft_strlen(arg[j]) > 2|| ((!nextc(&arg[j + 1])
+				|| !ft_isalnum(nextc(&arg[j + 1])[0]))
+				&& ft_strlen(arg[j]) == ft_strlen(err[i])))
+				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))) || (j  == 0
+				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))))
 				temp = ft_strsjoin((const char *[]){S_ERR, err[i], "'.", NULL});
 			else if (j == 0)
 				temp = syntax_error2(arg, NULL);
 		}
-	}
+	}	
 	return (ft_free_tab((void *)err, ft_strslen(err)), temp);
 }
 

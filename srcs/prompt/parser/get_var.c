@@ -37,13 +37,39 @@ char	end_var(char *str)
 	return (i);
 }
 
+char	*get_var2(char *var, char *str, int quote, int *i)
+{
+	char	*temp;
+
+
+	if (str[*i] == '$' && str[*i + 1] && ft_isdigit(str[*i + 1]) && quote % 2 == 0)
+		(*i)++;
+	else if (str[*i] == '$' && str[*i + 1] == '?' && quote % 2 == 0)
+	{
+		(*i)++;
+		var = ft_strdup(ft_getimp("?"));
+	}
+	else if (str[*i] == '$' && str[*i + 1] && ft_isalnum(str[*i + 1]) && quote % 2 == 0)
+	{
+		temp = ft_substr(str, *i, end_var(&str[*i]));
+		(*i) += (ft_strlen(temp) - 1);
+		var = ft_strjoin_free(var, find_var(&temp[1], 0));
+		ft_del(temp);
+	}
+	else if (str[*i] == '$')
+		var = ft_strjoin_free(var, "$");
+	return (var);
+}
+
 char	*get_var(char *str)
 {
 	int		i;
 	char	*var;
 	char	*temp;
+	int		quote;
 
 	i = -1;
+	quote = 0;
 	var = ft_strdup("");
 	if (str[0] == '~' && (!str[1] || str[1] == '/'))
 	{
@@ -52,26 +78,13 @@ char	*get_var(char *str)
 	}
 	while (++i < (int)ft_strlen(str))
 	{
+		if (str[i] == '\'')
+			quote++;
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "$"));
 		i += ft_strlen(temp);
 		var = ft_strjoin_free(var, temp);
 		ft_del(temp);
-		if (str[i] == '$' && str[i + 1] && ft_isdigit(str[i + 1]))
-			i++;
-		else if (str[i] == '$' && str[i + 1] == '?')
-		{
-			i++;
-			var = ft_strdup(ft_getimp("?"));
-		}
-		else if (str[i] == '$' && str[i + 1] && ft_isalnum(str[i + 1]))
-		{
-			temp = ft_substr(str, i, end_var(&str[i]));
-			i += (ft_strlen(temp) - 1);
-			var = ft_strjoin_free(var, find_var(&temp[1], 0));
-			ft_del(temp);
-		}
-		else if (str[i] == '$')
-			var = ft_strjoin_free(var, "$");
+		var = get_var2(var, str, quote, &i);
 	}
 	return (var);
 }

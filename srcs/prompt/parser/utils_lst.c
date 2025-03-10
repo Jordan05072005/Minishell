@@ -12,6 +12,17 @@
 
 #include "mini.h"
 
+void	free_tpars(t_pars **pars)
+{
+	(*pars)->in = NULL;
+	(*pars)->out = NULL;
+	ft_del((*pars)->cmd);
+	(*pars)->cmd = NULL;
+	(*pars)->limiter = NULL;
+	(*pars)->append = NULL;
+	(*pars)->sep = 0;
+}
+
 t_pars	*init_struct_pars(char **split, int sep)
 {
 	t_pars	*cmd;

@@ -38,7 +38,7 @@ char **del_strs(char **str, int j, char *s)
 			ft_del(str[i]);
 	}
 	str2[++it] = NULL;
-	return (ft_del(str), str2);
+	return (ft_del(s), ft_del(str), str2);
 }
 
 char	**insert_strs(char **str1, char *str2, int j, int overwrite)
@@ -75,7 +75,6 @@ int	name_correct(char *name, char *before, char *after, int len)
 		return (0);
 	end = 0;
 	s = 0;
-	printf("after : %s", after);
 	while (s < ft_strlen(before) || end < (ft_strlen(after)))
 	{
 		if (before[0] && name[s] != before[s])
@@ -98,6 +97,7 @@ char	**insert_file(char **str, int j, char **file, int *change)
 	char *end;
 	char	*start;
 
+	(void)change;
 	before = get_before(str[j]);
 	after = get_after(str[j]);
 	end = get_end(str[j]);
@@ -108,7 +108,7 @@ char	**insert_file(char **str, int j, char **file, int *change)
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
 		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1) && !accessv(start, file[f], end))
-			str = insert_strs(str, ft_strsjoin((const char *[]){start, file[f], end, NULL}), j++, (0 == (*change)++ && 0));
+			str = insert_strs(str, ft_strsjoin((const char *[]){start, file[f], end, NULL}), j++, 0);
 	}
 	return (ft_del(before), ft_del(after),
 		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);
@@ -163,7 +163,5 @@ char	**wildcard(char **str, int *j)
 		return (del_strs(str, (*j)--, temp));
 	file = get_file(dir	,ft_substr(str[*j], ft_strchri(str[*j], "*") + ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"), ft_strlen(str[*j])), path);
 	str = insert_file(str, *j, file, &change);
-	if ((*j) == 0)
-		(*j)++;
-	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));	
+	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));
 }
