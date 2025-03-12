@@ -63,11 +63,10 @@ char	*syntax_error2(char **arg, char *mess)
 		return (NULL);
 	temp = ft_strsjoin((const char *[]){">>.", ">.", "<<.", "<", NULL});
 	err = ft_split(temp, '.');
-	ft_del(temp);
-	temp = NULL;
 	i = -1;
 	while (!mess && ++i < 4)
 	{
+		ft_del2((void **)&temp);
 		if (ft_strslen(arg) > 1)
 			temp = ft_substr(arg[1], 0, 1 + (arg[1][0] == 62 || arg[1][0] == 60 || arg[1][0] == arg[1][1] || arg[1][1] == 62 || arg[1][1] == 60));
 		if (!ft_strncmp(arg[0], err[i], ft_strlen(err[i])))
@@ -119,9 +118,9 @@ int	pars_line(char *line, t_pars *exe)
 	i = -1;
 	i = 0;
 	arg = cut_line(line);
-	// int	j = -1;
-	// while (arg && arg[++j])
-	// 	printf("zrg : %s\n", arg[j]);
+	int	j = -1;
+	while (arg && arg[++j])
+		printf("zrg : %s\n", arg[j]);
 	if (!arg)
 		return (1);
 	mess = syntax_error(arg, -1, -1);
@@ -159,6 +158,6 @@ int	parseur(char *line, t_data **d)
 		err = pars_line(exe[i], &(*d)->cmd[i]);
 	if (err)
 		return (1);
-	//reader((*d)->cmd, ft_strslen(exe));
+	reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }

@@ -68,7 +68,7 @@ char	*ft_strdelquotes(char *str)
 	char	*str_f;
 	int		verr;
 
-	if (!str)
+	if (!str || (!ft_strchr(str, '"') && !ft_strchr(str, '\'')))
 		return (str);
 	len = ft_strlen(str) - (strlenchar(str, '"') + strlenchar(str, '\'')) + 1;
 	str_f = malloc(sizeof(char) * (len + 1));
@@ -85,7 +85,7 @@ char	*ft_strdelquotes(char *str)
 			verr++;
 	}
 	str_f[len] = 0;
-	return (str_f);
+	return (ft_del2((void **)&str), str_f);
 }
 
 void	shift_left(char **str, size_t i)

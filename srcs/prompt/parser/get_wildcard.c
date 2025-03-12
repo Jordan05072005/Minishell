@@ -56,6 +56,8 @@ char	*get_end(char *after)
 			len++;
 	i = ft_strchri(after, "*") + ft_strchri(&after[ft_strchri(after, "*")], "/");
 	j = 0;
+	if (!len)
+		return(ft_strdup(""));
 	str = malloc(sizeof(char) * (len + 1));
 	i--;
 	while (after[++i])
@@ -78,7 +80,7 @@ char	*get_before(char *str)
 		--j;
 	if (j == i)
 		return (ft_strdup(""));
-	before = malloc(sizeof(char) * (i - j));
+	before = malloc(sizeof(char) * (i - j + 1));
 	if (str[j] != '/')
 		j--;
 	it = -1;
@@ -101,7 +103,7 @@ char	*get_start(char *str)
 		--j;
 	if (j == 0)
 		return (ft_strdup(""));
-	start = malloc(sizeof(char) * (j + 1));
+	start = malloc(sizeof(char) * (j + 2));
 	while (++i <= j)
 		start[i] = str[i];
 	start[i] = 0;

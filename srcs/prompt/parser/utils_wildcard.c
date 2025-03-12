@@ -18,7 +18,7 @@ int	accessv(char *start, char *file, char *end)
 	char	*ende;
 
 	if (strchr(end, '*'))
-		ende = ft_strdup("");
+		ende = ft_strdup("\0");
 	else
 		ende = ft_strdup(end);
 	path = ft_strsjoin((const char *[]){start, file, ende, NULL});

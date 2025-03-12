@@ -34,21 +34,21 @@ int	is_cut(char c, char old, int *etat)
 
 	sep = ft_strdup("<>|& \t");
 	if ((*etat) && c == old)
-		return (0);
+		return (ft_del(sep), 0);
 	if ((*etat) && c != old)
 	{
 		if (!ft_strchr(sep, c))
 			(*etat) = 0;
-		return (1);
+		return (ft_del(sep), 1);
 	}
 	if (!(*etat) && ft_strchr(sep, c))
 	{
 		(*etat) = 1;
-		return (1);
+		return (ft_del(sep), 1);
 	}
 	if (!(*etat) && !ft_strchr(sep, c))
-		return (0);
-	return (0);
+		return (ft_del(sep), 0);
+	return (ft_del(sep), 0);
 }
 
 char	**cut_line(char *line)
@@ -78,9 +78,9 @@ char	**cut_line(char *line)
 				return (ft_free_tab((void *)arg, ft_strslen(arg)), NULL);
 			old = i;
 		}
-		else if ((is_cut(line[i], line[old], &etat)) || !line[i])
+		else if ((is_cut(line[i], line[old], &etat) || !line[i]))
 		{
-			if (old != 0 || i != 0)
+			if ((old != 0 || i != 0) && line[old] != 32)
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i;
 		}

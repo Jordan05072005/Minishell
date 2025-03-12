@@ -23,10 +23,11 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 	else
 	{
 		if (!cmd->cmd)
-		(cmd)->cmd = ft_strdup(arg[*n_arg]);
+		(cmd)->cmd = ft_strjoin(arg[*n_arg], " ");
 	else
 	{
 		(cmd)->cmd = ft_strjoin_free((cmd)->cmd, arg[*n_arg]);
+		(cmd)->cmd = ft_strjoin_free((cmd)->cmd, " ");
 	}
 	}
 }
@@ -77,7 +78,7 @@ char	**fill_args(char **str, int j)
 			var = get_var(str[j]);
 		if (var && var[0]) // is vcvar$
 		{
-			ft_del(str[j]);
+			ft_del2((void **)&str[j]);
 			str[j] = var;
 		}
 		else if (var)

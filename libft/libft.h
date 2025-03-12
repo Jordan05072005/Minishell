@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/12 18:28:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:09:56 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_li	ft_pow(long int nb, int pow);
 void	ft_bzero(void *add, size_t n);
 void	*ft_calloc(size_t n, size_t size);
 void	ft_del(void *add);
+void	ft_del2(void **add);
 void	ft_free_tab(void **tab, size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void	*ft_memchr(const void *add, int c, size_t n);
