@@ -1,17 +1,4 @@
 /* ---------------------------------- */
-          This is for cd
-
-[cd //] I dont even know if we are supposed to do that
-/* ---------------------------------- */
-
-/* ---------------------------------- */
-          This is for echo
-
-	Special case, need to talk this one.
-[echo $?]
-/* ---------------------------------- */
-
-/* ---------------------------------- */
 			This is for the parser
 
 [echo $:$= | cat -e] Doesnt stop the str for the search of env. -> good
@@ -67,9 +54,7 @@ BIG BOSS A TESTER :
 /////////////////////////////
 
 | hola -> GOOD 
-||||| -> GOOD 
-
-exit(127)
+||||| -> GOOD
 
 echo : if ~ followed by a / or by nothing, print $HOME instead of ~
 actually not in echo but in the parsing xDDDD -> good !
@@ -91,3 +76,4 @@ parsing : "                             " ->> GOOD
 [>] et tous les trucs a erreur de syntaxe -> pas la bonne valeur de retour, il faut update $?, a voir ensemble
 ["] -> devrait check si la deuxieme quote existe sinon mettre un message d'erreur
 [ls | | hola] devrait mettre un message d'erreur
+le heredoc leak de partout.

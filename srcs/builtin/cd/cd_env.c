@@ -12,7 +12,7 @@
 
 #include "mini.h"
 
-void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
+void	update_pwd(t_list *pwd, t_list *oldpwd, char *curpath)
 {
 	if (pwd)
 	{
@@ -20,12 +20,6 @@ void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
 		{
 			ft_del(oldpwd->content);
 			oldpwd->content = ft_strjoin("OLDPWD=", pwd->content + 4);
-		}
-		else if (!oldpwd && *present)
-		{
-			ft_lstadd_back(&data()->env,
-				ft_lstnew(ft_strjoin("OLDPWD=", pwd->content + 4)));
-			*present = 0;
 		}
 		else
 			ft_lstadd_back(&data()->loc,
@@ -37,13 +31,15 @@ void	update_pwd(t_list *pwd, t_list *oldpwd, int *present, char *curpath)
 	{
 		ft_lstadd_back(&data()->loc, ft_lstnew(ft_strjoin("PWD=", curpath)));
 		if (oldpwd)
-			*present = 1;
+		{
+			ft_del(oldpwd->content);
+			oldpwd->content = ft_strdup("OLDPWD");
+		}
 	}
 }
 
 void	update_env(char *curpath)
 {
-	static int	present = 0;
 	t_list		*temp;
 	t_list		*oldpwd;
 	t_list		*pwd;
@@ -55,12 +51,7 @@ void	update_env(char *curpath)
 	if (!pwd)
 		pwd = ft_getloc_struct("PWD", &temp);
 	oldpwd = ft_getenv_struct("OLDPWD", &temp);
-	if (!oldpwd && !present)
+	if (!oldpwd)
 		oldpwd = ft_getloc_struct("OLDPWD", &temp);
-	update_pwd(pwd, oldpwd, &present, curpath);
-	if (present)
-	{
-		ft_lstremove_if(&(data()->loc), is_env, ft_del, "OLDPWD");
-		ft_lstremove_if(&(data()->env), is_env, ft_del, "OLDPWD");
-	}
+	update_pwd(pwd, oldpwd, curpath);
 }

@@ -38,6 +38,8 @@ char	*get_var_body(char *str)
 	while (str[i] != '=' && str[i])
 		i++;
 	len = ft_strlen(&str[++i]);
+	if (len == 0)
+		return (ft_strdup(""));
 	dest = ft_calloc(len + 1, sizeof(char));
 	if (!dest)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),

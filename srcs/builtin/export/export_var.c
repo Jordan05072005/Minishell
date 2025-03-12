@@ -18,7 +18,8 @@ int	export_non_existant(char *str)
 	t_list	*var;
 
 	if (!ft_strchr(str, '='))
-		return (0);
+		return (add_link(&(data()->env),
+			ft_strdup(ft_strtrim(str, " \t\r\n\f\v"))), 0);
 	temp = create_var(str);
 	if (!temp)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),

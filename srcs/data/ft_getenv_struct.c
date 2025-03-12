@@ -24,7 +24,7 @@ t_list	*ft_getenv_struct(const char *str, t_list **placeholder)
 	while (env)
 	{
 		line = ft_strnstr(env->content, str, size);
-		if (line && line[size] == '=')
+		if (line && (line[size] == '=' || !line[size]))
 		{
 			if (env == data()->env)
 				*placeholder = NULL;
