@@ -24,7 +24,7 @@ t_list	*ft_getloc_struct(const char *str, t_list **placeholder)
 	while (loc)
 	{
 		line = ft_strnstr(loc->content, str, size);
-		if (line && line[size] == '=')
+		if (line && (line[size] == '=' || !line[size]))
 		{
 			if (loc == data()->loc)
 				*placeholder = NULL;

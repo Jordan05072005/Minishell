@@ -23,6 +23,8 @@ int	ft_env(char **arg)
 	while (env->next)
 	{
 		env = env->next;
+		if (!ft_strchr(env->content, '='))
+			continue ;
 		ft_printf("%s\n", env->content);
 	}
 	return (0);

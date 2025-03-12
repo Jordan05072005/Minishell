@@ -39,15 +39,13 @@ t_list	*ft_lstcpy(t_list *d)
 	return (cpy);
 }
 
-void	putexport(t_list *cpy, int size)
+void	putexport(t_list *cpy, int size, int i)
 {
 	t_list	*temp;
 	t_list	*first;
-	char		*temp2;
-	int			i;
+	char	*temp2;
 
 	first = cpy;
-	i = -1;
 	while (++i < size)
 	{
 		temp = cpy;
@@ -58,7 +56,10 @@ void	putexport(t_list *cpy, int size)
 			cpy = cpy->next;
 		}
 		temp2 = ft_substr(temp->content, 0, find_chr(temp->content, '='));
-		ft_printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
+		if (!ft_getenv(temp2))
+			ft_printf("declare -x %s\n", temp2);
+		else
+			ft_printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
 		ft_del(temp2);
 		ft_del(temp->content);
 		temp->content = NULL;
@@ -85,6 +86,6 @@ int	ft_export(char **arg)
 		}
 	}
 	else
-		putexport(ft_lstcpy(d->env), ft_lstsize(d->env));
+		putexport(ft_lstcpy(d->env), ft_lstsize(d->env), -1);
 	return (rv);
 }

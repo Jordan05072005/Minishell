@@ -19,7 +19,7 @@ int	is_env(void *str, void *to_find)
 
 	size = ft_strlen(to_find);
 	line = ft_strnstr(str, to_find, size);
-	if (line && line[size] == '=')
+	if (line && (line[size] == '=' || !line[size]))
 		return (1);
 	return (0);
 }
