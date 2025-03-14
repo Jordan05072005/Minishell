@@ -53,10 +53,11 @@ int	is_cut(char c, char old, int *etat)
 
 char	**cut_line(char *line)
 {
-	int	i;
-	int	old;
+	int		i;
+	int		old;
 	char	**arg;
-	int	etat;
+	int		etat;
+	char	quote;
 
 	i = -1;
 	etat = 0;
@@ -65,25 +66,26 @@ char	**cut_line(char *line)
 	old = 0;
 	while (++i <= (int)ft_strlen(line))
 	{
-		if (line[i] == '"')
+		if (line[i] == '"' || line[i] == '\'')
 		{
-			if (arg[0])
+			quote = line[i];
+			if (line[i - 1] && line[i - 1] != '"' && line[i - 1] != '\'')
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i++;
-			while (line[i] != '"')
+			while (line[i] && line[i] != quote)
 				i++;
-			if (line[i] == '"')
-				arg = addback_str(arg, ft_substr(line, old, ++i - old));
-			else
+			if (line[i] == quote && i != old + 1)
+				arg = addback_str(arg, ft_substr(line, old, i - old + 1));
+			else if (!line[i])
 				return (ft_free_tab((void *)arg, ft_strslen(arg)), NULL);
-			old = i;
+			old = i + 1;
 		}
-		else if ((is_cut(line[i], line[old], &etat) || !line[i]))
+		else if (is_cut(line[i], line[old], &etat) || !line[i])
 		{
-			if ((old != 0 || i != 0) && line[old] != 32)
+			if ((old != 0 || i != 0) && (old != (int)ft_strlen(line)))
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i;
 		}
 	}
 	return (arg);	
-}	
+}

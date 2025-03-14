@@ -66,25 +66,39 @@ char	*ft_strdelquotes(char *str)
 	int	i;
 	int	len;
 	char	*str_f;
-	int		verr;
+	char	quote;
+	// int		verr;
 
 	if (!str || (!ft_strchr(str, '"') && !ft_strchr(str, '\'')))
 		return (str);
-	len = ft_strlen(str) - (strlenchar(str, '"') + strlenchar(str, '\'')) + 1;
-	str_f = malloc(sizeof(char) * (len + 1));
-	if (!str_f)
-		return (NULL);
 	i = -1;
+	quote = 0;
 	len = 0;
-	verr = 0;
 	while (str[++i])
 	{
-		if (!(str[i] == '"' || (str[i] == '\'' && verr % 2 == 0)))
+		if (str[i] == quote)
+			quote = 0;
+		else if ((str[i] == '\'' || str[i] == '"') && !quote)
+			quote = str[i];
+		else
+			len++;
+	}
+	str_f = malloc(sizeof(char) * len + 1);
+	i = -1;
+	i = -1;
+	quote = 0;
+	len = 0;
+	while (str[++i])
+	{
+		if (str[i] == quote)
+			quote = 0;
+		else if ((str[i] == '\'' || str[i] == '"') && !quote)
+			quote = str[i];
+		else
 			str_f[len++] = str[i];
-		if (str[i] == '"')
-			verr++;
 	}
 	str_f[len] = 0;
+	printf("len : e%de\n", len);
 	return (ft_del2((void **)&str), str_f);
 }
 
