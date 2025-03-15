@@ -20,7 +20,7 @@ int	farg(char **str)
 	while (str[++i])
 	{
 		if (!ft_isspace(str[i][0]))
-			return (i);
+			return (i + 1);
 	}
 	return (i);
 }
@@ -30,13 +30,13 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 	if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0
 		&& max > *n_arg + 1)
 		{
-			(*n_arg) += farg(&arg[*n_arg]);
+			(*n_arg) += farg(&arg[*n_arg + 1]);
 			(cmd)->in = arg[(*n_arg)];
 		}
 	else if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2
 		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
 	{
-		(*n_arg) += farg(&arg[*n_arg]);
+		(*n_arg) += farg(&arg[*n_arg + 1]);
 		(cmd)->limiter = arg[(*n_arg)];
 	}
 	else
@@ -63,7 +63,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 		{
 			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			cmd->append = arg[(*n_arg)];
-			(*n_arg) += farg(&arg[*n_arg]);
+			(*n_arg) += farg(&arg[*n_arg + 1]);
 			(cmd)->out = arg[(*n_arg)];
 			close(fd);
 		}
