@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 15:58:23 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:26:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ int	exec(int nb_cmds, t_cmd *input)
 		return (set_exit_val(0), 0);
 	else if (!input->args[0])
 		return (set_exit_val(0), 0);
-	int	i = 0;
-	while (input->args[i])
-		printf("[%s] - ", input->args[i++]);
-	printf ("[%s]\n", input->args[i]);
 	if (data()->saved_tty != -1)
 		dup2(data()->saved_out, 1);
 	cmds = init_icmds(input, nb_cmds);

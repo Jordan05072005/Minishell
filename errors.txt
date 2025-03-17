@@ -71,9 +71,7 @@ parsing : "                             " ->> GOOD
 
 
 [ls > | test] -> creer un fichier et ne dit pas qu'il y a un soucis
+[> test.txt] -> message d'erreur alors qu'il faudrait pas
 [echo '|' ls] -> n'as pas d'output
-[<<<<<] -> mauvais message
-[>] et tous les trucs a erreur de syntaxe -> pas la bonne valeur de retour, il faut update $?, a voir ensemble
 ["] -> devrait check si la deuxieme quote existe sinon mettre un message d'erreur
-[ls | | hola] devrait mettre un message d'erreur
 le heredoc leak de partout.
