@@ -18,14 +18,18 @@ int	is_define(char *str)
 		return (0);
 	if (!ft_isalpha(*str) && *str != '_')
 		return (0);
-	while (*str != '=' && *str)
+	while ((*str != '=' && *str != '+') && *str)
 	{
 		if (!ft_isalnum(*str) && *str != '_')
 			return (0);
 		str++;
 	}
 	if (!*str)
+		return (3);
+	if (*str == '+' && *(str + 1) == '=')
 		return (2);
+	if (*str == '+' && *(str + 1) != '=')
+		return (0);
 	return (1);
 }
 

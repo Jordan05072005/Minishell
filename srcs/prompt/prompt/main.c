@@ -17,6 +17,7 @@
 char	*ft_readline(void)
 {
 	char	*prompt;
+	char	*temp;
 	char	*line;
 
 	signal(SIGINT, new_prompt);
@@ -25,10 +26,14 @@ char	*ft_readline(void)
 		prompt = NULL;
 	else
 		prompt = get_prompt();
-	line = readline(prompt);
-	// if (!prompt)
-	// 	printf("\n\nPrompt : %s\nWhat readline is reading : %s\n\n", prompt, line);
+	if (isatty(0))
+		temp = readline(prompt);
+	else
+		temp = get_next_line(0);
 	ft_del(prompt);
+	line = ft_strtrim(temp, " \t\r\n\f\v");
+	// line = ft_strdup(temp);
+	ft_del(temp);
 	signal(SIGINT, any);
 	return (line);
 }

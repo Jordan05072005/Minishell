@@ -98,7 +98,7 @@ char	*ft_strdelquotes(char *str)
 			str_f[len++] = str[i];
 	}
 	str_f[len] = 0;
-	printf("len : e%de\n", len);
+	// printf("len : e%de\n", len);
 	return (ft_del2((void **)&str), str_f);
 }
 
