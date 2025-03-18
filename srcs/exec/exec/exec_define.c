@@ -48,48 +48,46 @@ void	define_imp(t_icmd *cmds, int child, int i, char *var_name)
 	}
 }
 
-void	define_vars(t_icmd *cmds, int child)
+void	define_vars(t_icmd *cmds, int child, int i)
 {
-	int		i;
 	t_list	*var;
 	char	*var_name;
 
-	i = -1;
 	while (cmds[child].args[++i])
 	{
 		var_name = get_var_name(cmds[child].args[i]);
 		var = ft_getenv_struct(var_name, &(t_list *){0});
 		if (!var)
 			var = ft_getloc_struct(var_name, &(t_list *){0});
-		if (var)
+		ft_del(var_name);
+		if (var && is_define(cmds[child].args[i]) == 1)
 		{
 			ft_del(var->content);
 			var->content = create_var(cmds[child].args[i]);
 			continue ;
 		}
-		ft_del(var_name);
-		var_name = create_var(cmds[child].args[i]);
-		var = ft_lstnew(var_name);
-		if (!var)
-			return (ft_del(var_name), ft_perror(1, ft_strdup("mini: Internal er\
-ror: malloc."), clean_data() + clean_icmds()));
-		ft_lstadd_back(&data()->loc, var);
+		if (var)
+		{
+			var_name = create_join_var(cmds[child].args[i], var);
+			ft_del(var->content);
+			var->content = var_name;
+			continue ;
+		}
+		add_link(&(data()->loc), create_var(cmds[child].args[i]));
 	}
 }
 
-//run through every args, and if it contains anything that makes the arg not a
-//define of a local var, consider this arg as the start of the command, and act
-//like it is one.
 void	exec_define(t_icmd *cmds, int nb_cmds, int child)
 {
-	//Current version doesnt strip the char.
 	int	i;
+	int	is_def;
 
-	i = 0;
-	while (is_define(cmds[child].args[i]) == 1)
-		i++;
+	i = -1;
+	is_def = is_define(cmds[child].args[++i]);
+	while (is_def == 1 || is_def == 2)
+		is_def = is_define(cmds[child].args[++i]);
 	if (cmds[child].args[i])
 		return (define2child(cmds, nb_cmds, child, i));
 	cmds[child].exit = 0;
-	define_vars(cmds, child);
+	define_vars(cmds, child, -1);
 }
