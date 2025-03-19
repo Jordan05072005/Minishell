@@ -48,6 +48,15 @@ typedef struct s_cmd
 	char	**split;
 }	t_cmd;
 
+typedef struct s_bt
+{
+	void		*content;
+	int			value;
+	struct s_bt	*parent;
+	struct s_bt	*left;
+	struct s_bt	*right;
+}	t_bt;
+
 /* -------------------------------------------------------------------------- */
 /*                  prompt.h                                                  */
 /* -------------------------------------------------------------------------- */

@@ -30,6 +30,7 @@ char	*ft_readline(void)
 		temp = readline(prompt);
 	else
 		temp = get_next_line(0);
+		// temp = readline(NULL);
 	ft_del(prompt);
 	line = ft_strtrim(temp, " \t\r\n\f\v");
 	// line = ft_strdup(temp);
@@ -79,6 +80,7 @@ int	main(int ac, char **av, char **env)
 	t_data	*d;
 	char	*line;
 	char	*before;
+	t_bt	*ast;
 
 	before = NULL;
 	d = data();
@@ -90,14 +92,8 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
-		if (!parseur(line, &d))
-		{
-			return 1;
-			d->cmd->before = before; //Hugo free;
-			exec(d->cmd->pipe, d->cmd->exe);
-			clean_pars(0);
-		}
-		return 1;
+		ast = get_ast(line);
+		run_ast(ast);
 		line = ft_readline();
 	}
 	ft_del(before);

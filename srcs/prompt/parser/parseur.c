@@ -146,7 +146,7 @@ int	get_cut(char *str)
 	return (i);
 }
 
-int	parseur(char *line, t_data **d)
+t_list	*parseur(char *line, t_data **d)
 {
 	char	*temp_line;
 	size_t	i;
@@ -155,13 +155,11 @@ int	parseur(char *line, t_data **d)
 	t_pars *temp;
 	t_list *l;
 	
-	printf("hello world");
-	
 	err = 0;
 	i = -1;
 	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
 		&& (line[0] == '!' || line[0] == ':')))
-		return (1);
+		return (NULL);
 	l = NULL;
 	// exe = ft_split2(line, "&");
 	// if (!exe)	
@@ -175,7 +173,7 @@ int	parseur(char *line, t_data **d)
 	while (++i < ft_strlen(line) && !err)
 	{
 		len = get_cut(&line[i]);
-		printf("i : %ld et len : %d\n", i, len);
+		// printf("i : %ld et len : %d\n", i, len);
 		temp_line = ft_substr(&line[i], 0, len);
 		temp = init_struct_pars(1);
 		err = pars_line(temp_line, temp);
@@ -188,23 +186,23 @@ int	parseur(char *line, t_data **d)
 		}
 	}
 	//if err all free;
-	int	it = 0;
-	while (l != NULL)
-	{
-		if (it % 2 == 0)
-		{
-			reader(l->content, 1);
-			printf("la");
-			// printf("%p\n", l->content);
-		}
-		else
-			printf("%s\n", (char *)l->content);
+	// int	it = 0;
+	// while (l != NULL)
+	// {
+	// 	if (it % 2 == 0)
+	// 	{
+	// 		reader(l->content, 1);
+	// 		printf("la");
+	// 		// printf("%p\n", l->content);
+	// 	}
+	// 	else
+	// 		printf("%s\n", (char *)l->content);
 
-		l = l->next;
-		it++;
-	}
+	// 	l = l->next;
+	// 	it++;
+	// }
 	if (err)
-		return (1);
+		return (NULL);
 	// reader((*d)->cmd, ft_strslen(exe));
-	return (0);
+	return (l);
 }

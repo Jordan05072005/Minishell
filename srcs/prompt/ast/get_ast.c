@@ -80,10 +80,10 @@ void	clear_tree(t_bt *tree)
 	if (tree->right)
 		clear_tree(tree->right);
 	if (!tree->left && !tree->right)
-		clear_pipeline((t_list *)tree->content);
+		/* clear_pipeline((t_list *)tree->content) */;
 	else
-		ft_del((void **)&tree->content);
-	ft_del((void **)&tree);
+		ft_del2((void **)&tree->content);
+	ft_del2((void **)&tree);
 }
 
 void	del_unusedlst(t_list *lst)
@@ -93,7 +93,7 @@ void	del_unusedlst(t_list *lst)
 	while (lst)
 	{
 		next = lst->next;
-		ft_del((void **)&lst);
+		ft_del2((void **)&lst);
 		lst = next;
 	}
 }
@@ -105,6 +105,7 @@ t_bt	*get_ast(char *line)
 	char	*err;
 	size_t	i;
 
+	err = NULL;
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -112,7 +113,8 @@ t_bt	*get_ast(char *line)
 		i++;
 	if (i == ft_strlen(line))
 		return (NULL);
-	blocks = get_cmds(line, &err);
+	// blocks = get_cmds(line, &err);
+	blocks = parseur(line, NULL);
 	if (!blocks)
 	{
 		if (!err)
@@ -121,7 +123,7 @@ t_bt	*get_ast(char *line)
 		set_exit_val(2);
 		if (blocks)
 			clear_blocks(blocks);
-		ft_del((void **)&err);
+		ft_del2((void **)&err);
 		return (NULL);
 	}
 	blocks = ft_lstrev(blocks);
@@ -133,25 +135,11 @@ t_bt	*get_ast(char *line)
 	return (tree);
 }
 
-int	run_list(t_list *cmds_lst)
+int	run_list(t_pars *pars)
 {
-	t_cmd	*cmds;
-	int		size;
-	int		i;
-	int		rv;
+	int	rv;
 
-	size = ft_lstsize(cmds_lst);
-	cmds = malloc(size * sizeof(t_cmd));
-	if (!cmds)
-		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
-	i = 0;
-	while (cmds_lst)
-	{
-		cmds[i++] = *(t_cmd *)cmds_lst->content;
-		cmds_lst = cmds_lst->next;
-	}
-	rv = exec(size, cmds);
-	ft_del((void **)&cmds);
+	rv = exec(pars->pipe, pars->exe);
 	return (rv);
 }
 
@@ -162,7 +150,7 @@ int	run_ast(t_bt *ast)
 	if (!ast)
 		return (-1);
 	if (!ast->left && !ast->right)
-		return (run_list((t_list *)ast->content));
+		return (run_list((t_pars *)ast->content));
 	rv = run_ast(ast->left);
 	if (ft_strncmp("&&", (char *)ast->content, 3) == 0)
 	{

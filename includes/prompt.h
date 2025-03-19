@@ -62,7 +62,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg);
 /* -------------------------------------------------------------------------- */
 /*                  parser.c                                                  */
 /* -------------------------------------------------------------------------- */
-int	parseur(char *line, t_data **d);
+t_list	*parseur(char *line, t_data **d);
 
 /* -------------------------------------------------------------------------- */
 /*                  prompt.c                                                  */
@@ -93,5 +93,14 @@ int	farg(char **str);
 t_pars *init_struct_pars(int nbr);
 void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
 char	**ft_split2(char *s, char *c);
+
+
+t_bt	*create_bt_node(void *content);
+t_bt	*ft_btnew(void *content);
+void	set_parent(t_bt *parent, t_bt *child, int right);
+t_bt	*get_ast(char *line);
+void	clear_tree(t_bt *tree);
+int		run_ast(t_bt *ast);
+void	clear_blocks(t_list *cmds);
 
 #endif

@@ -97,10 +97,6 @@ char	*ft_strdelquotes(char *str)
 			str_f[len++] = str[i];
 	}
 	str_f[len] = 0;
-<<<<<<< HEAD
-=======
-	// printf("len : e%de\n", len);
->>>>>>> 3239bdb8ce7b48256bb3ab5d380eb0341a81e0e1
 	return (ft_del2((void **)&str), str_f);
 }
 

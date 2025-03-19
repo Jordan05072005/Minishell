@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/12 14:09:58 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:23:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	 ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
 	void (*del)(void *), char *to_find);
 int		ft_lstsize(t_list *lst);
 int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
+t_list	*ft_lstrev(t_list *head);
 
 /*			math_func			*/
 /********************************/

@@ -35,7 +35,7 @@ t_bt	*create_bt_node(void *content)
 	node = ft_btnew(content);
 	if (!node)
 	{
-		ft_del((void **)&content);
+		ft_del2((void **)&content);
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."), clean_data());
 	}
 	return (node);
