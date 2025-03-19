@@ -12,19 +12,6 @@
 
 #include "mini.h"
 
-int	farg(char **str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (!ft_isspace(str[i][0]))
-			return (i + 1);
-	}
-	return (i);
-}
-
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
 	if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0

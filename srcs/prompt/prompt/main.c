@@ -87,10 +87,12 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		if (!parseur(line, &d))
 		{
+			return 1;
 			d->cmd->before = before; //Hugo free;
 			exec(d->cmd->pipe, d->cmd->exe);
 			clean_pars(0);
 		}
+		return 1;
 		line = ft_readline();
 	}
 	ft_del(before);

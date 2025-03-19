@@ -55,6 +55,7 @@ char	*get_var(char *str);
 /* -------------------------------------------------------------------------- */
 /*                  fill.c                                                  */
 /* -------------------------------------------------------------------------- */
+int	farg(char **str);
 void	fill_exe(t_pars **pars, int i, int j);
 int	fill_struct(t_pars *cmd, char **arg, int *n_arg);
 
@@ -80,9 +81,16 @@ void	free_tpars(t_pars **pars);
 void	shift_left(char **str, size_t i);
 
 /* -------------------------------------------------------------------------- */
+/*                  utils2.c                                                   */
+/* -------------------------------------------------------------------------- */
+char	*nextc(char **str);
+int	farg(char **str);
+
+
+/* -------------------------------------------------------------------------- */
 /*                  utils_lst.c                                               */
 /* -------------------------------------------------------------------------- */
-t_pars *init_struct_pars(char **split, int nbr);
+t_pars *init_struct_pars(int nbr);
 void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
 char	**ft_split2(char *s, char *c);
 

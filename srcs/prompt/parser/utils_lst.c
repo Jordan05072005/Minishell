@@ -23,7 +23,7 @@ void	free_tpars(t_pars **pars)
 	(*pars)->sep = 0;
 }
 
-t_pars	*init_struct_pars(char **split, int sep)
+t_pars	*init_struct_pars(int sep)
 {
 	t_pars	*cmd;
 	int		i;
@@ -34,7 +34,6 @@ t_pars	*init_struct_pars(char **split, int sep)
 	i = -1;
 	while (++i < sep)
 	{
-		cmd[i].split = split;
 		cmd[i].in = NULL;
 		cmd[i].out = NULL;
 		cmd[i].cmd = NULL;
