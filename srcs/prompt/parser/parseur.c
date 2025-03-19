@@ -80,7 +80,7 @@ char	*pars_line(char *line, t_pars *exe)
 		fill_exe(&exe, i++, -1);
 		free_tpars(&exe);
 	}
-	write(1, "toi", 3);
+	// write(1, "toi", 3);
 	fill_exe(&exe, i, -1);
 	return (NULL);
 }
@@ -128,7 +128,7 @@ t_list	*parseur(char *line, char **err)
 			i += 2;
 		}
 	}
-	read2(l);
+	// read2(l);
 	if (*err || ft_lstsize(l) % 2 == 0)
 		return (clear_blocks(l), NULL);
 	return (l);
