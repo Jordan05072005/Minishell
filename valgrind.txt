@@ -4,6 +4,13 @@
 (abc) || def | ghi
 
 
-		    ||
-		/		 \
-def | ghi	    (abc)
+			||
+		/	     \
+   def | ghi	(abc)
+
+
+
+
+
+
+echo a || echo b && echo c || echo d && echo e | echo f && echo g

@@ -148,7 +148,7 @@ char	**wildcard(char **str, int *j)
 
 	// if (!existig)
 	// 	return ;
-	printf("hello");
+	// printf("hello");
 	path = get_start(str[*j]);
 	temp = ft_strdup(str[*j]);
 	if (!path[0])

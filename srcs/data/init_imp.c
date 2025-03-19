@@ -44,6 +44,8 @@ void	init_imp(t_list **imp)
 	pwd = getenv("PWD");
 	if (!pwd)
 		pwd = getcwd(NULL, 0);
+	if (!pwd)
+		pwd = "/";
 	add_link(imp, ft_strjoin("USER=", user));
 	add_link(imp, ft_strjoin("HOME=", home));
 	add_link(imp, ft_strjoin("PWD=", pwd));
