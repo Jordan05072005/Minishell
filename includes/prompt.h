@@ -62,7 +62,8 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg);
 /* -------------------------------------------------------------------------- */
 /*                  parser.c                                                  */
 /* -------------------------------------------------------------------------- */
-t_list	*parseur(char *line, t_data **d);
+t_list	*parseur(char *line, char **err);
+char	*syntax_error(char **arg, int i, int j);
 
 /* -------------------------------------------------------------------------- */
 /*                  prompt.c                                                  */
@@ -90,7 +91,7 @@ int	farg(char **str);
 /* -------------------------------------------------------------------------- */
 /*                  utils_lst.c                                               */
 /* -------------------------------------------------------------------------- */
-t_pars *init_struct_pars(int nbr);
+t_pars *init_struct_pars();
 void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
 char	**ft_split2(char *s, char *c);
 

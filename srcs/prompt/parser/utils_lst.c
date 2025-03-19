@@ -23,24 +23,17 @@ void	free_tpars(t_pars **pars)
 	(*pars)->sep = 0;
 }
 
-t_pars	*init_struct_pars(int sep)
+t_pars	*init_struct_pars()
 {
 	t_pars	*cmd;
-	int		i;
 
-	if (sep <= 0)
-		return (NULL);
-	cmd = malloc(sizeof(t_pars) * (sep));
-	i = -1;
-	while (++i < sep)
-	{
-		cmd[i].in = NULL;
-		cmd[i].out = NULL;
-		cmd[i].cmd = NULL;
-		cmd[i].limiter = NULL;
-		cmd[i].append = NULL;
-		cmd[i].sep = 0;
-	}
+	cmd = malloc(sizeof(t_pars));
+	cmd->in = NULL;
+	cmd->out = NULL;
+	cmd->cmd = NULL;
+	cmd->limiter = NULL;
+	cmd->append = NULL;
+	cmd->sep = 0;
 	return (cmd);
 }
 

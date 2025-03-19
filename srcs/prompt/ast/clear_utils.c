@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:20:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/19 13:25:43 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:54:22 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	clear_blocks(t_list *cmds)
 
 	while (cmds)
 	{
+		clean_pars((t_pars *)cmds->content);
 		// clear_pipeline((t_list *)cmds->content);
 		next = cmds->next;
 		ft_del2((void **)&cmds);

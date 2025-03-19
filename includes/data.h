@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:03:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 16:53:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:51:28 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define DATA_H
 
 int		clean_data(void);
-int		clean_pars(int full);
+int		clean_pars(t_pars *cmd);
 int		clean_env(void);
 t_data	*data(void);
 void	add_link(t_list **imp, char *content);

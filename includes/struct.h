@@ -70,7 +70,6 @@ typedef struct s_pars
 	char	*limiter;
 	char	*append;
 	char	sep;
-	char	**split;
 	char	*line;
 	char	*before;
 	t_cmd *exe;
@@ -81,7 +80,7 @@ typedef struct s_pars
 /* -------------------------------------------------------------------------- */
 typedef struct s_data
 {
-	t_pars	*cmd; // s_list -> 
+	t_list	*cmd; // s_list -> 
 	t_icmd	*cmds;
 	t_list	*imp;
 	t_list	*env;

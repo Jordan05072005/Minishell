@@ -114,7 +114,7 @@ t_bt	*get_ast(char *line)
 	if (i == ft_strlen(line))
 		return (NULL);
 	// blocks = get_cmds(line, &err);
-	blocks = parseur(line, NULL);
+	blocks = parseur(line, &err);
 	if (!blocks)
 	{
 		if (!err)

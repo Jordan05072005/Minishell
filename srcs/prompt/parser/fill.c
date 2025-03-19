@@ -48,9 +48,9 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 			&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
 				|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
 		{
-			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			cmd->append = arg[(*n_arg)];
 			(*n_arg) += farg(&arg[*n_arg + 1]);
+			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
 			(cmd)->out = arg[(*n_arg)];
 			close(fd);
 		}
