@@ -81,6 +81,7 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	char	*before;
 	t_bt	*ast;
+	int		ret;
 
 	before = NULL;
 	d = data();
@@ -97,5 +98,6 @@ int	main(int ac, char **av, char **env)
 		line = ft_readline();
 	}
 	ft_del(before);
-	return (ft_putendl_fd("exit\n", 1), clean_data(), 0);
+	ret = ft_atoi(ft_getimp("?"));
+	return (ft_putendl_fd("\001\033[0m\002" "exit", 1), clean_data(), ret);
 }

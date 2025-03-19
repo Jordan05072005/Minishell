@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:33:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:52:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:34:41 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*get_var_body(char *str)
 	int		i;
 	int		len;
 	char	*dest;
-	char	*ret;
 
 	i = 0;
 	while (str[i] != '=' && str[i])
@@ -48,12 +47,7 @@ char	*get_var_body(char *str)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
 	ft_strlcpy(dest, str + i, len + 1);
-	ret = ft_strtrim(dest, " \t\r\n\f\v");
-	ft_del(dest);
-	if (!dest)
-		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
-			clean_data() + clean_icmds()), NULL);
-	return (ret);
+	return (dest);
 }
 
 char	*create_var(char *str)
