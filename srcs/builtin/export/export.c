@@ -57,9 +57,9 @@ void	putexport(t_list *cpy, int size, int i)
 		}
 		temp2 = ft_substr(temp->content, 0, find_chr(temp->content, '='));
 		if (!ft_getenv(temp2))
-			ft_printf("declare -x %s\n", temp2);
+			printf("declare -x %s\n", temp2);
 		else
-			ft_printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
+			printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
 		ft_del(temp2);
 		ft_del(temp->content);
 		temp->content = NULL;

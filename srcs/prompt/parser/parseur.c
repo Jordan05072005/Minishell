@@ -107,9 +107,9 @@ int	pars_line(char *line, t_pars *exe)
 	i = -1;
 	i = 0;
 	arg = cut_line(line);
-	int	j = -1;
-	while (arg && arg[++j])
-		printf("zrg : %s\n", arg[j]);
+	// int	j = -1;
+	// while (arg && arg[++j])
+	// 	printf("zrg : %s\n", arg[j]);
 	if (!arg)
 		return (1);
 	mess = syntax_error(arg, -1, -1);
@@ -205,6 +205,6 @@ int	parseur(char *line, t_data **d)
 	}
 	if (err)
 		return (1);
-	//reader((*d)->cmd, ft_strslen(exe));
+	// reader((*d)->cmd, ft_strslen(exe));
 	return (0);
 }

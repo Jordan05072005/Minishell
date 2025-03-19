@@ -30,6 +30,8 @@ char	**env2env(t_list *env);
 int		is_env(void *str, void *to_find);
 void	update_shlvl(void);
 char	*get_var_name(char *str);
+char	*get_var_body(char *str);
 char	*create_var(char *str);
+char	*create_join_var(char *str, t_list *var);
 
 #endif

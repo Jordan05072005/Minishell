@@ -18,7 +18,7 @@ char	*get_var_name(char *str)
 	char	*dest;
 
 	i = 0;
-	while (str[i] != '=' && str[i])
+	while ((str[i] != '=' && str[i] != '+') && str[i])
 		i++;
 	dest = ft_calloc(i + 1, sizeof(char));
 	if (!dest)
@@ -33,10 +33,13 @@ char	*get_var_body(char *str)
 	int		i;
 	int		len;
 	char	*dest;
+	char	*ret;
 
 	i = 0;
 	while (str[i] != '=' && str[i])
 		i++;
+	if (!str[i])
+		return (ft_strdup(""));
 	len = ft_strlen(&str[++i]);
 	if (len == 0)
 		return (ft_strdup(""));
@@ -45,7 +48,12 @@ char	*get_var_body(char *str)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
 	ft_strlcpy(dest, str + i, len + 1);
-	return (ft_strtrim(dest, " \t\r\n\f\v"));
+	ret = ft_strtrim(dest, " \t\r\n\f\v");
+	ft_del(dest);
+	if (!dest)
+		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data() + clean_icmds()), NULL);
+	return (ret);
 }
 
 char	*create_var(char *str)
@@ -56,12 +64,35 @@ char	*create_var(char *str)
 
 	name = get_var_name(str);
 	body = get_var_body(str);
-	if (!body)
+	if (!body || !name)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
 	content = ft_strsjoin((const char *[]){name, "=", body, NULL});
 	ft_del(name);
 	ft_del(body);
+	if (!content)
+		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data() + clean_icmds()), NULL);
+	return (content);
+}
+
+char	*create_join_var(char *str, t_list *var)
+{
+	char	*content;
+	char	*name;
+	char	*body;
+	char	*body2;
+
+	name = get_var_name(str);
+	body2 = get_var_body(str);
+	body = get_var_body(var->content);
+	if (!body || !name || !body2)
+		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+			clean_data() + clean_icmds()), NULL);
+	content = ft_strsjoin((const char *[]){name, "=", body, body2, NULL});
+	ft_del(name);
+	ft_del(body);
+	ft_del(body2);
 	if (!content)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
