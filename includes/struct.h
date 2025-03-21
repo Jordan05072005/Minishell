@@ -45,6 +45,7 @@ typedef struct s_cmd
 	char	**args;
 	char	*here_doc;
 	int		append;
+	int		subshell;
 	char	**split;
 }	t_cmd;
 
