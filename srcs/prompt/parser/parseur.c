@@ -74,9 +74,6 @@ char	*pars_line(char *line, t_pars *exe)
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	while (fill_struct(exe, arg, &n_arg))
 	{
-		write(1, "moi", 3);
-
-		ft_putnbr_fd(i, 1);
 		fill_exe(&exe, i++, -1);
 		free_tpars(&exe);
 	}

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/19 13:55:00 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:03:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	export_update(t_list *env, char *str, int type)
 {
 	char	*content;
 
-	if (type == 3)
-		;
 	if (type == 1)
 	{
 		ft_del(env->content);
