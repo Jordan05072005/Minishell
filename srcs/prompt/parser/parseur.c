@@ -33,6 +33,8 @@ void	reader(t_pars *cmd, int i)
 				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
 			if (cmd[j].exe[y].append)
 				printf("    append : %d\n",cmd[j].exe[y].append);
+			if (cmd[j].exe[y].subshell)
+				printf("    subshell : %d\n",cmd[j].exe[y].subshell);
 			y++;
 		}
 		y = 0;
@@ -66,9 +68,9 @@ char	*pars_line(char *line, t_pars *exe)
 	n_arg = -1;
 	i = 0;
 	arg = cut_line(line);
-	// int	j = -1;
-	// while (arg && arg[++j])
-	// 	printf("zrg : %s\n", arg[j]);
+	int	j = -1;
+	while (arg && arg[++j])
+		printf("zrg : %s\n", arg[j]);
 	if (!arg)
 		return (ft_strdup("newline"));
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
@@ -117,6 +119,7 @@ t_list	*parseur(char *line, char **err)
 		*err = pars_line(temp->line, temp);
 		if (*err)
 			continue;
+		ft_del(temp->line);
 		ft_lstadd_back(&l, ft_lstnew(temp));
 		i += get_cut(&line[i]);
 		if (line[i] == '|' || line[i] == '&')
@@ -125,7 +128,7 @@ t_list	*parseur(char *line, char **err)
 			i += 2;
 		}
 	}
-	// read2(l);
+	read2(l);
 	if (*err || ft_lstsize(l) % 2 == 0)
 		return (clear_blocks(l), NULL);
 	return (l);

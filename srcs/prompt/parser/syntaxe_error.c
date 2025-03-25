@@ -14,21 +14,18 @@
 
 int	is_sep(char c)
 {
-	if (c == '|' || c == '<' || c == '&' || c == '>' || c == ')' || c == '(')
+	if (c == '|' || c == '<' || c == '&' || c == '>')
 		return (1);
 	return (0);
 }
 
-
-char	*syntax_error2(char **arg, char *mess)
+char	*syntax_error3(char **arg, char *mess, int i)
 {
 	char	*temp;
 	char	**err;
-	int		i;
 
 	temp = ft_strsjoin((const char *[]){">>.", ">.", "<<.", "<", NULL});
 	err = ft_split(temp, '.');
-	i = -1;
 	while (!mess && ++i < 4)
 	{
 		ft_del2((void **)&temp);
@@ -48,6 +45,17 @@ char	*syntax_error2(char **arg, char *mess)
 	}
 	return (ft_del(temp), ft_free_tab((void *)err, ft_strslen(err)), mess);
 }
+
+char *syntax_error2(char **arg, int j)
+{
+	if (arg[j][0] == '(')
+	{
+		if ((j > 0 && !is_sep(arg[j -1][0])) || (arg[j + 1] && !is_sep(arg[j + 1][0])))
+			return (ft_strdup("("));
+	}
+	return (syntax_error3(&arg[j], NULL, -1));
+}
+
 // ft_isalnum(arg[farg(arg) - 1][0]
 char	*syntax_error(char **arg, int i, int j)
 {
@@ -58,7 +66,7 @@ char	*syntax_error(char **arg, int i, int j)
 	err = ft_split(temp, '.');
 	ft_del(temp);
 	temp = NULL;
-	while (!temp && arg[++j])
+	while (arg && arg[0] && !temp && arg[++j])
 	{
 		i = -1;
 		while (!temp && err[++i] && arg[j])
@@ -69,8 +77,8 @@ char	*syntax_error(char **arg, int i, int j)
 				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))) || (j  == 0
 				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))))
 				temp = ft_strdup(err[i]);
-			else
-				temp = syntax_error2(&arg[j], NULL);
+			else if (!temp)
+				temp = syntax_error2(arg, j);
 		}
 	}	
 	return (ft_free_tab((void *)arg, ft_strslen(arg)),

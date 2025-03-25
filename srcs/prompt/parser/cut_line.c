@@ -66,15 +66,17 @@ char	**cut_line(char *line)
 	old = 0;
 	while (++i <= (int)ft_strlen(line))
 	{
-		if (line[i] == '"' || line[i] == '\'')
+		if (line[i] == '"' || line[i] == '\'' || line[i] == '(')
 		{
 			quote = line[i];
-			if (line[i - 1] && line[i - 1] != '"' && line[i - 1] != '\'')
+			if (line[i] == '(')
+				quote = ')';
+			if (i > 0 && line[i - 1] != '"' && line[i - 1] != '\'' && line[i - 1] != ')')
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i++;
 			while (line[i] && line[i] != quote)
 				i++;
-			if (line[i] == quote && i != old + 1)
+			if (line[i] == quote && line[i] != line[old + 1])
 				arg = addback_str(arg, ft_substr(line, old, i - old + 1));
 			else if (!line[i])
 				return (ft_free_tab((void *)arg, ft_strslen(arg)), NULL);
