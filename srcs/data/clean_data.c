@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/25 16:26:10 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:59:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	clean_env(void)
 
 int	clean_pars(t_pars *cmd)
 {
-	if (cmd == NULL)
+	if (!cmd)
 		return (0);
-	// if (full)
-	// 	ft_del(cmd->before);
 	if (cmd->exe)
 	{
 		while (--cmd->pipe >= 0)
@@ -37,7 +35,7 @@ int	clean_pars(t_pars *cmd)
 			ft_strslen(cmd->exe[0].split));
 		ft_del(cmd->exe);
 	}
-	ft_del(cmd->line);
+	// ft_del(cmd->line);
 	ft_del(cmd->cmd);
 	ft_del(cmd);
 	data()->cmd = NULL;

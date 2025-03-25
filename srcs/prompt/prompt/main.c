@@ -95,6 +95,7 @@ int	main(int ac, char **av, char **env)
 		before = ft_strdup(line);
 		ast = get_ast(line);
 		run_ast(ast);
+		clear_tree(ast);
 		line = ft_readline();
 	}
 	ft_del(before);
