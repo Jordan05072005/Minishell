@@ -80,7 +80,6 @@ int	main(int ac, char **av, char **env)
 	t_data	*d;
 	char	*line;
 	char	*before;
-	t_bt	*ast;
 	int		ret;
 
 	before = NULL;
@@ -93,9 +92,11 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 		free(before);
 		before = ft_strdup(line);
-		ast = get_ast(line);
-		run_ast(ast);
-		clear_tree(ast);
+		data()->ast = get_ast(line);
+		ft_del(line);
+		run_ast(data()->ast);
+		clear_tree(data()->ast);
+		data()->ast = NULL;
 		line = ft_readline();
 	}
 	ft_del(before);
