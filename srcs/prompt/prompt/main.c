@@ -112,6 +112,7 @@ int	main(int ac, char **av, char **env)
 	while (line)
 	{
 		before = update_history(line);
+		(void)before;
 		data()->ast = get_ast(line);
 		ft_del(line);
 		run_ast(data()->ast);

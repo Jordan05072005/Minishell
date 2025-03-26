@@ -25,6 +25,7 @@ char	*error_line(char *line, char *temp, int i)
 	int *quote;
 
 	prof = 0;
+	quote = 0;
 	while (line[++i])
 	{
 		quote = quotes(line[i], quote);
