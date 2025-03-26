@@ -26,7 +26,7 @@ DATA_SRC = \
 EXEC_SRC = \
     $(addprefix exec/, exec_child.c exec_parent.c exec_builtin.c exec.c exec_define.c) \
     $(addprefix icmds/, clean_icmds.c define2child.c init_icmd.c init_icmds.c zero_icmds.c) \
-    $(addprefix io/, close_fd.c here_doc.c set_io.c) \
+    $(addprefix io/, close_fd.c here_doc_gnl.c here_doc.c set_io.c) \
     $(addprefix path/, get_path.c is_builtin.c)
 
 PROMPT_SRC = \
