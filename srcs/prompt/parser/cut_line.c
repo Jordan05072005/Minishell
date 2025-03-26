@@ -116,7 +116,7 @@ char	**cut_line(char *line)
 		{
 			if ((old != 0 || i != 0) && (old != (int)ft_strlen(line)) && old != i)
 				arg = addback_str(arg, ft_substr(line, old, i - old));
-			old = i + 1;
+			old = i;
 		}
 	}
 	return (arg);	

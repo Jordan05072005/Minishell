@@ -107,7 +107,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 	{
 		(*pars)->exe[i].args = malloc(sizeof(char *));
 		temp = ft_strtrim((*pars)->cmd, " ");
-		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 1);
+		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 2);
 		ft_del(temp);
 	}
 	else
