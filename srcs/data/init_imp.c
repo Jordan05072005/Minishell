@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 16:52:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:45:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_imp(t_list **imp)
 	if (!home && ft_strncmp(user, "unknown", 8))
 		home = ft_strjoin("/home/", user);
 	else if (!home)
-		home = ft_strdup("/"); //need to check this, I think it doesnt work.
+		home = ft_strdup("/");
 	pwd = getenv("PWD");
 	if (!pwd)
 		pwd = getcwd(NULL, 0);
@@ -50,6 +50,7 @@ void	init_imp(t_list **imp)
 	add_link(imp, ft_strjoin("HOME=", home));
 	add_link(imp, ft_strjoin("PWD=", pwd));
 	add_link(imp, ft_strdup("?=0"));
+	add_link(imp, ft_strdup("BEFORE="));
 }
 
 void	init_io(t_data *d)

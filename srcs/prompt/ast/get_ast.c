@@ -80,7 +80,7 @@ void	clear_tree(t_bt *tree)
 	if (tree->right)
 		clear_tree(tree->right);
 	if (!tree->left && !tree->right)
-		/* clear_pipeline((t_list *)tree->content) */;
+		clean_pars((t_pars *)tree->content);
 	else
 		ft_del2((void **)&tree->content);
 	ft_del2((void **)&tree);
@@ -113,7 +113,6 @@ t_bt	*get_ast(char *line)
 		i++;
 	if (i == ft_strlen(line))
 		return (NULL);
-	// blocks = get_cmds(line, &err);
 	blocks = parseur(line, &err);
 	if (!blocks)
 	{

@@ -81,7 +81,7 @@ typedef struct s_pars
 /* -------------------------------------------------------------------------- */
 typedef struct s_data
 {
-	t_list	*cmd; // s_list -> 
+	t_bt	*ast;
 	t_icmd	*cmds;
 	t_list	*imp;
 	t_list	*env;

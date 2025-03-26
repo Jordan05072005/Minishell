@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 08:51:51 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 19:00:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:49:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_getloc(const char *str)
 		{
 			if (line[size + 1])
 				return (line + size + 1);
-			return ("");
+			return (NULL);
 		}
 		loc = loc->next;
 	}
