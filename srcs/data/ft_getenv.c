@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:50:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 15:08:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:48:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_getenv(const char *str)
 		{
 			if (line[size + 1])
 				return (line + size + 1);
-			return ("");
+			return (NULL);
 		}
 		env = env->next;
 	}

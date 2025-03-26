@@ -75,6 +75,29 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 		add_link(&(data()->env), ft_strdup("_=/usr/bin/env"));
 }
 
+char	*update_history(char *line)
+{
+	char	*last;
+	t_list	*before;
+	t_list	*bin;
+
+	last = ft_getimp("BEFORE");
+	if (!last)
+		add_history(line);
+	else if (ft_strncmp(last, line, ft_strlen(last) + 1))
+		add_history(line);
+	before = ft_getimp_struct("BEFORE", &bin);
+	if (!before)
+		ft_perror(1, ft_strdup("mini: Internal error: missing struct."),
+				clean_icmds() + clean_data());
+	ft_del(before->content);
+	before->content = ft_strsjoin((const char *[]){"BEFORE=", line, NULL});
+	if (!before->content)
+		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
+				clean_icmds() + clean_data());
+	return (ft_getimp("BEFORE"));
+}	
+
 int	main(int ac, char **av, char **env)
 {
 	t_data	*d;
@@ -88,10 +111,7 @@ int	main(int ac, char **av, char **env)
 	line = ft_readline();
 	while (line)
 	{
-		if (!before || ft_strncmp(before, line, ft_strlen(before) + 1) != 0)
-			add_history(line);
-		free(before);
-		before = ft_strdup(line);
+		before = update_history(line);
 		data()->ast = get_ast(line);
 		ft_del(line);
 		run_ast(data()->ast);
@@ -99,7 +119,6 @@ int	main(int ac, char **av, char **env)
 		data()->ast = NULL;
 		line = ft_readline();
 	}
-	ft_del(before);
 	ret = ft_atoi(ft_getimp("?"));
 	return (ft_putendl_fd("\001\033[0m\002" "exit", 1), clean_data(), ret);
 }

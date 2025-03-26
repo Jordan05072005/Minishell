@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:06:13 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 18:59:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:49:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_getimp(const char *str)
 		{
 			if (line[size + 1])
 				return (line + size + 1);
-			return ("");
+			return (NULL);
 		}
 		imp = imp->next;
 	}
