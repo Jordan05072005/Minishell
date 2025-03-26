@@ -20,7 +20,7 @@
 
 #define S_ERR "mini: syntax error near unexpected token `"
 
-char	**cut_line(char *line);	
+char	**cut_line(char *line);
 
 char	*get_color(int option);
 int		set_colors(char	*col1, char *col2, char *col3, char *col4);
@@ -63,7 +63,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg);
 /*                  parser.c                                                  */
 /* -------------------------------------------------------------------------- */
 t_list	*parseur(char *line, char **err);
-char	*syntax_error(char **arg, int i, int j);
+char	*syntax_error(char **arg, char *line, int i, int j);
 
 /* -------------------------------------------------------------------------- */
 /*                  prompt.c                                                  */
@@ -86,6 +86,8 @@ void	shift_left(char **str, size_t i);
 /* -------------------------------------------------------------------------- */
 char	*nextc(char **str);
 int	farg(char **str);
+char	*beforec(char **str, int i);
+int	*quotes(char c, int *tab);
 
 
 /* -------------------------------------------------------------------------- */

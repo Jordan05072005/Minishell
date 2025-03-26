@@ -79,7 +79,6 @@ char	*pars_line(char *line, t_pars *exe)
 		fill_exe(&exe, i++, -1);
 		free_tpars(&exe);
 	}
-	// write(1, "toi", 3);
 	fill_exe(&exe, i, -1);
 	return (NULL);
 }
@@ -108,7 +107,7 @@ t_list	*parseur(char *line, char **err)
 	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
 		&& (line[0] == '!' || line[0] == ':')))
 		return (NULL);
-	*err = syntax_error(cut_line(line), -1, -1);
+	*err = syntax_error(cut_line(line), line, -1, -1);
 	if (*err)
 		set_exit_val(2);
 	l = NULL;

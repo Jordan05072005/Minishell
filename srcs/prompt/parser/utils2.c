@@ -19,6 +19,16 @@ char	*nextc(char **str)
 	i = -1;
 	while (str[++i])
 	{
+		if (str[i][0] != ' ' && str[i][0] != '\t') // withspace
+			return (str[i]);
+	}
+	return (NULL);
+}
+
+char	*beforec(char **str, int i)
+{
+	while (str[--i])
+	{
 		if (str[i][0] != ' ' && str[i][0] != '\t')
 			return (str[i]);
 	}
@@ -36,5 +46,25 @@ int	farg(char **str)
 			return (i + 1);
 	}
 	return (i);
+}
+
+int	*quotes(char c, int *tab)
+{
+	if (!tab)
+	{
+		tab = malloc(sizeof(int) * 3);
+		tab[0] = 0;
+		tab[1] = 0;
+		tab[2] = 0;
+	}
+	if (c == '"')
+		tab[1]++;
+	else if (c == '\'')
+		tab[1]++;
+	if ((tab[0] + tab[1]) % 2 == 0)
+		tab[2] = 1;
+	else
+		tab[2] = 0;
+	return (tab);
 }
 

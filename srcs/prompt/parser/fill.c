@@ -42,15 +42,15 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 
 	max = ft_strslen(arg);
 	while (++(*n_arg) < max && !(ft_strlen(arg[*n_arg]) == 1
-			&& ft_strchri(arg[*n_arg], "|") != (int)ft_strlen(arg[*n_arg])))
+			&& ft_strchri(arg[*n_arg], "|") != (int)ft_strlen(arg[*n_arg]))) //ft_strncmp(arg[*n_arg], "|", 2))
 	{
 		if ((*n_arg) + 1 < max
 			&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
 				|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
 		{
 			cmd->append = arg[(*n_arg)];
-			(*n_arg) += farg(&arg[*n_arg + 1]);
-			fd = open(arg[*n_arg + 1], O_WRONLY | O_CREAT, 0777);
+			(*n_arg) += (farg(&arg[*n_arg + 1]));
+			fd = open(arg[*n_arg], O_WRONLY | O_CREAT, 0777);
 			(cmd)->out = arg[(*n_arg)];
 			close(fd);
 		}
@@ -94,16 +94,26 @@ char	**fill_args(char **str, int j)
 
 void	fill_exe(t_pars **pars, int i, int j)
 {
+	char	*temp;
+
 	(*pars)->exe[i].in = ft_strdelquotes((*pars)->in);
 	(*pars)->exe[i].out = ft_strdelquotes((*pars)->out);
 	(*pars)->exe[i].subshell = 0;
 	if ((*pars)->cmd && (*pars)->cmd[0] == '(')
 		(*pars)->exe[i].subshell = 1;
-	if ((*pars)->cmd)
+	if ((*pars)->cmd && !(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
+	else if ((*pars)->cmd)
+	{
+		(*pars)->exe[i].args = malloc(sizeof(char *));
+		temp = ft_strtrim((*pars)->cmd, " ");
+		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 1);
+		ft_del(temp);
+	}
 	else
 		(*pars)->exe[i].args = NULL;
-	(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
+	if (!(*pars)->exe[i].subshell)
+		(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
 	(*pars)->exe[i].here_doc = ft_strdelquotes((*pars)->limiter);
 	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3); // a modif
 }

@@ -51,6 +51,36 @@ int	is_cut(char c, char old, int *etat)
 	return (ft_del(sep), 0);
 }
 
+char	**gestion_parenthese(char **arg, char *line, int *i, int *old)
+{
+	int	prof;
+	int	temp;
+	int	*quote;
+
+	prof = 1;
+	temp = *i;
+	quote = 0;
+	if (*i > 0 && line[*i - 1] != ')')
+		arg = addback_str(arg, ft_substr(line, *old, *i - *old));
+	*old = *i;
+	while (line[++(*i)])
+	{
+		quote = quotes(line[*i], quote);
+		if (line[*i] == '(' && quote[2])
+			prof++;
+		else if (line[*i] == ')' && prof > 0 && quote[2])
+			prof--;
+		if (prof == 0)
+		{
+			arg = addback_str(arg, ft_substr(line, *old, *i - *old + 1));
+			*old = *i + 1;
+			return (arg);
+		}
+	}
+	*i = temp;
+	return (NULL);
+}
+
 char	**cut_line(char *line)
 {
 	int		i;
@@ -64,29 +94,29 @@ char	**cut_line(char *line)
 	arg = malloc(sizeof(char *));
 	arg[0] = NULL;
 	old = 0;
-	while (++i <= (int)ft_strlen(line))
+	while (arg && ++i <= (int)ft_strlen(line))
 	{
-		if (line[i] == '"' || line[i] == '\'' || line[i] == '(')
+		if (line[i] == '(')
+			arg = gestion_parenthese(arg, line, &i, &old);
+		else if (line[i] == '"' || line[i] == '\'')
 		{
 			quote = line[i];
-			if (line[i] == '(')
-				quote = ')';
-			if (i > 0 && line[i - 1] != '"' && line[i - 1] != '\'' && line[i - 1] != ')')
+			if (i > 0 && line[i - 1] != '"' && line[i - 1] != '\'')
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i++;
 			while (line[i] && line[i] != quote)
 				i++;
 			if (line[i] == quote && line[i] != line[old + 1])
 				arg = addback_str(arg, ft_substr(line, old, i - old + 1));
-			else if (!line[i])
-				return (ft_free_tab((void *)arg, ft_strslen(arg)), NULL);
+			else if (line[i] == line[old + 1])
+				arg = addback_str(arg, ft_strdup(""));
 			old = i + 1;
 		}
 		else if (is_cut(line[i], line[old], &etat) || !line[i])
 		{
-			if ((old != 0 || i != 0) && (old != (int)ft_strlen(line)))
+			if ((old != 0 || i != 0) && (old != (int)ft_strlen(line)) && old != i)
 				arg = addback_str(arg, ft_substr(line, old, i - old));
-			old = i;
+			old = i + 1;
 		}
 	}
 	return (arg);	
