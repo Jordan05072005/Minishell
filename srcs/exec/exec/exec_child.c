@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:49:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/26 10:29:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:31:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	exec_child(t_icmd *cmds, int nb_cmds, int child)
 {
 	struct	stat st;
 
-	int	i = 0;
-	while (cmds[child].args[i + 1])
-		printf("[%s] - ", cmds[child].args[i++]);
-	printf("[%s]\n", cmds[child].args[i]);
+	// int	i = 0;
+	// while (cmds[child].args[i + 1])
+	// 	printf("[%s] - ", cmds[child].args[i++]);
+	// printf("[%s]\n", cmds[child].args[i]);
 	set_io_cp(child, nb_cmds, cmds);
 	close_fd(cmds, nb_cmds, child);
 	if (!cmds[child].args)
