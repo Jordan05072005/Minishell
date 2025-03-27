@@ -25,17 +25,30 @@
 /* -------------------------------------------------------------------------- */
 /*                  exec.h                                                    */
 /* -------------------------------------------------------------------------- */
+// typedef struct s_info_cmd
+// {
+// 	int		fd_in;
+// 	int		fd_out;
+// 	char	*here_doc;
+// 	char	*path;
+// 	char	**args;
+// 	int		define;
+// 	int		pipe[2];
+// 	int		pid;
+// 	int		exit;
+// }	t_icmd;
+
 typedef struct s_info_cmd
 {
-	int		fd_in;
-	int		fd_out;
 	char	*here_doc;
 	char	*path;
 	char	**args;
-	int		define;
+	int		fd_in;
+	int		fd_out;
+	int		type;
 	int		pipe[2];
 	int		pid;
-	int		exit;
+	int		rv;
 }	t_icmd;
 
 typedef struct s_cmd

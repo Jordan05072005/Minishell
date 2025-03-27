@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:41:54 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/21 13:17:39 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_cmd_path(t_cmd input)
 	i = -1;
 	paths = ft_getenv("PATH");
 	if (!paths)
-		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: \
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: \
 ", input.args[0], " No such file or directory.", NULL}), 0), NULL);
 	tries = ft_split(paths, ':');
 	if (!tries)

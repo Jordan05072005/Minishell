@@ -107,7 +107,7 @@ char	**insert_file(char **str, int j, char **file)
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
 		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1) && !accessv(start, file[f], end))
-			str = insert_strs(str, ft_strsjoin((const char *[]){start, file[f], end, NULL}), j++, 0);
+			str = insert_strs(str, ft_strsjoin((char *[]){start, file[f], end, NULL}), j++, 0);
 	}
 	return (ft_del(before), ft_del(after),
 		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);

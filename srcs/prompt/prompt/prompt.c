@@ -43,8 +43,8 @@ char	*get_prompt(void)
 	if (!path)
 		path = ft_getimp("PWD");
 	if (strncmp(user, "root", 4) == 0)
-		prompt = ft_strsjoin((const char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
+		prompt = ft_strsjoin((char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
 	else
-		prompt = ft_strsjoin((const char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
+		prompt = ft_strsjoin((char *[]){get_color(0), user, get_color(2), "@", get_color(1), path, get_color(2), "$ \001\033[0;0m\002", get_color(3), NULL});
 	return (prompt);
 }

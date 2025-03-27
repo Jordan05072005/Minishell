@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:33:34 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/19 13:34:41 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*create_var(char *str)
 	if (!body || !name)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
-	content = ft_strsjoin((const char *[]){name, "=", body, NULL});
+	content = ft_strsjoin((char *[]){name, "=", body, NULL});
 	ft_del(name);
 	ft_del(body);
 	if (!content)
@@ -83,7 +83,7 @@ char	*create_join_var(char *str, t_list *var)
 	if (!body || !name || !body2)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 			clean_data() + clean_icmds()), NULL);
-	content = ft_strsjoin((const char *[]){name, "=", body, body2, NULL});
+	content = ft_strsjoin((char *[]){name, "=", body, body2, NULL});
 	ft_del(name);
 	ft_del(body);
 	ft_del(body2);

@@ -21,7 +21,7 @@ int	accessv(char *start, char *file, char *end)
 		ende = ft_strdup("\0");
 	else
 		ende = ft_strdup(end);
-	path = ft_strsjoin((const char *[]){start, file, ende, NULL});
+	path = ft_strsjoin((char *[]){start, file, ende, NULL});
 	if (access(path, F_OK) == -1)
 		return (ft_del(path), ft_del(ende), 1);
 	return (ft_del(path), ft_del(ende), 0);

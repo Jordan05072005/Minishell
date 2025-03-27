@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:07:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/11 16:21:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:39:19 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_perror(int error_code, char *custom_mess, int clean)
 {
 	if (clean)
 		ft_putendl_fd("What even happened there ???", 2);
-	else
+	else if (custom_mess)
 		ft_putendl_fd(custom_mess, 2);
 	ft_del(custom_mess);
 	if (error_code >= 0)

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 11:12:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:01:02 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*cd_previous(char *arg, char *unused, int *print, int option)
 		return (ft_strdup(path));
 	}
 	else
-		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg, "\
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", arg, "\
 : Invalid option.", NULL}), 0), NULL);
 }
 

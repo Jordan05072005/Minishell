@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 13:36:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*check_curpath(char *curpath, char *arg)
 	struct stat	path_stat;
 
 	if (!curpath)
-		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg,
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", arg,
 			": No such file or directory.", NULL}), 0), NULL);
 	if (curpath[0] != '/')
 		curpath = regen_curpath(curpath);
@@ -114,10 +114,10 @@ char	*check_curpath(char *curpath, char *arg)
 		return (NULL);
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) != 0)
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
+		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((char *[]){"mi\
 ni: cd: ", arg, ": No such file or directory.", NULL}), 0), NULL);
 	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
+		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((char *[]){"mi\
 ni: cd: ", arg, ": Not a directory.", NULL}), 0), NULL);
 	update_env(curpath);
 	return (curpath);

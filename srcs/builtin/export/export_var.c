@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/23 11:03:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	export_var(char *str)
 	name = get_var_name(str);
 	if (!type)
 	{
-		temp = ft_strsjoin((const char *[]){"bash: export: `", str, "': not a \
+		temp = ft_strsjoin((char *[]){"bash: export: `", str, "': not a \
 valid identifier.", NULL});
 		return (ft_del(name), ft_perror(-1, temp, 0), 1);
 	}

@@ -91,7 +91,7 @@ char	*update_history(char *line)
 		ft_perror(1, ft_strdup("mini: Internal error: missing struct."),
 				clean_icmds() + clean_data());
 	ft_del(before->content);
-	before->content = ft_strsjoin((const char *[]){"BEFORE=", line, NULL});
+	before->content = ft_strsjoin((char *[]){"BEFORE=", line, NULL});
 	if (!before->content)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
 				clean_icmds() + clean_data());

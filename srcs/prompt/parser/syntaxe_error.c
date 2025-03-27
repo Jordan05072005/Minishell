@@ -44,7 +44,7 @@ char	*syntax_error3(char **arg, char *mess, int i)
 	char	*temp;
 	char	**err;
 
-	temp = ft_strsjoin((const char *[]){">>.", ">.", "<<.", "<", NULL});
+	temp = ft_strsjoin((char *[]){">>.", ">.", "<<.", "<", NULL});
 	err = ft_split(temp, '.');
 	while (!mess && ++i < 4)
 	{
@@ -96,7 +96,7 @@ char	*syntax_error(char **arg, char *line, int i, int j)
 	char	**err;
 	char	*temp;
 
-	temp = ft_strsjoin((const char *[]){"||.", "|.", "&&.", "&.", NULL});
+	temp = ft_strsjoin((char *[]){"||.", "|.", "&&.", "&.", NULL});
 	err = ft_split(temp, '.');
 	temp = error_line(line, temp, -1);
 	while (arg && arg[0] && !temp && arg[++j])

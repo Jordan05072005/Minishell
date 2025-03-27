@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:16:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 11:58:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int ft_color(char **av)
 		{
 			ft_tolower(av[i]);
 			if (ft_strncmp(av[i], "0x", 2))
-				return (ft_perror(-1, ft_strsjoin((const char *[]){"color: Inva\
+				return (ft_perror(-1, ft_strsjoin((char *[]){"color: Inva\
 lid hex ('", av[i], "').", NULL}), 0), 1);
 		}
 	}
