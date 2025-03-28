@@ -14,18 +14,25 @@
 
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
-	if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0
-		&& max > *n_arg + 1)
+	char	*temp;
+
+	if ((*n_arg) + 1 < max
+	&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
+		|| ft_strncmp(arg[*n_arg], ">", 1) == 0 || cmd->out))
+	{
+		if (!cmd->out)
+			cmd->append = arg[(*n_arg)];
+		(*n_arg) += (farg(&arg[*n_arg + 1]));
+		ft_lstadd_back(&(cmd)->out, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
+		// ft_del(arg[(*n_arg)]);
+	}
+	else if (((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
+		|| cmd->in) && max > *n_arg + 1 )
 		{
 			(*n_arg) += farg(&arg[*n_arg + 1]);
-			(cmd)->in = arg[(*n_arg)];
+			ft_lstadd_back(&(cmd)->in, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
+			//ft_del(arg[(*n_arg)]);
 		}
-	else if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2
-		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
-	{
-		(*n_arg) += farg(&arg[*n_arg + 1]);
-		(cmd)->limiter = arg[(*n_arg)];
-	}
 	else
 	{
 		if (!cmd->cmd)
@@ -37,23 +44,18 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 
 int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 {
-	int	fd;
 	int	max;
 
 	max = ft_strslen(arg);
 	while (++(*n_arg) < max && !(ft_strlen(arg[*n_arg]) == 1
 			&& ft_strchri(arg[*n_arg], "|") != (int)ft_strlen(arg[*n_arg]))) //ft_strncmp(arg[*n_arg], "|", 2))
 	{
-		if ((*n_arg) + 1 < max
-			&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
-				|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
-		{
-			cmd->append = arg[(*n_arg)];
-			(*n_arg) += (farg(&arg[*n_arg + 1]));
-			fd = open(arg[*n_arg], O_WRONLY | O_CREAT, 0777);
-			(cmd)->out = arg[(*n_arg)];
-			close(fd);
-		}
+	if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2
+		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
+	{
+		(*n_arg) += farg(&arg[*n_arg + 1]);
+		(cmd)->limiter = arg[(*n_arg)];
+	}
 		else
 			fill_struct2(cmd, arg, n_arg, max);
 	}
@@ -96,8 +98,8 @@ void	fill_exe(t_pars **pars, int i, int j)
 {
 	char	*temp;
 
-	(*pars)->exe[i].in = ft_strdelquotes((*pars)->in);
-	(*pars)->exe[i].out = ft_strdelquotes((*pars)->out);
+	(*pars)->exe[i].in = (*pars)->in;
+	(*pars)->exe[i].out = (*pars)->out;
 	(*pars)->exe[i].subshell = 0;
 	if ((*pars)->cmd && (*pars)->cmd[0] == '(')
 		(*pars)->exe[i].subshell = 1;

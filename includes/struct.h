@@ -53,8 +53,8 @@ typedef struct s_info_cmd
 
 typedef struct s_cmd
 {
-	char	*in;
-	char	*out;
+	t_list	*in;
+	t_list	*out;
 	char	**args;
 	char	*here_doc;
 	int		append;
@@ -78,8 +78,8 @@ typedef struct s_pars
 {
 	int		n_sep;
 	int		pipe;
-	char	*in;
-	char	*out;
+	t_list	*in;
+	t_list	*out;
 	char	*cmd;
 	char	*limiter;
 	char	*append;
