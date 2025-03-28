@@ -14,18 +14,24 @@
 
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
-	if (ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0
-		&& max > *n_arg + 1)
+	int	fd;
+
+	if ((*n_arg) + 1 < max
+	&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
+		|| ft_strncmp(arg[*n_arg], ">", 1) == 0 || cmd->out))
+	{
+		cmd->append = arg[(*n_arg)];
+		(*n_arg) += (farg(&arg[*n_arg + 1]));
+		fd = open(arg[*n_arg], O_WRONLY | O_CREAT, 0777);
+		(cmd)->out = arg[(*n_arg)];
+		close(fd);
+	}
+	else if (((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
+		|| cmd->in) && max > *n_arg + 1 )
 		{
 			(*n_arg) += farg(&arg[*n_arg + 1]);
 			(cmd)->in = arg[(*n_arg)];
 		}
-	else if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2
-		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
-	{
-		(*n_arg) += farg(&arg[*n_arg + 1]);
-		(cmd)->limiter = arg[(*n_arg)];
-	}
 	else
 	{
 		if (!cmd->cmd)
@@ -37,23 +43,18 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 
 int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 {
-	int	fd;
 	int	max;
 
 	max = ft_strslen(arg);
 	while (++(*n_arg) < max && !(ft_strlen(arg[*n_arg]) == 1
 			&& ft_strchri(arg[*n_arg], "|") != (int)ft_strlen(arg[*n_arg]))) //ft_strncmp(arg[*n_arg], "|", 2))
 	{
-		if ((*n_arg) + 1 < max
-			&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
-				|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
-		{
-			cmd->append = arg[(*n_arg)];
-			(*n_arg) += (farg(&arg[*n_arg + 1]));
-			fd = open(arg[*n_arg], O_WRONLY | O_CREAT, 0777);
-			(cmd)->out = arg[(*n_arg)];
-			close(fd);
-		}
+	if ((*n_arg) + 1 < max && ft_strlen(arg[*n_arg]) == 2
+		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
+	{
+		(*n_arg) += farg(&arg[*n_arg + 1]);
+		(cmd)->limiter = arg[(*n_arg)];
+	}
 		else
 			fill_struct2(cmd, arg, n_arg, max);
 	}

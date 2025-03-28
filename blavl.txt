@@ -1,0 +1,15 @@
+total 244
+-rwxrwxrwx 1 jordan jordan   2547 Mar 26 17:49 Makefile
+-rwxrwxrwx 1 jordan jordan     11 Jan 27 16:01 README.md
+-rwxrwxrwx 1 jordan jordan      0 Mar 28  2025 blavl.txt
+-rwxrwxrwx 1 jordan jordan   2194 Mar 19 12:41 errors.txt
+-rwxrwxrwx 1 jordan jordan    368 Mar 19 12:41 export.sh
+-rwxrwxrwx 1 jordan jordan     85 Mar 19 12:41 ideas.txt
+drwxrwxrwx 1 jordan jordan   4096 Mar 28 11:20 includes
+drwxrwxrwx 1 jordan jordan   4096 Mar 28 11:20 libft
+-rwxrwxrwx 1 jordan jordan 239112 Mar 28 11:25 minishell
+-rwxrwxrwx 1 jordan jordan    562 Feb 21 15:27 redirections.txt
+drwxrwxrwx 1 jordan jordan   4096 Mar 28 11:20 srcs
+-rwxrwxrwx 1 jordan jordan    224 Feb  5 19:18 supp.supp
+-rwxrwxrwx 1 jordan jordan    130 Mar 28 11:34 tesst.txt
+-rwxrwxrwx 1 jordan jordan    183 Mar 25 15:34 valgrind.txt

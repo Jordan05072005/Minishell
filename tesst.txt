@@ -1,0 +1,13 @@
+Makefile
+README.md
+errors.txt
+export.sh
+ideas.txt
+includes
+libft
+minishell
+redirections.txt
+srcs
+supp.supp
+tesst.txt
+valgrind.txt
