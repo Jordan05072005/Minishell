@@ -12,53 +12,53 @@
 
 #include "mini.h"
 
-void	reader(t_pars *cmd, int i)
-{
-	int	j=0;
-	int	y=0;
+// void	reader(t_pars *cmd, int i)
+// {
+// 	int	j=0;
+// 	int	y=0;
 
-	while (j < i)
-	{
-		printf("exe : %d :\n", j);
-		while (y < cmd[j].pipe)
-		{ 
-			printf("  pipe %d :\n", y);
-			if (cmd[j].exe[y].args)
-				printf("    cmd : %s\n",cmd[j].exe[y].args[0]);
-			if (cmd[j].exe[y].in)
-				printf("    in : %s\n",cmd[j].exe[y].in);
-			if (cmd[j].exe[y].out)
-				printf("    out : %s \n",cmd[j].exe[y].out);
-			if (cmd[j].exe[y].here_doc)
-				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
-			if (cmd[j].exe[y].append)
-				printf("    append : %d\n",cmd[j].exe[y].append);
-			if (cmd[j].exe[y].subshell)
-				printf("    subshell : %d\n",cmd[j].exe[y].subshell);
-			y++;
-		}
-		y = 0;
-		j++;
-	}
-}
+// 	while (j < i)
+// 	{
+// 		printf("exe : %d :\n", j);
+// 		while (y < cmd[j].pipe)
+// 		{ 
+// 			printf("  pipe %d :\n", y);
+// 			if (cmd[j].exe[y].args)
+// 				printf("    cmd : %s\n",cmd[j].exe[y].args[0]);
+// 			if (cmd[j].exe[y].in)
+// 				printf("    in : %s\n",cmd[j].exe[y].in);
+// 			if (cmd[j].exe[y].out)
+// 				printf("    out : %s \n",cmd[j].exe[y].out);
+// 			if (cmd[j].exe[y].here_doc)
+// 				printf("    limiter : %s\n",cmd[j].exe[y].here_doc);
+// 			if (cmd[j].exe[y].append)
+// 				printf("    append : %d\n",cmd[j].exe[y].append);
+// 			if (cmd[j].exe[y].subshell)
+// 				printf("    subshell : %d\n",cmd[j].exe[y].subshell);
+// 			y++;
+// 		}
+// 		y = 0;
+// 		j++;
+// 	}
+// }
 
-void	read2(t_list *l)
-{
-	int	it = 0;
-	while (l != NULL)
-	{
-		if (it % 2 == 0)
-		{
-			reader(l->content, 1);
-			// printf("%p\n", l->content);
-		}
-		else
-			printf("%s\n", (char *)l->content);
+// void	read2(t_list *l)
+// {
+// 	int	it = 0;
+// 	while (l != NULL)
+// 	{
+// 		if (it % 2 == 0)
+// 		{
+// 			reader(l->content, 1);
+// 			// printf("%p\n", l->content);
+// 		}
+// 		else
+// 			printf("%s\n", (char *)l->content);
 
-		l = l->next;
-		it++;
-	}
-}
+// 		l = l->next;
+// 		it++;
+// 	}
+// }
 
 char	*pars_line(char *line, t_pars *exe)
 {

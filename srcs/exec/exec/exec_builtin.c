@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:16:28 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 17:18:26 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/03/27 18:48:24 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/03/27 18:50:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	switch_cmd(t_icmd *cmds, int child)
 {
 	if (!ft_strncmp(cmds[child].args[0], "cd", 3))
-		cmds[child].exit = ft_cd(cmds[child].args);
+		cmds[child].rv = ft_cd(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "pwd", 4))
-		cmds[child].exit = ft_pwd(cmds[child].args);
+		cmds[child].rv = ft_pwd(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "export", 7))
-		cmds[child].exit = ft_export(cmds[child].args);
+		cmds[child].rv = ft_export(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "unset", 6))
-		cmds[child].exit = ft_unset(cmds[child].args);
+		cmds[child].rv = ft_unset(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "env", 4))
-		cmds[child].exit = ft_env(cmds[child].args);
+		cmds[child].rv = ft_env(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "exit", 5))
-		cmds[child].exit = ft_exit(cmds[child].args);
+		cmds[child].rv = ft_exit(cmds[child].args);
 	else if (!ft_strncmp(cmds[child].args[0], "echo", 5))
-		cmds[child].exit = ft_echo(&cmds[child]);
+		cmds[child].rv = ft_echo(&cmds[child]);
 	else
-		cmds[child].exit = ft_color(cmds[child].args);
-	return (cmds[child].exit);
+		cmds[child].rv = ft_color(cmds[child].args);
+	return (cmds[child].rv);
 }
 
 void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 11:11:38 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/21 14:06:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:43:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	clean_icmds(void)
 	while (++child < nb_cmds)
 	{
 		ft_del(cmds[child].path);
-		if (cmds->define == 2)
+		if (cmds->type == -1)
 			ft_del(cmds[child].args);
 	}
 	ft_del(cmds);

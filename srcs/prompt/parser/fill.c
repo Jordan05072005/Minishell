@@ -14,8 +14,6 @@
 
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
-	char	*temp;
-
 	if ((*n_arg) + 1 < max
 	&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
 		|| ft_strncmp(arg[*n_arg], ">", 1) == 0 || cmd->out))

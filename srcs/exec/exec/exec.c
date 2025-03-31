@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 14:24:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/27 18:30:50 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/03/28 16:54:21 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,29 @@
 
 void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 {
-	if (nb_cmds > 1 || (!is_builtin(cmds[child].args[0])
-		&& !cmds[child].define))
+	int	i = -1;
+	if (cmds[child].args)
+	{
+		while (cmds[child].args[++i])
+			printf("[%s] - ", cmds[child].args[i]);
+		printf("[%s]\n", cmds[child].args[i]);
+	}
+	if (cmds[child].type == 1 || nb_cmds > 1)
 	{
 		cmds[child].pid = fork();
 		if (cmds[child].pid == -1)
 			ft_perror(1, ft_strdup("mini: Internal error: process."),
 				clean_data() + clean_icmds());
-		if (cmds[child].pid == 0 && !is_builtin(cmds[child].args[0]))
+		if (cmds[child].type == 1 && cmds[child].pid == 0)
 			exec_child(cmds, nb_cmds, child);
-		else if (cmds[child].pid == 0 && cmds[child].define)
-			exec_define(cmds, nb_cmds, child);
-		else if (cmds[child].pid == 0)
+		else if (cmds[child].type == 2 && cmds[child].pid == 0)
 			exec_builtin(cmds, nb_cmds, child);
+		else if (cmds[child].type == 3 && cmds[child].pid == 0)
+			exec_define(cmds, nb_cmds, child);
 	}
-	else if (cmds[child].define)
+	else if (cmds[child].type == 2)
 		exec_define(cmds, nb_cmds, child);
-	else
+	else if (cmds[child].type == 3)
 		exec_builtin(cmds, nb_cmds, child);
 }
 
@@ -53,6 +59,7 @@ void	set_exit_val(int ret_val)
 			clean_data());
 }
 
+
 int	exec(int nb_cmds, t_cmd *input)
 {
 	t_icmd	*cmds;
@@ -60,12 +67,6 @@ int	exec(int nb_cmds, t_cmd *input)
 	int		ret_value;
 
 	write(1, "\033[0m", 5);
-	// if (!input)
-	// 	return (set_exit_val(0), 0);
-	// else if (!input->args)
-	// 	return (set_exit_val(0), 0);
-	// else if (!input->args[0])
-	// 	return (set_exit_val(0), 0);
 	if (data()->saved_tty != -1)
 		dup2(data()->saved_out, 1);
 	cmds = init_icmds(input, nb_cmds);
