@@ -24,8 +24,8 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 		ft_lstadd_back(&(cmd)->out, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
 		// ft_del(arg[(*n_arg)]);
 	}
-	else if (((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
-		|| cmd->in) && max > *n_arg + 1)
+	else if ((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
+		 && max > *n_arg + 1)
 		{
 			(*n_arg) += farg(&arg[*n_arg + 1]);
 			ft_lstadd_back(&(cmd)->in, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
