@@ -56,7 +56,7 @@ typedef struct s_cmd
 	t_list	*in;
 	t_list	*out;
 	char	**args;
-	char	*here_doc;
+	t_list	*here_doc;
 	int		append;
 	int		subshell;
 	char	**split;
@@ -81,7 +81,7 @@ typedef struct s_pars
 	t_list	*in;
 	t_list	*out;
 	char	*cmd;
-	char	*limiter;
+	t_list	*limiter;
 	char	*append;
 	char	sep;
 	char	*line;

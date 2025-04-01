@@ -16,7 +16,7 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
 	if ((*n_arg) + 1 < max
 	&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
-		|| ft_strncmp(arg[*n_arg], ">", 1) == 0 || cmd->out))
+		|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
 	{
 		if (!cmd->out)
 			cmd->append = arg[(*n_arg)];
@@ -25,7 +25,7 @@ void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 		// ft_del(arg[(*n_arg)]);
 	}
 	else if (((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
-		|| cmd->in) && max > *n_arg + 1 )
+		|| cmd->in) && max > *n_arg + 1)
 		{
 			(*n_arg) += farg(&arg[*n_arg + 1]);
 			ft_lstadd_back(&(cmd)->in, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
@@ -52,7 +52,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 		&& ft_strncmp(arg[(*n_arg)], "<<", 3) == 0)
 	{
 		(*n_arg) += farg(&arg[*n_arg + 1]);
-		(cmd)->limiter = arg[(*n_arg)];
+		ft_lstadd_back(&(cmd)->limiter, ft_lstnew(ft_strdelquotes(arg[(*n_arg)])));
 	}
 		else
 			fill_struct2(cmd, arg, n_arg, max);
@@ -114,6 +114,6 @@ void	fill_exe(t_pars **pars, int i, int j)
 		(*pars)->exe[i].args = NULL;
 	if (!(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
-	(*pars)->exe[i].here_doc = ft_strdelquotes((*pars)->limiter);
+	(*pars)->exe[i].here_doc = (*pars)->limiter;
 	(*pars)->exe[i].append = ((*pars)->append) && !ft_strncmp((*pars)->append, ">>", 3); // a modif
 }
