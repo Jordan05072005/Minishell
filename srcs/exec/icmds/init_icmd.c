@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/28 16:47:37 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:31:27 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,30 @@ int	check_write(char *filename)
 
 void	open_all_files(t_icmd *cmd, t_cmd input)
 {
+	(void)cmd;
 	while (input.in)
 	{
-		if (check_read(input.in->content) || !input.in->next)
-			cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
-		if (input.in->next && cmd->fd_in >= 0)
-			close(cmd->fd_in);
+		printf("In is %s\n", (char *)input.in->content);
+		// if (check_read(input.in->content) || !input.in->next)
+		// 	cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
+		// if (input.in->next && cmd->fd_in >= 0)
+		// 	close(cmd->fd_in);
 		input.in = input.in->next;
 	}
 	while (input.out)
 	{
-		if (check_write(input.out->content) || !input.out->next)
-		{
-			if (input.append)
-				cmd->fd_out = open(input.out->content,
-					O_WRONLY | O_CREAT | O_APPEND, 0644);
-			else
-				cmd->fd_out = open(input.out->content,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		}
-		if (input.out->next && cmd->fd_out >= 0)
-			close(cmd->fd_out);
+		printf("Out is %s\n", (char *)input.out->content);
+		// if (check_write(input.out->content) || !input.out->next)
+		// {
+		// 	if (input.append)
+		// 		cmd->fd_out = open(input.out->content,
+		// 			O_WRONLY | O_CREAT | O_APPEND, 0644);
+		// 	else
+		// 		cmd->fd_out = open(input.out->content,
+		// 			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		// }
+		// if (input.out->next && cmd->fd_out >= 0)
+		// 	close(cmd->fd_out);
 		input.out = input.out->next;
 	}
 }
@@ -83,6 +86,8 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 {
 	open_all_files(cmd, input);
 	if (!input.args)
+		cmd->type = 0;
+	else if (!input.args[0])
 		cmd->type = 0;
 	else if (is_builtin(input.args[0]))
 		cmd->type = 2;

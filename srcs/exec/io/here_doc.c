@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:25:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_list	**get_text(t_icmd cmd)
 	char	*temp;
 	t_list	**input_list;
 
+	(void)cmd;//to remove
 	signal(SIGINT, sigint_here_doc);
 	input_list = get_input_lst();
 	while (1)
@@ -44,16 +45,16 @@ t_list	**get_text(t_icmd cmd)
 		temp = custom_gnl(0);
 		if (!temp)
 		{
-			ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he\
-re-document delimited by end-of-file (wanted `", cmd.here_doc, "')", NULL}), 0);
+// 			ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he\
+// re-document delimited by end-of-file (wanted `", cmd.here_doc, "')", NULL}), 0);
 			break;
 		}
-		if (ft_strncmp(temp, cmd.here_doc, ft_strlen(cmd.here_doc)) == 0
-			&& temp[ft_strlen(cmd.here_doc)] == '\n')
-		{
-			free(temp);
-			break;
-		}
+		// if (ft_strncmp(temp, cmd.here_doc, ft_strlen(cmd.here_doc)) == 0
+		// 	&& temp[ft_strlen(cmd.here_doc)] == '\n')
+		// {
+		// 	free(temp);
+		// 	break;
+		// }
 		add_link(input_list, temp);
 	}
 	return (input_list);

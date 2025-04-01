@@ -40,7 +40,7 @@
 
 typedef struct s_info_cmd
 {
-	char	*here_doc;
+	t_list	*here_doc;
 	char	*path;
 	char	**args;
 	int		fd_in;
