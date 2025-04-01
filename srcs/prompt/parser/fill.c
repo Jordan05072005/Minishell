@@ -14,17 +14,13 @@
 
 void	fill_struct2(t_pars *cmd, char **arg, int *n_arg, int max)
 {
-	int	fd;
-
 	if ((*n_arg) + 1 < max
 	&& (ft_strncmp(arg[*n_arg], ">>", 3) == 0
-		|| ft_strncmp(arg[*n_arg], ">", 1) == 0 || cmd->out))
+		|| ft_strncmp(arg[*n_arg], ">", 1) == 0))
 	{
 		cmd->append = arg[(*n_arg)];
 		(*n_arg) += (farg(&arg[*n_arg + 1]));
-		fd = open(arg[*n_arg], O_WRONLY | O_CREAT, 0777);
 		(cmd)->out = arg[(*n_arg)];
-		close(fd);
 	}
 	else if (((ft_strlen(arg[*n_arg]) == 1 && ft_strncmp(arg[*n_arg], "<", 2) == 0)
 		|| cmd->in) && max > *n_arg + 1 )

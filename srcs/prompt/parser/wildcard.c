@@ -96,6 +96,7 @@ char	**insert_file(char **str, int j, char **file)
 	char	*after;
 	char *end;
 	char	*start;
+	//cpy -> et si NULL, remet la cpy et del le reste 
 
 	before = get_before(str[j]);
 	after = get_after(str[j]);
