@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/28 16:04:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:10:51 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ void	define2child(t_icmd *cmds, int nb_cmds, int child, int start);
 int		is_define(char *str);
 void	set_exit_val(int ret_val);
 char	*custom_gnl(int fd);
+void	subshell(t_icmd cmd);
+void sigint_here_doc(int sig);
+t_list	**get_input_lst(void);
 
 #endif

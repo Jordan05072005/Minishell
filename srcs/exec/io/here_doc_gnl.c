@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:40:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/26 15:17:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:09:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,16 @@ char	*custom_gnl(int fd)
 	}
 	buffer[bytes_read + i] = 0;
 	return (buffer);
+}
+
+void sigint_here_doc(int sig)
+{
+	t_list	**lst;
+
+	(void)sig;
+	lst = get_input_lst();
+	ft_putstr_fd("\n", 1);
+	ft_lstclear(lst, ft_del);
+	(void)(clean_data() + clean_icmds());
+	exit(0);
 }

@@ -24,7 +24,7 @@ DATA_SRC = \
     ft_getloc_struct.c ft_getloc.c init_imp.c is_env.c update_shlvl.c
 
 EXEC_SRC = \
-    $(addprefix exec/, exec_child.c exec_parent.c exec_builtin.c exec.c exec_define.c) \
+    $(addprefix exec/, exec_child.c exec_parent.c exec_builtin.c exec.c exec_define.c subshell.c) \
     $(addprefix icmds/, clean_icmds.c define2child.c init_icmd.c init_icmds.c) \
     $(addprefix io/, close_fd.c here_doc_gnl.c here_doc.c set_io.c) \
     $(addprefix path/, get_path.c is_builtin.c)
