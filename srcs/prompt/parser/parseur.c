@@ -127,7 +127,7 @@ t_list	*parseur(char *line, char **err)
 			i += 2;
 		}
 	}
-	read2(l);
+	// read2(l);
 	if (*err || ft_lstsize(l) % 2 == 0)
 		return (clear_blocks(l), NULL);
 	return (l);
