@@ -69,7 +69,7 @@ char	*ft_strdelquotes(char *str)
 	char	quote;
 
 	if (!str || (!ft_strchr(str, '"') && !ft_strchr(str, '\'')))
-		return (str);
+		return (ft_strdup(str));
 	i = -1;
 	quote = 0;
 	len = 0;

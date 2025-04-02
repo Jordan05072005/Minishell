@@ -36,7 +36,7 @@ char	*error_line(char *line, char *temp, int i)
 	}
 	if (!quote[2] || prof != 0)
 		return (ft_del(temp), ft_strdup("newline"));
-	return (ft_del(temp), NULL);
+	return (ft_del(temp), ft_del(quote), NULL);
 }
 
 char	*syntax_error3(char **arg, char *mess, int i)

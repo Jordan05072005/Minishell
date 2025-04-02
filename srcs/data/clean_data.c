@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/25 17:19:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:41:13 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	clean_pars(t_pars *cmd)
 		{
 			ft_free_tab((void **)cmd->exe[cmd->pipe].args,
 				ft_strslen(cmd->exe[cmd->pipe].args));
+			ft_lstclear(&cmd->exe[cmd->pipe].in, free);
+			ft_lstclear(&cmd->exe[cmd->pipe].here_doc, free);
+			ft_lstclear(&cmd->exe[cmd->pipe].out, free);
 		}
 		ft_free_tab((void *)(cmd->exe[0].split),
 			ft_strslen(cmd->exe[0].split));
