@@ -99,7 +99,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
 	(*pars)->exe[i].subshell = 0;
-	if ((*pars)->cmd && (*pars)->cmd[0] == '(')
+	if ((*pars)->cmd && (*pars)->cmd[farg2((*pars)->cmd) - 1] == '(')
 		(*pars)->exe[i].subshell = 1;
 	if ((*pars)->cmd && !(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");

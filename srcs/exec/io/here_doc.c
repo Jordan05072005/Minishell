@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/01 15:25:46 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:18:31 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	**get_text(t_icmd cmd)
 		temp = custom_gnl(0);
 		if (!temp)
 		{
-// 			ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he\
+// ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he
 // re-document delimited by end-of-file (wanted `", cmd.here_doc, "')", NULL}), 0);
 			break;
 		}

@@ -19,7 +19,7 @@ char	*nextc(char **str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i][0] != ' ' && str[i][0] != '\t') // withspace
+		if (!ft_isspace(str[i][0]))
 			return (str[i]);
 	}
 	return (NULL);
@@ -43,6 +43,18 @@ int	farg(char **str)
 	while (str[++i])
 	{
 		if (!ft_isspace(str[i][0]))
+			return (i + 1);
+	}
+	return (i);
+}
+int	farg2(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (!ft_isspace(str[i]))
 			return (i + 1);
 	}
 	return (i);

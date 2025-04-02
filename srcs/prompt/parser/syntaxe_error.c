@@ -104,7 +104,7 @@ char	*syntax_error(char **arg, char *line, int i, int j)
 		i = -1;
 		while (!temp && err[++i] && arg[j])
 		{
-			if (arg[j][0] != '(' && (((ft_strlen(arg[j]) > 2 || ((!nextc(&arg[j + 1])
+			if (arg[j][0] == err[i][0] && (((ft_strlen(arg[j]) > 2 || ((!nextc(&arg[j + 1])
 				|| (is_sep(nextc(&arg[j + 1])[0]))) && arg[j][0] != '('
 				&& ft_strlen(arg[j]) == ft_strlen(err[i])))
 				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))) || (j  == 0

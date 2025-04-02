@@ -86,6 +86,7 @@ void	shift_left(char **str, size_t i);
 /* -------------------------------------------------------------------------- */
 char	*nextc(char **str);
 int	farg(char **str);
+int	farg2(char *str);
 char	*beforec(char **str, int i);
 int	*quotes(char c, int *tab);
 
