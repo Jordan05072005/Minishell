@@ -55,9 +55,9 @@ char	*syntax_error3(char **arg, char *mess, int i)
 				&& ft_strlen(arg[0]) <= 2)
 				mess = ft_strdup("newline");
 			else if ((ft_strslen(arg) - (arg[1] && ft_isspace(arg[1][0]) == 1)) == 1
-				&& ft_strlen(arg[0]) > 2 && !ft_isalnum(arg[0][2]))
+				&& ft_strlen(arg[0]) > 2 && is_sep(arg[0][2]))
 				temp = ft_substr(arg[0], 2, 2);
-			else if (ft_strslen(arg) > 1 && !ft_isalnum(arg[farg(&arg[1])][0]))
+			else if (ft_strslen(arg) > 1 && is_sep(arg[farg(&arg[1])][0]))
 				temp = ft_substr(arg[farg(&arg[1])], 0 , 2);
 			if (temp)
 				mess = ft_strdup(temp) ; 

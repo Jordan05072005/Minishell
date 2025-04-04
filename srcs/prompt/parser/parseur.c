@@ -86,13 +86,18 @@ char	*pars_line(char *line, t_pars *exe)
 int	get_cut(char *str)
 {
 	int	i;
+	int	para;
 
 	i = -1;
-
+	para = 0;
 	while (str[++i])
 	{
-		if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2)) && i != 0)
-			return (i);
+		if (!ft_strncmp(&str[i], "(", 1))
+			para = 1;
+		else if (para && !ft_strncmp(&str[i], ")", 1))
+			para = 0;
+		else if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2)) && i != 0 && !para)
+			return (i - 1);
 	}
 	return (i);
 }
@@ -104,12 +109,15 @@ t_list	*parseur(char *line, char **err)
 	t_list	*l;
 
 	i = -1;
+	printf("hello");
 	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
 		&& (line[0] == '!' || line[0] == ':')))
 		return (NULL);
 	*err = syntax_error(cut_line(line), line, -1, -1);
+	printf("hello");
 	if (*err)
 		set_exit_val(2);
+
 	l = NULL;
 	while (++i < ft_strlen(line) && !(*err))
 	{
@@ -127,7 +135,7 @@ t_list	*parseur(char *line, char **err)
 			i += 2;
 		}
 	}
-	// read2(l);
+	read2(l);
 	if (*err || ft_lstsize(l) % 2 == 0)
 		return (clear_blocks(l), NULL);
 	return (l);
