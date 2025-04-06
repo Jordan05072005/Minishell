@@ -99,6 +99,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 {
 	char	*temp;
 
+	printf("cmd : %s", (*pars)->cmd);
 	(*pars)->exe[i].in = (*pars)->in;
 	(*pars)->exe[i].out = (*pars)->out;
 	(*pars)->exe[i].subshell = 0;

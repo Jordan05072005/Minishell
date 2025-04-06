@@ -113,7 +113,6 @@ t_list	*parseur(char *line, char **err)
 		&& (line[0] == '!' || line[0] == ':')))
 		return (NULL);
 	*err = syntax_error(cut_line(line), line, -1, -1);
-	printf("hello");
 	if (*err)
 		set_exit_val(2);
 
