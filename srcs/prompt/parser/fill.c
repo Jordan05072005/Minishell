@@ -104,7 +104,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 	(*pars)->exe[i].subshell = 0;
 	if ((*pars)->cmd && (*pars)->cmd[farg2((*pars)->cmd) - 1] == '(')
 		(*pars)->exe[i].subshell = 1;
-	if ((*pars)->cmd && !(*pars)->exe[i].subshell)
+	if ((*pars)->cmd && (*pars)->cmd[0] && !(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " \t");
 	else if ((*pars)->cmd)
 	{
@@ -113,8 +113,10 @@ void	fill_exe(t_pars **pars, int i, int j)
 		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 2);
 		ft_del(temp);
 	}
-	else
-		(*pars)->exe[i].args = NULL;
+	else{
+		(*pars)->exe[i].args = malloc(sizeof(char *));
+		(*pars)->exe[i].args[0] = (*pars)->cmd;
+	}
 	if (!(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
 	(*pars)->exe[i].here_doc = (*pars)->limiter;

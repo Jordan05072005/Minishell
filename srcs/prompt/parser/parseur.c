@@ -109,7 +109,6 @@ t_list	*parseur(char *line, char **err)
 	t_list	*l;
 
 	i = -1;
-	printf("hello");
 	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
 		&& (line[0] == '!' || line[0] == ':')))
 		return (NULL);
