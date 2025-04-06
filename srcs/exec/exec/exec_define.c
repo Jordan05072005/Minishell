@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:35:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/28 15:36:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:01:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ void	exec_define(t_icmd *cmds, int nb_cmds, int child)
 		return (define2child(cmds, nb_cmds, child, i));
 	cmds[child].rv = 0;
 	define_vars(cmds, child, -1);
+	if (nb_cmds > 1)
+		return (clean_data(), clean_icmds(), exit(0));
 }
