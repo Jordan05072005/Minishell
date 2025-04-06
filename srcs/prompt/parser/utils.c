@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 02:50:33 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/01/28 02:50:33 by jguaglio         ###   ########.fr       */
+/*   Created: 2025/04/06 13:26:53 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/06 13:26:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*ft_strdelquotes(char *str)
 			str_f[len++] = str[i];
 	}
 	str_f[len] = 0;
-	return (ft_del2((void **)&str), str_f);
+	return (/* ft_del2((void **)&str), */ str_f);
 }
 
 void	shift_left(char **str, size_t i)

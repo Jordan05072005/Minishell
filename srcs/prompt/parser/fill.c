@@ -66,6 +66,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 char	**fill_args(char **str, int j)
 {
 	char	*var;
+	char	*temp;
 
 	j = -1;
 	while (str && ++j < (int)ft_strslen(str))
@@ -87,7 +88,9 @@ char	**fill_args(char **str, int j)
 		}
 		else if (var)
 			shift_left(str, j);
-		str[j] = ft_strdelquotes(str[j]);
+		temp = ft_strdelquotes(str[j]);
+		ft_del(str[j]);
+		str[j] = temp;
 	}
 	return (str);
 }
