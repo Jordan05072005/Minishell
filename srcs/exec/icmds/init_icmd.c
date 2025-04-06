@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/02 10:56:57 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 12:45:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,52 @@
 
 int	check_read(char *filename)
 {
-	char	*mess;
-
 	if (access(filename, F_OK) == -1)
-	{
-		mess = ft_strsjoin((char *[]){"mini: ", filename, ": No such file or di\
-rectory.", NULL});
-		ft_putendl_fd(mess, 2);
-		ft_del(mess);
-		return (1);
-	}
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": No \
+such file or directory.", NULL}), 0), 1);
 	if (access(filename, R_OK) == -1)
-	{
-		mess = ft_strsjoin((char *[]){"mini: ", filename, ": Permission denied.\
-", NULL});
-		ft_putendl_fd(mess, 2);
-		ft_del(mess);
-		return (1);
-	}
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Per\
+mission denied.", NULL}), 0), 1);
+	return (0);
+}
+
+int	check_dir(char *filename)
+{
+	struct stat	st;
+	char		*dir;
+	char		*slash;
+
+	slash = ft_strrchr(filename, '/');
+	if (!slash)
+		dir = ft_strdup(".");
+	else if (slash == filename)
+		dir = ft_strdup("/");
+	else
+		dir = ft_substr(filename, 0, slash - filename);
+	if (access(dir, X_OK) == -1)
+		return (ft_del(dir), ft_perror(-1, ft_strsjoin((char *[]){"mini: \
+", filename, ": Permission denied.", NULL}), 0), 1);
+	if (access(dir, F_OK) == -1)
+		return (ft_del(dir), ft_perror(-1, ft_strsjoin((char *[]){"mini: \
+", filename, ": No such file or directory.", NULL}), 0), 1);
+	if (stat(filename, &st) == 0 && S_ISDIR(st.st_mode))
+		return (ft_del(dir), ft_perror(-1, ft_strsjoin((char *[]){"mini: \
+", filename, ": Is a directory.", NULL}), 0), 1);
+	if (access(dir, W_OK) == -1 && access(filename, W_OK) == -1)
+		return (ft_del(dir), ft_perror(-1, ft_strsjoin((char *[]){"mini: \
+", filename, ": Permission denied.", NULL}), 0), 1);
+	ft_del(dir);
 	return (0);
 }
 
 int	check_write(char *filename)
 {
-	char	*mess;
-
+	if (check_dir(filename))
+		return (1);
 	if (access(filename, F_OK) == -1)
 		return (0);
 	if (access(filename, W_OK) == -1)
-	{
-		mess = ft_strsjoin((char *[]){"mini: ", filename, ": Permission denied.\
-", NULL});
-		ft_putendl_fd(mess, 2);
-		ft_del(mess);
-		return (1);
-	}
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Permission denied.", NULL}), 0), 1);
 	return (0);
 }
 
@@ -59,6 +70,7 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
 		if (check_read(input.in->content))
 			break ;
+		printf("fd_in is %d\n", cmd->fd_in);
 		if (input.in->next && cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		input.in = input.in->next;
@@ -71,6 +83,7 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		else
 			cmd->fd_out = open(input.out->content,
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		printf("fd_out is %d\n", cmd->fd_out);
 		if (check_write(input.out->content))
 			break ;
 		if (input.out->next && cmd->fd_out >= 0)
