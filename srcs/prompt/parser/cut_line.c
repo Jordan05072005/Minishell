@@ -74,9 +74,11 @@ char	**gestion_parenthese(char **arg, char *line, int *i, int *old)
 		{
 			arg = addback_str(arg, ft_substr(line, *old, *i - *old + 1));
 			*old = *i + 1;
+			ft_del(quote);
 			return (arg);
 		}
 	}
+	ft_del(quote);
 	*i = temp;
 	return (NULL);
 }
