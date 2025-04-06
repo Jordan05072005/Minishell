@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/02 12:55:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:27:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 			exec_define(cmds, nb_cmds, child);
 	}
 	else if (cmds[child].type == 2)
-		exec_define(cmds, nb_cmds, child);
-	else if (cmds[child].type == 3)
 		exec_builtin(cmds, nb_cmds, child);
+	else if (cmds[child].type == 3)
+		exec_define(cmds, nb_cmds, child);
 }
 
 void	set_exit_val(int ret_val)

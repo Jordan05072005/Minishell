@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 12:45:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:16:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	check_write(char *filename)
 	if (access(filename, F_OK) == -1)
 		return (0);
 	if (access(filename, W_OK) == -1)
-		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Permission denied.", NULL}), 0), 1);
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Per\
+mission denied.", NULL}), 0), 1);
 	return (0);
 }
 
@@ -113,7 +114,6 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 	cmd->here_doc = input.here_doc;
 	cmd->args = input.args;
 	cmd->path = get_path(input, cmd);
-	if (!cmd->path)
 	cmd->pid = -1;
 	if (pipe(cmd->pipe) == -1)
 		return (ft_perror(1, ft_strdup("mini: Internal error: pipe."),
