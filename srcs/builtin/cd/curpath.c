@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 12:57:43 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	**get_stack(char *curpath, int *depth)
 	}
 	return (ft_free_tab((void **)path, ft_strslen(path)), stack);
 }
-
 
 // i3[0] = depth;
 // i3[1] = len / j;
@@ -119,6 +118,9 @@ ni: cd: ", arg, ": No such file or directory.", NULL}), 0), NULL);
 	if (!S_ISDIR(path_stat.st_mode))
 		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((char *[]){"mi\
 ni: cd: ", arg, ": Not a directory.", NULL}), 0), NULL);
+	if (access(curpath, X_OK) == -1)
+		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((char *[]){"mi\
+ni: cd: ", arg, ": Permission denied.", NULL}), 0), NULL);
 	update_env(curpath);
 	return (curpath);
 }

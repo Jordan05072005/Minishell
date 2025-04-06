@@ -66,6 +66,7 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg)
 char	**fill_args(char **str, int j)
 {
 	char	*var;
+	char	*temp;
 
 	j = -1;
 	while (str && ++j < (int)ft_strslen(str))
@@ -87,7 +88,9 @@ char	**fill_args(char **str, int j)
 		}
 		else if (var)
 			shift_left(str, j);
-		str[j] = ft_strdelquotes(str[j]);
+		temp = ft_strdelquotes(str[j]);
+		ft_del(str[j]);
+		str[j] = temp;
 	}
 	return (str);
 }
@@ -102,11 +105,11 @@ void	fill_exe(t_pars **pars, int i, int j)
 	if ((*pars)->cmd && (*pars)->cmd[farg2((*pars)->cmd) - 1] == '(')
 		(*pars)->exe[i].subshell = 1;
 	if ((*pars)->cmd && !(*pars)->exe[i].subshell)
-		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " ");
+		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " \t");
 	else if ((*pars)->cmd)
 	{
 		(*pars)->exe[i].args = malloc(sizeof(char *));
-		temp = ft_strtrim((*pars)->cmd, " ");
+		temp = ft_strtrim((*pars)->cmd, " \t");
 		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 2);
 		ft_del(temp);
 	}
