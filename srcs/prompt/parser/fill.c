@@ -109,9 +109,10 @@ void	fill_exe(t_pars **pars, int i, int j)
 		(*pars)->exe[i].args = ft_split2((*pars)->cmd, " \t");
 	else if ((*pars)->cmd)
 	{
-		(*pars)->exe[i].args = malloc(sizeof(char *));
+		(*pars)->exe[i].args = malloc(2 * sizeof(char *));
 		temp = ft_strtrim((*pars)->cmd, " \t");
 		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 2);
+		(*pars)->exe[i].args[1] = NULL;
 		ft_del(temp);
 	}
 	if (!(*pars)->exe[i].subshell)
