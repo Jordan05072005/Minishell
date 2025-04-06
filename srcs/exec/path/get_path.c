@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:25:50 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 11:20:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:53:44 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_path(t_cmd input, t_icmd *cmd)
 	if (ft_strncmp(".", input.args[0], 2) == 0 || ft_strncmp(input.args[0], "\
 ", 1) == 0 || ft_strncmp("..", input.args[0], 3) == 0)
 		return (ft_perror(-1, ft_strsjoin((char *[]){input.args[0], ": Command \
-not found.", NULL}), 0), NULL);
+not found.", NULL}), 0), cmd->rv = 127, NULL);
 	if (ft_strnstr(input.args[0], "/", ft_strlen(input.args[0])))
 	{
 		if (stat(input.args[0], &st) == 0 && !S_ISREG(st.st_mode))

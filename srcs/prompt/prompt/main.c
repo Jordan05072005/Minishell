@@ -117,6 +117,7 @@ int	main(int ac, char **av, char **env)
 		ft_del(line);
 		run_ast(data()->ast);
 		clear_tree(data()->ast);
+		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
 		data()->ast = NULL;
 		line = ft_readline();
 	}

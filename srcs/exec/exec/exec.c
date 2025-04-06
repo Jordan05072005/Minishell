@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 15:27:13 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:02:13 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 {
-	int	i = -1;
-	if (cmds[child].args)
-	{
-		if (cmds[child].type == 4)
-			printf("Subshell : ");
-		else
-			printf("Nooormal : ");
-		while (cmds[child].args[++i])
-			printf("[%s] - ", cmds[child].args[i]);
-		printf("[%s]\n", cmds[child].args[i]);
-	}
+	// int	i = -1;
+	// if (cmds[child].args)
+	// {
+	// 	if (cmds[child].type == 4)
+	// 		printf("Subshell : ");
+	// 	else
+	// 		printf("Nooormal : ");
+	// 	while (cmds[child].args[++i])
+	// 		printf("[%s] - ", cmds[child].args[i]);
+	// 	printf("[%s]\n", cmds[child].args[i]);
+	// }
 	if (cmds[child].type == 4)
 		exec_subshell(cmds, child);
 	else if (cmds[child].type == 1 || nb_cmds > 1)
