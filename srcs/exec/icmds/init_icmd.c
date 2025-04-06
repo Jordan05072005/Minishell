@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 15:16:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:35:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
 		if (check_read(input.in->content))
 			break ;
-		printf("fd_in is %d\n", cmd->fd_in);
 		if (input.in->next && cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		input.in = input.in->next;
@@ -84,7 +83,6 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		else
 			cmd->fd_out = open(input.out->content,
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		printf("fd_out is %d\n", cmd->fd_out);
 		if (check_write(input.out->content))
 			break ;
 		if (input.out->next && cmd->fd_out >= 0)
