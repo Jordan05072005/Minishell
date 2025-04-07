@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 13:20:16 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 13:13:11 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:16:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	clear_blocks(t_list *cmds)
 {
 	t_list	*next;
 
+	if (!cmds)
+		return ;
 	while (cmds)
 	{
 		clean_pars((t_pars *)cmds->content);
@@ -29,5 +31,32 @@ void	clear_blocks(t_list *cmds)
 			ft_del2((void **)&cmds);
 			cmds = next;
 		}
+	}
+}
+
+void	clear_tree(t_bt *tree)
+{
+	if (!tree)
+		return ;
+	if (tree->left)
+		clear_tree(tree->left);
+	if (tree->right)
+		clear_tree(tree->right);
+	if (!tree->left && !tree->right)
+		clean_pars((t_pars *)tree->content);
+	else
+		ft_del2((void **)&tree->content);
+	ft_del2((void **)&tree);
+}
+
+void	del_unusedlst(t_list *lst)
+{
+	t_list	*next;
+
+	while (lst)
+	{
+		next = lst->next;
+		ft_del2((void **)&lst);
+		lst = next;
 	}
 }

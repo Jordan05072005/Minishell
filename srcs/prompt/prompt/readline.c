@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env2env.c                                          :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 13:56:02 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:49:37 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/04/07 12:50:18 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/07 13:34:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	**env2env(t_list *env)
+char	*ft_readline(void)
 {
-	char	**new_env;
-	t_list	*temp;
-	size_t	len;
-	size_t	i;
+	char	*prompt;
+	char	*temp;
+	char	*line;
 
-	temp = env;
-	len = ft_lstsize(env);
-	new_env = malloc((len + 1) * sizeof(char *));
-	if (!new_env)
-		ft_perror(1, "mini: Internal error: malloc.",
-			clean_data() + clean_icmds());
-	i = -1;
-	while (++i < len)
-	{
-		new_env[i] = temp->content;
-		temp = temp->next;
-	}
-	new_env[i] = NULL;
-	return (new_env);
+	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
+	if (!isatty(0))
+		prompt = NULL;
+	else
+		prompt = get_prompt();
+	if (isatty(0))
+		temp = readline(prompt);
+	else
+		temp = readline(prompt);
+	ft_del(prompt);
+	line = ft_strtrim(temp, " \t\r\n\f\v");
+	ft_del(temp);
+	signal(SIGINT, any);
+	return (line);
 }

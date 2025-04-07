@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/02 11:37:01 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:46:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,22 @@ t_list	**get_text(char *limiter)
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
-		temp = custom_gnl(0);
+		temp = custom_gnl();
 		if (!temp)
 		{
 			ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he\
 re-document delimited by end-of-file (wanted `", limiter, "')", NULL}), 0);
-			break;
+			break ;
 		}
 		if (ft_strncmp(temp, limiter, ft_strlen(limiter)) == 0
 			&& temp[ft_strlen(limiter)] == '\n')
 		{
 			free(temp);
-			break;
+			break ;
 		}
 		add_link(input_list, temp);
 	}
+	write(1, "---\n", 4);
 	return (input_list);
 }
 
@@ -89,7 +90,7 @@ void	get_here_doc(t_icmd cmd)
 	close(p_fd[0]);
 }
 
-void here_doc(t_icmd cmd)
+void	here_doc(t_icmd cmd)
 {
 	int	saved;
 

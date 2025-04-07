@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:40:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/02 11:09:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:43:36 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,36 @@
 // 	return (buffer);
 // }
 
-char	*custom_gnl(int fd)
+char	*get_line(size_t *b_read, char **buffer, size_t *i, size_t buff_size)
+{
+	while (1)
+	{
+		*b_read = read(0, &(*buffer)[*i], buff_size);
+		if (*b_read <= 0)
+		{
+			if (*i == 0 || *b_read < 0)
+				return (free(*buffer), NULL);
+			continue ;
+		}
+		if ((*buffer)[*b_read + *i - 1] == '\n')
+			break ;
+		*i += *b_read;
+		if (*i >= buff_size - 1)
+		{
+			buff_size += buff_size;
+			*buffer = ft_realloc(*buffer, buff_size * sizeof(char));
+			if (!*buffer)
+				return (NULL);
+		}
+	}
+	(*buffer)[*b_read + *i] = 0;
+	return (*buffer);
+}
+
+char	*custom_gnl(void)
 {
 	char	*buffer;
-	ssize_t	bytes_read;
+	size_t	bytes_read;
 	size_t	i;
 	size_t	buff_size;
 
@@ -58,31 +84,11 @@ char	*custom_gnl(int fd)
 	if (!buffer)
 		return (NULL);
 	i = 0;
-	while (1)
-	{
-		bytes_read = read(fd, &buffer[i], buff_size);
-		if (bytes_read <= 0)
-		{
-			if (i == 0 || bytes_read < 0)
-				return (free(buffer), NULL);
-			continue ;
-		}
-		if (buffer[bytes_read + i - 1] == '\n')
-			break ;
-		i += bytes_read;
-		if (i >= buff_size - 1) 
-		{
-			buff_size += buff_size;
-			buffer = ft_realloc(buffer, buff_size * sizeof(char));
-			if (!buffer)
-				return (NULL);
-		}
-	}
-	buffer[bytes_read + i] = 0;
-	return (buffer);
+	bytes_read = 0;
+	return (get_line(&bytes_read, &buffer, &i, buff_size));
 }
 
-void sigint_here_doc(int sig)
+void	sigint_here_doc(int sig)
 {
 	t_list	**lst;
 

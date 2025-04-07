@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 16:35:33 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:14:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 	{
 		if (input.append)
 			cmd->fd_out = open(input.out->content,
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			cmd->fd_out = open(input.out->content,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (check_write(input.out->content))
 			break ;
 		if (input.out->next && cmd->fd_out >= 0)
@@ -115,5 +115,5 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 	cmd->pid = -1;
 	if (pipe(cmd->pipe) == -1)
 		return (ft_perror(1, ft_strdup("mini: Internal error: pipe."),
-			clean_icmds() + clean_data()));
+				clean_icmds() + clean_data()));
 }

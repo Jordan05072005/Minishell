@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:25:50 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 15:53:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:16:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmd)
 	tries = ft_split(env_path, ':');
 	if (!tries)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
-			clean_data() + clean_icmds()), NULL);
+				clean_data() + clean_icmds()), NULL);
 	while (tries[++i])
 	{
 		path = create_path(tries[i], input.args[0]);
@@ -43,7 +43,7 @@ mand not found.", NULL}), 0);
 
 char	*get_path(t_cmd input, t_icmd *cmd)
 {
-	struct	stat st;
+	struct stat	st;
 
 	if (cmd->type == 0)
 		return (NULL);

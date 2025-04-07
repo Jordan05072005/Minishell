@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_ast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.fr>  #+#  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-05 15:02:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025-03-05 15:02:15 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/07 12:42:00 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,33 +71,6 @@ t_bt	*build_tree(t_list *blocks)
 	return (tree);
 }
 
-void	clear_tree(t_bt *tree)
-{
-	if (!tree)
-		return ;
-	if (tree->left)
-		clear_tree(tree->left);
-	if (tree->right)
-		clear_tree(tree->right);
-	if (!tree->left && !tree->right)
-		clean_pars((t_pars *)tree->content);
-	else
-		ft_del2((void **)&tree->content);
-	ft_del2((void **)&tree);
-}
-
-void	del_unusedlst(t_list *lst)
-{
-	t_list	*next;
-
-	while (lst)
-	{
-		next = lst->next;
-		ft_del2((void **)&lst);
-		lst = next;
-	}
-}
-
 t_bt	*get_ast(char *line)
 {
 	t_bt	*tree;
@@ -120,10 +93,7 @@ t_bt	*get_ast(char *line)
 			err = ft_strdup("newline");
 		printf("mini: syntax error near unexpected token `%s'\n", err);
 		set_exit_val(2);
-		if (blocks)
-			clear_blocks(blocks);
-		ft_del2((void **)&err);
-		return (NULL);
+		return (clear_blocks(blocks), ft_del2((void **)&err), NULL);
 	}
 	blocks = ft_lstrev(blocks);
 	if (ft_lstsize(blocks) == 1)

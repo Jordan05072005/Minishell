@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/27 18:00:08 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:51:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 void	ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
-	void (*del)(void *), char *to_find);
+			void (*del)(void *), char *to_find);
 int		ft_lstsize(t_list *lst);
 int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 t_list	*ft_lstrev(t_list *head);
