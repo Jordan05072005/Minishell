@@ -29,7 +29,7 @@ char	*error_line(char *line, char *temp, int i)
 	while (line[++i])
 	{
 		quote = quotes(line[i], quote);
-		if (line[i] == '(' && quote[2])
+		if (line[i] == '(' && quote[2] && prof >= 0)
 			prof++;
 		else if (line[i] == ')' && quote[2])
 			prof--;

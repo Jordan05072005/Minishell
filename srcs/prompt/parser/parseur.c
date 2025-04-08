@@ -112,10 +112,8 @@ t_list *getLineParsing(char *line, char **err)
 		lineTemp = ft_substr(&line[i], 0, get_cut(&line[i]));
 		ft_lstadd_back(&cutLine, ft_lstnew(lineTemp));
 		i += get_cut(&line[i]);
-		// printf("line[i] : %c\n", line[i]);
 		if (line[i] == '|' || line[i] == '&')
 		{
-			// printf("ici");
 			ft_lstadd_back(&cutLine, ft_lstnew((void *)ft_substr(&line[i], 0, 2)));
 			i += 2;
 		}
@@ -133,7 +131,6 @@ t_pars	*parseur(char *line)
 	pars = init_struct_pars();
 	pars->line = line;
  	pars_line(pars->line, pars);
-	// ft_del(pars->line);
 	// reader(pars, 1);
 
 	return (pars);
