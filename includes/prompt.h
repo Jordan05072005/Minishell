@@ -46,6 +46,7 @@ char	*get_start(char *str);
 /* -------------------------------------------------------------------------- */
 
 int		accessv(char *start, char *file, char *str);
+int existing(char *path, char *str);
 
 /* -------------------------------------------------------------------------- */
 /*                  get_var.c                                                 */
@@ -97,6 +98,8 @@ int		*quotes(char c, int *tab);
 t_pars	*init_struct_pars(void);
 void	init_struct_cmd(t_pars **pars, int nbr, char **arg);
 char	**ft_split2(char *s, char *c);
+t_wildcard *initWildcard(char *path);
+void cleanW(t_wildcard **w);
 
 char	*ft_readline(void);
 

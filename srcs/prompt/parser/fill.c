@@ -77,8 +77,6 @@ char	**fill_args(char **str, int j)
 			str = wildcard(str, &j);
 			continue;
 		}
-		// if (!str || !str[1])
-		// 	printf("hello");
 		if (ft_strchr(str[j], '$') || ft_strchr(str[j], '~'))
 			var = get_var(str[j]);
 		if (var && var[0]) // is vcvar$

@@ -113,32 +113,6 @@ char	**insert_file(char **str, int j, char **file)
 		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);
 }
 
-// int	existing(char *str)
-// {
-// 	char	*path;
-// 	char	*temp;
-// 	DIR		*dir;
-
-
-// 	path = get_start(str[*j]);
-// 	temp = ft_strdup(str[*j]);
-// 	if (!path[0])
-// 	{
-// 		ft_del(path);
-// 		path = ft_strdup("./");
-// 	}
-// 	dir = opendir(path);
-// 	if (!dir)
-// 		return (1);
-// }
-
-// si avant y'a / -> prend se chemin
-// sinon reduire la recherche a avant apres 
-// juste * == all
-// riens on ecrit jsute *dededde = *dededde
-// echo /*
-// echo /includes/*
-// echo */
 char	**wildcard(char **str, int *j)
 {
 	DIR		*dir;
@@ -146,9 +120,6 @@ char	**wildcard(char **str, int *j)
 	char	*path;
 	char	*temp;
 
-	// if (!existig)
-	// 	return ;
-	// printf("hello");
 	path = get_start(str[*j]);
 	temp = ft_strdup(str[*j]);
 	if (!path[0])
@@ -156,6 +127,8 @@ char	**wildcard(char **str, int *j)
 		ft_del2((void **)&path);
 		path = ft_strdup("./");
 	}
+	if (existing(path, str[*j]) <= 0)
+		return (ft_del(path), ft_del(temp), str);
 	dir = opendir(path);
 	if (!dir)
 		return (del_strs(str, (*j)--, temp));

@@ -46,7 +46,7 @@ void	read2(t_list *l)
 {
 	while (l != NULL)
 	{
-		printf("%s\n", (char *)l->content);
+		printf("arg : %s\n", (char *)l->content);
 		l = l->next;
 	}
 }
@@ -78,19 +78,23 @@ int	get_cut(char *str)
 {
 	int	i;
 	int	para;
+	int *quote;
 
+	quote = 0;
 	i = -1;
 	para = 0;
 	while (str[++i])
 	{
-		if (!ft_strncmp(&str[i], "(", 1))
-			para = 1;
-		else if (para && !ft_strncmp(&str[i], ")", 1))
-			para = 0;
-		else if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2)) && i != 0 && !para)
+		quote = quotes(str[i], quote);
+		if (!ft_strncmp(&str[i], "(", 1) && quote[2])
+			para++;
+		else if (para && !ft_strncmp(&str[i], ")", 1) && quote[2])
+			para--;
+		else if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2))
+				&& i != 0 && para == 0 && quote[2])
 			return (i);
 	}
-	return (i);
+	return (ft_del(quote), i);
 }
 
 t_list *getLineParsing(char *line, char **err)
@@ -118,7 +122,7 @@ t_list *getLineParsing(char *line, char **err)
 			i += 2;
 		}
 	}
-	// read2(cutLine);
+	read2(cutLine);
 	if (*err)
 		return (ft_lstclear(&cutLine, free), NULL);
 	return (cutLine);

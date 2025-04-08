@@ -54,3 +54,27 @@ void	init_struct_cmd(t_pars **pars, int nbr, char **arg)
 		(*pars)->exe[i].split = arg;
 	}
 }
+
+t_wildcard *initWildcard(char *path)
+{
+	t_wildcard *w;
+
+	w = malloc(sizeof(t_wildcard));
+	w->pathTemp = ft_strdup(path);
+	w->dir = NULL;
+	w->after = NULL;
+	w->before = NULL;
+	w->val = 0;
+	w->i = -1;
+	return (w);
+}
+
+void cleanW(t_wildcard **w)
+{
+	ft_del((*w)->after);
+	ft_del((*w)->before);
+	ft_del((*w)->pathTemp);
+	if ((*w)->dir)
+		closedir((*w)->dir);
+	ft_del(*w);
+}

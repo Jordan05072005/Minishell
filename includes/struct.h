@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 14:07:58 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:21:18 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+#include <dirent.h>
 
 /* -------------------------------------------------------------------------- */
 /*                  exec.h                                                    */
@@ -70,6 +72,16 @@ typedef struct s_bt
 	struct s_bt	*left;
 	struct s_bt	*right;
 }	t_bt;
+
+typedef struct s_wildcard
+{
+	DIR	*dir;
+	char	*pathTemp;
+	char	*after;
+	char *before;
+	int	val;
+	int i;
+}	t_wildcard;
 
 /* -------------------------------------------------------------------------- */
 /*                  prompt.h                                                  */
