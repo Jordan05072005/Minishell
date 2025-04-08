@@ -6,7 +6,7 @@
 /*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:40:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 13:24:25 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:25:53 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 // 	return (buffer);
 // }
 
-char	*get_line(size_t *b_read, char **buffer, size_t *i, size_t buff_size)
+char	*get_line(int *b_read, char **buffer, int *i, int buff_size)
 {
 	while (1)
 	{
@@ -75,9 +75,9 @@ char	*get_line(size_t *b_read, char **buffer, size_t *i, size_t buff_size)
 char	*custom_gnl(void)
 {
 	char	*buffer;
-	size_t	bytes_read;
-	size_t	i;
-	size_t	buff_size;
+	int		bytes_read;
+	int		i;
+	int		buff_size;
 
 	buff_size = 1024;
 	buffer = malloc(buff_size * sizeof(char));
