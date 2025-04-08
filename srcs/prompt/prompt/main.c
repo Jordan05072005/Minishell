@@ -22,6 +22,7 @@ char	*ft_readline(void)
 
 	signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
 	if (!isatty(0))
 		prompt = NULL;
 	else
@@ -113,10 +114,13 @@ int	main(int ac, char **av, char **env)
 		(void)before;
 		data()->ast = get_ast(line);
 		ft_del(line);
-		run_ast(data()->ast);
-		clear_tree(data()->ast);
-		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
-		data()->ast = NULL;
+		if (data()->ast)
+		{
+			run_ast(data()->ast);
+			clear_tree(data()->ast);
+			// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
+			data()->ast = NULL;
+		}
 		line = ft_readline();
 	}
 	ret = ft_atoi(ft_getimp("?"));
