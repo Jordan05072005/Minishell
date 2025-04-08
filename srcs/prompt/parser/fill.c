@@ -113,7 +113,7 @@ void	fill_exe(t_pars **pars, int i, int j)
 		temp = ft_strtrim((*pars)->cmd, " \t");
 		(*pars)->exe[i].args[0] = ft_substr(temp, 1, ft_strlen(temp) - 2);
 		ft_del(temp);
-	}
+	}	
 	if (!(*pars)->exe[i].subshell)
 		(*pars)->exe[i].args = fill_args((*pars)->exe[i].args, j);;
 	(*pars)->exe[i].here_doc = (*pars)->limiter;

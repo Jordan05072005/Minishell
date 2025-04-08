@@ -113,7 +113,7 @@ t_bt	*get_ast(char *line)
 		i++;
 	if (i == ft_strlen(line))
 		return (NULL);
-	blocks = parseur(line, &err);
+	blocks = getLineParsing(line, &err);
 	if (!blocks)
 	{
 		if (!err)
@@ -137,8 +137,11 @@ t_bt	*get_ast(char *line)
 int	run_list(t_pars *pars)
 {
 	int	rv;
+	t_pars *p;
 
-	rv = exec(pars->pipe, pars->exe);
+	p = parseur(line2->content);
+	rv = exec(p->pipe, p->exe);
+	clean_pars(p);
 	return (rv);
 }
 

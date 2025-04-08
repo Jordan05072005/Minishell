@@ -62,7 +62,8 @@ int	fill_struct(t_pars *cmd, char **arg, int *n_arg);
 /* -------------------------------------------------------------------------- */
 /*                  parser.c                                                  */
 /* -------------------------------------------------------------------------- */
-t_list	*parseur(char *line, char **err);
+t_pars	*parseur(char *line);
+t_list *getLineParsing(char *line, char **err);
 char	*syntax_error(char **arg, char *line, int i, int j);
 
 /* -------------------------------------------------------------------------- */

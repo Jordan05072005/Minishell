@@ -44,23 +44,14 @@ void	reader(t_pars *cmd, int i)
 
 void	read2(t_list *l)
 {
-	int	it = 0;
 	while (l != NULL)
 	{
-		if (it % 2 == 0)
-		{
-			reader(l->content, 1);
-			// printf("%p\n", l->content);
-		}
-		else
-			printf("%s\n", (char *)l->content);
-
+		printf("%s\n", (char *)l->content);
 		l = l->next;
-		it++;
 	}
 }
 
-char	*pars_line(char *line, t_pars *exe)
+void pars_line(char *line, t_pars *exe)
 {
 	char	**arg;
 	int		n_arg;
@@ -72,7 +63,7 @@ char	*pars_line(char *line, t_pars *exe)
 	// while (arg && arg[++j])
 	// 	printf("zrg : %s\n", arg[j]);
 	if (!arg)
-		return (ft_strdup("newline"));
+		return ;
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);
 	while (fill_struct(exe, arg, &n_arg))
 	{
@@ -80,7 +71,7 @@ char	*pars_line(char *line, t_pars *exe)
 		free_tpars(&exe);
 	}
 	fill_exe(&exe, i, -1);
-	return (NULL);
+	return ;
 }
 
 int	get_cut(char *str)
@@ -97,44 +88,53 @@ int	get_cut(char *str)
 		else if (para && !ft_strncmp(&str[i], ")", 1))
 			para = 0;
 		else if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2)) && i != 0 && !para)
-			return (i - 1);
+			return (i);
 	}
 	return (i);
 }
 
-t_list	*parseur(char *line, char **err)
+t_list *getLineParsing(char *line, char **err)
 {
 	size_t	i;
-	t_pars	*temp;
-	t_list	*l;
+	t_list *cutLine;
+	char	*lineTemp;
 
 	i = -1;
 	if (!line || line[0] == '\0' || (ft_strlen(line) == 1 
-		&& (line[0] == '!' || line[0] == ':')))
+	&& (line[0] == '!' || line[0] == ':')))
 		return (NULL);
 	*err = syntax_error(cut_line(line), line, -1, -1);
 	if (*err)
 		set_exit_val(2);
-
-	l = NULL;
+	cutLine = NULL;
 	while (++i < ft_strlen(line) && !(*err))
 	{
-		temp = init_struct_pars();
-		temp->line = ft_substr(&line[i], 0, get_cut(&line[i]));
-		*err = pars_line(temp->line, temp);
-		if (*err)
-			continue;
-		ft_del(temp->line);
-		ft_lstadd_back(&l, ft_lstnew(temp));
+		lineTemp = ft_substr(&line[i], 0, get_cut(&line[i]));
+		ft_lstadd_back(&cutLine, ft_lstnew(lineTemp));
 		i += get_cut(&line[i]);
+		printf("line[i] : %c\n", line[i]);
 		if (line[i] == '|' || line[i] == '&')
 		{
-			ft_lstadd_back(&l, ft_lstnew((void *)ft_substr(&line[i], 0, 2)));
+			printf("ici");
+			ft_lstadd_back(&cutLine, ft_lstnew((void *)ft_substr(&line[i], 0, 2)));
 			i += 2;
 		}
 	}
-	read2(l);
-	if (*err || ft_lstsize(l) % 2 == 0)
-		return (clear_blocks(l), NULL);
-	return (l);
+	read2(cutLine);
+	if (*err)
+		return (ft_lstclear(&cutLine, free), NULL);
+	return (cutLine);
+}
+
+t_pars	*parseur(char *line)
+{
+	t_pars	*pars;
+
+	pars = init_struct_pars();
+	pars->line = line;
+ 	pars_line(pars->line, pars);
+	ft_del(pars->line);
+	reader(pars, 1);
+
+	return (pars);
 }
