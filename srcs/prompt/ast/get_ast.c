@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 13:17:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:07:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,19 @@ t_bt	*get_ast(char *line)
 	return (tree);
 }
 
+//(a=test && echo "a is [$a]") && echo "a is [$a]"
 int	run_list(char *line)
 {
-	int	rv;
-	t_pars *p;
+	int		rv;
+	t_data	*da;
+	t_pars	*p;
 
+	da = data();
 	p = parseur(line);
+	da->pars = p;
 	rv = exec(p->pipe, p->exe);
 	clean_pars(p);
+	da->pars = NULL;
 	return (rv);
 }
 
