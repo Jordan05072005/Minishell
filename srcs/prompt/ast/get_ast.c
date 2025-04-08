@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 12:42:00 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:17:31 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ t_bt	*get_ast(char *line)
 	return (tree);
 }
 
-int	run_list(t_pars *pars)
+int	run_list(char *line)
 {
 	int	rv;
 	t_pars *p;
 
-	p = parseur(line2->content);
+	p = parseur(line);
 	rv = exec(p->pipe, p->exe);
 	clean_pars(p);
 	return (rv);
@@ -122,7 +122,7 @@ int	run_ast(t_bt *ast)
 	if (!ast)
 		return (-1);
 	if (!ast->left && !ast->right)
-		return (run_list((t_pars *)ast->content));
+		return (run_list((char *)ast->content));
 	rv = run_ast(ast->left);
 	if (ft_strncmp("&&", (char *)ast->content, 3) == 0)
 	{
