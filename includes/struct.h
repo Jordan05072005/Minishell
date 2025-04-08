@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 13:15:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:07:58 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ typedef struct s_data
 {
 	t_bt	*ast;
 	t_icmd	*cmds;
+	t_pars	*pars;
 	t_list	*imp;
 	t_list	*env;
 	t_list	*loc;
-	t_list	*mem;
 	int		nb_cmds;
 	int		saved_out;
 	int		saved_tty;

@@ -60,7 +60,7 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 		ft_color(av);
 	if (isatty(1))
 		print_welcome();
-	d->mem = NULL;
+	d->pars = NULL;
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");

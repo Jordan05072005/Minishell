@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:46:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:08:28 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,7 @@ void	get_here_doc(t_icmd cmd)
 		close(p_fd[1]);
 		return ((void)(clean_data() + clean_icmds()), exit(0));
 	}
-	waitpid(f_id, NULL, 0);
-	close(p_fd[1]);
-	dup2(p_fd[0], 0);
+	(waitpid(f_id, NULL, 0), close(p_fd[1]), dup2(p_fd[0], 0));
 	close(p_fd[0]);
 }
 
