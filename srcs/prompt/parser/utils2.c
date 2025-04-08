@@ -27,7 +27,7 @@ char	*nextc(char **str)
 
 char	*beforec(char **str, int i)
 {
-	while (str[--i])
+	while (--i > 0)
 	{
 		if (str[i][0] != ' ' && str[i][0] != '\t')
 			return (str[i]);
