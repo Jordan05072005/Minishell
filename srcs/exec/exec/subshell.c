@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:00:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/02 12:55:22 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:03:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	exec_subshell(t_icmd *cmds, int child)
 		data()->ast = get_ast(sub);
 		ft_del(sub);
 		run_ast(data()->ast);
-		clean_data();
 		ret = ft_atoi(ft_getimp("?"));
+		clean_data();
 		exit(ret);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 12:45:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:14:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	check_write(char *filename)
 	if (access(filename, F_OK) == -1)
 		return (0);
 	if (access(filename, W_OK) == -1)
-		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Permission denied.", NULL}), 0), 1);
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Per\
+mission denied.", NULL}), 0), 1);
 	return (0);
 }
 
@@ -70,7 +71,6 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
 		if (check_read(input.in->content))
 			break ;
-		printf("fd_in is %d\n", cmd->fd_in);
 		if (input.in->next && cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		input.in = input.in->next;
@@ -79,11 +79,10 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 	{
 		if (input.append)
 			cmd->fd_out = open(input.out->content,
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			cmd->fd_out = open(input.out->content,
-				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		printf("fd_out is %d\n", cmd->fd_out);
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (check_write(input.out->content))
 			break ;
 		if (input.out->next && cmd->fd_out >= 0)
@@ -113,9 +112,8 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 	cmd->here_doc = input.here_doc;
 	cmd->args = input.args;
 	cmd->path = get_path(input, cmd);
-	if (!cmd->path)
 	cmd->pid = -1;
 	if (pipe(cmd->pipe) == -1)
 		return (ft_perror(1, ft_strdup("mini: Internal error: pipe."),
-			clean_icmds() + clean_data()));
+				clean_icmds() + clean_data()));
 }

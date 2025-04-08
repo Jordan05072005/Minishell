@@ -29,11 +29,9 @@ char	*ft_readline(void)
 	if (isatty(0))
 		temp = readline(prompt);
 	else
-		temp = get_next_line(0);
-		// temp = readline(NULL);
+		temp = readline(prompt);
 	ft_del(prompt);
 	line = ft_strtrim(temp, " \t\r\n\f\v");
-	// line = ft_strdup(temp);
 	ft_del(temp);
 	signal(SIGINT, any);
 	return (line);
@@ -43,7 +41,6 @@ void	create_env(t_data **d, char **env, char **av, int ac)
 {
 	(void)av;
 	(void)ac;
-
 	(*d)->loc = NULL;
 	(*d)->env = NULL;
 	(*d)->imp = NULL;
@@ -63,6 +60,7 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 		ft_color(av);
 	if (isatty(1))
 		print_welcome();
+	d->mem = NULL;
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");
@@ -89,14 +87,14 @@ char	*update_history(char *line)
 	before = ft_getimp_struct("BEFORE", &bin);
 	if (!before)
 		ft_perror(1, ft_strdup("mini: Internal error: missing struct."),
-				clean_icmds() + clean_data());
+			clean_icmds() + clean_data());
 	ft_del(before->content);
 	before->content = ft_strsjoin((char *[]){"BEFORE=", line, NULL});
 	if (!before->content)
 		ft_perror(1, ft_strdup("mini: Internal error: malloc."),
-				clean_icmds() + clean_data());
+			clean_icmds() + clean_data());
 	return (ft_getimp("BEFORE"));
-}	
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -117,6 +115,7 @@ int	main(int ac, char **av, char **env)
 		ft_del(line);
 		run_ast(data()->ast);
 		clear_tree(data()->ast);
+		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
 		data()->ast = NULL;
 		line = ft_readline();
 	}

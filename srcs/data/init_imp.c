@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/26 13:45:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:47:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_io(t_data *d)
 		tty = open("/dev/tty", O_WRONLY);
 		if (tty == -1)
 			ft_perror(1, ft_strdup("mini: error opening a terminal.\n"),
-					clean_data());
+				clean_data());
 		d->saved_tty = dup(tty);
 		if (d->saved_tty == -1)
 			ft_perror(1, ft_strdup("mini: error redirecting stdout to a termina\

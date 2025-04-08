@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:25:50 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/06 11:20:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:16:56 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmd)
 	tries = ft_split(env_path, ':');
 	if (!tries)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
-			clean_data() + clean_icmds()), NULL);
+				clean_data() + clean_icmds()), NULL);
 	while (tries[++i])
 	{
 		path = create_path(tries[i], input.args[0]);
@@ -43,7 +43,7 @@ mand not found.", NULL}), 0);
 
 char	*get_path(t_cmd input, t_icmd *cmd)
 {
-	struct	stat st;
+	struct stat	st;
 
 	if (cmd->type == 0)
 		return (NULL);
@@ -52,7 +52,7 @@ char	*get_path(t_cmd input, t_icmd *cmd)
 	if (ft_strncmp(".", input.args[0], 2) == 0 || ft_strncmp(input.args[0], "\
 ", 1) == 0 || ft_strncmp("..", input.args[0], 3) == 0)
 		return (ft_perror(-1, ft_strsjoin((char *[]){input.args[0], ": Command \
-not found.", NULL}), 0), NULL);
+not found.", NULL}), 0), cmd->rv = 127, NULL);
 	if (ft_strnstr(input.args[0], "/", ft_strlen(input.args[0])))
 	{
 		if (stat(input.args[0], &st) == 0 && !S_ISREG(st.st_mode))

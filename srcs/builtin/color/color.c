@@ -6,34 +6,28 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:16:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/27 18:02:03 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:09:14 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-// {NULL, "c0d684", "cbeaa6", "f3f9d2", "ffffff"},
-// {NULL, "593f62", "7b6d8d", "6a5678", "ffffff"},
-// {NULL, "775144", "c09891", "9c756b", "ffffff"},
-// {NULL, "7e8d85", "a2e3c4", "abd1be", "ffffff"},
-// {NULL, "1e1e1e", "1e1e1e", "1e1e1e", "1e1e1e"}
-
 char	**get_config(int config)
 {
-	static char *configs[13][5] = {
-		{NULL, "0x00a1c9", "0x00ffa1", "0x00d0b5", "0xffffff"},
-		{NULL, "0x00a1c9", "0x00ffa1", "0x00d0b5", "0x81ffd1"},
-		{NULL, "0xcc8eeb", "0xcc8eeb", "0xb649ed", "0xffffff"},
-		{NULL, "0xcc8eeb", "0xcc8eeb", "0xb649ed", "0xe0b0ff"},
-		{NULL, "0xc0d684", "0xcbeaa6", "0xf3f9d2", "0xffffff"},
-		{NULL, "0xc0d684", "0xcbeaa6", "0xf3f9d2", "0xcbeaa6"},
-		{NULL, "0x593f62", "0x7b6d8d", "0x6a5678", "0xffffff"},
-		{NULL, "0x593f62", "0x7b6d8d", "0x6a5678", "0x907d9d"},
-		{NULL, "0x775144", "0xc09891", "0x9c756b", "0xffffff"},
-		{NULL, "0x775144", "0xc09891", "0x9c756b", "0xbba48b"},
-		{NULL, "0x7e8d85", "0xa2e3c4", "0xabd1be", "0xffffff"},
-		{NULL, "0x7e8d85", "0xa2e3c4", "0xabd1be", "0xd1f3e2"},
-		{NULL, "0x1e1e1e", "0x1e1e1e", "0x1e1e1e", "0x1e1e1e"}
+	static char	*configs[13][5] = {
+	{NULL, "0x00a1c9", "0x00ffa1", "0x00d0b5", "0xffffff"},
+	{NULL, "0x00a1c9", "0x00ffa1", "0x00d0b5", "0x81ffd1"},
+	{NULL, "0xcc8eeb", "0xcc8eeb", "0xb649ed", "0xffffff"},
+	{NULL, "0xcc8eeb", "0xcc8eeb", "0xb649ed", "0xe0b0ff"},
+	{NULL, "0xc0d684", "0xcbeaa6", "0xf3f9d2", "0xffffff"},
+	{NULL, "0xc0d684", "0xcbeaa6", "0xf3f9d2", "0xcbeaa6"},
+	{NULL, "0x593f62", "0x7b6d8d", "0x6a5678", "0xffffff"},
+	{NULL, "0x593f62", "0x7b6d8d", "0x6a5678", "0x907d9d"},
+	{NULL, "0x775144", "0xc09891", "0x9c756b", "0xffffff"},
+	{NULL, "0x775144", "0xc09891", "0x9c756b", "0xbba48b"},
+	{NULL, "0x7e8d85", "0xa2e3c4", "0xabd1be", "0xffffff"},
+	{NULL, "0x7e8d85", "0xa2e3c4", "0xabd1be", "0xd1f3e2"},
+	{NULL, "0x1e1e1e", "0x1e1e1e", "0x1e1e1e", "0x1e1e1e"}
 	};
 
 	return (configs[config]);
@@ -78,7 +72,7 @@ fig index."), 0), 1);
 	return (-1);
 }
 
-int ft_color(char **av)
+int	ft_color(char **av)
 {
 	int			i;
 	int			preproc;

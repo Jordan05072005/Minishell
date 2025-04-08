@@ -6,11 +6,32 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/27 18:01:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:04:55 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+char	*get_curpath(char *arg, int *print)
+{
+	char	*curpath;
+	char	*cdpath;
+	char	**cdpaths;
+
+	cdpaths = NULL;
+	cdpath = ft_getenv("CDPATH");
+	if (!cdpath)
+		cdpath = ft_getloc("CDPATH");
+	if (cdpath)
+		cdpaths = ft_split(cdpath, ':');
+	curpath = test_cdpath(cdpaths, arg);
+	ft_free_tab((void **)cdpaths, ft_strslen(cdpaths));
+	if (!curpath)
+		curpath = create_path(ft_getimp("PWD"), arg);
+	else
+		*print = 1;
+	return (curpath);
+}
 
 char	*cd_previous(char *arg, char *unused, int *print, int option)
 {
@@ -49,21 +70,12 @@ char	*find_path(char *arg, int *print)
 		if (!path)
 			path = ft_getloc("HOME");
 		if (!path)
-			return (ft_perror(-1, ft_strdup("mini: cd: HOME is not set."), 0), NULL);
+			return (ft_perror(-1, ft_strdup("mini: cd: HOME is not set."), 0),
+				NULL);
 		return (ft_strdup(path));
 	}
 	if (arg[0] == '/')
 		return (ft_strdup(arg));
-	//the following one should not exist, it should be done in parsing.
-	if (arg[0] == '~')
-	{
-		path = ft_getenv("HOME");
-		if (!path)
-			path = ft_getloc("HOME");
-		if (!path)
-			path = ft_getimp("HOME");
-		return (create_path(path, arg + 1));
-	}
 	if (arg[0] == '.')
 		return (create_path(ft_getimp("PWD"), arg));
 	return (get_curpath(arg, print));
@@ -77,7 +89,7 @@ int	ft_cd(char **av)
 
 	print = 0;
 	option = 0;
-	if (av[1]) 
+	if (av[1])
 		option = (ft_strncmp(av[1], "--", 3) == 0);
 	if (ft_strslen(av) > 2 + option)
 		return (ft_perror(-1, ft_strdup("mini: cd: Too many arguments."), 0),
