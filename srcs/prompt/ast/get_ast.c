@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 14:07:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:06:40 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_bt	*get_ast(char *line)
 	if (i == ft_strlen(line))
 		return (NULL);
 	blocks = getLineParsing(line, &err);
-	if (!blocks)
+	if (!blocks || err)
 	{
 		if (!err)
 			err = ft_strdup("newline");
