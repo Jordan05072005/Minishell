@@ -92,7 +92,7 @@ int	get_cut(char *str)
 			para--;
 		else if ((!ft_strncmp(&str[i], "||", 2) || !ft_strncmp(&str[i], "&&", 2))
 				&& i != 0 && para == 0 && quote[2])
-			return (i);
+			return (ft_del(quote), i);
 	}
 	return (ft_del(quote), i);
 }
