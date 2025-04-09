@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 14:08:28 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:32:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	write_text(int p_fd[2], t_list *input)
 	ft_lstclear(&temp, ft_del);
 }
 
-void	get_here_doc(t_icmd cmd)
+int	get_here_doc(t_icmd cmd)
 {
 	int		p_fd[2];
 	pid_t	f_id;
@@ -82,22 +82,24 @@ void	get_here_doc(t_icmd cmd)
 		input = get_text((char *)cmd.here_doc->content);
 		write_text(p_fd, *input);
 		close(p_fd[1]);
-		return ((void)(clean_data() + clean_icmds()), exit(0));
+		return ((void)(clean_data() + clean_icmds()), exit(0), 0);
 	}
-	(waitpid(f_id, NULL, 0), close(p_fd[1]), dup2(p_fd[0], 0));
-	close(p_fd[0]);
+	(waitpid(f_id, NULL, 0), close(p_fd[1]));
+	return (p_fd[0]);
 }
 
-void	here_doc(t_icmd cmd)
+int	here_doc(t_icmd cmd)
 {
 	int	saved;
+	int	fd;
 
 	saved = dup(0);
 	while (cmd.here_doc)
 	{
-		get_here_doc(cmd);
+		fd = get_here_doc(cmd);
 		cmd.here_doc = cmd.here_doc->next;
 		if (cmd.here_doc)
 			dup2(saved, 0);
 	}
+	return (fd);
 }

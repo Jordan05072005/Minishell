@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:39:04 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:16:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:30:16 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	set_io_p(int child, int nb_cmds, t_icmd *cmds)
 {
-	if (cmds[child].here_doc)
-		here_doc(cmds[child]);
-	else if (cmds[child].fd_in != 0)
+	if (cmds[child].fd_in != 0)
 	{
 		if (dup2(cmds[child].fd_in, 0) == -1)
 			return (ft_perror(-1, NULL, 0), 1);
@@ -43,9 +41,7 @@ int	set_io_p(int child, int nb_cmds, t_icmd *cmds)
 
 void	set_io_cp(int child, int nb_cmds, t_icmd *cmds)
 {
-	if (cmds[child].here_doc)
-		here_doc(cmds[child]);
-	else if (cmds[child].fd_in != 0)
+	if (cmds[child].fd_in != 0)
 	{
 		if (dup2(cmds[child].fd_in, 0) == -1)
 			ft_perror(1, NULL, clean_data() + clean_icmds());

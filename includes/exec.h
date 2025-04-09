@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:27:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:55:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:09:03 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_icmd(t_icmd *cmd, t_cmd input);
 char	*get_path(t_cmd input, t_icmd *cmd);
 void	exec_child(t_icmd *cmds, int nb_cmds, int child);
 void	set_io_cp(int child, int nb_cmds, t_icmd *cmds);
-void	here_doc(t_icmd cmd);
+int		here_doc(t_icmd cmd);
 void	close_fd(t_icmd *cmds, int nb_cmds, int child);
 int		exec_parent(t_icmd *cmds, int nb_cmds);
 int		clean_icmds(void);
