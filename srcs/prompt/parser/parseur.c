@@ -51,6 +51,9 @@ void	read2(t_list *l)
 	}
 }
 
+	// int	j = -1;
+	// while (arg && arg[++j])
+	// 	printf("zrg : %s\n", arg[j]);
 void pars_line(char *line, t_pars *exe)
 {
 	char	**arg;
@@ -59,9 +62,6 @@ void pars_line(char *line, t_pars *exe)
 	n_arg = -1;
 	i = 0;
 	arg = cut_line(line);
-	int	j = -1;
-	while (arg && arg[++j])
-		printf("zrg : %s\n", arg[j]);
 	if (!arg)
 		return ;
 	init_struct_cmd(&exe, nbr_sep(arg, "|"), arg);

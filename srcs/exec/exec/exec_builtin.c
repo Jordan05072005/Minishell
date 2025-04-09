@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 18:48:24 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 11:42:02 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:25:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,3 @@ void	exec_builtin(t_icmd *cmds, int nb_cmds, int child)
 	if (nb_cmds > 1)
 		return (clean_data(), clean_icmds(), exit(exit_status));
 }
-
-
-//((exit 1) && ls)

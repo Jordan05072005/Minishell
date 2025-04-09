@@ -23,7 +23,7 @@ void	new_prompt(int signum)
 	if (signum == SIGINT)
 	{
 		set_exit_val(130);
-		ft_printf("\n");
+		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
