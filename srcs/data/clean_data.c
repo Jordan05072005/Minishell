@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 14:12:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:30:01 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int	clean_data(void)
 	clean_env();
 	clear_tree(data()->ast);
 	clean_pars(data()->pars);
+	data()->pars = NULL;
 	return (0);
 }

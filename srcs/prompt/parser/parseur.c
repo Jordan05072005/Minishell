@@ -122,7 +122,7 @@ t_list *getLineParsing(char *line, char **err)
 			i += 2;
 		}
 	}
-	read2(cutLine);
+	// read2(cutLine);
 	if (*err)
 		return (ft_lstclear(&cutLine, free), NULL);
 	return (cutLine);
