@@ -6,12 +6,14 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:59:50 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:49:09 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
+{
 	// int	i = -1;
 	// if (cmds[child].args)
 	// {
@@ -23,8 +25,6 @@
 	// 		printf("[%s] - ", cmds[child].args[i]);
 	// 	printf("[%s]\n", cmds[child].args[i]);
 	// }
-void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
-{
 	if (cmds[child].type == 0)
 		cmds[child].rv = (cmds[child].fd_in == -1 || cmds[child].fd_out == -1);
 	if (cmds[child].type == 4)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 16:33:09 by jguaglio          #+#    #+#             */
-/*   Updated: 2025/01/27 16:33:09 by jguaglio         ###   ########.fr       */
+/*   Created: 2025/04/09 11:04:33 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/09 11:04:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ int	main(int ac, char **av, char **env)
 		{
 			run_ast(data()->ast);
 			clear_tree(data()->ast);
-			// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
 			data()->ast = NULL;
 		}
+		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
 		line = ft_readline();
 	}
 	ret = ft_atoi(ft_getimp("?"));

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:00:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 14:55:48 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:29:53 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	exec_subshell(t_icmd *cmds, int child)
 	{
 		sub = ft_strdup(cmds[child].args[0]);
 		clean_pars(data()->pars);
+		data()->pars = NULL;
 		clear_tree(data()->ast);
 		clean_icmds();
 		data()->ast = get_ast(sub);

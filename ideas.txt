@@ -1,1 +1,0 @@
-Ca serait cool de mettre un message d'erreur pour les unclosed quote (Genre [cd "ab])

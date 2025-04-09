@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 15:06:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:33:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,16 @@ t_bt	*get_ast(char *line)
 		set_exit_val(2);
 		return (clear_blocks(blocks), ft_del2((void **)&err), NULL);
 	}
+	//aaaaaaaaaaaaa
+	// t_list	*temp;
+	// temp = blocks;
+	// while (temp && temp->next)
+	// {
+	// 	printf("[%s] -> ", (char *)temp->content);
+	// 	temp = temp->next;
+	// }
+	// printf("[%s]\n", (char *)temp->content);
+	//aaaaaaaaa
 	blocks = ft_lstrev(blocks);
 	if (ft_lstsize(blocks) == 1)
 		tree = create_bt_node(blocks->content);
@@ -104,7 +114,6 @@ t_bt	*get_ast(char *line)
 	return (tree);
 }
 
-//(a=test && echo "a is [$a]") && echo "a is [$a]"
 int	run_list(char *line)
 {
 	int		rv;

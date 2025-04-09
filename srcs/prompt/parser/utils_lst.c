@@ -21,7 +21,6 @@ void	free_tpars(t_pars **pars)
 	(*pars)->limiter = NULL;
 	(*pars)->append = NULL;
 	(*pars)->sep = 0;
-	(*pars)->pipe = 0;
 }
 
 t_pars	*init_struct_pars()
