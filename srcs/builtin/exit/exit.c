@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:14:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/28 11:19:32 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:29:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_exit(char **av)
 	int	exit_val;
 
 	if (isatty(0) && isatty(1))
-		ft_printf("exit\n");
+		printf("exit\n");
 	if (!av[1])
 		exit_val = ft_atoi(ft_getimp("?"));
 	else

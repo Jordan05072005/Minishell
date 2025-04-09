@@ -41,7 +41,7 @@ int existing2(t_wildcard *w, char *path, char *str, int i)
 			w->after, ft_strlen(w->after))
 			&& ft_strncmp(entry->d_name, ".", 1) != 0)
 		{
-			path = ft_strjoin(w->pathTemp, entry->d_name);
+			path = ft_strjoin(w->path_temp, entry->d_name);
 			if (access(path, F_OK) == 0)
 				w->val += existing(path, &str[i + 1 + ft_strlen(w->after)]);
 			ft_del(path);
@@ -69,7 +69,7 @@ int existing(char *path, char *str)
 			return (existing2(w, path, str, i));
 		}
 		if (str[i] == '/')
-			w->pathTemp = ft_strjoin_free(w->pathTemp, "/");
+			w->path_temp = ft_strjoin_free(w->path_temp, "/");
 	}
 	path = ft_strjoin(path, str);
 	i = w->val;

@@ -51,6 +51,9 @@ void	read2(t_list *l)
 	}
 }
 
+	// int	j = -1;
+	// while (arg && arg[++j])
+	// 	printf("zrg : %s\n", arg[j]);
 void pars_line(char *line, t_pars *exe)
 {
 	char	**arg;

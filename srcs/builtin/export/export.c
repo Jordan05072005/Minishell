@@ -61,8 +61,7 @@ void	putexport(t_list *cpy, int size, int i)
 			printf("declare -x %s\n", temp2);
 		else
 			printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
-		ft_del(temp2);
-		ft_del(temp->content);
+		(ft_del(temp2), ft_del(temp->content));
 		temp->content = NULL;
 		cpy = first;
 	}
