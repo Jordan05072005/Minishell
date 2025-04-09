@@ -22,7 +22,6 @@ char	*ft_readline(void)
 
 	signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
 	if (!isatty(0))
 		prompt = NULL;
 	else
@@ -120,9 +119,9 @@ int	main(int ac, char **av, char **env)
 			clear_tree(data()->ast);
 			data()->ast = NULL;
 		}
-		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
 		line = ft_readline();
 	}
 	ret = ft_atoi(ft_getimp("?"));
 	return (ft_putendl_fd("\001\033[0m\002" "exit", 1), clean_data(), ret);
 }
+		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));

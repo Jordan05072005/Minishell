@@ -6,14 +6,12 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 10:49:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:56:42 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
-{
 	// int	i = -1;
 	// if (cmds[child].args)
 	// {
@@ -25,6 +23,8 @@ void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 	// 		printf("[%s] - ", cmds[child].args[i]);
 	// 	printf("[%s]\n", cmds[child].args[i]);
 	// }
+void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
+{
 	if (cmds[child].type == 0)
 		cmds[child].rv = (cmds[child].fd_in == -1 || cmds[child].fd_out == -1);
 	if (cmds[child].type == 4)
@@ -35,12 +35,16 @@ void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 		if (cmds[child].pid == -1)
 			ft_perror(1, ft_strdup("mini: Internal error: process."),
 				clean_data() + clean_icmds());
-		if (cmds[child].type == 1 && cmds[child].pid == 0)
-			exec_child(cmds, nb_cmds, child);
-		else if (cmds[child].type == 2 && cmds[child].pid == 0)
-			exec_builtin(cmds, nb_cmds, child);
-		else if (cmds[child].type == 3 && cmds[child].pid == 0)
-			exec_define(cmds, nb_cmds, child);
+		if (cmds[child].pid == 0)
+		{
+			(signal(SIGINT, SIG_DFL), signal(SIGQUIT, SIG_DFL));
+			if (cmds[child].type == 1)
+				exec_child(cmds, nb_cmds, child);
+			else if (cmds[child].type == 2)
+				exec_builtin(cmds, nb_cmds, child);
+			else if (cmds[child].type == 3)
+				exec_define(cmds, nb_cmds, child);
+		}
 	}
 	else if (cmds[child].type == 2)
 		exec_builtin(cmds, nb_cmds, child);
