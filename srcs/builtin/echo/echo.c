@@ -34,9 +34,8 @@ void	write_str(char *str, t_icmd *cmd, int etat, int i)
 	oct = 0;
 	if (!etat)
 		return ;
-	while (++j < ft_strlen(str))
-		oct += ft_putchar_fd(str[j], cmd->fd_out);
-	if (cmd->args[i + 1] && oct != 0)
+	ft_putstr_fd(str, 1);
+	if (cmd->args[i + 1])
 		write(1, " ", 1);
 }
 
@@ -60,6 +59,6 @@ int	ft_echo(t_icmd *cmd)
 	trunc = ft_strtrim(cmd->args[1], "n");
 	if (!cmd->args[1] || !(!ft_strncmp(cmd->args[1], "-n", 2)
 			&& !ft_strncmp(trunc, "-", 2)))
-		write(cmd->fd_out, "\n", 1);
+		write(1, "\n", 1);
 	return (ft_del(trunc), 0);
 }
