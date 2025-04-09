@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 14:28:44 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:38:49 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,19 @@ t_bt	*build_tree(t_list *blocks)
 	return (tree);
 }
 
+int	ast_ok(t_list *blocks, char *err)
+{
+	if (!blocks || err)
+	{
+		if (!err)
+			err = ft_strdup("newline");
+		printf("mini: syntax error near unexpected token `%s'\n", err);
+		set_exit_val(2);
+		return (clear_blocks(blocks), ft_del2((void **)&err), 0);
+	}
+	return (1);
+}
+
 t_bt	*get_ast(char *line)
 {
 	t_bt	*tree;
@@ -87,14 +100,8 @@ t_bt	*get_ast(char *line)
 	if (!line[i])
 		return (NULL);
 	blocks = getLineParsing(line, &err);
-	if (!blocks || err)
-	{
-		if (!err)
-			err = ft_strdup("newline");
-		printf("mini: syntax error near unexpected token `%s'\n", err);
-		set_exit_val(2);
-		return (clear_blocks(blocks), ft_del2((void **)&err), NULL);
-	}
+	if (!ast_ok(blocks, err))
+		return (NULL);
 	blocks = ft_lstrev(blocks);
 	if (ft_lstsize(blocks) == 1)
 		tree = create_bt_node(blocks->content);
@@ -102,44 +109,4 @@ t_bt	*get_ast(char *line)
 		tree = build_tree(blocks);
 	del_unusedlst(blocks);
 	return (tree);
-}
-
-int	run_list(char *line)
-{
-	int		rv;
-	t_data	*da;
-	t_pars	*p;
-
-	da = data();
-	p = parseur(line);
-	da->pars = p;
-	rv = exec(p->pipe, p->exe);
-	clean_pars(p);
-	da->pars = NULL;
-	return (rv);
-}
-
-int	run_ast(t_bt *ast)
-{
-	int	rv;
-
-	if (!ast)
-		return (-1);
-	if (!ast->left && !ast->right)
-		return (run_list((char *)ast->content));
-	rv = run_ast(ast->left);
-	if (ft_strncmp("&&", (char *)ast->content, 3) == 0)
-	{
-		if (rv == 0)
-			return (run_ast(ast->right));
-		else
-			return (rv);
-	}
-	else
-	{
-		if (rv != 0)
-			return (run_ast(ast->right));
-		else
-			return (rv);
-	}
 }

@@ -62,7 +62,7 @@ t_wildcard *initWildcard(char *path)
 	t_wildcard *w;
 
 	w = malloc(sizeof(t_wildcard));
-	w->pathTemp = ft_strdup(path);
+	w->path_temp = ft_strdup(path);
 	w->dir = NULL;
 	w->after = NULL;
 	w->before = NULL;
@@ -75,7 +75,7 @@ void cleanW(t_wildcard **w)
 {
 	ft_del((*w)->after);
 	ft_del((*w)->before);
-	ft_del((*w)->pathTemp);
+	ft_del((*w)->path_temp);
 	if ((*w)->dir)
 		closedir((*w)->dir);
 	ft_del(*w);

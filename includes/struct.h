@@ -3,42 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 22:21:18 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:33:54 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include <dirent.h>
-
-/* -------------------------------------------------------------------------- */
-/*                  exec.h                                                    */
-/* -------------------------------------------------------------------------- */
-// typedef struct s_list
-// {
-// 	void			*content;
-// 	struct s_list	*next;
-// }	t_list;
-
-/* -------------------------------------------------------------------------- */
-/*                  exec.h                                                    */
-/* -------------------------------------------------------------------------- */
-// typedef struct s_info_cmd
-// {
-// 	int		fd_in;
-// 	int		fd_out;
-// 	char	*here_doc;
-// 	char	*path;
-// 	char	**args;
-// 	int		define;
-// 	int		pipe[2];
-// 	int		pid;
-// 	int		exit;
-// }	t_icmd;
+# include <dirent.h>
 
 typedef struct s_info_cmd
 {
@@ -75,12 +50,12 @@ typedef struct s_bt
 
 typedef struct s_wildcard
 {
-	DIR	*dir;
-	char	*pathTemp;
+	DIR		*dir;
+	char	*path_temp;
 	char	*after;
-	char *before;
-	int	val;
-	int i;
+	char	*before;
+	int		val;
+	int		i;
 }	t_wildcard;
 
 /* -------------------------------------------------------------------------- */

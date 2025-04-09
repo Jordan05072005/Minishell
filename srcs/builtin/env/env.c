@@ -20,13 +20,13 @@ int	ft_env(char **arg)
 		return (ft_perror(-1, ft_strdup("mini: env: Only one argument."), 0),
 			1);
 	env = data()->env;
-	printf("%s\n", env->content);
+	printf("%s\n", (char *)env->content);
 	while (env->next)
 	{
 		env = env->next;
 		if (!ft_strchr(env->content, '='))
 			continue ;
-		printf("%s\n", env->content);
+		printf("%s\n", (char *)env->content);
 	}
 	return (0);
 }
