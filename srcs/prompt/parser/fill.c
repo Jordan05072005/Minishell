@@ -85,7 +85,7 @@ char	**fill_args(char **str, int j)
 			str[j] = var;
 		}
 		else if (var)
-			shift_left(str, j);
+			(ft_del(var), ft_del(str[j]), shift_left(str, j));
 		temp = ft_strdelquotes(str[j]);
 		ft_del(str[j]);
 		str[j] = temp;
