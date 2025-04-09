@@ -27,11 +27,6 @@ char	ft_strchr_index(char *str, char c)
 
 void	write_str(char *str, t_icmd *cmd, int etat, int i)
 {
-	size_t	j;
-	int		oct;
-
-	j = -1;
-	oct = 0;
 	if (!etat)
 		return ;
 	ft_putstr_fd(str, 1);

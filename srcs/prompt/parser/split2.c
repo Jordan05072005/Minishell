@@ -15,22 +15,15 @@
 static int	in_cote(char *str, int j)
 {
 	int	i;
-	int	one;
-	int	two;
+	int	*tab;
 
 	i = -1;
-	one = 0;
-	two = 0;
+	tab = NULL;
 	while (++i <= j)
-	{
-		if (str[i] == '\'')
-			one++;
-		if (str[i] == '"')
-			two++;
-	}
-	if (one % 2 == 0 && two % 2 == 0)
-		return (0);
-	return (1);
+		tab = quotes(str[i], tab);
+	if (!tab || (tab && tab[2]))
+		return (ft_del((void *)tab), 0);
+	return (ft_del((void *)tab), 1);
 }
 
 static int	is_charset(char *charset, char ch)
