@@ -14,7 +14,7 @@
 
 int	is_sep(char c)
 {
-	if (c == '|' || c == '<' || c == '&' || c == '>' || c == '(')
+	if (c == '|' || c == '<' || c == '&' || c == '>')
 		return (1);
 	return (0);
 }
@@ -78,7 +78,7 @@ char *syntax_error2(char **arg, int j, char *line2)
 		if (j > 0 && beforec(arg, j) && !is_sep(beforec(arg, j)[0]))
 			return (ft_strdup("("));
 		else if ((arg[j + 1] && nextc(&arg[j + 1]) && !is_sep(nextc(&arg[j + 1])[0])))
-			return (ft_strdup(")"));
+			return (ft_substr(nextc(&arg[j + 1]), 0, 2));
 		else if (arg[j][farg2(&arg[j][1])] == ')')
 			return (ft_strdup(")"));
 		else
@@ -107,7 +107,7 @@ char	*syntax_error(char **arg, char *line, int i, int j)
 		while (!temp && err[++i] && arg[j])
 		{
 			if (arg[j][0] == err[i][0] && (((ft_strlen(arg[j]) > 2 || ((!nextc(&arg[j + 1])
-				|| (is_sep(nextc(&arg[j + 1])[0]))) && arg[j][0] != '('
+				|| (is_sep(nextc(&arg[j + 1])[0])))
 				&& ft_strlen(arg[j]) == ft_strlen(err[i])))
 				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j]))) || (j  == 0
 				&& ft_strnstr(arg[j], err[i], ft_strlen(arg[j])))))
