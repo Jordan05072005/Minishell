@@ -69,11 +69,11 @@ int	*quotes(char c, int *tab)
 		tab[1] = 0;
 		tab[2] = 0;
 	}
-	if (c == '"')
+	if (c == '"' && tab[1] % 2 == 0)
+		tab[0]++;
+	else if (c == '\'' && tab[0] % 2 == 0)
 		tab[1]++;
-	else if (c == '\'')
-		tab[1]++;
-	if ((tab[0] + tab[1]) % 2 == 0)
+	if (tab[0] % 2 == 0 && tab[1] % 2 == 0)
 		tab[2] = 1;
 	else
 		tab[2] = 0;
