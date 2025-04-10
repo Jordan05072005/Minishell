@@ -109,19 +109,21 @@ char	*get_start(char *str)
 	return (start);
 }
 
-char	**get_after(char *str)
+char	**get_after(char *str) // add vide qun fini pat *
 {
 	int		i;
 	char	**after;
 	char	*temp;
 
-	i = ft_strchri(str, "*");
+	i = ft_strchri(str, "*") + 1;
 	if (ft_strchri(&str[i], "/"))
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "/"));
 	else
 		temp = ft_substr(&str[i], 0, ft_strlen(&str[i]));
 	if (!temp || !temp[0])
-		return (NULL);
+		return (ft_del(temp), NULL);
+	if (temp[ft_strlen(temp) - 1] == '*')
+		temp = ft_strjoin_free(temp, " ");
 	after = ft_split(temp, '*');
 	return (ft_del(temp), after);
 }

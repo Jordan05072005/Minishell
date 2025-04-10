@@ -75,7 +75,7 @@ char	**gestion_parenthese(char **arg, char *line, int *i, int *old)
 			return (ft_del(quote), arg);
 		}
 	}
-	return (ft_del(quote), NULL);
+	return (ft_del(arg), ft_del(quote), NULL);
 }
 
 char	**gestion_quote(char **arg, char *line, int *i, int *old)

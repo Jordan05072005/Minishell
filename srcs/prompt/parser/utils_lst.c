@@ -73,7 +73,8 @@ t_wildcard	*init_wildcard(char *path)
 
 void	cleanw(t_wildcard **w)
 {
-	ft_del((*w)->after);
+	ft_free_tab((void *)(*w)->after,
+		ft_strslen((*w)->after));
 	ft_del((*w)->before);
 	ft_del((*w)->path_temp);
 	if ((*w)->dir)

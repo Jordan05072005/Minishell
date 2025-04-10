@@ -69,13 +69,19 @@ int	name_correct(char *name, char *before, char **after)
 	size_t	i;
 	char	*temp;
 
-	if (!before[0] && !after)
-		return (0);
 	i = -1;
-	temp = ft_strnstr(name, before, ft_strlen(name));
-	while (after && ++i < ft_strslen(after) && temp)
+	if (!before[0] && !after)
+		return (1);
+	if (ft_strncmp(name, before, ft_strlen(before)) != 0)
+		return (0);
+	temp = &name[ft_strlen(before)];
+	if (!after)
+		return (temp != NULL);
+	while (after && ++i < ft_strslen(after) - 1 && temp)
 		temp = ft_strnstr(temp, after[i], ft_strlen(temp));
-	if (!temp)
+	if (temp && (after[i][0] == 32 || (ft_strlen(temp) >= ft_strlen(after[i])
+			&& !ft_strncmp(&temp[ft_strlen(temp) - ft_strlen(after[i])],
+				after[i], ft_strlen(after[i])))))
 		return (1);
 	return (0);
 }
@@ -97,7 +103,7 @@ char	**insert_file(char **str, int j, char **file)
 	{
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
-		else if (!name_correct(file[f], before, after)
+		else if (name_correct(file[f], before, after)
 			&& !accessv(start, file[f], end))
 			str = insert_strs(str, ft_strsjoin((char *[]){start,
 						file[f], end, NULL}), j++, 0);
@@ -121,8 +127,8 @@ char	**wildcard(char **str, int *j)
 		ft_del2((void **)&path);
 		path = ft_strdup("./");
 	}
-	// if (existing(path, str[*j]) <= 0)
-	// 	return (ft_del(path), ft_del(temp), str);
+	if (existing(path, str[*j]) <= 0)
+		return (ft_del(path), ft_del(temp), str);
 	dir = opendir(path);
 	if (!dir)
 		return (del_strs(str, (*j)--, temp));
