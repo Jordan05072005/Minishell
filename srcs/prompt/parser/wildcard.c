@@ -64,27 +64,19 @@ char	**insert_strs(char **str1, char *str2, int j, int overwrite)
 	return (ft_free_tab((void *)str1, ft_strslen(str1)), ft_del(str2), str_f);
 }
 
-int	name_correct(char *name, char *before, char *after, int len)
+int	name_correct(char *name, char *before, char **after)
 {
-	size_t	s;
-	size_t	end;
+	size_t	i;
+	char *temp;
 
-	end = ft_strlen(name);
-	if (!before[0] && !after[0])
+	if (!before[0] && !after)
 		return (0);
-	end = 0;
-	s = 0;
-	while (s < ft_strlen(before) || end < (ft_strlen(after)))
-	{
-		if (before[0] && name[s] != before[s])
-			return (1);
-		if (after[0] && name[len - end] != after[ft_strlen(after) - end - 1])
-			return (1);
-		if (s < ft_strlen(before))
-			s++;
-		if (end < ft_strlen(after))
-			end++;
-	}
+	i = -1;
+	temp = ft_strnstr(name, before, ft_strlen(name));
+	while (after && ++i < ft_strslen(after) && temp)
+		temp = ft_strnstr(temp, after[i], ft_strlen(temp));
+	if (!temp)
+		return (1);
 	return (0);
 }
 
@@ -92,7 +84,7 @@ char	**insert_file(char **str, int j, char **file)
 {
 	int		f;
 	char	*before;
-	char	*after;
+	char	**after;
 	char	*end;
 	char	*start;
 
@@ -105,12 +97,12 @@ char	**insert_file(char **str, int j, char **file)
 	{
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
-		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1)
+		else if (!name_correct(file[f], before, after)
 			&& !accessv(start, file[f], end))
 			str = insert_strs(str, ft_strsjoin((char *[]){start,
 						file[f], end, NULL}), j++, 0);
 	}
-	return (ft_del(before), ft_del(after),
+	return (ft_del(before), ft_free_tab((void * )after, ft_strslen(after)),
 		ft_free_tab((void *)file, ft_strslen(file)),
 		ft_del(end), ft_del(start), str);
 }
@@ -129,14 +121,12 @@ char	**wildcard(char **str, int *j)
 		ft_del2((void **)&path);
 		path = ft_strdup("./");
 	}
-	if (existing(path, str[*j]) <= 0)
-		return (ft_del(path), ft_del(temp), str);
+	// if (existing(path, str[*j]) <= 0)
+	// 	return (ft_del(path), ft_del(temp), str);
 	dir = opendir(path);
 	if (!dir)
 		return (del_strs(str, (*j)--, temp));
-	file = get_file(dir, ft_substr(str[*j], ft_strchri(str[*j], "*")
-				+ ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"),
-				ft_strlen(str[*j])), path);
+	file = get_file(dir, get_end(str[*j]), path);
 	str = insert_file(str, *j, file);
 	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));
 }

@@ -31,6 +31,7 @@ void		print_welcome(void);
 /* -------------------------------------------------------------------------- */
 char		**wildcard(char **str, int *j);
 char		**insert_strs(char **str1, char *str2, int j, int overwrite);
+int	name_correct(char *name, char *before, char **after);
 
 /* -------------------------------------------------------------------------- */
 /*                  get_wildcard.c                                            */
@@ -38,7 +39,7 @@ char		**insert_strs(char **str1, char *str2, int j, int overwrite);
 char		**get_file(DIR *dir, char *after, char *path);
 char		*get_end(char *after);
 char		*get_before(char *str);
-char		*get_after(char *str);
+char		**get_after(char *str);
 char		*get_start(char *str);
 
 /* -------------------------------------------------------------------------- */

@@ -36,14 +36,12 @@ int	existing2(t_wildcard *w, char *path, char *str, int i)
 	w->after = get_after(&str[i]);
 	while (entry)
 	{
-		if (!ft_strncmp(entry->d_name, w->before, ft_strlen(w->before))
-			&& !ft_strncmp(&entry->d_name[ft_strlen(entry->d_name)
-					- ft_strlen(w->after)], w->after, ft_strlen(w->after))
+		if (!name_correct(entry->d_name, w->before, w->after)
 			&& ft_strncmp(entry->d_name, ".", 1) != 0)
 		{
 			path = ft_strjoin(w->path_temp, entry->d_name);
 			if (access(path, F_OK) == 0)
-				w->val += existing(path, &str[i + 1 + ft_strlen(w->after)]);
+				w->val += existing(path, &str[i + 1 + ft_strslen(w->after)]); // ici
 			ft_del(path);
 		}
 		entry = readdir(w->dir);

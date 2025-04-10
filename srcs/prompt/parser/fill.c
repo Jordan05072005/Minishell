@@ -74,14 +74,17 @@ char	**fill_args(char **str, int j, char *var)
 			continue ;
 		}
 		if (ft_strchr(str[j], '$') || ft_strchr(str[j], '~'))
-			var = get_var(str[j]);
-		if (var && var[0])
 		{
-			ft_del2((void **)&str[j]);
-			str[j] = var;
+			var = get_var(str[j]);
+			if (var && var[0])
+			{
+				ft_del2((void **)&str[j]);
+				str[j] = var;
+			}
+			else if (var)
+				(ft_del(var), ft_del(str[j]), shift_left(str, j));
 		}
-		else if (var)
-			(ft_del(var), ft_del(str[j]), shift_left(str, j));
+
 		temp = ft_strdelquotes(str[j]);
 		ft_del(str[j]);
 		str[j] = temp;
