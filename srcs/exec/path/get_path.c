@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:25:50 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:16:56 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:15:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char	*get_cmd_path(t_cmd input, t_icmd *cmd)
 	char	*path;
 	int		i;
 
-	i = 0;
+	i = -1;
 	env_path = ft_getenv("PATH");
 	if (!env_path)
 		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", input.args[0], "\
- No such file or directory.", NULL}), 0), cmd->rv = 126, NULL);
+: No such file or directory.", NULL}), 0), cmd->rv = 126, NULL);
 	tries = ft_split(env_path, ':');
 	if (!tries)
 		return (ft_perror(1, ft_strdup("mini: Internal error: malloc."),
