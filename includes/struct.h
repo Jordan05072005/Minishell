@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:05:10 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 14:33:54 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:54:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_data
 	t_list	*imp;
 	t_list	*env;
 	t_list	*loc;
+	int		exit;
 	int		nb_cmds;
 	int		saved_out;
 	int		saved_tty;

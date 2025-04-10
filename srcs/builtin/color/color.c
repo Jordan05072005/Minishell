@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 12:16:06 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 11:09:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:32:59 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ int	check_config(char **av)
 		if (check_arg_config(av[1]))
 			return (ft_perror(-1, ft_strdup("color: Invalid number given as con\
 fig index."), 0), 1);
-		config = (ft_atoi(av[1]) - 1) % 13;
+		config = (ft_atoi(av[1]) + 12) % 13;
+		if (config < 0)
+			config = 0;
 		colors = get_config(config);
 		if (!set_colors(colors[1], colors[2], colors[3], colors[4]))
 			return (0);

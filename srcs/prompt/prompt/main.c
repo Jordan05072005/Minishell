@@ -61,6 +61,7 @@ void	init_mini(t_data *d, int ac, char **av, char **env)
 	if (isatty(1))
 		print_welcome();
 	d->pars = NULL;
+	d->exit = -1;
 	create_env(&d, env, av, ac);
 	init_io(d);
 	printf("\e[?2004l");
@@ -107,21 +108,21 @@ int	main(int ac, char **av, char **env)
 	d = data();
 	init_mini(d, ac, av, env);
 	line = ft_readline();
-	while (line)
+	while (line && d->exit == -1)
 	{
 		before = update_history(line);
 		(void)before;
 		data()->ast = get_ast(line);
 		ft_del(line);
-		if (data()->ast)
-		{
-			run_ast(data()->ast);
-			clear_tree(data()->ast);
-			data()->ast = NULL;
-		}
-		line = ft_readline();
+		run_ast(data()->ast);
+		clear_tree(data()->ast);
+		data()->ast = NULL;
+		if (d->exit == -1)
+			line = ft_readline();
 	}
-	ret = ft_atoi(ft_getimp("?"));
+	ret = d->exit;
+	if (d->exit == -1)
+		ret = ft_atoi(ft_getimp("?"));
 	return (ft_putendl_fd("\001\033[0m\002" "exit", 1), clean_data(), ret);
 }
 		// printf("Exit is : %d\n", ft_atoi(ft_getimp("?")));
