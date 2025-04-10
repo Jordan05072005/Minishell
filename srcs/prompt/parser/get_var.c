@@ -49,7 +49,7 @@ char	*get_var2(char *var, char *str, int quote, int *i)
 		var = ft_strjoin_free(var, ft_getimp("?"));
 	}
 	else if (str[*i] == '$' && str[*i + 1]
-		&& (ft_isalnum(str[*i + 1])  || str[*i + 1] == '_')
+		&& (ft_isalnum(str[*i + 1]) || str[*i + 1] == '_')
 		&& quote % 2 == 0)
 	{
 		temp = ft_substr(str, *i, end_var(&str[*i]));
