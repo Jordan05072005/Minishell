@@ -113,16 +113,15 @@ char	**get_after(char *str)
 {
 	int		i;
 	char	**after;
-	char *temp;
+	char	*temp;
 
 	i = ft_strchri(str, "*");
 	if (ft_strchri(&str[i], "/"))
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "/"));
 	else
 		temp = ft_substr(&str[i], 0, ft_strlen(&str[i]));
-
 	if (!temp || !temp[0])
 		return (NULL);
-	after = ft_split(temp, '*');	
+	after = ft_split(temp, '*');
 	return (ft_del(temp), after);
 }

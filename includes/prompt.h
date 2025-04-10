@@ -31,7 +31,7 @@ void		print_welcome(void);
 /* -------------------------------------------------------------------------- */
 char		**wildcard(char **str, int *j);
 char		**insert_strs(char **str1, char *str2, int j, int overwrite);
-int	name_correct(char *name, char *before, char **after);
+int			name_correct(char *name, char *before, char **after);
 
 /* -------------------------------------------------------------------------- */
 /*                  get_wildcard.c                                            */

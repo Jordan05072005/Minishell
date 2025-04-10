@@ -67,7 +67,7 @@ char	**insert_strs(char **str1, char *str2, int j, int overwrite)
 int	name_correct(char *name, char *before, char **after)
 {
 	size_t	i;
-	char *temp;
+	char	*temp;
 
 	if (!before[0] && !after)
 		return (0);
@@ -102,7 +102,7 @@ char	**insert_file(char **str, int j, char **file)
 			str = insert_strs(str, ft_strsjoin((char *[]){start,
 						file[f], end, NULL}), j++, 0);
 	}
-	return (ft_del(before), ft_free_tab((void * )after, ft_strslen(after)),
+	return (ft_del(before), ft_free_tab((void *)after, ft_strslen(after)),
 		ft_free_tab((void *)file, ft_strslen(file)),
 		ft_del(end), ft_del(start), str);
 }
