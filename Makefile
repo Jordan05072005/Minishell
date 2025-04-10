@@ -8,8 +8,6 @@ RM = rm -f
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-
 BUILTIN_SRC = \
     $(addprefix cd/, cd_env.c cd.c utils.c curpath.c) \
     $(addprefix pwd/, pwd.c) \
@@ -52,7 +50,7 @@ OBJ = $(MINI_SRC:.c=.o)
 all: $(NAME)
 
 valgrind: $(LIBFT) all
-	@valgrind --suppressions=./supp.supp \
+	@valgrind --suppressions=$(abspath $(dir $(lastword $(MAKEFILE_LIST))))/supp.supp \
 		--leak-check=full --show-leak-kinds=all --trace-children=yes ./$(NAME)
 
 run: all

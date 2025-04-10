@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:14:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 14:29:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:59:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	ft_exit(char **av)
 {
 	int	exit_val;
 
-	if (isatty(0) && isatty(1))
-		printf("exit\n");
 	if (!av[1])
 		exit_val = ft_atoi(ft_getimp("?"));
 	else
@@ -72,7 +70,6 @@ int	ft_exit(char **av)
 		else
 			exit_val = ft_atoi(av[1]) % 256;
 	}
-	clean_data();
-	clean_icmds();
-	exit(exit_val);
+	data()->exit = exit_val;
+	return (0);
 }
