@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:14:14 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 15:31:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,15 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 		cmd->fd_in = open(input.in->content, O_RDONLY, 0777);
 		if (check_read(input.in->content))
 			break ;
-		if (input.in->next && cmd->fd_in >= 0)
+		if (input.in->next && cmd->fd_in > 0)
 			close(cmd->fd_in);
 		input.in = input.in->next;
+	}
+	if (input.here_doc)
+	{
+		if (cmd->fd_in > 0)
+			close(cmd->fd_in);
+		cmd->fd_in = here_doc(*cmd);
 	}
 	while (input.out)
 	{
@@ -85,7 +91,7 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (check_write(input.out->content))
 			break ;
-		if (input.out->next && cmd->fd_out >= 0)
+		if (input.out->next && cmd->fd_out > 1)
 			close(cmd->fd_out);
 		input.out = input.out->next;
 	}
@@ -95,6 +101,7 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 {
 	cmd->fd_in = 0;
 	cmd->fd_out = 1;
+	cmd->here_doc = input.here_doc;
 	open_all_files(cmd, input);
 	if (input.subshell)
 		cmd->type = 4;
@@ -109,7 +116,6 @@ void	init_icmd(t_icmd *cmd, t_cmd input)
 	else
 		cmd->type = 1;
 	cmd->rv = -1;
-	cmd->here_doc = input.here_doc;
 	cmd->args = input.args;
 	cmd->path = get_path(input, cmd);
 	cmd->pid = -1;
