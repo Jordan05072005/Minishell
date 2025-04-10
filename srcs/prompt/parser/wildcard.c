@@ -12,12 +12,11 @@
 
 #include "mini.h"
 
-
-char **del_strs(char **str, int j, char *s)
+char	**del_strs(char **str, int j, char *s)
 {
-	int	i;
-	int	len;
-	int	it;
+	int		i;
+	int		len;
+	int		it;
 	char	**str2;
 
 	i = j - 1;
@@ -79,7 +78,7 @@ int	name_correct(char *name, char *before, char *after, int len)
 	{
 		if (before[0] && name[s] != before[s])
 			return (1);
-		if (after[0] && name[len - end] != after[ft_strlen(after) - end - 1]) // a modif
+		if (after[0] && name[len - end] != after[ft_strlen(after) - end - 1])
 			return (1);
 		if (s < ft_strlen(before))
 			s++;
@@ -94,7 +93,7 @@ char	**insert_file(char **str, int j, char **file)
 	int		f;
 	char	*before;
 	char	*after;
-	char *end;
+	char	*end;
 	char	*start;
 
 	before = get_before(str[j]);
@@ -106,11 +105,14 @@ char	**insert_file(char **str, int j, char **file)
 	{
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
-		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1) && !accessv(start, file[f], end))
-			str = insert_strs(str, ft_strsjoin((char *[]){start, file[f], end, NULL}), j++, 0);
+		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1)
+			&& !accessv(start, file[f], end))
+			str = insert_strs(str, ft_strsjoin((char *[]){start,
+						file[f], end, NULL}), j++, 0);
 	}
 	return (ft_del(before), ft_del(after),
-		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);
+		ft_free_tab((void *)file, ft_strslen(file)),
+		ft_del(end), ft_del(start), str);
 }
 
 char	**wildcard(char **str, int *j)
@@ -132,7 +134,9 @@ char	**wildcard(char **str, int *j)
 	dir = opendir(path);
 	if (!dir)
 		return (del_strs(str, (*j)--, temp));
-	file = get_file(dir	,ft_substr(str[*j], ft_strchri(str[*j], "*") + ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"), ft_strlen(str[*j])), path);
+	file = get_file(dir, ft_substr(str[*j], ft_strchri(str[*j], "*")
+				+ ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"),
+				ft_strlen(str[*j])), path);
 	str = insert_file(str, *j, file);
 	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));
 }

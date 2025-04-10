@@ -27,7 +27,7 @@ int	accessv(char *start, char *file, char *end)
 	return (ft_del(path), ft_del(ende), 0);
 }
 
-int existing2(t_wildcard *w, char *path, char *str, int i)
+int	existing2(t_wildcard *w, char *path, char *str, int i)
 {
 	struct dirent	*entry;
 
@@ -36,9 +36,9 @@ int existing2(t_wildcard *w, char *path, char *str, int i)
 	w->after = get_after(&str[i]);
 	while (entry)
 	{
-		if (!ft_strncmp(entry->d_name, w->before, ft_strlen(w->before)) &&
-			!ft_strncmp(&entry->d_name[ft_strlen(entry->d_name) - ft_strlen(w->after)],
-			w->after, ft_strlen(w->after))
+		if (!ft_strncmp(entry->d_name, w->before, ft_strlen(w->before))
+			&& !ft_strncmp(&entry->d_name[ft_strlen(entry->d_name)
+					- ft_strlen(w->after)], w->after, ft_strlen(w->after))
 			&& ft_strncmp(entry->d_name, ".", 1) != 0)
 		{
 			path = ft_strjoin(w->path_temp, entry->d_name);
@@ -49,23 +49,23 @@ int existing2(t_wildcard *w, char *path, char *str, int i)
 		entry = readdir(w->dir);
 	}
 	i = w->val;
-	return (cleanW(&w), i);
+	return (cleanw(&w), i);
 }
 
-int existing(char *path, char *str)
+int	existing(char *path, char *str)
 {
-	t_wildcard *w;
-	int	i;
+	t_wildcard	*w;
+	int			i;
 
 	i = -1;
-	w = initWildcard(path);
+	w = init_wildcard(path);
 	while (str[++i])
 	{
 		if (str[i] == '*')
 		{
 			w->dir = opendir(path);
 			if (!(w->dir))
-				return (cleanW(&w), 0);
+				return (cleanw(&w), 0);
 			return (existing2(w, path, str, i));
 		}
 		if (str[i] == '/')
@@ -74,6 +74,6 @@ int existing(char *path, char *str)
 	path = ft_strjoin(path, str);
 	i = w->val;
 	if (access(path, F_OK) == 0)
-		return (ft_del(path), cleanW(&w), i + 1);
-	return (ft_del(path), cleanW(&w), i);
+		return (ft_del(path), cleanw(&w), i + 1);
+	return (ft_del(path), cleanw(&w), i);
 }

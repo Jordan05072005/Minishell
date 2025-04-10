@@ -12,7 +12,6 @@
 
 #include "mini.h"
 
-
 char	*find_var(char *name, int lock)
 {
 	if (ft_getenv(name))
@@ -20,7 +19,7 @@ char	*find_var(char *name, int lock)
 	else if (ft_getloc(name))
 		return (ft_getloc(name));
 	else if (ft_getimp(name) && lock)
-		return(ft_getimp(name));
+		return (ft_getimp(name));
 	return (NULL);
 }
 
@@ -41,15 +40,16 @@ char	*get_var2(char *var, char *str, int quote, int *i)
 {
 	char	*temp;
 
-
-	if (str[*i] == '$' && str[*i + 1] && ft_isdigit(str[*i + 1]) && quote % 2 == 0)
+	if (str[*i] == '$' && str[*i + 1]
+		&& ft_isdigit(str[*i + 1]) && quote % 2 == 0)
 		(*i)++;
 	else if (str[*i] == '$' && str[*i + 1] == '?' && quote % 2 == 0)
 	{
 		(*i)++;
 		var = ft_strjoin_free(var, ft_getimp("?"));
 	}
-	else if (str[*i] == '$' && str[*i + 1] && ft_isalnum(str[*i + 1]) && quote % 2 == 0)
+	else if (str[*i] == '$' && str[*i + 1]
+		&& ft_isalnum(str[*i + 1]) && quote % 2 == 0)
 	{
 		temp = ft_substr(str, *i, end_var(&str[*i]));
 		(*i) += (ft_strlen(temp) - 1);

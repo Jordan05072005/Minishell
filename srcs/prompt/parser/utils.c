@@ -12,7 +12,7 @@
 
 #include "mini.h"
 
-int	ft_strchri(char *str, char *c)
+size_t	ft_strchri(char *str, char *c)
 {
 	int	i;
 	int	j;
@@ -46,30 +46,12 @@ int	nbr_sep(char **str, char *sep)
 	return (compt + 1);
 }
 
-int	strlenchar(char *str, char c)
+int	ft_strdelquotes2(char *str)
 {
-	int	i;
-	int	len;
-
-	i = -1;
-	len = 0;
-	while (str[++i])
-	{
-		if (str[i] == c)
-			len++;
-	}
-	return (len);
-}
-
-char	*ft_strdelquotes(char *str)
-{
-	int	i;
-	int	len;
-	char	*str_f;
+	int		i;
+	int		len;
 	char	quote;
 
-	if (!str || (!ft_strchr(str, '"') && !ft_strchr(str, '\'')))
-		return (ft_strdup(str));
 	i = -1;
 	quote = 0;
 	len = 0;
@@ -82,8 +64,20 @@ char	*ft_strdelquotes(char *str)
 		else
 			len++;
 	}
+	return (len);
+}
+
+char	*ft_strdelquotes(char *str)
+{
+	char	quote;
+	int		len;
+	int		i;
+	char	*str_f;
+
+	if (!str || (!ft_strchr(str, '"') && !ft_strchr(str, '\'')))
+		return (ft_strdup(str));
+	len = ft_strdelquotes2(str);
 	str_f = malloc(sizeof(char) * len + 1);
-	i = -1;
 	i = -1;
 	quote = 0;
 	len = 0;
@@ -109,4 +103,4 @@ void	shift_left(char **str, size_t i)
 		str[i] = str[i + 1];
 		i++;
 	}
-}	
+}

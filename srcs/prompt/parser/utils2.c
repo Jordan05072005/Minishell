@@ -47,6 +47,7 @@ int	farg(char **str)
 	}
 	return (i);
 }
+
 int	farg2(char *str)
 {
 	int	i;
@@ -79,4 +80,3 @@ int	*quotes(char c, int *tab)
 		tab[2] = 0;
 	return (tab);
 }
-

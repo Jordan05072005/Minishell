@@ -23,7 +23,7 @@ void	free_tpars(t_pars **pars)
 	(*pars)->sep = 0;
 }
 
-t_pars	*init_struct_pars()
+t_pars	*init_struct_pars(void)
 {
 	t_pars	*cmd;
 
@@ -57,9 +57,9 @@ void	init_struct_cmd(t_pars **pars, int nbr, char **arg)
 	}
 }
 
-t_wildcard *initWildcard(char *path)
+t_wildcard	*init_wildcard(char *path)
 {
-	t_wildcard *w;
+	t_wildcard	*w;
 
 	w = malloc(sizeof(t_wildcard));
 	w->path_temp = ft_strdup(path);
@@ -71,7 +71,7 @@ t_wildcard *initWildcard(char *path)
 	return (w);
 }
 
-void cleanW(t_wildcard **w)
+void	cleanw(t_wildcard **w)
 {
 	ft_del((*w)->after);
 	ft_del((*w)->before);

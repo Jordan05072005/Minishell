@@ -57,14 +57,14 @@ char		*get_var(char *str);
 /*                  fill.c                                                    */
 /* -------------------------------------------------------------------------- */
 int			farg(char **str);
-void		fill_exe(t_pars **pars, int i, int j);
+void		fill_exe(t_pars **pars, int i);
 int			fill_struct(t_pars *cmd, char **arg, int *n_arg);
 
 /* -------------------------------------------------------------------------- */
 /*                  parser.c                                                  */
 /* -------------------------------------------------------------------------- */
 t_pars		*parseur(char *line);
-t_list		*getLineParsing(char *line, char **err);
+t_list		*get_line_parsing(char *line, char **err);
 char		*syntax_error(char **arg, char *line, int i, int j);
 
 /* -------------------------------------------------------------------------- */
@@ -77,7 +77,7 @@ void		any(int signum);
 /* -------------------------------------------------------------------------- */
 /*                  utils.c                                                   */
 /* -------------------------------------------------------------------------- */
-int			ft_strchri(char *str, char *c);
+size_t		ft_strchri(char *str, char *c);
 int			nbr_sep(char **str, char *sep);
 char		*ft_strdelquotes(char *str);
 void		free_tpars(t_pars **pars);
@@ -98,8 +98,8 @@ int			*quotes(char c, int *tab);
 t_pars		*init_struct_pars(void);
 void		init_struct_cmd(t_pars **pars, int nbr, char **arg);
 char		**ft_split2(char *s, char *c);
-t_wildcard	*initWildcard(char *path);
-void		cleanW(t_wildcard **w);
+t_wildcard	*init_wildcard(char *path);
+void		cleanw(t_wildcard **w);
 
 char		*ft_readline(void);
 

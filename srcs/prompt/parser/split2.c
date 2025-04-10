@@ -78,7 +78,6 @@ char	**ft_split2(char *s, char *c)
 
 	i = 0;
 	i_m = 0;
-
 	str_final = malloc((ft_nbr_word(s, c) + 1) * sizeof(char *));
 	if (str_final == NULL)
 		return (NULL);

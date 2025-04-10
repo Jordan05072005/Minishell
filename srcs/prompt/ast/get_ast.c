@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_ast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 14:38:49 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:59:17 by jguaglio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_bt	*get_ast(char *line)
 		i++;
 	if (!line[i])
 		return (NULL);
-	blocks = getLineParsing(line, &err);
+	blocks = get_line_parsing(line, &err);
 	if (!ast_ok(blocks, err))
 		return (NULL);
 	blocks = ft_lstrev(blocks);
