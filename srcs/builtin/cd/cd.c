@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:19:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/10 15:42:40 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:56:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ char	*cd_previous(char *arg, char *unused, int *print, int option)
 : Invalid option.", NULL}), 0), NULL);
 }
 
-char	*find_path(char *arg, int *print)
+char	*find_path(char *arg, int *print, int *special)
 {
 	char	*path;
 
+	*special = 0;
 	if (!arg)
 	{
 		path = ft_getenv("HOME");
@@ -72,12 +73,12 @@ char	*find_path(char *arg, int *print)
 		if (!path)
 			return (ft_perror(-1, ft_strdup("mini: cd: HOME is not set."), 0),
 				NULL);
-		return (ft_strdup(path));
+		return (*special = 1, ft_strdup(path));
 	}
 	if (arg[0] == '/')
-		return (ft_strdup(arg));
+		return (*special = 1, ft_strdup(arg));
 	if (arg[0] == '.')
-		return (create_path(ft_getimp("PWD"), arg));
+		return (*special = 1, create_path(ft_getimp("PWD"), arg));
 	return (get_curpath(arg, print));
 }
 
@@ -86,6 +87,7 @@ int	ft_cd(char **av)
 	char	*curpath;
 	size_t	option;
 	int		print;
+	int		special;
 
 	print = 0;
 	option = 0;
@@ -94,13 +96,13 @@ int	ft_cd(char **av)
 	if (ft_strslen(av) > 2 + option)
 		return (ft_perror(-1, ft_strdup("mini: cd: Too many arguments."), 0),
 			1);
-	curpath = find_path(av[1 + option], &print);
+	curpath = find_path(av[1 + option], &print, &special);
 	if (!curpath)
 		return (1);
 	curpath = cd_previous(av[1 + option], curpath, &print, option);
 	if (!curpath)
 		return (1);
-	curpath = check_curpath(curpath, av[1 + option]);
+	curpath = check_curpath(curpath, av[1 + option], special);
 	if (!curpath)
 		return (1);
 	if (print)

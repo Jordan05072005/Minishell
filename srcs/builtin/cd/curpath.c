@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/10 15:45:38 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:05:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ current directory: getcwd: cannot access parent directories: No such file or di\
 rectory"), 0), NULL);
 }
 
-char	*check_curpath(char *curpath, char *arg)
+char	*check_curpath(char *curpath, char *arg, int special_print)
 {
 	struct stat	path_stat;
 
@@ -112,15 +112,5 @@ char	*check_curpath(char *curpath, char *arg)
 	if (!curpath)
 		return (NULL);
 	curpath = clean_curpath(curpath);
-	if (stat(curpath, &path_stat) != 0)
-		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", curpath, ": \
-No such file or directory.", NULL}), 0), ft_del(curpath), NULL);
-	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", curpath, ": \
-Not a directory.", NULL}), 0), ft_del(curpath), NULL);
-	if (access(curpath, X_OK) == -1)
-		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", curpath, ": \
-Permission denied.", NULL}), 0), ft_del(curpath), NULL);
-	update_env(curpath);
-	return (curpath);
+	return (cd_error_messages(curpath, arg, special_print));
 }
