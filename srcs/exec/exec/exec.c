@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 13:56:42 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:22:07 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_cmd(t_icmd *cmds, int child, int nb_cmds)
 	if (cmds[child].type == 0)
 		cmds[child].rv = (cmds[child].fd_in == -1 || cmds[child].fd_out == -1);
 	if (cmds[child].type == 4)
-		exec_subshell(cmds, child);
+		exec_subshell(cmds, child, nb_cmds);
 	else if (cmds[child].type == 1 || nb_cmds > 1)
 	{
 		cmds[child].pid = fork();
@@ -77,7 +77,7 @@ int	exec(int nb_cmds, t_cmd *input)
 	int		child;
 	int		ret_value;
 
-	write(1, "\033[0m", 5);
+	// write(1, "\033[0m", 5);
 	if (data()->saved_tty != -1)
 		dup2(data()->saved_out, 1);
 	cmds = init_icmds(input, nb_cmds);

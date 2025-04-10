@@ -6,13 +6,13 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:00:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/10 21:14:04 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:20:25 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	exec_subshell(t_icmd *cmds, int child)
+void	exec_subshell(t_icmd *cmds, int child, int nb_cmds)
 {
 	char	*sub;
 	int		ret;
@@ -23,6 +23,8 @@ void	exec_subshell(t_icmd *cmds, int child)
 			clean_data() + clean_icmds());
 	if (cmds[child].pid == 0)
 	{
+		set_io_cp(child, nb_cmds, cmds);
+		close_fd(cmds, nb_cmds, child);
 		sub = ft_strdup(cmds[child].args[0]);
 		clean_pars(data()->pars);
 		data()->pars = NULL;
