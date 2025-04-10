@@ -49,7 +49,8 @@ char	*get_var2(char *var, char *str, int quote, int *i)
 		var = ft_strjoin_free(var, ft_getimp("?"));
 	}
 	else if (str[*i] == '$' && str[*i + 1]
-		&& ft_isalnum(str[*i + 1]) && quote % 2 == 0)
+		&& (ft_isalnum(str[*i + 1])  || str[*i + 1] == '_')
+		&& quote % 2 == 0)
 	{
 		temp = ft_substr(str, *i, end_var(&str[*i]));
 		(*i) += (ft_strlen(temp) - 1);
@@ -59,6 +60,21 @@ char	*get_var2(char *var, char *str, int quote, int *i)
 	else if (str[*i] == '$')
 		var = ft_strjoin_free(var, "$");
 	return (var);
+}
+
+int	nbr_quote(char *str)
+{
+	int	i;
+	int	quote;
+
+	i = -1;
+	quote = 0;
+	while (str[++i] && str[i] != '$')
+	{
+		if (str[i] == '\'')
+			quote++;
+	}
+	return (quote);
 }
 
 char	*get_var(char *str)
@@ -78,8 +94,7 @@ char	*get_var(char *str)
 	}
 	while (++i < (int)ft_strlen(str))
 	{
-		if (str[i] == '\'')
-			quote++;
+		quote = nbr_quote(&str[i]);
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "$"));
 		i += ft_strlen(temp);
 		var = ft_strjoin_free(var, temp);
