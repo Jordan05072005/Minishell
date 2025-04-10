@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:12:47 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 15:31:25 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:20:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,24 @@ int	check_dir(char *filename)
 	return (0);
 }
 
-int	check_write(char *filename)
+int	check_write(char *filename, int append)
 {
 	if (check_dir(filename))
-		return (1);
+		return (-1);
 	if (access(filename, F_OK) == -1)
-		return (0);
+	{
+		if (append)
+			return (open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644));
+		else
+			return (open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644));
+	}
 	if (access(filename, W_OK) == -1)
 		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: ", filename, ": Per\
-mission denied.", NULL}), 0), 1);
-	return (0);
+mission denied.", NULL}), 0), -1);
+	if (append)
+		return (open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644));
+	else
+		return (open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644));
 }
 
 void	open_all_files(t_icmd *cmd, t_cmd input)
@@ -83,13 +91,8 @@ void	open_all_files(t_icmd *cmd, t_cmd input)
 	}
 	while (input.out)
 	{
-		if (input.append)
-			cmd->fd_out = open(input.out->content,
-					O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else
-			cmd->fd_out = open(input.out->content,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (check_write(input.out->content))
+		cmd->fd_out = check_write(input.out->content, input.append);
+		if (cmd->fd_out)
 			break ;
 		if (input.out->next && cmd->fd_out > 1)
 			close(cmd->fd_out);
