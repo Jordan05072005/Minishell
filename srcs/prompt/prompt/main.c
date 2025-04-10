@@ -113,7 +113,7 @@ int	main(int ac, char **av, char **env)
 		before = update_history(line);
 		(void)before;
 		data()->ast = get_ast(line);
-		ft_del(line);
+		(ft_del(line), write(1, "\033[0m", 5));
 		run_ast(data()->ast);
 		clear_tree(data()->ast);
 		data()->ast = NULL;

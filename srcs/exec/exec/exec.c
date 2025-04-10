@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:49:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/10 21:22:07 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:06:39 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	exec(int nb_cmds, t_cmd *input)
 	int		child;
 	int		ret_value;
 
-	// write(1, "\033[0m", 5);
 	if (data()->saved_tty != -1)
 		dup2(data()->saved_out, 1);
 	cmds = init_icmds(input, nb_cmds);
