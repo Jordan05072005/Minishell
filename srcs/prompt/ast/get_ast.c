@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_ast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 11:13:43 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/10 13:59:17 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:42:24 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	ast_ok(t_list *blocks, char *err)
 	{
 		if (!err)
 			err = ft_strdup("newline");
-		printf("mini: syntax error near unexpected token `%s'\n", err);
+		ft_putstr_fd("mini: syntax error near unexpected token `", 2);
+		ft_putstr_fd(err, 2);
+		ft_putstr_fd("'\n", 2);
 		set_exit_val(2);
 		return (clear_blocks(blocks), ft_del2((void **)&err), 0);
 	}
