@@ -98,6 +98,7 @@ char	**insert_file(char **str, int j, char **file)
 	after = get_after(str[j]);
 	end = get_end(str[j]);
 	start = get_start(str[j]);
+
 	f = -1;
 	while (file && file[++f])
 	{

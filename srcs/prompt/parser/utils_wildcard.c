@@ -17,7 +17,7 @@ int	accessv(char *start, char *file, char *end)
 	char	*path;
 	char	*ende;
 
-	if (strchr(end, '*'))
+	if (ft_strchr(end, '*'))
 		ende = ft_strdup("\0");
 	else
 		ende = ft_strdup(end);

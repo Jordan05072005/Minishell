@@ -116,6 +116,8 @@ char	**get_after(char *str) // add vide qun fini pat *
 	char	*temp;
 
 	i = ft_strchri(str, "*") + 1;
+	if (str[i] == '/')
+		return (NULL);
 	if (ft_strchri(&str[i], "/"))
 		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "/"));
 	else
