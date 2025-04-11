@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/09 15:32:15 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:33:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,20 @@ int	get_here_doc(t_icmd cmd)
 
 int	here_doc(t_icmd cmd)
 {
-	int	saved;
+	int	saved_in;
+	int	saved_out;
 	int	fd;
 
-	saved = dup(0);
+	saved_in = dup(0);
+	saved_out = dup(1);
+	dup2(data()->saved_tty, 1);
 	while (cmd.here_doc)
 	{
 		fd = get_here_doc(cmd);
 		cmd.here_doc = cmd.here_doc->next;
 		if (cmd.here_doc)
-			dup2(saved, 0);
+			dup2(saved_in, 0);
 	}
+	dup2(saved_out, 1);
 	return (fd);
 }

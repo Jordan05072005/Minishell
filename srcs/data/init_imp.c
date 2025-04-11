@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:55:19 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/07 10:47:47 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:30:47 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ l.\n"), clean_data());
 			ft_perror(1, ft_strdup("mini: error redirecting stdout to a termina\
 l.\n"), clean_data());
 	}
+	else
+		d->saved_tty = dup(1);
 }
