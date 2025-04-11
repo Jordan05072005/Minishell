@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:00:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/11 08:14:35 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:17:15 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	redirect_subshell_fd(t_icmd *cmds, int nb_cmds, int child, int *ret)
 	if (sub[0] == '(' && sub[ft_strlen(sub) - 1] == ')')
 	{
 		*ret = 1;
+		if (cmds[child].fd_out > 1)
+			close(cmds[child].fd_out);
 		cmds[child].fd_out = open("/dev/null", O_WRONLY);
 	}
 	ft_del(sub);
