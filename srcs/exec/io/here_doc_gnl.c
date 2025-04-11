@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_gnl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:40:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/08 13:25:53 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:34:06 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@
 // 	return (buffer);
 // }
 
+
+char	**get_buffer(void)
+{
+	static char	*buff = NULL;
+
+	return (&buff);
+}
+
 char	*get_line(int *b_read, char **buffer, int *i, int buff_size)
 {
 	while (1)
@@ -74,18 +82,19 @@ char	*get_line(int *b_read, char **buffer, int *i, int buff_size)
 
 char	*custom_gnl(void)
 {
-	char	*buffer;
+	char	**buffer;
 	int		bytes_read;
 	int		i;
 	int		buff_size;
 
+	buffer = get_buffer();
 	buff_size = 1024;
-	buffer = malloc(buff_size * sizeof(char));
-	if (!buffer)
+	*buffer = malloc(buff_size * sizeof(char));
+	if (!*buffer)
 		return (NULL);
 	i = 0;
 	bytes_read = 0;
-	return (get_line(&bytes_read, &buffer, &i, buff_size));
+	return (get_line(&bytes_read, buffer, &i, buff_size));
 }
 
 void	sigint_here_doc(int sig)
@@ -96,6 +105,7 @@ void	sigint_here_doc(int sig)
 	lst = get_input_lst();
 	ft_putstr_fd("\n", 1);
 	ft_lstclear(lst, ft_del);
+	ft_del(*get_buffer());
 	(void)(clean_data() + clean_icmds());
 	exit(0);
 }
