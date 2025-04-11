@@ -17,3 +17,41 @@ echo a || echo b && echo c || echo d && echo e | echo f && echo g
 
 9223372036854775807
 9223372036854775807
+
+
+
+
+
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ((exit 1) && ls)
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ((exit 1) || ls)
+ls): Command not found.
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ (exit 1 || ls)
+Subshell : exit 1 || ls
+exit
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ (((ls)))
+Subshell : ((ls))
+Subshell : (ls)
+Subshell : ls
+errors.txt  export.sh  ideas.txt  includes  libft  Makefile  minishell	README.md  redirections.txt  srcs  supp.supp  valgrind.txt
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ( exit 1 || ls)
+Subshell :  exit 1 || ls
+exit
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ( (exit 1) || ls)
+ls): Command not found.
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ (ls && ls)
+Subshell : ls && ls
+errors.txt  export.sh  ideas.txt  includes  libft  Makefile  minishell	README.md  redirections.txt  srcs  supp.supp  valgrind.txt
+errors.txt  export.sh  ideas.txt  includes  libft  Makefile  minishell	README.md  redirections.txt  srcs  supp.supp  valgrind.txt
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ (ls | ls)
+Subshell : ls | ls
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ls | ls
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ls
+errors.txt  export.sh  ideas.txt  includes  libft  Makefile  minishell	README.md  redirections.txt  srcs  supp.supp  valgrind.txt
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ls | ls
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ls | cat -e
+hle-hena@/home/hle-hena/Documents/42_projects/Minishell$ ls && cat -e
+errors.txt  export.sh  ideas.txt  includes  libft  Makefile  minishell	README.md  redirections.txt  srcs  supp.supp  valgrind.txt
+a
+a$
+a
+a$

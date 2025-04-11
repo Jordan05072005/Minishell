@@ -17,15 +17,16 @@ int	ft_env(char **arg)
 	t_list	*env;
 
 	if (ft_strslen(arg) > 1)
-		return (1);
+		return (ft_perror(-1, ft_strdup("mini: env: Only one argument."), 0),
+			1);
 	env = data()->env;
-	ft_printf("%s\n", env->content);
+	printf("%s\n", (char *)env->content);
 	while (env->next)
 	{
 		env = env->next;
 		if (!ft_strchr(env->content, '='))
 			continue ;
-		ft_printf("%s\n", env->content);
+		printf("%s\n", (char *)env->content);
 	}
 	return (0);
 }

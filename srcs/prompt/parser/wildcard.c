@@ -12,12 +12,11 @@
 
 #include "mini.h"
 
-
-char **del_strs(char **str, int j, char *s)
+char	**del_strs(char **str, int j, char *s)
 {
-	int	i;
-	int	len;
-	int	it;
+	int		i;
+	int		len;
+	int		it;
 	char	**str2;
 
 	i = j - 1;
@@ -65,27 +64,25 @@ char	**insert_strs(char **str1, char *str2, int j, int overwrite)
 	return (ft_free_tab((void *)str1, ft_strslen(str1)), ft_del(str2), str_f);
 }
 
-int	name_correct(char *name, char *before, char *after, int len)
+int	name_correct(char *name, char *before, char **after)
 {
-	size_t	s;
-	size_t	end;
+	size_t	i;
+	char	*temp;
 
-	end = ft_strlen(name);
-	if (!before[0] && !after[0])
+	i = -1;
+	if (!before[0] && !after)
+		return (1);
+	if (ft_strncmp(name, before, ft_strlen(before)) != 0)
 		return (0);
-	end = 0;
-	s = 0;
-	while (s < ft_strlen(before) || end < (ft_strlen(after)))
-	{
-		if (before[0] && name[s] != before[s])
-			return (1);
-		if (after[0] && name[len - end] != after[ft_strlen(after) - end - 1]) // a modif
-			return (1);
-		if (s < ft_strlen(before))
-			s++;
-		if (end < ft_strlen(after))
-			end++;
-	}
+	temp = &name[ft_strlen(before)];
+	if (!after)
+		return (temp != NULL);
+	while (after && ++i < ft_strslen(after) - 1 && temp)
+		temp = ft_strnstr(temp, after[i], ft_strlen(temp));
+	if (temp && (after[i][0] == 32 || (ft_strlen(temp) >= ft_strlen(after[i])
+			&& !ft_strncmp(&temp[ft_strlen(temp) - ft_strlen(after[i])],
+				after[i], ft_strlen(after[i])))))
+		return (1);
 	return (0);
 }
 
@@ -93,53 +90,30 @@ char	**insert_file(char **str, int j, char **file)
 {
 	int		f;
 	char	*before;
-	char	*after;
-	char *end;
+	char	**after;
+	char	*end;
 	char	*start;
-	//cpy -> et si NULL, remet la cpy et del le reste 
 
 	before = get_before(str[j]);
 	after = get_after(str[j]);
 	end = get_end(str[j]);
 	start = get_start(str[j]);
+
 	f = -1;
 	while (file && file[++f])
 	{
 		if (!ft_strchr(before, '.') && file[f][0] == '.')
 			any(0);
-		else if (!name_correct(file[f], before, after, ft_strlen(file[f]) - 1) && !accessv(start, file[f], end))
-			str = insert_strs(str, ft_strsjoin((const char *[]){start, file[f], end, NULL}), j++, 0);
+		else if (name_correct(file[f], before, after)
+			&& !accessv(start, file[f], end))
+			str = insert_strs(str, ft_strsjoin((char *[]){start,
+						file[f], end, NULL}), j++, 0);
 	}
-	return (ft_del(before), ft_del(after),
-		ft_free_tab((void *)file, ft_strslen(file)), ft_del(end), ft_del(start), str);
+	return (ft_del(before), ft_free_tab((void *)after, ft_strslen(after)),
+		ft_free_tab((void *)file, ft_strslen(file)),
+		ft_del(end), ft_del(start), str);
 }
 
-// int	existing(char *str)
-// {
-// 	char	*path;
-// 	char	*temp;
-// 	DIR		*dir;
-
-
-// 	path = get_start(str[*j]);
-// 	temp = ft_strdup(str[*j]);
-// 	if (!path[0])
-// 	{
-// 		ft_del(path);
-// 		path = ft_strdup("./");
-// 	}
-// 	dir = opendir(path);
-// 	if (!dir)
-// 		return (1);
-// }
-
-// si avant y'a / -> prend se chemin
-// sinon reduire la recherche a avant apres 
-// juste * == all
-// riens on ecrit jsute *dededde = *dededde
-// echo /*
-// echo /includes/*
-// echo */
 char	**wildcard(char **str, int *j)
 {
 	DIR		*dir;
@@ -147,9 +121,6 @@ char	**wildcard(char **str, int *j)
 	char	*path;
 	char	*temp;
 
-	// if (!existig)
-	// 	return ;
-	// printf("hello");
 	path = get_start(str[*j]);
 	temp = ft_strdup(str[*j]);
 	if (!path[0])
@@ -157,10 +128,12 @@ char	**wildcard(char **str, int *j)
 		ft_del2((void **)&path);
 		path = ft_strdup("./");
 	}
+	if (existing(path, str[*j]) <= 0)
+		return (ft_del(path), ft_del(temp), str);
 	dir = opendir(path);
 	if (!dir)
 		return (del_strs(str, (*j)--, temp));
-	file = get_file(dir	,ft_substr(str[*j], ft_strchri(str[*j], "*") + ft_strchri(&str[*j][ft_strchri(str[*j], "*")], "/"), ft_strlen(str[*j])), path);
+	file = get_file(dir, get_end(str[*j]), path);
 	str = insert_file(str, *j, file);
 	return (closedir(dir), ft_del(path), del_strs(str, (*j)--, temp));
 }

@@ -12,14 +12,13 @@
 
 #include "mini.h"
 
-
-char	**get_file(DIR *dir, char *after, char *path)
+char	**get_file(DIR *dir, char *end, char *path)
 {
+	struct stat		statbuf;
 	struct dirent	*entry;
 	char			**file;
+	char			*all_path;
 	int				i;
-	struct stat statbuf;
-	char	*all_path;
 
 	file = malloc(sizeof(char *));
 	file[0] = NULL;
@@ -29,7 +28,7 @@ char	**get_file(DIR *dir, char *after, char *path)
 		all_path = ft_strjoin(path, entry->d_name);
 		stat(all_path, &statbuf);
 		ft_del(all_path);
-		if ((after[0] == '/' && S_ISDIR(statbuf.st_mode) ) || after[0] != '/')
+		if ((end[0] && S_ISDIR(statbuf.st_mode)) || !end[0])
 		{
 			i = 0;
 			while (file[i]
@@ -39,7 +38,7 @@ char	**get_file(DIR *dir, char *after, char *path)
 		}
 		entry = readdir(dir);
 	}
-	return (ft_del(after), file);
+	return (ft_del(end), file);
 }
 
 char	*get_end(char *after)
@@ -50,22 +49,23 @@ char	*get_end(char *after)
 	int		j;
 
 	len = 0;
-	i = ft_strchri(after, "*") + ft_strchri(&after[ft_strchri(after, "*")], "/");
+	i = ft_strchri(after, "*")
+		+ ft_strchri(&after[ft_strchri(after, "*")], "/");
 	i--;
 	while (after[++i])
-			len++;
-	i = ft_strchri(after, "*") + ft_strchri(&after[ft_strchri(after, "*")], "/");
+		len++;
+	i = ft_strchri(after, "*")
+		+ ft_strchri(&after[ft_strchri(after, "*")], "/");
 	j = 0;
 	if (!len)
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	str = malloc(sizeof(char) * (len + 1));
 	i--;
 	while (after[++i])
-			str[j++] = after[i]; 
+		str[j++] = after[i];
 	str[j] = 0;
 	return (str);
 }
-
 
 char	*get_before(char *str)
 {
@@ -75,7 +75,7 @@ char	*get_before(char *str)
 	char	*before;
 
 	i = ft_strchri(str, "*");
-	j =  ft_strchri(str, "*");
+	j = ft_strchri(str, "*");
 	while (j > 0 && str[j] && str[j] != '/')
 		--j;
 	if (j == i)
@@ -90,7 +90,6 @@ char	*get_before(char *str)
 	return (before);
 }
 
-
 char	*get_start(char *str)
 {
 	int		i;
@@ -98,7 +97,7 @@ char	*get_start(char *str)
 	char	*start;
 
 	i = -1;
-	j =  ft_strchri(str, "*");
+	j = ft_strchri(str, "*");
 	while (j > 0 && str[j] && str[j] != '/')
 		--j;
 	if (j == 0)
@@ -110,26 +109,23 @@ char	*get_start(char *str)
 	return (start);
 }
 
-
-
-char	*get_after(char *str)// tout apres la /
+char	**get_after(char *str) // add vide qun fini pat *
 {
 	int		i;
-	int		j;
-	int		it;
-	char	*after;
-	
-	i = ft_strchri(str, "*");
-	j = ft_strchri(str, "*");
-	if (j == (int)ft_strlen(str))
-		return (ft_strdup(""));
-	j++;
-	while (str[j] && str[j] != '/' && str[j] != '*')
-		++j;
-	after = malloc(sizeof(char) * (j - i + 1));
-	it = -1;
-	while (++i < j)
-		after[++it] = str[i];
-	after[++it] = 0;
-	return (after);
+	char	**after;
+	char	*temp;
+
+	i = ft_strchri(str, "*") + 1;
+	if (str[i] == '/')
+		return (NULL);
+	if (ft_strchri(&str[i], "/"))
+		temp = ft_substr(&str[i], 0, ft_strchri(&str[i], "/"));
+	else
+		temp = ft_substr(&str[i], 0, ft_strlen(&str[i]));
+	if (!temp || !temp[0])
+		return (ft_del(temp), NULL);
+	if (temp[ft_strlen(temp) - 1] == '*')
+		temp = ft_strjoin_free(temp, " ");
+	after = ft_split(temp, '*');
+	return (ft_del(temp), after);
 }

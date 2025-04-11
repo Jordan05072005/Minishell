@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 18:53:15 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/19 13:23:26 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:53:23 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ char	*ft_toupper(char *str);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
-int		ft_lstcountf(t_list *lst, int (*f)(t_list *));
 void	ft_lstdelink(t_list **prev, t_list **link, void (*del)(void *));
+int		ft_lstcountf(t_list *lst, int (*f)(t_list *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
-void	 ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
-	void (*del)(void *), char *to_find);
+void	ft_lstremove_if(t_list **head, int (*cnd)(void *, void *),
+			void (*del)(void *), char *to_find);
 int		ft_lstsize(t_list *lst);
 int		ft_lstsorted(t_list *lst, int (*f)(t_list *));
 t_list	*ft_lstrev(t_list *head);
@@ -110,7 +110,7 @@ char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *src);
 void	ft_striteri(char *str, void (*f)(unsigned int, char *));
 char	*ft_strjoin(const char *s1, const char *s2);
-char	*ft_strsjoin(const char **strs);
+char	*ft_strsjoin(char **strs);
 char	*ft_strjoin_free(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t n);

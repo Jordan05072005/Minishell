@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 11:04:59 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/28 18:57:44 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:59:37 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (dest);
 }
 
-char	*ft_strsjoin(const char **strs)
+char	*ft_strsjoin(char **strs)
 {
 	char	*dest;
 	int		i;

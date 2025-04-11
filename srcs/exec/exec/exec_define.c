@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 10:43:40 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/26 16:00:22 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/03/28 15:35:06 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/06 16:01:45 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,6 @@ int	is_define(char *str)
 	if (*str == '+' && *(str + 1) != '=')
 		return (0);
 	return (1);
-}
-
-void	define_imp(t_icmd *cmds, int child, int i, char *var_name)
-{
-	t_list	*temp;
-	t_list	*var;
-
-	var = ft_getimp_struct(var_name, &temp);
-	if (var == ft_getimp_struct("PWD", &temp))
-		return ;
-	if (var)
-	{
-		ft_del(var->content);
-		var->content = ft_strdup(cmds[child].args[i]);
-	}
 }
 
 void	define_vars(t_icmd *cmds, int child, int i)
@@ -88,6 +73,8 @@ void	exec_define(t_icmd *cmds, int nb_cmds, int child)
 		is_def = is_define(cmds[child].args[++i]);
 	if (cmds[child].args[i])
 		return (define2child(cmds, nb_cmds, child, i));
-	cmds[child].exit = 0;
+	cmds[child].rv = 0;
 	define_vars(cmds, child, -1);
+	if (nb_cmds > 1)
+		return (clean_data(), clean_icmds(), exit(0));
 }

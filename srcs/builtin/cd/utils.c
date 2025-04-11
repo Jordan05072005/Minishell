@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:16:11 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/13 21:39:31 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 22:14:11 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*create_path(char *first_component, char *second_component)
 		path = ft_strjoin(first_component, "/");
 	else
 		path = ft_strdup(first_component);
+	if (!second_component)
+		return (path);
 	dir_path = ft_strjoin(path, second_component);
 	ft_del(path);
 	return (dir_path);
@@ -73,4 +75,25 @@ char	*test_cdpath(char **cdpath, char *arg)
 		ft_del(dir_path);
 	}
 	return (NULL);
+}
+
+char	*cd_error_messages(char *curpath, char *arg, int special_print)
+{
+	struct stat	path_stat;
+	char		*print;
+
+	print = arg;
+	if (special_print)
+		print = curpath;
+	if (stat(curpath, &path_stat) != 0)
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", print, ": \
+No such file or directory.", NULL}), 0), ft_del(curpath), NULL);
+	if (!S_ISDIR(path_stat.st_mode))
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", print, ": \
+Not a directory.", NULL}), 0), ft_del(curpath), NULL);
+	if (access(curpath, X_OK) == -1)
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", print, ": \
+Permission denied.", NULL}), 0), ft_del(curpath), NULL);
+	update_env(curpath);
+	return (curpath);
 }

@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 16:42:48 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/25 17:19:32 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/09 10:30:01 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	clean_pars(t_pars *cmd)
 		{
 			ft_free_tab((void **)cmd->exe[cmd->pipe].args,
 				ft_strslen(cmd->exe[cmd->pipe].args));
+			ft_lstclear(&cmd->exe[cmd->pipe].in, free);
+			ft_lstclear(&cmd->exe[cmd->pipe].here_doc, free);
+			ft_lstclear(&cmd->exe[cmd->pipe].out, free);
 		}
 		ft_free_tab((void *)(cmd->exe[0].split),
 			ft_strslen(cmd->exe[0].split));
@@ -44,5 +47,7 @@ int	clean_data(void)
 {
 	clean_env();
 	clear_tree(data()->ast);
+	clean_pars(data()->pars);
+	data()->pars = NULL;
 	return (0);
 }

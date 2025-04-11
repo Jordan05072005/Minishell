@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 19:11:09 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/27 13:36:05 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 18:05:26 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**get_stack(char *curpath, int *depth)
 	ft_del(curpath);
 	if (!path || !stack)
 		return (ft_free_tab((void **)path, ft_strslen(path)), ft_del(stack),
-			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);//Does not free like it should
+			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);
 	*depth = 0;
 	i = -1;
 	while (path[++i])
@@ -40,7 +40,6 @@ char	**get_stack(char *curpath, int *depth)
 	}
 	return (ft_free_tab((void **)path, ft_strslen(path)), stack);
 }
-
 
 // i3[0] = depth;
 // i3[1] = len / j;
@@ -61,7 +60,7 @@ char	*clean_curpath(char *curpath)
 	clean = ft_calloc(i3[1], sizeof(char));
 	if (!clean)
 		return (ft_free_tab((void **)path, ft_strslen(path)),
-			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);//Does not free correctly ?????
+			ft_perror(1, ft_strdup("mini: Internal error: malloc"), 0), NULL);
 	i3[2] = -1;
 	i3[1] = 0;
 	clean[0] = '/';
@@ -74,7 +73,7 @@ char	*clean_curpath(char *curpath)
 	return (ft_free_tab((void **)path, ft_strslen(path)), clean);
 }
 
-char *regen_curpath(char *curpath)
+char	*regen_curpath(char *curpath)
 {
 	char	*dest;
 
@@ -92,20 +91,20 @@ char	*cd_nopwd(char *curpath, char *arg)
 	curpath = clean_curpath(curpath);
 	if (stat(curpath, &path_stat) == 0)
 		return (ft_del(temp), curpath);
-	if (is_dot(arg))//I dont like this, there is probably a better idea.
+	if (is_dot(arg))
 		update_env(temp);
 	return (ft_del(curpath), ft_del(temp), ft_perror(-1, ft_strdup("cd: error retrieving \
 current directory: getcwd: cannot access parent directories: No such file or di\
 rectory"), 0), NULL);
 }
 
-char	*check_curpath(char *curpath, char *arg)
+char	*check_curpath(char *curpath, char *arg, int special_print)
 {
 	struct stat	path_stat;
 
 	if (!curpath)
-		return (ft_perror(-1, ft_strsjoin((const char *[]){"mini: cd: ", arg,
-			": No such file or directory.", NULL}), 0), NULL);
+		return (ft_perror(-1, ft_strsjoin((char *[]){"mini: cd: ", arg,
+					": No such file or directory.", NULL}), 0), NULL);
 	if (curpath[0] != '/')
 		curpath = regen_curpath(curpath);
 	if (stat(ft_getimp("PWD"), &path_stat) != 0)
@@ -113,33 +112,5 @@ char	*check_curpath(char *curpath, char *arg)
 	if (!curpath)
 		return (NULL);
 	curpath = clean_curpath(curpath);
-	if (stat(curpath, &path_stat) != 0)
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
-ni: cd: ", arg, ": No such file or directory.", NULL}), 0), NULL);
-	if (!S_ISDIR(path_stat.st_mode))
-		return (ft_del(curpath), ft_perror(-1, ft_strsjoin((const char *[]){"mi\
-ni: cd: ", arg, ": Not a directory.", NULL}), 0), NULL);
-	update_env(curpath);
-	return (curpath);
-}
-
-char	*get_curpath(char *arg, int *print)
-{
-	char	*curpath;
-	char	*cdpath;
-	char	**cdpaths;
-
-	cdpaths = NULL;
-	cdpath = ft_getenv("CDPATH");
-	if (!cdpath)
-		cdpath = ft_getloc("CDPATH");
-	if (cdpath)
-		cdpaths = ft_split(cdpath, ':');
-	curpath = test_cdpath(cdpaths, arg);
-	ft_free_tab((void **)cdpaths, ft_strslen(cdpaths));
-	if (!curpath)
-		curpath = create_path(ft_getimp("PWD"), arg);
-	else
-		*print = 1;
-	return (curpath);
+	return (cd_error_messages(curpath, arg, special_print));
 }

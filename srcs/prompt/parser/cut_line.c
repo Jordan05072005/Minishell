@@ -54,11 +54,9 @@ int	is_cut(char c, char old, int *etat)
 char	**gestion_parenthese(char **arg, char *line, int *i, int *old)
 {
 	int	prof;
-	int	temp;
 	int	*quote;
 
 	prof = 1;
-	temp = *i;
 	quote = 0;
 	if (*i > 0 && line[*i - 1] != ')')
 		arg = addback_str(arg, ft_substr(line, *old, *i - *old));
@@ -74,11 +72,26 @@ char	**gestion_parenthese(char **arg, char *line, int *i, int *old)
 		{
 			arg = addback_str(arg, ft_substr(line, *old, *i - *old + 1));
 			*old = *i + 1;
-			return (arg);
+			return (ft_del(quote), arg);
 		}
 	}
-	*i = temp;
-	return (NULL);
+	return (ft_del(arg), ft_del(quote), NULL);
+}
+
+char	**gestion_quote(char **arg, char *line, int *i, int *old)
+{
+	char	quote;
+
+	quote = line[*i];
+	if (*i > 0 && line[*i - 1] != '"' && line[*i - 1] != '\'')
+		arg = addback_str(arg, ft_substr(line, *old, *i - *old));
+	(*old) = (*i)++;
+	while (line[*i] && line[*i] != quote)
+		(*i)++;
+	if (line[*i] == quote)
+		arg = addback_str(arg, ft_substr(line, *old, (*i) - (*old) + 1));
+	(*old) = (*i) + 1;
+	return (arg);
 }
 
 char	**cut_line(char *line)
@@ -87,7 +100,6 @@ char	**cut_line(char *line)
 	int		old;
 	char	**arg;
 	int		etat;
-	char	quote;
 
 	i = -1;
 	etat = 0;
@@ -99,25 +111,14 @@ char	**cut_line(char *line)
 		if (line[i] == '(')
 			arg = gestion_parenthese(arg, line, &i, &old);
 		else if (line[i] == '"' || line[i] == '\'')
-		{
-			quote = line[i];
-			if (i > 0 && line[i - 1] != '"' && line[i - 1] != '\'')
-				arg = addback_str(arg, ft_substr(line, old, i - old));
-			old = i++;
-			while (line[i] && line[i] != quote)
-				i++;
-			if (line[i] == quote && line[i] != line[old + 1])
-				arg = addback_str(arg, ft_substr(line, old, i - old + 1));
-			else if (line[i] == line[old + 1])
-				arg = addback_str(arg, ft_strdup(""));
-			old = i + 1;
-		}
+			arg = gestion_quote(arg, line, &i, &old);
 		else if (is_cut(line[i], line[old], &etat) || !line[i])
 		{
-			if ((old != 0 || i != 0) && (old != (int)ft_strlen(line)) && old != i)
+			if ((old != 0 || i != 0)
+				&& (old != (int)ft_strlen(line)) && old != i)
 				arg = addback_str(arg, ft_substr(line, old, i - old));
 			old = i;
 		}
 	}
-	return (arg);	
+	return (arg);
 }

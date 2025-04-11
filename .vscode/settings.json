@@ -64,6 +64,9 @@
     "builtin.h": "c",
     "fcntl.h": "c",
     "struct.h": "c",
-    "libft.h": "c"
+    "libft.h": "c",
+    "wait.h": "c",
+    "typeinfo": "c",
+    "dirent.h": "c"
   }
 }

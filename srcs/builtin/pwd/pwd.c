@@ -18,6 +18,6 @@ int	ft_pwd(char **arg)
 
 	(void) arg;
 	cwd = ft_getimp("PWD");
-	ft_printf("%s\n", cwd);
+	printf("%s\n", cwd);
 	return (0);
 }

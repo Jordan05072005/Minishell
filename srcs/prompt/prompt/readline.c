@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zero_icmds.c                                       :+:      :+:    :+:   */
+/*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 10:57:07 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/02/12 10:45:06 by hle-hena         ###   ########.fr       */
+/*   Created: 2025/04/07 12:50:18 by hle-hena          #+#    #+#             */
+/*   Updated: 2025/04/07 13:34:50 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	zero_out(t_icmd *cmds, int nb_cmds)
+char	*ft_readline(void)
 {
-	int	i;
+	char	*prompt;
+	char	*temp;
+	char	*line;
 
-	i = -1;
-	while (++i < nb_cmds)
-	{
-		cmds[i].fd_in = 0;
-		cmds[i].fd_out = 1;
-		cmds[i].here_doc = NULL;
-		cmds[i].path = NULL;
-		cmds[i].args = NULL;
-		cmds[i].pipe[0] = 0;
-		cmds[i].pipe[0] = 0;
-		cmds[i].pid = 0;
-		cmds[i].exit = -1;
-		cmds[i].define = 0;
-	}
+	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
+	if (!isatty(0))
+		prompt = NULL;
+	else
+		prompt = get_prompt();
+	if (isatty(0))
+		temp = readline(prompt);
+	else
+		temp = readline(prompt);
+	ft_del(prompt);
+	line = ft_strtrim(temp, " \t\r\n\f\v");
+	ft_del(temp);
+	signal(SIGINT, any);
+	return (line);
 }

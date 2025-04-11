@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "mini.h"
+#include "mini.h"
 
 int	find_chr(char *str, int ch)
 {
@@ -51,7 +51,8 @@ void	putexport(t_list *cpy, int size, int i)
 		temp = cpy;
 		while (cpy)
 		{
-			if (!(temp->content) || (cpy->content && ft_strncmp(temp->content, cpy->content, ft_strlen(temp->content) + 1) > 0))
+			if (!(temp->content) || (cpy->content && ft_strncmp(temp->content,
+						cpy->content, ft_strlen(temp->content) + 1) > 0))
 				temp = cpy;
 			cpy = cpy->next;
 		}
@@ -60,8 +61,7 @@ void	putexport(t_list *cpy, int size, int i)
 			printf("declare -x %s\n", temp2);
 		else
 			printf("declare -x %s=\"%s\"\n", temp2, ft_getenv(temp2));
-		ft_del(temp2);
-		ft_del(temp->content);
+		(ft_del(temp2), ft_del(temp->content));
 		temp->content = NULL;
 		cpy = first;
 	}
@@ -70,7 +70,7 @@ void	putexport(t_list *cpy, int size, int i)
 
 int	ft_export(char **arg)
 {
-	t_data	*d;
+	t_data		*d;
 	int			i;
 	int			rv;
 

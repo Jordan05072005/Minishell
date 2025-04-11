@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:02:01 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/26 15:09:09 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 08:33:38 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,7 @@ t_list	**get_input_lst(void)
 	return (&input);
 }
 
-void sigint_here_doc(int sig)
-{
-	t_list	**lst;
-
-	(void)sig;
-	lst = get_input_lst();
-	ft_putstr_fd("\n", 1);
-	ft_lstclear(lst, ft_del);
-	(void)(clean_data() + clean_icmds());
-	exit(0);
-}
-
-t_list	**get_text(t_icmd cmd)
+t_list	**get_text(char *limiter)
 {
 	char	*temp;
 	t_list	**input_list;
@@ -41,21 +29,22 @@ t_list	**get_text(t_icmd cmd)
 	while (1)
 	{
 		ft_putstr_fd("> ", 1);
-		temp = custom_gnl(0);
+		temp = custom_gnl();
 		if (!temp)
 		{
-			ft_perror(-1, ft_strsjoin((const char *[]){"\nmini: warning: he\
-re-document delimited by end-of-file (wanted `", cmd.here_doc, "')", NULL}), 0);
-			break;
+			ft_perror(-1, ft_strsjoin((char *[]){"\nmini: warning: he\
+re-document delimited by end-of-file (wanted `", limiter, "')", NULL}), 0);
+			break ;
 		}
-		if (ft_strncmp(temp, cmd.here_doc, ft_strlen(cmd.here_doc)) == 0
-			&& temp[ft_strlen(cmd.here_doc)] == '\n')
+		if (ft_strncmp(temp, limiter, ft_strlen(limiter)) == 0
+			&& temp[ft_strlen(limiter)] == '\n')
 		{
 			free(temp);
-			break;
+			break ;
 		}
 		add_link(input_list, temp);
 	}
+	write(1, "---\n", 4);
 	return (input_list);
 }
 
@@ -72,7 +61,7 @@ void	write_text(int p_fd[2], t_list *input)
 	ft_lstclear(&temp, ft_del);
 }
 
-void here_doc(t_icmd cmd)
+int	get_here_doc(t_icmd cmd)
 {
 	int		p_fd[2];
 	pid_t	f_id;
@@ -89,11 +78,32 @@ void here_doc(t_icmd cmd)
 	if (f_id == 0)
 	{
 		close(p_fd[0]);
-		input = get_text(cmd);
+		ft_lstclear(get_input_lst(), ft_del);
+		input = get_text((char *)cmd.here_doc->content);
 		write_text(p_fd, *input);
 		close(p_fd[1]);
-		return ((void)(clean_data() + clean_icmds()), exit(0));
+		return ((void)(clean_data() + clean_icmds()), exit(0), 0);
 	}
-	close(p_fd[1]);
-	dup2(p_fd[0], 0);
+	(waitpid(f_id, NULL, 0), close(p_fd[1]));
+	return (p_fd[0]);
+}
+
+int	here_doc(t_icmd cmd)
+{
+	int	saved_in;
+	int	saved_out;
+	int	fd;
+
+	saved_in = dup(0);
+	saved_out = dup(1);
+	dup2(data()->saved_tty, 1);
+	while (cmd.here_doc)
+	{
+		fd = get_here_doc(cmd);
+		cmd.here_doc = cmd.here_doc->next;
+		if (cmd.here_doc)
+			dup2(saved_in, 0);
+	}
+	dup2(saved_out, 1);
+	return (fd);
 }

@@ -19,7 +19,7 @@ char	*nextc(char **str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i][0] != ' ' && str[i][0] != '\t') // withspace
+		if (!ft_isspace(str[i][0]))
 			return (str[i]);
 	}
 	return (NULL);
@@ -27,7 +27,7 @@ char	*nextc(char **str)
 
 char	*beforec(char **str, int i)
 {
-	while (str[--i])
+	while (--i > 0)
 	{
 		if (str[i][0] != ' ' && str[i][0] != '\t')
 			return (str[i]);
@@ -48,6 +48,19 @@ int	farg(char **str)
 	return (i);
 }
 
+int	farg2(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (!ft_isspace(str[i]))
+			return (i + 1);
+	}
+	return (i);
+}
+
 int	*quotes(char c, int *tab)
 {
 	if (!tab)
@@ -57,14 +70,13 @@ int	*quotes(char c, int *tab)
 		tab[1] = 0;
 		tab[2] = 0;
 	}
-	if (c == '"')
+	if (c == '"' && tab[1] % 2 == 0)
+		tab[0]++;
+	else if (c == '\'' && tab[0] % 2 == 0)
 		tab[1]++;
-	else if (c == '\'')
-		tab[1]++;
-	if ((tab[0] + tab[1]) % 2 == 0)
+	if (tab[0] % 2 == 0 && tab[1] % 2 == 0)
 		tab[2] = 1;
 	else
 		tab[2] = 0;
 	return (tab);
 }
-

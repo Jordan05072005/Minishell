@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jguaglio <guaglio.jordan@gmail.com>        +#+  +:+       +#+        */
+/*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:23:08 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/12 14:09:54 by jguaglio         ###   ########.fr       */
+/*   Updated: 2025/04/07 10:52:46 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_del(void *add)
 void	ft_del2(void **add)
 {
 	if (add && *add)
-		{
-			free(*add);
-			*add = NULL;
-		}
+	{
+		free(*add);
+		*add = NULL;
+	}
 }

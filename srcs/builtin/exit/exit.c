@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:14:49 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/03/24 18:51:17 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:59:35 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,13 @@ int	ft_exit(char **av)
 {
 	int	exit_val;
 
-	if (isatty(0) && isatty(1))
-		ft_printf("exit\n");
 	if (!av[1])
 		exit_val = ft_atoi(ft_getimp("?"));
 	else
 	{
 		exit_val = 2;
 		if (!str_isnum(av[1]) || is_overflow(av[1]))
-			ft_perror(-1, ft_strsjoin((const char *[]){"mini: exit: ", av[1], "\
+			ft_perror(-1, ft_strsjoin((char *[]){"mini: exit: ", av[1], "\
 : numeric argument required.", NULL}), 0);
 		else if (ft_strslen(av) > 2)
 			return (ft_perror(-1, ft_strdup("mini: exit: Too many arguments."),
@@ -72,7 +70,6 @@ int	ft_exit(char **av)
 		else
 			exit_val = ft_atoi(av[1]) % 256;
 	}
-	clean_data();
-	clean_icmds();
-	exit(exit_val);
+	data()->exit = exit_val;
+	return (0);
 }
