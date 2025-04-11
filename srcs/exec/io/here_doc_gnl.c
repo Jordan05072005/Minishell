@@ -6,46 +6,11 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:40:23 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/11 10:34:06 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:48:33 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-// char	*gnl(int fd, int buffsize)
-// {
-// 	char	*buffer;
-// 	ssize_t	bytes_read;
-// 	size_t	i;
-
-// 	buffer = malloc(buff_size * sizeof(char));
-// 	if (!buffer)
-// 		return (NULL);
-// 	i = 0;
-// 	while (1)
-// 	{
-// 		bytes_read = read(fd, &buffer[i], buff_size);
-// 		if (bytes_read <= 0)
-// 		{
-// 			if (i == 0 || bytes_read < 0)
-// 				return (free(buffer), NULL);
-// 			continue ;
-// 		}
-// 		if (buffer[bytes_read + i - 1] == '\n')
-// 			break ;
-// 		i += bytes_read;
-// 		if (i >= buff_size - 1) 
-// 		{
-// 			buff_size += buff_size;
-// 			buffer = ft_realloc(buffer, buff_size * sizeof(char));
-// 			if (!buffer)
-// 				return (NULL);
-// 		}
-// 	}
-// 	buffer[bytes_read + i] = 0;
-// 	return (buffer);
-// }
-
 
 char	**get_buffer(void)
 {

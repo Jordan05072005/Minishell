@@ -6,7 +6,7 @@
 /*   By: hle-hena <hle-hena@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:00:15 by hle-hena          #+#    #+#             */
-/*   Updated: 2025/04/11 08:43:30 by hle-hena         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:49:08 by hle-hena         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	redirect_subshell_fd(t_icmd *cmds, int nb_cmds, int child, int *ret)
 
 	*ret = 0;
 	sub = ft_strtrim(cmds[child].args[0], " \t");
-	// printf("sub is [%s]\n", sub);
 	if (sub[0] == '(' && sub[ft_strlen(sub) - 1] == ')')
 	{
 		*ret = 1;
